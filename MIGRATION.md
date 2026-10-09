@@ -170,6 +170,7 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 - [ ] Release workflow attaches `default.gitignore` (uv writes `dist/.gitignore`); cosmetic: use `dist/*.whl dist/*.tar.gz` in `publish.yml`
 - [ ] quartodoc prints ~14 docstring warnings (parameters documented but not in the signature) in `ob_atom.py`, `hyperfine.py`, `spectral.py`
 - [ ] CHANGELOG has no entries between 0.9.0 and 0.12.0
+- [x] CI `bench` gate was flaky (50% tolerance vs measured run-to-run variance of up to +127% on identical code); widened to 200% in #306
 
 ## Open issues and risks
 

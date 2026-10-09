@@ -42,12 +42,14 @@ jobs:
         run: |
           # Only add --benchmark-compare-fail when a baseline exists in the
           # cache. On the first run the cache is empty so we just save;
-          # subsequent runs compare and fail on >50% mean regression.
-          # 50% tolerates GitHub runner hardware variance (runners of the same
-          # OS label can differ by ~30% in wall-clock time) while still
-          # catching genuine algorithmic regressions.
+          # subsequent runs compare and fail on >200% mean regression.
+          # GitHub runners of the same OS label vary far more than first
+          # assumed: the same code measured 140, 225, 232 and 318 ms on this
+          # benchmark (up to +127% against a baseline saved from a fast
+          # runner), so a 50% gate failed unrelated docs-only PRs. 200% still
+          # catches a genuine algorithmic regression (3x slower or worse).
           if find .benchmarks -name "*.json" 2>/dev/null | grep -q .; then
-            COMPARE="--benchmark-compare --benchmark-compare-fail=mean:50%"
+            COMPARE="--benchmark-compare --benchmark-compare-fail=mean:200%"
           else
             COMPARE=""
           fi
