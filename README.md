@@ -69,8 +69,9 @@ published as MaxwellBloch:
   howpublished = {\url{https://github.com/tpogden/clerq}}
 }
 ```
-A citation for clerq itself, with its own DOI, will be added with the first
-release under the new name.
+A `CITATION.cff` for clerq is included (GitHub's "Cite this repository" button
+reads it). A citation with its own DOI will be added once the first archived
+release under the new name is available.
 
 ## Changelog
 
