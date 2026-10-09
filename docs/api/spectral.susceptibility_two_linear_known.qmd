@@ -1,0 +1,19 @@
+# spectral.susceptibility_two_linear_known { #maxwellbloch.spectral.susceptibility_two_linear_known }
+
+```python
+spectral.susceptibility_two_linear_known(
+    freq_list,
+    interaction_strength,
+    decay_rate,
+)
+```
+
+In the linear regime for a two-level system, the suecpetibility is
+known analytically. This is here for useful comparison, as good
+agreement between a simulated weak field in a two-level system tells us
+that the model is accurate in the linear regime, which gives us
+confidence in the scheme for going beyond the weak field limit.
+
+## Notes {.doc-section .doc-section-notes}
+
+See TP Ogden Thesis Eqn(2.61)

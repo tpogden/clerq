@@ -1,0 +1,26 @@
+# t_funcs.gaussian { #maxwellbloch.t_funcs.gaussian }
+
+```python
+t_funcs.gaussian(index)
+```
+
+Return a Gaussian pulse time function.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                           |
+|--------|--------|-----------------------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``fwhm_{index}``, ``centre_{index}``, |
+|        | TFunc  | and either ``ampl_{index}`` or ``n_pi_{index}`` from args. Raises     |
+|        | TFunc  | ``KeyError`` if both or neither amplitude parameters are present.     |
+
+## Notes {.doc-section .doc-section-notes}
+
+The amplitude can be set directly via ``ampl_{index}`` or indirectly
+via ``n_pi_{index}`` (desired pulse area in multiples of π).

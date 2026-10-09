@@ -18,13 +18,10 @@ Homepage = "https://github.com/tpogden/maxwellbloch"
 [project.optional-dependencies]
 test = ["pytest>=8", "pytest-cov", "pytest-xdist"]
 docs = [
-    "sphinx",
-    "nbsphinx",
+    "quartodoc",
     "jupyter",
     "matplotlib",
     "seaborn",
-    "sphinx_rtd_theme",
-    "recommonmark",
     "plotly>=5.18",
     "kaleido>=0.2",
 ]

@@ -1,0 +1,23 @@
+# t_funcs.ramp_onoff { #maxwellbloch.t_funcs.ramp_onoff }
+
+```python
+t_funcs.ramp_onoff(index)
+```
+
+Return a ramp-on / ramp-off time function.
+
+The pulse rises smoothly, holds at ``ampl``, then falls smoothly. Built
+by composing :func:`ramp_on` and :func:`ramp_off`.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                         |
+|--------|--------|---------------------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``ampl_{index}``, ``fwhm_{index}``, |
+|        | TFunc  | ``on_{index}``, and ``off_{index}`` from args.                      |

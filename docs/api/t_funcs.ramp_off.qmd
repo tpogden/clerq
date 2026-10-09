@@ -1,0 +1,23 @@
+# t_funcs.ramp_off { #maxwellbloch.t_funcs.ramp_off }
+
+```python
+t_funcs.ramp_off(index)
+```
+
+Return a ramp-off time function.
+
+The pulse holds at ``ampl`` until the turn-off time ``off``, then falls
+smoothly to zero using a half-Gaussian.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                         |
+|--------|--------|---------------------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``ampl_{index}``, ``fwhm_{index}``, |
+|        | TFunc  | and ``off_{index}`` from args.                                      |

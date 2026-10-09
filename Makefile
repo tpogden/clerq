@@ -27,21 +27,21 @@ format_check:
 
 # Docs ------------------------------------------------------------------------
 
-# Incremental build — Sphinx skips unchanged source files (fast for development).
-# If a notebook's .ipynb source has changed, Sphinx will re-execute it.
+# Quarto renders from stored notebook outputs; use docs_execute to re-run them.
 docs: docs_html
 
-docs_html:
-	uv run sphinx-build docs docs/_build -b html --jobs auto
+docs_api:
+	cd docs && uv run quartodoc build
 
-# Full rebuild — clears the Sphinx environment cache (-E) so every source file
-# is re-read and every notebook is re-executed. Use this when .qu files are
-# stale but the .ipynb source is unchanged, or after a code change outside notebooks.
-docs_rebuild:
-	uv run sphinx-build -E docs docs/_build -b html --jobs auto
+docs_html: docs_api
+	cd docs && uv run quarto render
 
-docs_serve: docs_html
-	uv run python -m http.server 8000 --directory docs/_build
+# Re-execute every notebook (slow), refreshing outputs and docs/_freeze.
+docs_execute: docs_api
+	cd docs && uv run quarto render --execute
+
+docs_serve:
+	cd docs && uv run quarto preview
 
 serve: docs_serve
 
@@ -50,7 +50,7 @@ serve: docs_serve
 dist:
 	uv build
 
-.PHONY: dist docs_html docs_rebuild docs_serve serve clean_docs
+.PHONY: dist docs docs_api docs_html docs_execute docs_serve serve clean_docs
 
 # Release (bump version, commit, tag — then push to trigger CI publish) ------
 # Usage: make bump_patch / bump_minor / bump_major
@@ -78,7 +78,7 @@ clean_qu:
 	rm $(QU_FILES)
 
 clean_docs:
-	rm -rf docs/_build
+	rm -rf docs/_site docs/_freeze
 
 clean_dist:
 	rm -rf dist/*

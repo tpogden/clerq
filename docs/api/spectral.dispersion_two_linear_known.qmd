@@ -1,0 +1,11 @@
+# spectral.dispersion_two_linear_known { #maxwellbloch.spectral.dispersion_two_linear_known }
+
+```python
+spectral.dispersion_two_linear_known(
+    freq_list,
+    interaction_strength,
+    decay_rate,
+)
+```
+
+The dispersion is half the real part of the susecptibility.

@@ -1,0 +1,22 @@
+# spectral.voigt_two_linear_known { #maxwellbloch.spectral.voigt_two_linear_known }
+
+```python
+spectral.voigt_two_linear_known(freq_list, decay_rate, thermal_width)
+```
+
+Returns the Voigt profile for a two-level system in the linear regime.
+
+The Voigt profile is the convolution of a Lorentzian with a Gaussian, and
+describes the absorption lineshape for a thermal two-level system.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name          | Type       | Description                                                            | Default    |
+|---------------|------------|------------------------------------------------------------------------|------------|
+| freq_list     | np.ndarray | List of frequency detunings from resonance (in 2pi Gamma).             | _required_ |
+| decay_rate    | float      | Spontaneous decay rate of the transition (in 2pi Gamma).               | _required_ |
+| thermal_width | float      | Width of the lineshape in the same units as decay rate (in 2pi Gamma). | _required_ |
+
+## Notes {.doc-section .doc-section-notes}
+
+See my thesis section 2.5.6 for more information.

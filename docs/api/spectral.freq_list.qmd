@@ -1,0 +1,15 @@
+# spectral.freq_list { #maxwellbloch.spectral.freq_list }
+
+```python
+spectral.freq_list(mb_solve)
+```
+
+Fourier transform of the tlist into the frequency domain for
+    spectral analysis.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name     | Type    | Description                                 | Default    |
+|----------|---------|---------------------------------------------|------------|
+| mb_solve | MBSolve | An MBSolve object.                          | _required_ |
+| Returns  |         | Array[num_time_points] of frequency values. | _required_ |

@@ -1,0 +1,21 @@
+# utility.half_max_roots { #maxwellbloch.utility.half_max_roots }
+
+```python
+utility.half_max_roots(x, y)
+```
+
+Return the half-maximum value and the two roots where ``y`` crosses it.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type       | Description                                                                                                            | Default    |
+|--------|------------|------------------------------------------------------------------------------------------------------------------------|------------|
+| x      | np.ndarray | 1-D array of independent variable values (must be monotonically increasing and have enough points for spline fitting). | _required_ |
+| y      | np.ndarray | 1-D array of dependent variable values, same length as ``x``.                                                          | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                      |
+|--------|--------|------------------------------------------------------------------|
+|        | float  | Tuple ``(half_max, r1, r2)`` where ``half_max = max(y) / 2`` and |
+|        | float  | ``r1 < r2`` are the two x-values where ``y == half_max``.        |

@@ -25,10 +25,13 @@ Legend: `[x]` done · `[ ]` to do · 👤 you must do it (external or credential
 - [x] YAML frontmatter cell on 12 example + 8 usage notebooks (`ef80153`)
 - [x] `quarto render` clean: 25 pages, no broken internal links, Plotly renders
 - [x] `_site/` gitignored
-- [ ] Decide fate of the draft `mbs-ladder-rydberg-eit-counter.ipynb` (excluded from the build)
-- [ ] API reference: replace Sphinx autodoc (`docs/api/*.rst`) with quartodoc 🤖
-- [ ] Port the remaining Sphinx-only content (e.g. the `.. figure::` caption, Sphinx cross-refs inside notebooks) and check the navbar active state
-- [ ] Remove Sphinx (`conf.py`, `index.rst`, `*.rst`, `make.bat`, `docs` extra in `pyproject.toml`, CI `docs` job, readthedocs badge); do this at cutover
+
+**Phase 1 complete** apart from the README badge, which moves to Phase 3.
+- [x] Draft `mbs-ladder-rydberg-eit-counter.ipynb` stays excluded from the build (same as under Sphinx); finishing it is separate work
+- [x] API reference: quartodoc (28 generated pages, committed; CI checks they are up to date)
+- [x] Sphinx-only content ported (figure caption, gallery); no `:doc:`/`:ref:` left in notebooks; navbar uses one sidebar per section
+- [x] Sphinx removed: `conf.py`, `*.rst`, `make.bat`, `.readthedocs.yml`, `custom.css`; `docs` extra, Makefile targets and CI `docs` job now use Quarto
+- [ ] readthedocs badge in README (handled in Phase 3 README rebrand)
 
 Notes: kept the existing `mbs-*` notebook names. The plan's `a0`–`a12` naming does
 not exist in this repo.

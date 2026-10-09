@@ -10,6 +10,7 @@ project:
     - examples/*.ipynb
     - "!examples/mbs-ladder-rydberg-eit-counter.ipynb"  # draft
     - support/troubleshooting.md
+    - api/*.qmd
 
 execute:
   freeze: auto
@@ -27,38 +28,93 @@ website:
       - {href: installation.qmd, text: Install}
       - {href: usage/two-level.ipynb, text: Usage}
       - {href: examples/index.qmd, text: Examples}
+      - {href: api/index.qmd, text: API}
       - {href: support/troubleshooting.md, text: Support}
   sidebar:
-    style: docked
-    contents:
-      - installation.qmd
-      - section: "Usage"
-        contents:
-          - usage/two-level.ipynb
-          - usage/three-level.ipynb
-          - usage/structure.ipynb
-          - usage/spectral-analysis.ipynb
-          - usage/velocity-classes.ipynb
-          - usage/counter-propagating.ipynb
-          - usage/plotting.ipynb
-          - usage/built-in-time-functions.ipynb
-          - usage/scripts.md
-      - section: "Examples"
-        href: examples/index.qmd
-        contents:
-          - examples/mbs-linear-absorption.ipynb
-          - examples/mbs-sit-area-theorem.ipynb
-          - examples/mbs-two-photon-echo.ipynb
-          - examples/mbs-lambda-eit-slow-light.ipynb
-          - examples/mbs-lambda-cpt.ipynb
-          - examples/mbs-lambda-adiabatons.ipynb
-          - examples/mbs-vee-simultons.ipynb
-          - examples/mbs-ladder-weak-pulse-coupling-decay.ipynb
-          - examples/mbs-ladder-autler-townes.ipynb
-          - examples/mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay.ipynb
-          - examples/mbs-Rb87_5s12_5p12_F11_q1-sech-2pi.ipynb
-          - examples/mbs-Rb87_5s12_5p32_F23_q1-weak-pulse-decay.ipynb
-      - support/troubleshooting.md
+    - id: usage
+      title: Usage
+      style: docked
+      contents:
+        - usage/two-level.ipynb
+        - usage/three-level.ipynb
+        - usage/structure.ipynb
+        - usage/spectral-analysis.ipynb
+        - usage/velocity-classes.ipynb
+        - usage/counter-propagating.ipynb
+        - usage/plotting.ipynb
+        - usage/built-in-time-functions.ipynb
+        - usage/scripts.md
+    - id: examples
+      title: Examples
+      style: docked
+      contents:
+        - examples/index.qmd
+        - examples/mbs-linear-absorption.ipynb
+        - examples/mbs-sit-area-theorem.ipynb
+        - examples/mbs-two-photon-echo.ipynb
+        - examples/mbs-lambda-eit-slow-light.ipynb
+        - examples/mbs-lambda-cpt.ipynb
+        - examples/mbs-lambda-adiabatons.ipynb
+        - examples/mbs-vee-simultons.ipynb
+        - examples/mbs-ladder-weak-pulse-coupling-decay.ipynb
+        - examples/mbs-ladder-autler-townes.ipynb
+        - examples/mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay.ipynb
+        - examples/mbs-Rb87_5s12_5p12_F11_q1-sech-2pi.ipynb
+        - examples/mbs-Rb87_5s12_5p32_F23_q1-weak-pulse-decay.ipynb
+    - id: api
+      title: API reference
+      style: docked
+      contents:
+        - api/index.qmd
+        - auto: "api/*.qmd"
+
+quartodoc:
+  package: maxwellbloch
+  source_dir: ../src
+  dir: api
+  parser: google
+  title: API reference
+  sections:
+    - title: Solvers
+      desc: Time-domain and spatial-propagation solvers.
+      contents:
+        - mb_solve.MBSolve
+        - ob_solve.OBSolve
+    - title: Atoms and fields
+      contents:
+        - ob_atom.OBAtom
+        - field.Field
+    - title: Time functions
+      contents:
+        - t_funcs.square
+        - t_funcs.gaussian
+        - t_funcs.sech
+        - t_funcs.ramp_on
+        - t_funcs.ramp_off
+        - t_funcs.ramp_onoff
+        - t_funcs.ramp_offon
+        - t_funcs.sinc
+        - t_funcs.intp
+    - title: Spectral analysis
+      contents:
+        - spectral.freq_list
+        - spectral.rabi_freq
+        - spectral.absorption
+        - spectral.dispersion
+        - spectral.susceptibility_two_linear_known
+        - spectral.absorption_two_linear_known
+        - spectral.dispersion_two_linear_known
+        - spectral.voigt_two_linear_known
+    - title: Hyperfine structure
+      contents:
+        - hyperfine.Atom1e
+        - hyperfine.LevelF
+        - hyperfine.LevelMF
+    - title: Utilities
+      contents:
+        - utility.maxwell_boltzmann
+        - utility.half_max_roots
+        - utility.full_width_at_half_max
 
 format:
   html:
