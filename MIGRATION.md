@@ -104,7 +104,7 @@ Deferred to Phase 4/5 (needs the repo rename, PyPI or you):
   register `clerq` as a trusted publisher (or use a project token) before tagging 👤
 - GitHub URLs in README, `pyproject.toml` and `_quarto.yml` point at `tpogden/clerq`, which only exists after
   the repo rename (Phase 4.2)
-- Zenodo DOI and clerq citation
+- ~~Zenodo DOI and clerq citation~~ done (concept DOI `10.5281/zenodo.23269881`)
 - Existing bug found in passing, unrelated to the rename: `mbsolve --help` crashes under Python 3.14 (unescaped `%`
   in an argparse help string)
 
@@ -172,7 +172,7 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 ## Phase 5: Post-cutover
 
 - [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
-- [ ] New Zenodo DOI; add to README citation block alongside the old one 👤. `CITATION.cff` added (no ORCID yet). On Zenodo: enable `tpogden/clerq` under GitHub settings (Sync now after the rename); only releases published *after* the switch are archived, so the first archived release will be `v0.13.1`. Check whether the repo was already enabled under the old name: if so, releases join the existing MaxwellBloch record (same concept DOI)
+- [x] Zenodo: `v0.13.1` archived 2026-10-09. Concept DOI (all versions, used in the README and `CITATION.cff`) `10.5281/zenodo.23269881`; version DOI for v0.13.1 `10.5281/zenodo.23269882`. The old MaxwellBloch citation stays for earlier versions 👤
 - [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
 - [ ] External references sweep 👤 (done 2026-10-09 except the items marked open):
   - [x] `tpogden/clerq` repo description and homepage (`https://clerq.org`)
