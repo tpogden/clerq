@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.13.1] 2026-10-09
 
 ### Fixed
 - The `mbsolve` and `obsolve` command-line scripts crashed in 0.13.0: `mbsolve` failed while building its argument
@@ -17,9 +17,19 @@ Versioning](http://semver.org/spec/v2.0.0.html).
   `linear-absorption` labels and Beer-Lambert formula updated), so every example solves the physical problem it
   was designed for, bit for bit as in 0.12.0; plot limits widened where the data left the axes.
 
+### Changed
+- The package is now described as classical Maxwell fields propagating through open quantum systems (Maxwell's
+  equations coupled to the Lindblad master equation), not as a Maxwell-Bloch solver: PyPI summary, README, docs.
+- Docs: executed notebook outputs are regenerated from scratch (the site had shown tqdm progress bars on several
+  pages), a rename announcement page, and a "Why a new name" section. `make docs_execute` now stores the outputs
+  in the notebooks.
+- CI: the benchmark regression gate is widened from 50% to 200%, because identical code varied by more than that
+  between GitHub runners.
+
 ### Added
 - `CITATION.cff` (software citation metadata; also read by Zenodo and GitHub's
   "Cite this repository").
+- The stimulated three-pulse photon echo example.
 
 ## [0.13.0] 2026-10-09
 
