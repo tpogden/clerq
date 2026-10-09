@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.13.0] 2026-10-09
+
+### Fixed
+- **Breaking: corrected a factor-of-2 error in the Maxwell propagation
+  equation** (`1j` → `2j` in `MBSolve`), with the spectral-theory curves in
+  `clerq.spectral` updated to match. Propagation previously gave half the
+  physical optical depth (the Maxwell equation used the convention for coupling
+  Ω, the Bloch solver the standard Ω/2), so absorption and propagation results
+  change. Recompute any cached `.qu` results.
 
 ### Changed
 - **Renamed from `maxwellbloch` to `clerq`.** The package, import name and PyPI
