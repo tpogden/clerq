@@ -102,7 +102,7 @@ Deferred to Phase 4/5 (needs the repo rename, PyPI or you):
 - [x] `docs/CNAME` (`clerq.org`), included in the site via `resources`
 - [x] Existing `publish.yml` (tag `v*` → tests → build → PyPI via OIDC → GitHub release) needs no code change
 
-### Version decision (needs your OK)
+### Version decision (agreed 2026-10-09: clerq 0.13.0, shim 0.12.1)
 
 Last `maxwellbloch` on PyPI is **0.12.0**. The first clerq release contains the factor-of-2 physics fix (a breaking change to
 results), so I recommend **`clerq 0.13.0`** via `uv run bump-my-version bump minor`, and the shim as `maxwellbloch 0.12.1`
