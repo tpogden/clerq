@@ -9,6 +9,10 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Fixed
+- The `mbsolve` and `obsolve` command-line scripts crashed in 0.13.0: `mbsolve` failed while building its argument
+  parser (an unescaped `%` in a help string, an error on Python 3.14) and called `MBSolve.mbsolve` with a keyword that
+  no longer exists; `obsolve` called a non-existent `OBSolve.solve`. The dead `--pbarchunksize` option is removed
+  (the progress bar is always on), and `tests/test_bin.py` now solves a small problem with each script.
 - Example notebooks recalibrated after the factor-of-2 fix in 0.13.0: interaction strengths halved (and the
   `linear-absorption` labels and Beer-Lambert formula updated), so every example solves the physical problem it
   was designed for, bit for bit as in 0.12.0; plot limits widened where the data left the axes.

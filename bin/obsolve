@@ -21,7 +21,7 @@ def main():
     print('Loading problem definition from file {0}'.format(args['file']))
     obs = ob_solve.OBSolve().from_json(args['file'])
     print(obs.to_json_str())
-    obs.solve(show_pbar=True, recalc=args['recalc'])
+    obs.obsolve(show_pbar=True, recalc=args['recalc'])
 
     return 0
 
