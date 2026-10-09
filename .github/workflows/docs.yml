@@ -1,7 +1,7 @@
 name: Docs
 
 # Publishes the Quarto site to GitHub Pages (clerq.org) from master, i.e. on
-# release merges. Notebook outputs come from the committed docs/_freeze, so no
+# release merges. Notebook outputs are stored in the committed .ipynb files, so no
 # Python environment is needed here.
 on:
   push:

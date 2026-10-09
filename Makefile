@@ -36,9 +36,9 @@ docs_api:
 docs_html: docs_api
 	cd docs && uv run quarto render
 
-# Re-execute every notebook (slow), refreshing outputs and docs/_freeze.
+# Re-execute every notebook (slow) and store the outputs in the .ipynb files.
 docs_execute: docs_api
-	cd docs && uv run ./execute.sh --fresh
+	cd docs && uv run ./execute.sh
 
 docs_serve:
 	cd docs && uv run quarto preview
@@ -78,7 +78,7 @@ clean_qu:
 	rm $(QU_FILES)
 
 clean_docs:
-	rm -rf docs/_site docs/_freeze
+	rm -rf docs/_site
 
 clean_dist:
 	rm -rf dist/*

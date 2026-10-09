@@ -29,7 +29,7 @@ Versioning](http://semver.org/spec/v2.0.0.html).
   `clerq` version instead of the `maxwellbloch` version. Earlier entries below
   keep the old name.
 - Documentation moved from Sphinx/readthedocs to Quarto (clerq.org). Executed
-  notebook outputs are committed in `docs/_freeze/`; the `.qu` solver caches
+  executed outputs are stored in the notebooks; the `.qu` solver caches
   are no longer committed.
 
 ## [0.9.0] 2026-04-24

@@ -14,7 +14,7 @@ Legend: `[x]` done · `[ ]` to do · 👤 you must do it (external or credential
 ## Phase 0: Pre-work
 
 - [x] 0.1 Reserve `clerq` on PyPI 👤: `clerq 0.0.0` live, verified 2026-10-09
-- [x] 0.2 Decisions locked (see plan): continue `0.x.y`, rename in place, `freeze: auto`, shim, new Zenodo DOI
+- [x] 0.2 Decisions locked (see plan): continue `0.x.y`, rename in place, ~~`freeze: auto`~~ (replaced by outputs stored in the notebooks), shim, new Zenodo DOI
 - [x] 0.3 `clerq.org` DNS points at GitHub Pages 👤: apex A records `185.199.108–111.153` and `www` CNAME to `tpogden.github.io`, verified 2026-10-09 (MX left as Hover mail forwarding)
 - [ ] 0.4 Revoke the account-wide PyPI token used for the stub; create a `clerq`-scoped token for Phase 4 👤
 - [ ] 0.5 Decide whether to batch a small API cleanup into the rename release (open question in plan)
@@ -44,20 +44,29 @@ Done 2026-10-09 (`95a0e96`). Factor-of-2 fix (PR #289) was merged into `next` fi
       tqdm progress rates, plotly random div ids, and random nbformat cell ids
 - [x] 2.2 Fixed: `%time` removed; `docs/.ipython/.../00-docs-determinism.py` silences tqdm and makes `uuid4`
       deterministic (used only by `docs/execute.sh`); frontmatter cells given a fixed `id`
-- [x] 2.3 Two from-scratch executions (no `.qu`, no freeze) give a byte-identical `_freeze/` (7 min each)
-- [x] 2.4 `docs/_freeze/` committed (15 MB, 20 notebooks); committed `.qu` caches deleted and `*.qu` ignored everywhere
-- [x] Gate: clean clone + plain `quarto render` takes 23 s, starts no kernel, no warnings, 0 broken links, all 20 pages show outputs
+- [x] 2.3 Two from-scratch executions (no `.qu`) give byte-identical results (7 min each)
+- [x] 2.4 Committed `.qu` caches deleted and `*.qu` ignored everywhere
 
-How to refresh after changing code or a notebook: `make docs_execute` (runs `docs/execute.sh --fresh`, ~7 min),
-review the `_freeze/` diff, commit. Never run `quarto render --execute` directly: it rewrites the source notebooks
-with outputs and, without the startup script, produces non-reproducible output.
+**Correction (2026-10-09).** Phase 2 originally stored the executed outputs in `docs/_freeze/` and claimed the site
+was built from it. That was wrong. Quarto never executes a `.ipynb` on a plain `quarto render`
+(`execute.enabled` is false for notebooks), so it shows the outputs *stored in the notebook* and ignores `_freeze/`.
+The notebooks committed in `95a0e96` did contain outputs, but from early runs made without the determinism script,
+so the deployed pages showed tqdm progress-bar spam (1201 cells in 7 notebooks; 124 lines on the `sech-2pi` page) and
+the "clean clone renders from `_freeze`" gate had only tested those stored outputs. Fixed in the PR that removed
+`_freeze/`: the executed outputs now live in the notebooks, two from-scratch runs give byte-identical notebooks
+(0 of 21 differ), and the new outputs match the audited freeze (every stdout line, same figure counts).
+
+How to refresh after changing code or a notebook: `make docs_execute` (runs `docs/execute.sh`, ~8 min; deletes `.qu`
+caches, then `quarto render --execute` with the determinism startup script), review the notebook diff, commit. Do not
+run `quarto render --execute` without the startup script (`IPYTHONDIR=docs/.ipython`): outputs then include progress
+bars and random plotly ids.
 
 Things learned:
 
 - 15 of 20 notebooks had no stored outputs (Sphinx executed them at build time), so the Phase 1 site had empty
   pages until now.
 - Notebooks used `recalc=False` against committed `.qu` caches, so they never re-solved. Those caches are gone.
-- The `mbs-ladder-rydberg-eit-counter` draft is excluded and has no freeze.
+- The `mbs-ladder-rydberg-eit-counter` draft is excluded from the build and from re-execution.
 
 ## Phase 3: Code rename ✅
 
@@ -72,7 +81,7 @@ Done 2026-10-09 (`61d85d4` rename, `aa6a2b0` regenerated docs). Version stays `0
 - [x] CI: no `maxwellbloch` strings in the workflows (docs job already switched to Quarto in Phase 1)
 - [x] Gate: 208 tests pass; `ruff check` and `ruff format --check` clean
 - [x] Gate: wheel builds as `clerq-0.12.0`, installs in a clean venv, `import clerq` works, `import maxwellbloch` fails, `mbsolve`/`obsolve`/movie scripts installed
-- [x] Gate: re-executed freeze is byte-identical to the pre-rename freeze once the name is normalised, so the rename changes no numerics
+- [x] Gate: re-executed outputs are identical to the pre-rename ones once the name is normalised, so the rename changes no numerics
 - [x] Gate: clean-clone `quarto render` 24 s, 0 broken links, all pages have outputs
 
 Changed on purpose vs the plan: the site description in `_quarto.yml` says "Maxwell–Bloch solver", not
@@ -98,7 +107,7 @@ Deferred to Phase 4/5 (needs the repo rename, PyPI or you):
       `from maxwellbloch.field import Field` and `maxwellbloch.plot` return the same objects as `clerq`; it warns with
       `DeprecationWarning`; and it keeps the `[plot]`, `[test]`, `[docs]`, `[dev]` extras. It requires `clerq>=0.13.0`.
 - [x] `.github/workflows/docs.yml`: publishes the Quarto site to `gh-pages` on push to `master` (and manually). Verified that a
-      clean clone renders with no Jupyter installed, from `docs/_freeze`
+      clean clone renders with no Jupyter installed, from the outputs stored in the notebooks
 - [x] `docs/CNAME` (`clerq.org`), included in the site via `resources`
 - [x] Existing `publish.yml` (tag `v*` → tests → build → PyPI via OIDC → GitHub release) needs no code change
 
@@ -155,14 +164,32 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 - [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
 - [ ] New Zenodo DOI; add to README citation block alongside the old one 👤. `CITATION.cff` added (no ORCID yet). On Zenodo: enable `tpogden/clerq` under GitHub settings (Sync now after the rename); only releases published *after* the switch are archived, so the first archived release will be `v0.13.1`. Check whether the repo was already enabled under the old name: if so, releases join the existing MaxwellBloch record (same concept DOI)
 - [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
-- [ ] External references sweep (personal site, CV, papers, Scholar) 👤
+- [ ] External references sweep 👤 (done 2026-10-09 except the items marked open):
+  - [x] `tpogden/clerq` repo description and homepage (`https://clerq.org`)
+  - [x] Site `index.qmd` Projects entry in `tpogden.github.com` (master, `fb70693`) and `tpogden-quarto` (main, `ce6796e`).
+        `ogden.eu` is served from the `gh-pages` branch of `tpogden.github.com`, published by hand, so the live site
+        changes when you next run `quarto publish gh-pages`
+  - [x] `tpogden.github.com/environment.yml`: pip `clerq`, python 3.11, dropped the `qutip=4` / python 3.7 pins (no
+        `maxwellbloch` >= 0.8 could install with them). The file is unreferenced; the site is built with uv
+  - [ ] Read the Docs, `maxwellbloch.readthedocs.io`: still live and stale, no banner. Admin -> Redirects -> add an
+        exact redirect from `/$rest` (or `/en/latest/$rest` and `/en/stable/$rest`) to `https://clerq.org/` with
+        *Force redirect* on, otherwise existing pages are served instead. Removing `.readthedocs.yml` means new RTD
+        builds will fail, which is fine once redirected
+  - [ ] CV (`tpogden/cv`, `tpo-cv.tex`): project entry still says MaxwellBloch
+  - [ ] `paper-maxwellbloch`: title and "Program Title" say MaxwellBloch and the abstract frames the package as solving
+        the Maxwell-Bloch equations; a rewrite decision, not a find and replace
+  - [ ] Blog posts that `import maxwellbloch` and use parameters tuned before the factor-of-2 fix (figures are baked, but a
+        re-execution gives different optical depths); add a note or leave
+  - [ ] Google Scholar and ORCID entries (not reachable from the repo)
+  - Left alone on purpose: `phd-thesis`, `research-notes` (historical), the CoOMBE paper's link to
+    `github.com/tpogden/maxwellbloch` (redirects), `notebooks-maxwellbloch` (archived)
 
 ---
 
 ## Follow-ups after the cutover
 
 - [ ] PR #278 (A5 stimulated echo, targets `next`) still imports `maxwellbloch`: merge `next` into it and rename imports
-      (`perl -pi -e 's/maxwellbloch/clerq/g'` on its files) before it merges; its notebook needs a `docs/_freeze` refresh (`make docs_execute`)
+      (`perl -pi -e 's/maxwellbloch/clerq/g'` on its files) before it merges; its notebook needs its outputs refreshed (`make docs_execute`)
 - [ ] Dependabot PRs #297–#300 target `master`; they should rebase cleanly, otherwise `@dependabot rebase`
 - [ ] `mbsolve --help` crashes on Python 3.14 (unescaped `%` in a help string; `-p/--pbarchunksize` may be dead). Branch
       `fix/mbsolve-help-percent` exists from a separate session; deliberately not included in 0.13.0, ships in 0.13.1
@@ -175,6 +202,6 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 ## Open issues and risks
 
 - `next` is level with `master`, so the plan's `main` maps to `next` for PRs and to `master` for the release.
-- The `.qu` cache files are committed under `docs/` (`!docs/examples/*.qu`). Decide whether `_freeze/` replaces them or they stay.
+- The `.qu` cache files are committed under `docs/` (`!docs/examples/*.qu`). Resolved: `.qu` caches are no longer committed.
 - The spike's counter-propagation exclusion vs the `usage/counter-propagating` notebook: the notebook documents existing behaviour, so it migrates as is.
 - The `pip install clerq` command in `installation.qmd` only works after the Phase 4.4 release.
