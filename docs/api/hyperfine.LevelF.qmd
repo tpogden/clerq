@@ -1,4 +1,4 @@
-# hyperfine.LevelF { #maxwellbloch.hyperfine.LevelF }
+# hyperfine.LevelF { #clerq.hyperfine.LevelF }
 
 ```python
 hyperfine.LevelF(I, J, F, energy=0.0, mF_energies=None)
@@ -26,10 +26,10 @@ Represents an F hyperfine structure level and holds its magnetic
 
 | Name | Description |
 | --- | --- |
-| [build_mF_levels](#maxwellbloch.hyperfine.LevelF.build_mF_levels) | Builds the mF sublevels of the F level. |
-| [get_mF_range](#maxwellbloch.hyperfine.LevelF.get_mF_range) | Returns a range representing the m_F angular momentum sublevels |
+| [build_mF_levels](#clerq.hyperfine.LevelF.build_mF_levels) | Builds the mF sublevels of the F level. |
+| [get_mF_range](#clerq.hyperfine.LevelF.get_mF_range) | Returns a range representing the m_F angular momentum sublevels |
 
-### build_mF_levels { #maxwellbloch.hyperfine.LevelF.build_mF_levels }
+### build_mF_levels { #clerq.hyperfine.LevelF.build_mF_levels }
 
 ```python
 hyperfine.LevelF.build_mF_levels(mF_energies=None)
@@ -46,7 +46,7 @@ Builds the mF sublevels of the F level.
 Returns:
     self.mF_levels
 
-### get_mF_range { #maxwellbloch.hyperfine.LevelF.get_mF_range }
+### get_mF_range { #clerq.hyperfine.LevelF.get_mF_range }
 
 ```python
 hyperfine.LevelF.get_mF_range()

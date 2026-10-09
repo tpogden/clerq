@@ -1,4 +1,4 @@
-# spectral.dispersion_two_linear_known { #maxwellbloch.spectral.dispersion_two_linear_known }
+# spectral.dispersion_two_linear_known { #clerq.spectral.dispersion_two_linear_known }
 
 ```python
 spectral.dispersion_two_linear_known(
@@ -8,4 +8,4 @@ spectral.dispersion_two_linear_known(
 )
 ```
 
-The dispersion is half the real part of the susecptibility.
+The field dispersion, equal to the real part of the susceptibility.

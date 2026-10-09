@@ -1,4 +1,4 @@
-# ob_atom.OBAtom { #maxwellbloch.ob_atom.OBAtom }
+# ob_atom.OBAtom { #clerq.ob_atom.OBAtom }
 
 ```python
 ob_atom.OBAtom(
@@ -17,17 +17,17 @@ ob_atom.OBAtom(
 
 | Name | Description |
 | --- | --- |
-| [add_field](#maxwellbloch.ob_atom.OBAtom.add_field) | Add a Field to the list given a dict representing the field. |
-| [build_fields](#maxwellbloch.ob_atom.OBAtom.build_fields) | Build the field list given a list of dicts representing fields. |
-| [build_initial_state](#maxwellbloch.ob_atom.OBAtom.build_initial_state) | Build the initial density matrix for the atom. |
-| [build_operators](#maxwellbloch.ob_atom.OBAtom.build_operators) | Build the quantum operators representing the bare Hamiltonian, |
-| [get_detunings](#maxwellbloch.ob_atom.OBAtom.get_detunings) | Returns a list of detunings, one for each field in fields. |
-| [get_fields_sum_coherence](#maxwellbloch.ob_atom.OBAtom.get_fields_sum_coherence) | Returns the sum coherences of the atom density matrix for each |
-| [set_H_Delta](#maxwellbloch.ob_atom.OBAtom.set_H_Delta) | Set the detuning part of the interaction Hamiltonian, H_Delta, |
-| [set_H_Omega](#maxwellbloch.ob_atom.OBAtom.set_H_Omega) |  |
-| [to_json_str](#maxwellbloch.ob_atom.OBAtom.to_json_str) | Return a JSON string representation of the Atom object. |
+| [add_field](#clerq.ob_atom.OBAtom.add_field) | Add a Field to the list given a dict representing the field. |
+| [build_fields](#clerq.ob_atom.OBAtom.build_fields) | Build the field list given a list of dicts representing fields. |
+| [build_initial_state](#clerq.ob_atom.OBAtom.build_initial_state) | Build the initial density matrix for the atom. |
+| [build_operators](#clerq.ob_atom.OBAtom.build_operators) | Build the quantum operators representing the bare Hamiltonian, |
+| [get_detunings](#clerq.ob_atom.OBAtom.get_detunings) | Returns a list of detunings, one for each field in fields. |
+| [get_fields_sum_coherence](#clerq.ob_atom.OBAtom.get_fields_sum_coherence) | Returns the sum coherences of the atom density matrix for each |
+| [set_H_Delta](#clerq.ob_atom.OBAtom.set_H_Delta) | Set the detuning part of the interaction Hamiltonian, H_Delta, |
+| [set_H_Omega](#clerq.ob_atom.OBAtom.set_H_Omega) |  |
+| [to_json_str](#clerq.ob_atom.OBAtom.to_json_str) | Return a JSON string representation of the Atom object. |
 
-### add_field { #maxwellbloch.ob_atom.OBAtom.add_field }
+### add_field { #clerq.ob_atom.OBAtom.add_field }
 
 ```python
 ob_atom.OBAtom.add_field(field_dict)
@@ -35,7 +35,7 @@ ob_atom.OBAtom.add_field(field_dict)
 
 Add a Field to the list given a dict representing the field.
 
-### build_fields { #maxwellbloch.ob_atom.OBAtom.build_fields }
+### build_fields { #clerq.ob_atom.OBAtom.build_fields }
 
 ```python
 ob_atom.OBAtom.build_fields(field_dicts)
@@ -43,7 +43,7 @@ ob_atom.OBAtom.build_fields(field_dicts)
 
 Build the field list given a list of dicts representing fields.
 
-### build_initial_state { #maxwellbloch.ob_atom.OBAtom.build_initial_state }
+### build_initial_state { #clerq.ob_atom.OBAtom.build_initial_state }
 
 ```python
 ob_atom.OBAtom.build_initial_state(initial_state=None)
@@ -70,7 +70,7 @@ The default is for all of the population to be in ``|0><0|``.
 - The elements must sum to 1 (as this will be the trace of the
     density matrix).
 
-### build_operators { #maxwellbloch.ob_atom.OBAtom.build_operators }
+### build_operators { #clerq.ob_atom.OBAtom.build_operators }
 
 ```python
 ob_atom.OBAtom.build_operators()
@@ -79,7 +79,7 @@ ob_atom.OBAtom.build_operators()
 Build the quantum operators representing the bare Hamiltonian,
 collapse operators and interaction Hamiltonian.
 
-### get_detunings { #maxwellbloch.ob_atom.OBAtom.get_detunings }
+### get_detunings { #clerq.ob_atom.OBAtom.get_detunings }
 
 ```python
 ob_atom.OBAtom.get_detunings()
@@ -87,7 +87,7 @@ ob_atom.OBAtom.get_detunings()
 
 Returns a list of detunings, one for each field in fields.
 
-### get_fields_sum_coherence { #maxwellbloch.ob_atom.OBAtom.get_fields_sum_coherence }
+### get_fields_sum_coherence { #clerq.ob_atom.OBAtom.get_fields_sum_coherence }
 
 ```python
 ob_atom.OBAtom.get_fields_sum_coherence(states_t=None)
@@ -108,7 +108,7 @@ Returns the sum coherences of the atom density matrix for each
 |--------|------------|---------------------------------------------|
 |        | np.ndarray | np.ndarray of shape (num_fields, t_steps+1) |
 
-### set_H_Delta { #maxwellbloch.ob_atom.OBAtom.set_H_Delta }
+### set_H_Delta { #clerq.ob_atom.OBAtom.set_H_Delta }
 
 ```python
 ob_atom.OBAtom.set_H_Delta(detunings)
@@ -123,7 +123,7 @@ Set the detuning part of the interaction Hamiltonian, H_Delta,
 |-----------|---------------|-----------------------------------------------------|------------|
 | detunings | list\[float\] | list of floats: detunings of each field in the list | _required_ |
 
-### set_H_Omega { #maxwellbloch.ob_atom.OBAtom.set_H_Omega }
+### set_H_Omega { #clerq.ob_atom.OBAtom.set_H_Omega }
 
 ```python
 ob_atom.OBAtom.set_H_Omega(rabi_freqs, rabi_freq_t_funcs, rabi_freq_t_args)
@@ -139,7 +139,7 @@ ob_atom.OBAtom.set_H_Omega(rabi_freqs, rabi_freq_t_funcs, rabi_freq_t_args)
 
 Returns:
 
-### to_json_str { #maxwellbloch.ob_atom.OBAtom.to_json_str }
+### to_json_str { #clerq.ob_atom.OBAtom.to_json_str }
 
 ```python
 ob_atom.OBAtom.to_json_str()

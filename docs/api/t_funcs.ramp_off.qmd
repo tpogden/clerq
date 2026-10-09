@@ -1,4 +1,4 @@
-# t_funcs.ramp_off { #maxwellbloch.t_funcs.ramp_off }
+# t_funcs.ramp_off { #clerq.t_funcs.ramp_off }
 
 ```python
 t_funcs.ramp_off(index)

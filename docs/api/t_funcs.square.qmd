@@ -1,4 +1,4 @@
-# t_funcs.square { #maxwellbloch.t_funcs.square }
+# t_funcs.square { #clerq.t_funcs.square }
 
 ```python
 t_funcs.square(index)

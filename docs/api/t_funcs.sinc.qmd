@@ -1,4 +1,4 @@
-# t_funcs.sinc { #maxwellbloch.t_funcs.sinc }
+# t_funcs.sinc { #clerq.t_funcs.sinc }
 
 ```python
 t_funcs.sinc(index)

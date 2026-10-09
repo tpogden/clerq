@@ -1,4 +1,4 @@
-# t_funcs.sech { #maxwellbloch.t_funcs.sech }
+# t_funcs.sech { #clerq.t_funcs.sech }
 
 ```python
 t_funcs.sech(index)

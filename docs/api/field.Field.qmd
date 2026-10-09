@@ -1,4 +1,4 @@
-# field.Field { #maxwellbloch.field.Field }
+# field.Field { #clerq.field.Field }
 
 ```python
 field.Field(
@@ -39,12 +39,12 @@ coupled, detuning and Rabi frequency function.
 
 | Name | Description |
 | --- | --- |
-| [get_json_dict](#maxwellbloch.field.Field.get_json_dict) | Return a dict representation of the Field object to be dumped to |
-| [lower_levels](#maxwellbloch.field.Field.lower_levels) | Return the unique lower (ground) level indices coupled by this field. |
-| [to_json_str](#maxwellbloch.field.Field.to_json_str) | Return a JSON string representation of the Field object. |
-| [upper_levels](#maxwellbloch.field.Field.upper_levels) | Return the unique upper (excited) level indices coupled by this field. |
+| [get_json_dict](#clerq.field.Field.get_json_dict) | Return a dict representation of the Field object to be dumped to |
+| [lower_levels](#clerq.field.Field.lower_levels) | Return the unique lower (ground) level indices coupled by this field. |
+| [to_json_str](#clerq.field.Field.to_json_str) | Return a JSON string representation of the Field object. |
+| [upper_levels](#clerq.field.Field.upper_levels) | Return the unique upper (excited) level indices coupled by this field. |
 
-### get_json_dict { #maxwellbloch.field.Field.get_json_dict }
+### get_json_dict { #clerq.field.Field.get_json_dict }
 
 ```python
 field.Field.get_json_dict()
@@ -59,7 +59,7 @@ For the rabi_freq_t_func attribute generated with
 build_rabi_freq_t_func, a suffix for the index will have been
 added. We remove that. e.g. e.g. ramp_onoff_0 -> ramp_onoff
 
-### lower_levels { #maxwellbloch.field.Field.lower_levels }
+### lower_levels { #clerq.field.Field.lower_levels }
 
 ```python
 field.Field.lower_levels()
@@ -73,7 +73,7 @@ Return the unique lower (ground) level indices coupled by this field.
 |--------|-------------|-----------------------------------------------------------------|
 |        | list\[int\] | Sorted list of unique indices ``c[0]`` from ``coupled_levels``. |
 
-### to_json_str { #maxwellbloch.field.Field.to_json_str }
+### to_json_str { #clerq.field.Field.to_json_str }
 
 ```python
 field.Field.to_json_str()
@@ -87,7 +87,7 @@ Return a JSON string representation of the Field object.
 |--------|--------|---------------------------------------------------|
 |        | str    | (string) JSON representation of the Field object. |
 
-### upper_levels { #maxwellbloch.field.Field.upper_levels }
+### upper_levels { #clerq.field.Field.upper_levels }
 
 ```python
 field.Field.upper_levels()

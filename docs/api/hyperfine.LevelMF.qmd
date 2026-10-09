@@ -1,4 +1,4 @@
-# hyperfine.LevelMF { #maxwellbloch.hyperfine.LevelMF }
+# hyperfine.LevelMF { #clerq.hyperfine.LevelMF }
 
 ```python
 hyperfine.LevelMF(mF, energy=0.0)

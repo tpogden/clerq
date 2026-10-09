@@ -1,4 +1,4 @@
-# t_funcs.gaussian { #maxwellbloch.t_funcs.gaussian }
+# t_funcs.gaussian { #clerq.t_funcs.gaussian }
 
 ```python
 t_funcs.gaussian(index)

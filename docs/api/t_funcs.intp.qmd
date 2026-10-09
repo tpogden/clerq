@@ -1,4 +1,4 @@
-# t_funcs.intp { #maxwellbloch.t_funcs.intp }
+# t_funcs.intp { #clerq.t_funcs.intp }
 
 ```python
 t_funcs.intp(index)

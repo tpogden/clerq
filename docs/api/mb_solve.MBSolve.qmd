@@ -1,4 +1,4 @@
-# mb_solve.MBSolve { #maxwellbloch.mb_solve.MBSolve }
+# mb_solve.MBSolve { #clerq.mb_solve.MBSolve }
 
 ```python
 mb_solve.MBSolve(
@@ -26,26 +26,26 @@ mb_solve.MBSolve(
 
 | Name | Description |
 | --- | --- |
-| [build_velocity_classes](#maxwellbloch.mb_solve.MBSolve.build_velocity_classes) | Build the velocity-class detuning grid and Boltzmann weights. |
-| [build_zlist](#maxwellbloch.mb_solve.MBSolve.build_zlist) | Builds the space grid. |
-| [check](#maxwellbloch.mb_solve.MBSolve.check) | Validates the MBSolve object. |
-| [coherences](#maxwellbloch.mb_solve.MBSolve.coherences) | Gets the sum of coherences (off-diagonals) in a list of coupled |
-| [coherences_field](#maxwellbloch.mb_solve.MBSolve.coherences_field) | Get the sum of coherences (off-diagonals) for the levels coupled by |
-| [fields_area](#maxwellbloch.mb_solve.MBSolve.fields_area) | Gets the integrated pulse area of each field. |
-| [get_json_dict](#maxwellbloch.mb_solve.MBSolve.get_json_dict) | Return the full problem definition as a JSON-serialisable dict. |
-| [init_Omegas_zt](#maxwellbloch.mb_solve.MBSolve.init_Omegas_zt) | Inits the Rabi frequency array. |
-| [init_states_zt](#maxwellbloch.mb_solve.MBSolve.init_states_zt) | Inits the system density matrices. |
-| [load_results](#maxwellbloch.mb_solve.MBSolve.load_results) | Loads the solution from a QuTiP pickle file. |
-| [mbsolve](#maxwellbloch.mb_solve.MBSolve.mbsolve) | Solves the Maxwell-Bloch equations for the system. |
-| [mbsolve_ab](#maxwellbloch.mb_solve.MBSolve.mbsolve_ab) | Solves the Maxwell-Bloch equations using an Adams-Bashforth step. |
-| [mbsolve_euler](#maxwellbloch.mb_solve.MBSolve.mbsolve_euler) | Solves the Maxwell-Bloch equations using a Euler step. |
-| [populations](#maxwellbloch.mb_solve.MBSolve.populations) | Gets the sum of populations in a list of levels. |
-| [populations_field](#maxwellbloch.mb_solve.MBSolve.populations_field) | Gets the sum of populations for the upper (excited) level coupled by |
-| [save_results](#maxwellbloch.mb_solve.MBSolve.save_results) | Saves the solution to a QuTiP pickle file. |
-| [z_step](#maxwellbloch.mb_solve.MBSolve.z_step) | Returns the distance from one space point to the next. |
-| [z_step_inner](#maxwellbloch.mb_solve.MBSolve.z_step_inner) | Returns the distance from one inner space point to the next. |
+| [build_velocity_classes](#clerq.mb_solve.MBSolve.build_velocity_classes) | Build the velocity-class detuning grid and Boltzmann weights. |
+| [build_zlist](#clerq.mb_solve.MBSolve.build_zlist) | Builds the space grid. |
+| [check](#clerq.mb_solve.MBSolve.check) | Validates the MBSolve object. |
+| [coherences](#clerq.mb_solve.MBSolve.coherences) | Gets the sum of coherences (off-diagonals) in a list of coupled |
+| [coherences_field](#clerq.mb_solve.MBSolve.coherences_field) | Get the sum of coherences (off-diagonals) for the levels coupled by |
+| [fields_area](#clerq.mb_solve.MBSolve.fields_area) | Gets the integrated pulse area of each field. |
+| [get_json_dict](#clerq.mb_solve.MBSolve.get_json_dict) | Return the full problem definition as a JSON-serialisable dict. |
+| [init_Omegas_zt](#clerq.mb_solve.MBSolve.init_Omegas_zt) | Inits the Rabi frequency array. |
+| [init_states_zt](#clerq.mb_solve.MBSolve.init_states_zt) | Inits the system density matrices. |
+| [load_results](#clerq.mb_solve.MBSolve.load_results) | Loads the solution from a QuTiP pickle file. |
+| [mbsolve](#clerq.mb_solve.MBSolve.mbsolve) | Solves the Maxwell-Bloch equations for the system. |
+| [mbsolve_ab](#clerq.mb_solve.MBSolve.mbsolve_ab) | Solves the Maxwell-Bloch equations using an Adams-Bashforth step. |
+| [mbsolve_euler](#clerq.mb_solve.MBSolve.mbsolve_euler) | Solves the Maxwell-Bloch equations using a Euler step. |
+| [populations](#clerq.mb_solve.MBSolve.populations) | Gets the sum of populations in a list of levels. |
+| [populations_field](#clerq.mb_solve.MBSolve.populations_field) | Gets the sum of populations for the upper (excited) level coupled by |
+| [save_results](#clerq.mb_solve.MBSolve.save_results) | Saves the solution to a QuTiP pickle file. |
+| [z_step](#clerq.mb_solve.MBSolve.z_step) | Returns the distance from one space point to the next. |
+| [z_step_inner](#clerq.mb_solve.MBSolve.z_step_inner) | Returns the distance from one inner space point to the next. |
 
-### build_velocity_classes { #maxwellbloch.mb_solve.MBSolve.build_velocity_classes }
+### build_velocity_classes { #clerq.mb_solve.MBSolve.build_velocity_classes }
 
 ```python
 mb_solve.MBSolve.build_velocity_classes(velocity_classes=None)
@@ -65,7 +65,7 @@ Build the velocity-class detuning grid and Boltzmann weights.
 |--------|---------------------------------|---------------------------------------|
 |        | tuple\[np.ndarray, np.ndarray\] | (thermal_delta_list, thermal_weights) |
 
-### build_zlist { #maxwellbloch.mb_solve.MBSolve.build_zlist }
+### build_zlist { #clerq.mb_solve.MBSolve.build_zlist }
 
 ```python
 mb_solve.MBSolve.build_zlist(z_min, z_max, z_steps, z_steps_inner)
@@ -88,7 +88,7 @@ Builds the space grid.
     you don't need to record the solution at such a high-level of
     resolution, increase z_steps_inner.
 
-### check { #maxwellbloch.mb_solve.MBSolve.check }
+### check { #clerq.mb_solve.MBSolve.check }
 
 ```python
 mb_solve.MBSolve.check()
@@ -96,7 +96,7 @@ mb_solve.MBSolve.check()
 
 Validates the MBSolve object.
 
-### coherences { #maxwellbloch.mb_solve.MBSolve.coherences }
+### coherences { #clerq.mb_solve.MBSolve.coherences }
 
 ```python
 mb_solve.MBSolve.coherences(coupled_levels)
@@ -123,7 +123,7 @@ Unlike ``OBAtom.get_fields_sum_coherence``, which operates on a
 single-z time series with per-field weighting factors, this method
 sums over the full (z, t) array with unit weights.
 
-### coherences_field { #maxwellbloch.mb_solve.MBSolve.coherences_field }
+### coherences_field { #clerq.mb_solve.MBSolve.coherences_field }
 
 ```python
 mb_solve.MBSolve.coherences_field(field_idx)
@@ -141,7 +141,7 @@ a field.
 Returns:
     np.array, shape (z_steps+1, t_steps+1), dtype=complex
 
-### fields_area { #maxwellbloch.mb_solve.MBSolve.fields_area }
+### fields_area { #clerq.mb_solve.MBSolve.fields_area }
 
 ```python
 mb_solve.MBSolve.fields_area()
@@ -156,7 +156,7 @@ Gets the integrated pulse area of each field.
 |        | np.ndarray | np.array [num_fields, num_z_steps]: Integrated area of each field |
 |        | np.ndarray | over time                                                         |
 
-### get_json_dict { #maxwellbloch.mb_solve.MBSolve.get_json_dict }
+### get_json_dict { #clerq.mb_solve.MBSolve.get_json_dict }
 
 ```python
 mb_solve.MBSolve.get_json_dict()
@@ -164,7 +164,7 @@ mb_solve.MBSolve.get_json_dict()
 
 Return the full problem definition as a JSON-serialisable dict.
 
-### init_Omegas_zt { #maxwellbloch.mb_solve.MBSolve.init_Omegas_zt }
+### init_Omegas_zt { #clerq.mb_solve.MBSolve.init_Omegas_zt }
 
 ```python
 mb_solve.MBSolve.init_Omegas_zt()
@@ -177,7 +177,7 @@ states_zt shape: (z_steps+1, t_steps+1, num_states, num_states) — z-first.
 These are inconsistent; correcting either is a breaking API change,
 deferred to a future major version.
 
-### init_states_zt { #maxwellbloch.mb_solve.MBSolve.init_states_zt }
+### init_states_zt { #clerq.mb_solve.MBSolve.init_states_zt }
 
 ```python
 mb_solve.MBSolve.init_states_zt()
@@ -185,7 +185,7 @@ mb_solve.MBSolve.init_states_zt()
 
 Inits the system density matrices.
 
-### load_results { #maxwellbloch.mb_solve.MBSolve.load_results }
+### load_results { #clerq.mb_solve.MBSolve.load_results }
 
 ```python
 mb_solve.MBSolve.load_results()
@@ -206,7 +206,7 @@ Loads the solution from a QuTiP pickle file.
 - Old savefiles without metadata are loaded without integrity
     checking, with a warning.
 
-### mbsolve { #maxwellbloch.mb_solve.MBSolve.mbsolve }
+### mbsolve { #clerq.mb_solve.MBSolve.mbsolve }
 
 ```python
 mb_solve.MBSolve.mbsolve(
@@ -243,7 +243,7 @@ Solves the Maxwell-Bloch equations for the system.
 |        | np.ndarray | self.Omegas_zt: The solved field complex Rabi frequency at each point in space z and time t. |
 |        | np.ndarray | self.states_zt: The solved density matrix at each point in space z and time t.               |
 
-### mbsolve_ab { #maxwellbloch.mb_solve.MBSolve.mbsolve_ab }
+### mbsolve_ab { #clerq.mb_solve.MBSolve.mbsolve_ab }
 
 ```python
 mb_solve.MBSolve.mbsolve_ab(
@@ -272,7 +272,7 @@ Solves the Maxwell-Bloch equations using an Adams-Bashforth step.
 |        | np.ndarray | self.Omegas_zt: The solved field complex Rabi frequency at each point in space z and time t. |
 |        | np.ndarray | self.states_zt: The solved density matrix at each point in space z and time t.               |
 
-### mbsolve_euler { #maxwellbloch.mb_solve.MBSolve.mbsolve_euler }
+### mbsolve_euler { #clerq.mb_solve.MBSolve.mbsolve_euler }
 
 ```python
 mb_solve.MBSolve.mbsolve_euler(
@@ -301,7 +301,7 @@ Solves the Maxwell-Bloch equations using a Euler step.
 |        | np.ndarray | self.Omegas_zt: The solved field complex Rabi frequency at each point in space z and time t. |
 |        | np.ndarray | self.states_zt: The solved density matrix at each point in space z and time t.               |
 
-### populations { #maxwellbloch.mb_solve.MBSolve.populations }
+### populations { #clerq.mb_solve.MBSolve.populations }
 
 ```python
 mb_solve.MBSolve.populations(levels)
@@ -321,7 +321,7 @@ Gets the sum of populations in a list of levels.
 |--------|------------|-------------------------------------------------------|
 |        | np.ndarray | np.array, shape (z_steps+1, t_steps+1), dtype=np.real |
 
-### populations_field { #maxwellbloch.mb_solve.MBSolve.populations_field }
+### populations_field { #clerq.mb_solve.MBSolve.populations_field }
 
 ```python
 mb_solve.MBSolve.populations_field(field_idx, upper=True)
@@ -346,7 +346,7 @@ Gets the sum of populations for the upper (excited) level coupled by
 
 - Casting upper to int so upper is 1, lower is 0.
 
-### save_results { #maxwellbloch.mb_solve.MBSolve.save_results }
+### save_results { #clerq.mb_solve.MBSolve.save_results }
 
 ```python
 mb_solve.MBSolve.save_results()
@@ -359,7 +359,7 @@ Saves the solution to a QuTiP pickle file.
 - The path to which the results will be saved is taken from
     self.savefile.
 
-### z_step { #maxwellbloch.mb_solve.MBSolve.z_step }
+### z_step { #clerq.mb_solve.MBSolve.z_step }
 
 ```python
 mb_solve.MBSolve.z_step()
@@ -367,7 +367,7 @@ mb_solve.MBSolve.z_step()
 
 Returns the distance from one space point to the next.
 
-### z_step_inner { #maxwellbloch.mb_solve.MBSolve.z_step_inner }
+### z_step_inner { #clerq.mb_solve.MBSolve.z_step_inner }
 
 ```python
 mb_solve.MBSolve.z_step_inner()

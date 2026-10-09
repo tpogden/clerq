@@ -1,4 +1,4 @@
-# ob_solve.OBSolve { #maxwellbloch.ob_solve.OBSolve }
+# ob_solve.OBSolve { #clerq.ob_solve.OBSolve }
 
 ```python
 ob_solve.OBSolve(
@@ -15,7 +15,7 @@ ob_solve.OBSolve(
 Time-domain master equation solver for a single spatial point.
 
 Wraps :func:`qutip.mesolve` to evolve an atomic density matrix described
-by an :class:`~maxwellbloch.ob_atom.OBAtom` over a user-defined time
+by an :class:`~clerq.ob_atom.OBAtom` over a user-defined time
 grid. Supports Doppler broadening via velocity classes and can save/load
 results to avoid recomputation.
 
@@ -23,7 +23,7 @@ results to avoid recomputation.
 
 | Name     | Type         | Description                                                                                                            | Default     |
 |----------|--------------|------------------------------------------------------------------------------------------------------------------------|-------------|
-| atom     | dict \| None | Dict (or empty dict for defaults) describing the atomic system; passed to :class:`~maxwellbloch.ob_atom.OBAtom`.       | `None`      |
+| atom     | dict \| None | Dict (or empty dict for defaults) describing the atomic system; passed to :class:`~clerq.ob_atom.OBAtom`.              | `None`      |
 | t_min    | float        | Start time of the simulation.                                                                                          | `0.0`       |
 | t_max    | float        | End time of the simulation.                                                                                            | `1.0`       |
 | t_steps  | int          | Number of time steps.                                                                                                  | `100`       |
@@ -35,14 +35,14 @@ results to avoid recomputation.
 
 | Name | Description |
 | --- | --- |
-| [build_opts](#maxwellbloch.ob_solve.OBSolve.build_opts) | Build the options dict to be passed into the QuTiP solver. |
-| [from_json](#maxwellbloch.ob_solve.OBSolve.from_json) | Initialise OBSolve from JSON file. |
-| [from_json_str](#maxwellbloch.ob_solve.OBSolve.from_json_str) | Initialise OBSolve from JSON string. |
-| [savefile_exists](#maxwellbloch.ob_solve.OBSolve.savefile_exists) | Returns true if savefile (with appended extension .qu) exists. |
-| [set_field_rabi_freq_t_args](#maxwellbloch.ob_solve.OBSolve.set_field_rabi_freq_t_args) | Set the Rabi frequency time function arguments. To be used with |
-| [set_field_rabi_freq_t_func](#maxwellbloch.ob_solve.OBSolve.set_field_rabi_freq_t_func) | Set the Rabi frequency time function of a field to a new time |
+| [build_opts](#clerq.ob_solve.OBSolve.build_opts) | Build the options dict to be passed into the QuTiP solver. |
+| [from_json](#clerq.ob_solve.OBSolve.from_json) | Initialise OBSolve from JSON file. |
+| [from_json_str](#clerq.ob_solve.OBSolve.from_json_str) | Initialise OBSolve from JSON string. |
+| [savefile_exists](#clerq.ob_solve.OBSolve.savefile_exists) | Returns true if savefile (with appended extension .qu) exists. |
+| [set_field_rabi_freq_t_args](#clerq.ob_solve.OBSolve.set_field_rabi_freq_t_args) | Set the Rabi frequency time function arguments. To be used with |
+| [set_field_rabi_freq_t_func](#clerq.ob_solve.OBSolve.set_field_rabi_freq_t_func) | Set the Rabi frequency time function of a field to a new time |
 
-### build_opts { #maxwellbloch.ob_solve.OBSolve.build_opts }
+### build_opts { #clerq.ob_solve.OBSolve.build_opts }
 
 ```python
 ob_solve.OBSolve.build_opts(opts=None)
@@ -70,7 +70,7 @@ which is not known to QuTiP it will throw an exception.
 
 [0]: http://qutip.org/docs/4.2/guide/dynamics/dynamics-options.html
 
-### from_json { #maxwellbloch.ob_solve.OBSolve.from_json }
+### from_json { #clerq.ob_solve.OBSolve.from_json }
 
 ```python
 ob_solve.OBSolve.from_json(file_path)
@@ -78,7 +78,7 @@ ob_solve.OBSolve.from_json(file_path)
 
 Initialise OBSolve from JSON file.
 
-### from_json_str { #maxwellbloch.ob_solve.OBSolve.from_json_str }
+### from_json_str { #clerq.ob_solve.OBSolve.from_json_str }
 
 ```python
 ob_solve.OBSolve.from_json_str(json_str)
@@ -86,7 +86,7 @@ ob_solve.OBSolve.from_json_str(json_str)
 
 Initialise OBSolve from JSON string.
 
-### savefile_exists { #maxwellbloch.ob_solve.OBSolve.savefile_exists }
+### savefile_exists { #clerq.ob_solve.OBSolve.savefile_exists }
 
 ```python
 ob_solve.OBSolve.savefile_exists()
@@ -94,7 +94,7 @@ ob_solve.OBSolve.savefile_exists()
 
 Returns true if savefile (with appended extension .qu) exists.
 
-### set_field_rabi_freq_t_args { #maxwellbloch.ob_solve.OBSolve.set_field_rabi_freq_t_args }
+### set_field_rabi_freq_t_args { #clerq.ob_solve.OBSolve.set_field_rabi_freq_t_args }
 
 ```python
 ob_solve.OBSolve.set_field_rabi_freq_t_args(field_idx, t_args)
@@ -110,7 +110,7 @@ Set the Rabi frequency time function arguments. To be used with
 | field_idx | int    | The field for which to set the Rabi frequency t_args | _required_ |
 | t_args    | dict   | A dict representing the args to go with the t_func.  | _required_ |
 
-### set_field_rabi_freq_t_func { #maxwellbloch.ob_solve.OBSolve.set_field_rabi_freq_t_func }
+### set_field_rabi_freq_t_func { #clerq.ob_solve.OBSolve.set_field_rabi_freq_t_func }
 
 ```python
 ob_solve.OBSolve.set_field_rabi_freq_t_func(field_idx, t_func)

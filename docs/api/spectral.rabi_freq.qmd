@@ -1,4 +1,4 @@
-# spectral.rabi_freq { #maxwellbloch.spectral.rabi_freq }
+# spectral.rabi_freq { #clerq.spectral.rabi_freq }
 
 ```python
 spectral.rabi_freq(mb_solve, field_idx, *, window=None)

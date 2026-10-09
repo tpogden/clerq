@@ -1,4 +1,4 @@
-# spectral.absorption { #maxwellbloch.spectral.absorption }
+# spectral.absorption { #clerq.spectral.absorption }
 
 ```python
 spectral.absorption(mb_solve, field_idx, z_idx=-1, *, window=None)

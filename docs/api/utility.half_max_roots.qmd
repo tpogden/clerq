@@ -1,4 +1,4 @@
-# utility.half_max_roots { #maxwellbloch.utility.half_max_roots }
+# utility.half_max_roots { #clerq.utility.half_max_roots }
 
 ```python
 utility.half_max_roots(x, y)

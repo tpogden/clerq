@@ -1,4 +1,4 @@
-# spectral.freq_list { #maxwellbloch.spectral.freq_list }
+# spectral.freq_list { #clerq.spectral.freq_list }
 
 ```python
 spectral.freq_list(mb_solve)

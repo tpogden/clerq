@@ -1,4 +1,4 @@
-# utility.full_width_at_half_max { #maxwellbloch.utility.full_width_at_half_max }
+# utility.full_width_at_half_max { #clerq.utility.full_width_at_half_max }
 
 ```python
 utility.full_width_at_half_max(x, y)

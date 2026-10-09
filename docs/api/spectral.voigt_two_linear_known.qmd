@@ -1,4 +1,4 @@
-# spectral.voigt_two_linear_known { #maxwellbloch.spectral.voigt_two_linear_known }
+# spectral.voigt_two_linear_known { #clerq.spectral.voigt_two_linear_known }
 
 ```python
 spectral.voigt_two_linear_known(freq_list, decay_rate, thermal_width)

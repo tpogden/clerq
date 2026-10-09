@@ -1,4 +1,4 @@
-# spectral.susceptibility_two_linear_known { #maxwellbloch.spectral.susceptibility_two_linear_known }
+# spectral.susceptibility_two_linear_known { #clerq.spectral.susceptibility_two_linear_known }
 
 ```python
 spectral.susceptibility_two_linear_known(
@@ -8,7 +8,7 @@ spectral.susceptibility_two_linear_known(
 )
 ```
 
-In the linear regime for a two-level system, the suecpetibility is
+In the linear regime for a two-level system, the susceptibility is
 known analytically. This is here for useful comparison, as good
 agreement between a simulated weak field in a two-level system tells us
 that the model is accurate in the linear regime, which gives us
@@ -16,4 +16,8 @@ confidence in the scheme for going beyond the weak field limit.
 
 ## Notes {.doc-section .doc-section-notes}
 
-See TP Ogden Thesis Eqn(2.61)
+Returns g·χ_ρ, where χ_ρ is the coherence susceptibility satisfying
+ρ₀₁ = χ_ρ·Ω in the weak-field limit. The Bloch Hamiltonian uses the
+standard coupling Ω/2, so χ_ρ = i/(Γ/2 − iΔ). The absorption and
+dispersion are its imaginary and real parts respectively.
+See TP Ogden Thesis Eqn(2.61).

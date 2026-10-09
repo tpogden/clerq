@@ -1,4 +1,4 @@
-# hyperfine.Atom1e { #maxwellbloch.hyperfine.Atom1e }
+# hyperfine.Atom1e { #clerq.hyperfine.Atom1e }
 
 ```python
 hyperfine.Atom1e(element=None, isotope=None)
@@ -10,17 +10,17 @@ Represents an atom object and contains a list of J levels.
 
 | Name | Description |
 | --- | --- |
-| [get_F_level_idx_map](#maxwellbloch.hyperfine.Atom1e.get_F_level_idx_map) | Maps each element of the mF_list to a F_level index. |
-| [get_clebsch_hf_factors](#maxwellbloch.hyperfine.Atom1e.get_clebsch_hf_factors) | Returns a list of Clebsch-Gordan coefficients for the hyperfine |
-| [get_clebsch_hf_factors_iso](#maxwellbloch.hyperfine.Atom1e.get_clebsch_hf_factors_iso) | Returns a list of Clebsch-Gordan coefficients for the hyperfine |
-| [get_coupled_levels](#maxwellbloch.hyperfine.Atom1e.get_coupled_levels) | Return all mF-level index pairs between two sets of F levels. |
-| [get_decay_factors](#maxwellbloch.hyperfine.Atom1e.get_decay_factors) | Returns a list of factors for the collapse operators for each |
-| [get_energies](#maxwellbloch.hyperfine.Atom1e.get_energies) | Returns a list of energies for each mF level in all J levels. |
-| [get_mF_list](#maxwellbloch.hyperfine.Atom1e.get_mF_list) | Unnests the mF levels into a single list of dicts. |
-| [get_num_mF_levels](#maxwellbloch.hyperfine.Atom1e.get_num_mF_levels) | Returns the total number of mF levels in all J levels. |
-| [get_strength_factor](#maxwellbloch.hyperfine.Atom1e.get_strength_factor) | Relative hyperfine transition strength factors. |
+| [get_F_level_idx_map](#clerq.hyperfine.Atom1e.get_F_level_idx_map) | Maps each element of the mF_list to a F_level index. |
+| [get_clebsch_hf_factors](#clerq.hyperfine.Atom1e.get_clebsch_hf_factors) | Returns a list of Clebsch-Gordan coefficients for the hyperfine |
+| [get_clebsch_hf_factors_iso](#clerq.hyperfine.Atom1e.get_clebsch_hf_factors_iso) | Returns a list of Clebsch-Gordan coefficients for the hyperfine |
+| [get_coupled_levels](#clerq.hyperfine.Atom1e.get_coupled_levels) | Return all mF-level index pairs between two sets of F levels. |
+| [get_decay_factors](#clerq.hyperfine.Atom1e.get_decay_factors) | Returns a list of factors for the collapse operators for each |
+| [get_energies](#clerq.hyperfine.Atom1e.get_energies) | Returns a list of energies for each mF level in all J levels. |
+| [get_mF_list](#clerq.hyperfine.Atom1e.get_mF_list) | Unnests the mF levels into a single list of dicts. |
+| [get_num_mF_levels](#clerq.hyperfine.Atom1e.get_num_mF_levels) | Returns the total number of mF levels in all J levels. |
+| [get_strength_factor](#clerq.hyperfine.Atom1e.get_strength_factor) | Relative hyperfine transition strength factors. |
 
-### get_F_level_idx_map { #maxwellbloch.hyperfine.Atom1e.get_F_level_idx_map }
+### get_F_level_idx_map { #clerq.hyperfine.Atom1e.get_F_level_idx_map }
 
 ```python
 hyperfine.Atom1e.get_F_level_idx_map()
@@ -28,7 +28,7 @@ hyperfine.Atom1e.get_F_level_idx_map()
 
 Maps each element of the mF_list to a F_level index.
 
-### get_clebsch_hf_factors { #maxwellbloch.hyperfine.Atom1e.get_clebsch_hf_factors }
+### get_clebsch_hf_factors { #clerq.hyperfine.Atom1e.get_clebsch_hf_factors }
 
 ```python
 hyperfine.Atom1e.get_clebsch_hf_factors(F_level_idxs_a, F_level_idxs_b, q)
@@ -51,7 +51,7 @@ Returns a list of Clebsch-Gordan coefficients for the hyperfine
 |--------|--------|----------------------------|
 |        | list   | factors, length of mF_list |
 
-### get_clebsch_hf_factors_iso { #maxwellbloch.hyperfine.Atom1e.get_clebsch_hf_factors_iso }
+### get_clebsch_hf_factors_iso { #clerq.hyperfine.Atom1e.get_clebsch_hf_factors_iso }
 
 ```python
 hyperfine.Atom1e.get_clebsch_hf_factors_iso(F_level_idxs_a, F_level_idxs_b)
@@ -82,7 +82,7 @@ an isotropic field.
   three components of the dipole moment, so it is appropriate to
   average over the couplings (i.e. factor 1/3) rather than sum.
 
-### get_coupled_levels { #maxwellbloch.hyperfine.Atom1e.get_coupled_levels }
+### get_coupled_levels { #clerq.hyperfine.Atom1e.get_coupled_levels }
 
 ```python
 hyperfine.Atom1e.get_coupled_levels(F_level_idxs_a, F_level_idxs_b)
@@ -110,7 +110,7 @@ Selection rules (e.g. forbidding J=J' transitions) are not
 enforced here. Callers are responsible for passing physically
 valid level index sets.
 
-### get_decay_factors { #maxwellbloch.hyperfine.Atom1e.get_decay_factors }
+### get_decay_factors { #clerq.hyperfine.Atom1e.get_decay_factors }
 
 ```python
 hyperfine.Atom1e.get_decay_factors(F_level_idxs_a, F_level_idxs_b)
@@ -135,7 +135,7 @@ on-zero factor to sum.
 
 Returns: (list): factors, length of mF_list
 
-### get_energies { #maxwellbloch.hyperfine.Atom1e.get_energies }
+### get_energies { #clerq.hyperfine.Atom1e.get_energies }
 
 ```python
 hyperfine.Atom1e.get_energies()
@@ -143,7 +143,7 @@ hyperfine.Atom1e.get_energies()
 
 Returns a list of energies for each mF level in all J levels.
 
-### get_mF_list { #maxwellbloch.hyperfine.Atom1e.get_mF_list }
+### get_mF_list { #clerq.hyperfine.Atom1e.get_mF_list }
 
 ```python
 hyperfine.Atom1e.get_mF_list()
@@ -151,7 +151,7 @@ hyperfine.Atom1e.get_mF_list()
 
 Unnests the mF levels into a single list of dicts.
 
-### get_num_mF_levels { #maxwellbloch.hyperfine.Atom1e.get_num_mF_levels }
+### get_num_mF_levels { #clerq.hyperfine.Atom1e.get_num_mF_levels }
 
 ```python
 hyperfine.Atom1e.get_num_mF_levels()
@@ -159,7 +159,7 @@ hyperfine.Atom1e.get_num_mF_levels()
 
 Returns the total number of mF levels in all J levels.
 
-### get_strength_factor { #maxwellbloch.hyperfine.Atom1e.get_strength_factor }
+### get_strength_factor { #clerq.hyperfine.Atom1e.get_strength_factor }
 
 ```python
 hyperfine.Atom1e.get_strength_factor(

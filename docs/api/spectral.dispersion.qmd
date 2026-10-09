@@ -1,4 +1,4 @@
-# spectral.dispersion { #maxwellbloch.spectral.dispersion }
+# spectral.dispersion { #clerq.spectral.dispersion }
 
 ```python
 spectral.dispersion(mb_solve, field_idx, z_idx=-1, *, window=None)

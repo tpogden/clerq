@@ -1,4 +1,4 @@
-# utility.maxwell_boltzmann { #maxwellbloch.utility.maxwell_boltzmann }
+# utility.maxwell_boltzmann { #clerq.utility.maxwell_boltzmann }
 
 ```python
 utility.maxwell_boltzmann(v, fwhm, offset=0.0)
