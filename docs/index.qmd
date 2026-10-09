@@ -2,6 +2,10 @@
 title: "clerq"
 ---
 
+::: {.callout-note}
+MaxwellBloch is now **clerq**. See [what changed and how to update](news/rename.qmd).
+:::
+
 clerq solves the propagation of classical electromagnetic fields through media
 of open quantum systems, using Maxwell's equations coupled to the Lindblad
 master equation. It is used for near-resonant light in thermal atomic vapours,
