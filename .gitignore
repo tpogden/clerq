@@ -57,10 +57,8 @@ cover/
 .DS_Store
 .benchmarks/
 
-# Saved Files — ignore everywhere except docs cache (needed for fast builds)
+# Saved solver results (regenerated on demand; docs outputs live in docs/_freeze)
 *.qu
-!docs/examples/*.qu
-!docs/usage/*.qu
 
 # Version files (generated at build time)
 maxwellbloch/version.py

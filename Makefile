@@ -38,7 +38,7 @@ docs_html: docs_api
 
 # Re-execute every notebook (slow), refreshing outputs and docs/_freeze.
 docs_execute: docs_api
-	cd docs && uv run quarto render --execute
+	cd docs && uv run ./execute.sh
 
 docs_serve:
 	cd docs && uv run quarto preview
