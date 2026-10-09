@@ -1,0 +1,21 @@
+# utility.maxwell_boltzmann { #clerq.utility.maxwell_boltzmann }
+
+```python
+utility.maxwell_boltzmann(v, fwhm, offset=0.0)
+```
+
+Maxwell-Boltzmann probability distribution.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type       | Description                                     | Default    |
+|--------|------------|-------------------------------------------------|------------|
+| v      | np.ndarray | velocity (or detuning) values.                  | _required_ |
+| fwhm   | float      | full-width at half-maximum of the distribution. | _required_ |
+| offset | float      | centre of the distribution (default 0).         | `0.0`      |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type       | Description                                 |
+|--------|------------|---------------------------------------------|
+|        | np.ndarray | Probability density at each value in ``v``. |

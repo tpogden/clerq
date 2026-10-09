@@ -9,7 +9,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import fixed, mb_solve
+from clerq import fixed, mb_solve
 
 # Absolute path of tests/json directory, so that tests can be called from
 # different directories.

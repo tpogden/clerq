@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- **Renamed from `maxwellbloch` to `clerq`.** The package, import name and PyPI
+  name are now `clerq`; update `import maxwellbloch` to `import clerq`. The
+  Plotly theme template is now named `"clerq"`, and `.qu` save files record the
+  `clerq` version instead of the `maxwellbloch` version. Earlier entries below
+  keep the old name.
+- Documentation moved from Sphinx/readthedocs to Quarto (clerq.org). Executed
+  notebook outputs are committed in `docs/_freeze/`; the `.qu` solver caches
+  are no longer committed.
+
 ## [0.9.0] 2026-04-24
 
 ### Added

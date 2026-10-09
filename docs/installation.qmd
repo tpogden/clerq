@@ -1,0 +1,30 @@
+---
+title: "Installation"
+---
+
+## Using uv (recommended)
+
+[uv](https://docs.astral.sh/uv/) is the recommended way to install clerq:
+
+```sh
+uv pip install clerq
+```
+
+## Using pip
+
+```sh
+pip install clerq
+```
+
+## Using Conda
+
+You can create and activate a Conda environment with the required dependencies:
+
+```sh
+conda create --name mb -c conda-forge python=3.11 qutip
+conda activate mb
+pip install clerq
+```
+
+Alternatively you can manually download and install any
+[release](https://github.com/tpogden/clerq/releases).

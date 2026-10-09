@@ -71,12 +71,13 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.11"
-      - name: Install system dependencies
-        run: sudo apt-get install -y pandoc
+      - uses: quarto-dev/quarto-actions/setup@v2
       - name: Install dependencies
         run: uv sync --extra docs
+      - name: Check API pages are up to date
+        run: |
+          cd docs && uv run quartodoc build
+          git diff --exit-code -- api
       - name: Build docs
-        # nbsphinx_execute=never uses stored notebook outputs rather than
-        # re-running simulations, keeping CI fast. Run a full local build
-        # (without this override) after editing notebooks.
-        run: uv run sphinx-build -D nbsphinx_execute=never docs docs/_build -b html -W
+        # Renders from stored notebook outputs; notebooks are not re-executed.
+        run: cd docs && uv run quarto render
