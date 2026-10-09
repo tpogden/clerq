@@ -8,6 +8,11 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Example notebooks recalibrated after the factor-of-2 fix in 0.13.0: interaction strengths halved (and the
+  `linear-absorption` labels and Beer-Lambert formula updated), so every example solves the physical problem it
+  was designed for, bit for bit as in 0.12.0; plot limits widened where the data left the axes.
+
 ### Added
 - `CITATION.cff` (software citation metadata; also read by Zenodo and GitHub's
   "Cite this repository").

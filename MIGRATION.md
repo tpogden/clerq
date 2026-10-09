@@ -56,6 +56,16 @@ the "clean clone renders from `_freeze`" gate had only tested those stored outpu
 `_freeze/`: the executed outputs now live in the notebooks, two from-scratch runs give byte-identical notebooks
 (0 of 21 differ), and the new outputs match the audited freeze (every stdout line, same figure counts).
 
+**Examples vs the factor-of-2 fix (2026-10-09).** The examples were tuned before PR #289 doubled the effective optical
+depth, so after it they showed different physics (e.g. the 0.5π + 1.5π simulton figure overshot to 3.3π and was absorbed
+in half the distance). Audit: for each notebook, the problem was solved with the pre-fix solver (`maxwellbloch 0.12.0`,
+original strengths) and with `clerq` at half the strengths; the field arrays are bit-identical for all 19 notebooks that
+call `MBSolve`. So every `interaction_strengths` was halved (SIT's `interaction_strength` too), which restores each
+example exactly. Exceptions where the number is part of the text: `linear-absorption` was relabelled (Ng = 0.05 / 0.5 / 5,
+amplitude `exp(-2Ng z/Γ)`, `alpha(0) = 4Ng/Γ`), the adiabatons OD table now says `x 4`, and `velocity-classes` scales
+`spectral.voigt_two_linear_known` (a unit-strength profile) by the interaction strength. Plot limits that clipped the data
+(`vee-simultons`) were widened. Any future solver change that alters results should be audited the same way.
+
 How to refresh after changing code or a notebook: `make docs_execute` (runs `docs/execute.sh`, ~8 min; deletes `.qu`
 caches, then `quarto render --execute` with the determinism startup script), review the notebook diff, commit. Do not
 run `quarto render --execute` without the startup script (`IPYTHONDIR=docs/.ipython`): outputs then include progress
