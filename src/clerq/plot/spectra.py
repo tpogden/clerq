@@ -7,13 +7,13 @@ from typing import TYPE_CHECKING
 import numpy as np
 import plotly.graph_objects as go
 
-from maxwellbloch import spectral
-from maxwellbloch.plot import theme as _theme  # noqa: F401 — registers template
+from clerq import spectral
+from clerq.plot import theme as _theme  # noqa: F401 — registers template
 
 if TYPE_CHECKING:
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.mb_solve import MBSolve
 
-_TEMPLATE = "maxwellbloch"
+_TEMPLATE = "clerq"
 
 # Candidate tick magnitudes for arcsinh axis (symmetric about 0).
 # Ticks ≤ the displayed f_max are shown; no hardcoded upper bound.

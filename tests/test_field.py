@@ -7,7 +7,7 @@ Thomas Ogden <t@ogden.eu>
 
 import unittest
 
-from maxwellbloch import field, t_funcs
+from clerq import field, t_funcs
 
 
 class TestInit(unittest.TestCase):
@@ -194,6 +194,5 @@ class TestBuildRabiFreqTFunc(unittest.TestCase):
             self.field_00.build_rabi_freq_t_func("f")
 
         self.assertTrue(
-            "module 'maxwellbloch.t_funcs' has no attribute 'f'"
-            in str(context.exception)
+            "module 'clerq.t_funcs' has no attribute 'f'" in str(context.exception)
         )

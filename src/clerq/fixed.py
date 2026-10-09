@@ -11,7 +11,7 @@ import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 
 if TYPE_CHECKING:
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.mb_solve import MBSolve
 
 
 def t_list(mb_solve: MBSolve, speed_of_light: float) -> np.ndarray:

@@ -1,4 +1,4 @@
-"""MaxwellBloch Plotly theme template."""
+"""clerq Plotly theme template."""
 
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -49,4 +49,4 @@ _TEMPLATE = go.layout.Template(
     )
 )
 
-pio.templates["maxwellbloch"] = _TEMPLATE
+pio.templates["clerq"] = _TEMPLATE

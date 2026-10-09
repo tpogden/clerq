@@ -61,8 +61,8 @@ cover/
 *.qu
 
 # Version files (generated at build time)
-maxwellbloch/version.py
-maxwellbloch/_version.py
+clerq/version.py
+clerq/_version.py
 
 # Docs
 docs/_site

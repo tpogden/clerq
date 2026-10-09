@@ -3,8 +3,8 @@
 import json
 from typing import Any
 
-from maxwellbloch import t_funcs
-from maxwellbloch.t_funcs import TFunc
+from clerq import t_funcs
+from clerq.t_funcs import TFunc
 
 
 class Field(object):

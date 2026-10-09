@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import t_funcs, utility
+from clerq import t_funcs, utility
 
 
 class TestGaussian(unittest.TestCase):

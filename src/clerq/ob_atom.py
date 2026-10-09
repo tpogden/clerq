@@ -7,7 +7,7 @@ import numpy as np
 import qutip as qu
 from numpy import pi
 
-from maxwellbloch import field, ob_base
+from clerq import field, ob_base
 
 
 class OBAtom(ob_base.OBBase):

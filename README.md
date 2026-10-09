@@ -1,13 +1,18 @@
-# MaxwellBloch
+# clerq
 
-[![Build Status](https://github.com/tpogden/maxwellbloch/actions/workflows/ci.yml/badge.svg)](https://github.com/tpogden/maxwellbloch/actions/workflows/ci.yml)
-[![Documentation Status](https://readthedocs.org/projects/maxwellbloch/badge/?version=latest)](https://maxwellbloch.readthedocs.io/en/latest/?badge=latest)
-[![Coverage Status](https://coveralls.io/repos/github/tpogden/maxwellbloch/badge.svg?branch=master)](https://coveralls.io/github/tpogden/maxwellbloch?branch=master)
-[![PyPI](https://img.shields.io/pypi/v/maxwellbloch)](https://pypi.org/project/MaxwellBloch/)
+[![Build Status](https://github.com/tpogden/clerq/actions/workflows/ci.yml/badge.svg)](https://github.com/tpogden/clerq/actions/workflows/ci.yml)
+[![Documentation](https://img.shields.io/badge/docs-clerq.org-blue)](https://clerq.org)
+[![PyPI](https://img.shields.io/pypi/v/clerq)](https://pypi.org/project/clerq/)
 
-MaxwellBloch is a Python package for solving the coupled Maxwell-Bloch
+clerq is a Python package for solving the coupled Maxwell-Bloch
 equations describing the nonlinear propagation of near-resonant light through
 thermal quantised systems such as atomic vapours.
+
+> **Renamed from `maxwellbloch`.** This package was previously published as
+> `maxwellbloch`. Install `clerq` and change `import maxwellbloch` to
+> `import clerq`. The old name will keep working through a transitional release
+> that re-exports `clerq` with a `DeprecationWarning`. The API is otherwise
+> unchanged.
 
 ![](example.gif)
 
@@ -21,20 +26,20 @@ area of 2π.
 
 ## Documentation
 
-Docs for the project are at [maxwellbloch.readthedocs.io][docs].
+Docs for the project are at [clerq.org][docs].
 
 ## Install
 
 The recommended way to install is via [uv](https://docs.astral.sh/uv/):
 
 ```sh
-uv pip install maxwellbloch
+uv pip install clerq
 ```
 
 Or using pip:
 
 ```sh
-pip install maxwellbloch
+pip install clerq
 ```
 
 If you prefer Conda, you can create and activate an environment with the
@@ -42,14 +47,15 @@ required dependencies with
 ```sh
 conda create --name mb -c conda-forge python=3.11 qutip
 conda activate mb
-pip install maxwellbloch
+pip install clerq
 ```
 
 More detailed installation instructions can be found in the [docs][docs] along with many example problems.
 
 ## Attribution
 
-If you use MaxwellBloch for research, please use the following citation:
+If you use clerq for research, please cite the original package, which was
+published as MaxwellBloch:
 ```
 @misc{ogden2020maxwellbloch,
   author = {Ogden, Thomas P.},
@@ -60,9 +66,11 @@ If you use MaxwellBloch for research, please use the following citation:
   year = {2020},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/tpogden/maxwellbloch}}
+  howpublished = {\url{https://github.com/tpogden/clerq}}
 }
 ```
+A citation for clerq itself, with its own DOI, will be added with the first
+release under the new name.
 
 ## Changelog
 
@@ -72,4 +80,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 MIT License. See [LICENSE.txt](LICENSE.txt).
 
-[docs]: https://maxwellbloch.readthedocs.io/
+[docs]: https://clerq.org/

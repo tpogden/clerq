@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 
 if TYPE_CHECKING:
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.mb_solve import MBSolve
 
 
 def omega_abs(mbs: MBSolve, field_idx: int = 0) -> np.ndarray:

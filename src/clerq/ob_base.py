@@ -6,7 +6,7 @@ from typing import Any
 import numpy as np
 import qutip as qu
 
-from maxwellbloch import sigma
+from clerq import sigma
 
 # QuTiP 5 changed the default coefficient function style to 'pythonic'
 # (f(t, **kwargs)). This codebase uses the QuTiP 4 'dict' style (f(t, args)).

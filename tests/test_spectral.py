@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import mb_solve, spectral, utility
+from clerq import mb_solve, spectral, utility
 
 # Absolute path of tests/json directory, so that tests can be called from
 # different directories.

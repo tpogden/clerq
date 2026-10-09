@@ -5,7 +5,7 @@ from itertools import product
 
 import numpy as np
 
-from maxwellbloch.angmom import calc_clebsch_hf
+from clerq.angmom import calc_clebsch_hf
 
 
 class _JsonMixin:

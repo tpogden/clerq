@@ -16,9 +16,9 @@ import warnings
 
 import numpy as np
 
-from maxwellbloch import mb_solve
-from maxwellbloch.exceptions import CounterPropagatingDepletionError
-from maxwellbloch.field import Field
+from clerq import mb_solve
+from clerq.exceptions import CounterPropagatingDepletionError
+from clerq.field import Field
 
 # ---------------------------------------------------------------------------
 # Field schema / init tests

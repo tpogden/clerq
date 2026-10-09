@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 
 if TYPE_CHECKING:
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.mb_solve import MBSolve
 
 
 def freq_list(mb_solve: MBSolve) -> np.ndarray:

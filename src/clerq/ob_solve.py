@@ -7,20 +7,20 @@ from typing import Any
 
 import numpy as np
 
-from maxwellbloch import ob_atom
+from clerq import ob_atom
 
 
 class OBSolve(object):
     """Time-domain master equation solver for a single spatial point.
 
     Wraps :func:`qutip.mesolve` to evolve an atomic density matrix described
-    by an :class:`~maxwellbloch.ob_atom.OBAtom` over a user-defined time
+    by an :class:`~clerq.ob_atom.OBAtom` over a user-defined time
     grid. Supports Doppler broadening via velocity classes and can save/load
     results to avoid recomputation.
 
     Args:
         atom: Dict (or empty dict for defaults) describing the atomic system;
-            passed to :class:`~maxwellbloch.ob_atom.OBAtom`.
+            passed to :class:`~clerq.ob_atom.OBAtom`.
         t_min: Start time of the simulation.
         t_max: End time of the simulation.
         t_steps: Number of time steps.

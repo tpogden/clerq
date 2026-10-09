@@ -477,6 +477,78 @@ wheels = [
 ]
 
 [[package]]
+name = "clerq"
+version = "0.12.0"
+source = { editable = "." }
+dependencies = [
+    { name = "qutip" },
+    { name = "tqdm" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "bump-my-version" },
+    { name = "jupyter" },
+    { name = "kaleido" },
+    { name = "matplotlib" },
+    { name = "plotly" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "pytest-xdist" },
+    { name = "quartodoc" },
+    { name = "ruff" },
+    { name = "seaborn" },
+    { name = "twine" },
+]
+docs = [
+    { name = "jupyter" },
+    { name = "kaleido" },
+    { name = "matplotlib" },
+    { name = "plotly" },
+    { name = "quartodoc" },
+    { name = "seaborn" },
+]
+plot = [
+    { name = "kaleido" },
+    { name = "plotly" },
+]
+test = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "pytest-xdist" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest-benchmark" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "bump-my-version", marker = "extra == 'dev'" },
+    { name = "clerq", extras = ["test", "docs", "plot"], marker = "extra == 'dev'" },
+    { name = "jupyter", marker = "extra == 'docs'" },
+    { name = "kaleido", marker = "extra == 'docs'", specifier = ">=0.2" },
+    { name = "kaleido", marker = "extra == 'plot'", specifier = ">=0.2" },
+    { name = "matplotlib", marker = "extra == 'docs'" },
+    { name = "plotly", marker = "extra == 'docs'", specifier = ">=5.18" },
+    { name = "plotly", marker = "extra == 'plot'", specifier = ">=5.18" },
+    { name = "pytest", marker = "extra == 'test'", specifier = ">=8" },
+    { name = "pytest-cov", marker = "extra == 'test'" },
+    { name = "pytest-xdist", marker = "extra == 'test'" },
+    { name = "quartodoc", marker = "extra == 'docs'" },
+    { name = "qutip", specifier = ">=5" },
+    { name = "ruff", marker = "extra == 'dev'" },
+    { name = "seaborn", marker = "extra == 'docs'" },
+    { name = "tqdm", specifier = ">=4" },
+    { name = "twine", marker = "extra == 'dev'" },
+]
+provides-extras = ["test", "docs", "plot", "dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest-benchmark", specifier = ">=5.2.3" }]
+
+[[package]]
 name = "click"
 version = "8.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -2061,78 +2133,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/c7/74/97e72a36efd4ae2bc
 wheels = [
     { url = "https://files.pythonhosted.org/packages/af/33/ee4519fa02ed11a94aef9559552f3b17bb863f2ecfe1a35dc7f548cde231/matplotlib_inline-0.2.1-py3-none-any.whl", hash = "sha256:d56ce5156ba6085e00a9d54fead6ed29a9c47e215cd1bba2e976ef39f5710a76", size = 9516, upload-time = "2025-10-23T09:00:20.675Z" },
 ]
-
-[[package]]
-name = "maxwellbloch"
-version = "0.12.0"
-source = { editable = "." }
-dependencies = [
-    { name = "qutip" },
-    { name = "tqdm" },
-]
-
-[package.optional-dependencies]
-dev = [
-    { name = "bump-my-version" },
-    { name = "jupyter" },
-    { name = "kaleido" },
-    { name = "matplotlib" },
-    { name = "plotly" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "pytest-xdist" },
-    { name = "quartodoc" },
-    { name = "ruff" },
-    { name = "seaborn" },
-    { name = "twine" },
-]
-docs = [
-    { name = "jupyter" },
-    { name = "kaleido" },
-    { name = "matplotlib" },
-    { name = "plotly" },
-    { name = "quartodoc" },
-    { name = "seaborn" },
-]
-plot = [
-    { name = "kaleido" },
-    { name = "plotly" },
-]
-test = [
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "pytest-xdist" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest-benchmark" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "bump-my-version", marker = "extra == 'dev'" },
-    { name = "jupyter", marker = "extra == 'docs'" },
-    { name = "kaleido", marker = "extra == 'docs'", specifier = ">=0.2" },
-    { name = "kaleido", marker = "extra == 'plot'", specifier = ">=0.2" },
-    { name = "matplotlib", marker = "extra == 'docs'" },
-    { name = "maxwellbloch", extras = ["test", "docs", "plot"], marker = "extra == 'dev'" },
-    { name = "plotly", marker = "extra == 'docs'", specifier = ">=5.18" },
-    { name = "plotly", marker = "extra == 'plot'", specifier = ">=5.18" },
-    { name = "pytest", marker = "extra == 'test'", specifier = ">=8" },
-    { name = "pytest-cov", marker = "extra == 'test'" },
-    { name = "pytest-xdist", marker = "extra == 'test'" },
-    { name = "quartodoc", marker = "extra == 'docs'" },
-    { name = "qutip", specifier = ">=5" },
-    { name = "ruff", marker = "extra == 'dev'" },
-    { name = "seaborn", marker = "extra == 'docs'" },
-    { name = "tqdm", specifier = ">=4" },
-    { name = "twine", marker = "extra == 'dev'" },
-]
-provides-extras = ["test", "docs", "plot", "dev"]
-
-[package.metadata.requires-dev]
-dev = [{ name = "pytest-benchmark", specifier = ">=5.2.3" }]
 
 [[package]]
 name = "mdurl"

@@ -7,12 +7,12 @@ from typing import TYPE_CHECKING, Literal
 import numpy as np
 import plotly.graph_objects as go
 
-from maxwellbloch.plot import theme as _theme  # noqa: F401 — registers template
+from clerq.plot import theme as _theme  # noqa: F401 — registers template
 
 if TYPE_CHECKING:
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.mb_solve import MBSolve
 
-_TEMPLATE = "maxwellbloch"
+_TEMPLATE = "clerq"
 
 
 def population(

@@ -6,16 +6,16 @@ from typing import TYPE_CHECKING, Literal
 
 import plotly.graph_objects as go
 
-from maxwellbloch.plot import theme as _theme  # noqa: F401 — registers template
-from maxwellbloch.plot.utils import field_label, omega_abs, pulse_area_z
+from clerq.plot import theme as _theme  # noqa: F401 — registers template
+from clerq.plot.utils import field_label, omega_abs, pulse_area_z
 
 if TYPE_CHECKING:
     import numpy as np
 
-    from maxwellbloch.field import Field
-    from maxwellbloch.mb_solve import MBSolve
+    from clerq.field import Field
+    from clerq.mb_solve import MBSolve
 
-_TEMPLATE = "maxwellbloch"
+_TEMPLATE = "clerq"
 
 _DEFAULT_COLORSCALES = ["Blues", "Greens", "Oranges", "Reds"]
 
@@ -113,7 +113,7 @@ def field_spacetime(
     label = field_label(mbs, field_idx)
 
     if speed_of_light is not None:
-        from maxwellbloch import fixed
+        from clerq import fixed
 
         Omega = fixed.rabi_freq(mbs, field_idx, speed_of_light, part="abs")
         tlist = fixed.t_list(mbs, speed_of_light)
@@ -189,7 +189,7 @@ def field_envelope(
     ]
 
     if speed_of_light is not None:
-        from maxwellbloch import fixed
+        from clerq import fixed
 
         Omega = fixed.rabi_freq(mbs, field_idx, speed_of_light, part="abs")
         tlist = fixed.t_list(mbs, speed_of_light)
@@ -261,7 +261,7 @@ def field_z_profile_anim(
         plotly Figure with animation frames, time slider, and play/pause buttons.
     """
     if speed_of_light is not None:
-        from maxwellbloch import fixed
+        from clerq import fixed
 
         Omega = fixed.rabi_freq(mbs, field_idx, speed_of_light, part="abs")
         tlist = fixed.t_list(mbs, speed_of_light)

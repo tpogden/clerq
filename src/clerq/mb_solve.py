@@ -11,9 +11,9 @@ import numpy as np
 import qutip as qu
 import tqdm
 
-from maxwellbloch import ob_solve, t_funcs
-from maxwellbloch.exceptions import CounterPropagatingDepletionError
-from maxwellbloch.utility import maxwell_boltzmann
+from clerq import ob_solve, t_funcs
+from clerq.exceptions import CounterPropagatingDepletionError
+from clerq.utility import maxwell_boltzmann
 
 
 class MBSolve(ob_solve.OBSolve):
@@ -683,7 +683,7 @@ class MBSolve(ob_solve.OBSolve):
         """Build the metadata dict stored alongside results in the .qu file."""
         return {
             "hash": hashlib.sha256(self.to_json_str().encode()).hexdigest(),
-            "maxwellbloch": importlib.metadata.version("maxwellbloch"),
+            "clerq": importlib.metadata.version("clerq"),
             "qutip": importlib.metadata.version("qutip"),
             "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
         }
@@ -725,7 +725,7 @@ class MBSolve(ob_solve.OBSolve):
                     f"Savefile {self.savefile}.qu was built from a different "
                     "problem definition. Delete it or set recalc=True."
                 )
-            for key in ("maxwellbloch", "qutip"):
+            for key in ("clerq", "qutip"):
                 saved = meta.get(key)
                 current = importlib.metadata.version(key)
                 if saved and saved != current:

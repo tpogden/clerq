@@ -17,7 +17,7 @@ execute:
 
 website:
   title: "clerq"
-  description: "Differentiable Maxwell–Lindblad solver for near-resonant light propagation"
+  description: "Maxwell–Bloch solver for near-resonant light propagation through atomic vapours"
   site-url: https://clerq.org
   repo-url: https://github.com/tpogden/clerq
   repo-actions: [edit, issue]
@@ -68,7 +68,7 @@ website:
         - auto: "api/*.qmd"
 
 quartodoc:
-  package: maxwellbloch
+  package: clerq
   source_dir: ../src
   dir: api
   parser: google

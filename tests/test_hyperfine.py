@@ -8,7 +8,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import hyperfine
+from clerq import hyperfine
 
 
 class TestAtom1eAddFLevel(unittest.TestCase):
