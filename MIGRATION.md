@@ -36,49 +36,28 @@ Legend: `[x]` done · `[ ]` to do · 👤 you must do it (external or credential
 Notes: kept the existing `mbs-*` notebook names. The plan's `a0`–`a12` naming does
 not exist in this repo.
 
-## Phase 2: Notebook reproducibility audit 🤖
+## Phase 2: Notebook reproducibility audit ✅
 
-**Factor-of-2 fix (PR #289) is merged into `next`** and now in this branch (`f576f1f`), so the
-audit can proceed. It is not yet on `master`; it ships with the next release merge.
+Done 2026-10-09 (`95a0e96`). Factor-of-2 fix (PR #289) was merged into `next` first and is in this branch.
 
-Findings from the first static pass and a trial `quarto render --execute` (5 min, no errors):
+- [x] 2.1 Inventory: no random numbers or seeds anywhere; nondeterminism came from `%time` (3 notebooks),
+      tqdm progress rates, plotly random div ids, and random nbformat cell ids
+- [x] 2.2 Fixed: `%time` removed; `docs/.ipython/.../00-docs-determinism.py` silences tqdm and makes `uuid4`
+      deterministic (used only by `docs/execute.sh`); frontmatter cells given a fixed `id`
+- [x] 2.3 Two from-scratch executions (no `.qu`, no freeze) give a byte-identical `_freeze/` (7 min each)
+- [x] 2.4 `docs/_freeze/` committed (15 MB, 20 notebooks); committed `.qu` caches deleted and `*.qu` ignored everywhere
+- [x] Gate: clean clone + plain `quarto render` takes 23 s, starts no kernel, no warnings, 0 broken links, all 20 pages show outputs
 
-- 15 of 20 notebooks have **no stored outputs** (Sphinx executed them at build time), so the
-  site only shows figures after an execute-render; `_freeze/` is therefore required, not optional.
-- No notebook uses random numbers or seeds. Timing noise is limited to `%time` cells in 4 notebooks.
-- Most notebooks call `mbsolve(recalc=False)`, so they **load committed `.qu` caches instead of solving**.
-  Stale caches are the main reproducibility risk. 20 caches changed on a trial run.
-- Rendering a notebook with `--execute` writes outputs back into the source `.ipynb`; the render
-  step must restore them (or the policy must change to store outputs in the notebooks).
+How to refresh after changing code or a notebook: `make docs_execute` (runs `docs/execute.sh --fresh`, ~7 min),
+review the `_freeze/` diff, commit. Never run `quarto render --execute` directly: it rewrites the source notebooks
+with outputs and, without the startup script, produces non-reproducible output.
 
-- [ ] 2.1 Inventory nondeterminism in each notebook (seeds, `%time`, timing output, plot rendering)
-- [ ] 2.2 Fix and pin: seeds, strip timing cells, pin matplotlib/plotly/kaleido for the docs env
-- [ ] 2.3 Re-execute all notebooks twice in a clean env; diff outputs
-- [ ] 2.4 Commit `docs/_freeze/`, then delete the committed `.qu` caches (redundant with `_freeze/`; decided 2026-10-09) and add `*.qu` back to the ignore list
-- [ ] Gate: `quarto render` from a clean checkout matches the local build
+Things learned:
 
-Per notebook (tick when executed twice with matching output):
-
-- [ ] usage/two-level
-- [ ] usage/three-level
-- [ ] usage/structure
-- [ ] usage/spectral-analysis
-- [ ] usage/velocity-classes
-- [ ] usage/counter-propagating
-- [ ] usage/plotting
-- [ ] usage/built-in-time-functions
-- [ ] examples/mbs-linear-absorption
-- [ ] examples/mbs-sit-area-theorem
-- [ ] examples/mbs-two-photon-echo
-- [ ] examples/mbs-lambda-eit-slow-light
-- [ ] examples/mbs-lambda-cpt
-- [ ] examples/mbs-lambda-adiabatons
-- [ ] examples/mbs-vee-simultons
-- [ ] examples/mbs-ladder-weak-pulse-coupling-decay
-- [ ] examples/mbs-ladder-autler-townes
-- [ ] examples/mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay
-- [ ] examples/mbs-Rb87_5s12_5p12_F11_q1-sech-2pi
-- [ ] examples/mbs-Rb87_5s12_5p32_F23_q1-weak-pulse-decay
+- 15 of 20 notebooks had no stored outputs (Sphinx executed them at build time), so the Phase 1 site had empty
+  pages until now.
+- Notebooks used `recalc=False` against committed `.qu` caches, so they never re-solved. Those caches are gone.
+- The `mbs-ladder-rydberg-eit-counter` draft is excluded and has no freeze.
 
 ## Phase 3: Code rename 🤖 (one discrete commit)
 
