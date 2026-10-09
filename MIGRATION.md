@@ -38,9 +38,8 @@ not exist in this repo.
 
 ## Phase 2: Notebook reproducibility audit 🤖
 
-**Blocked on the factor-of-2 fix.** `fix/maxwell-propagation-factor-of-2` (`9b02515`) is not merged
-into `next`/`master`. It changes `mb_solve.py` and `spectral.py`, so every `.qu` cache and every
-frozen output made before it lands is wrong. Merge it first, then do the steps below.
+**Factor-of-2 fix (PR #289) is merged into `next`** and now in this branch (`f576f1f`), so the
+audit can proceed. It is not yet on `master`; it ships with the next release merge.
 
 Findings from the first static pass and a trial `quarto render --execute` (5 min, no errors):
 
@@ -55,7 +54,7 @@ Findings from the first static pass and a trial `quarto render --execute` (5 min
 - [ ] 2.1 Inventory nondeterminism in each notebook (seeds, `%time`, timing output, plot rendering)
 - [ ] 2.2 Fix and pin: seeds, strip timing cells, pin matplotlib/plotly/kaleido for the docs env
 - [ ] 2.3 Re-execute all notebooks twice in a clean env; diff outputs
-- [ ] 2.4 Commit `docs/_freeze/`
+- [ ] 2.4 Commit `docs/_freeze/`, then delete the committed `.qu` caches (redundant with `_freeze/`; decided 2026-10-09) and add `*.qu` back to the ignore list
 - [ ] Gate: `quarto render` from a clean checkout matches the local build
 
 Per notebook (tick when executed twice with matching output):
