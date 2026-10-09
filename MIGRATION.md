@@ -5,7 +5,7 @@ Source plan: `clerq-migration-plan.md`. Tick boxes as work lands. Delete this
 file at cutover (Phase 4), or move it to `docs/news/`.
 
 **Branch:** `claude/clerq-spike-migration-plan-efba93` (long-lived; PRs target `next`)
-**Last updated:** 2026-10-09
+**Last updated:** 2026-10-09 (cutover complete)
 
 Legend: `[x]` done · `[ ]` to do · 👤 you must do it (external or credentialed) · 🤖 Claude can do it
 
@@ -123,22 +123,26 @@ Steps
 2. [x] 👤 **Register PyPI trusted publishers** (PyPI → project `clerq` → Publishing): owner `tpogden`, repo `clerq`,
        workflow `publish.yml`, environment `pypi`. The old one is registered for `MaxwellBloch` and will not work for `clerq`.
        Check the GitHub environment `pypi` still exists after the rename
-3. [ ] 🤖/👤 Open the PR from this branch to `next` and merge it
-4. [ ] 🤖 On `next`: `uv run bump-my-version bump minor` (→ 0.13.0, commit and tag `v0.13.0`)
-5. [ ] 👤 Release merge: `git checkout master && git merge --no-ff next && git push && git push --tags`; the tag runs
+3. [x] 🤖/👤 PR #301 merged into `next` (merge commit `af73bc2`)
+4. [x] 🤖 `next` bumped to 0.13.0 (`3347b6e`, tag `v0.13.0`). `uv.lock` records the project version and `bump-my-version` does not update it, so: `bump-my-version bump minor --no-commit --no-tag`, `uv lock`, then commit and tag by hand
+5. [x] 👤 Release merge (done 2026-10-09, `master` at `efaf96d`; the `pypi` environment has a required reviewer, so approve the run in the Actions UI): `git checkout master && git merge --no-ff next && git push && git push --tags`; the tag runs
        `publish.yml`, which uploads `clerq 0.13.0` to PyPI and makes the GitHub release. The push to `master` also runs `docs.yml`
-6. [ ] 👤 Pages: Settings → Pages → source branch `gh-pages`, custom domain `clerq.org`, enforce HTTPS (certificate can take ~1 h)
-7. [ ] 👤 Upload the shim (after `clerq 0.13.0` is live, since it depends on it):
+6. [x] 👤 Pages (HTTPS enforced). **First run needs a `gh-pages` branch to exist**: `quarto publish` cannot create it, so the first `docs.yml` run failed until an empty orphan `gh-pages` branch was pushed and the workflow re-run. GitHub then configured Pages itself from the branch and `CNAME`: Settings → Pages → source branch `gh-pages`, custom domain `clerq.org`, enforce HTTPS (certificate can take ~1 h)
+7. [x] 👤 Shim `maxwellbloch 0.12.1` uploaded. Upload the shim (after `clerq 0.13.0` is live, since it depends on it):
        `cd <scratchpad>/maxwellbloch-shim && uvx twine upload dist/*` (use a `maxwellbloch`-scoped token)
-8. [ ] 🤖 Verification checklist below
+8. [x] 🤖 Verification checklist below
 
 Verification
 
-- [ ] `https://clerq.org` loads; one example notebook shows plots
-- [ ] `https://github.com/tpogden/maxwellbloch` redirects to `clerq`
-- [ ] Fresh venv: `pip install clerq` and `import clerq` work; `clerq.__version__ == "0.13.0"`
-- [ ] Fresh venv: `pip install maxwellbloch` installs the shim and clerq; `from maxwellbloch import mb_solve` works and warns
-- [ ] `pip install --no-cache-dir` if PyPI metadata lags
+- [x] `https://clerq.org` loads; one example notebook shows plots
+- [x] `https://github.com/tpogden/maxwellbloch` redirects to `clerq`
+- [x] Fresh venv: `pip install clerq` and `import clerq` work; `clerq.__version__ == "0.13.0"`
+- [x] Fresh venv: `pip install maxwellbloch` installs the shim and clerq; `from maxwellbloch import mb_solve` works and warns
+- [x] `pip install --no-cache-dir` if PyPI metadata lags (it did, briefly: the `/pypi/<name>/json` summary endpoint showed 0.12.0 for a few minutes after the shim upload while the simple index already had 0.12.1)
+
+Verified 2026-10-09: `clerq 0.13.0` and `maxwellbloch 0.12.1` on PyPI; fresh-venv installs of both; `maxwellbloch==0.12.0` pin
+still installs the old release alone; shim solve output is identical to clerq; `https://clerq.org` (and `www`, and http) serve
+the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green on `master`.
 
 ### Rollback notes
 
@@ -154,6 +158,18 @@ Verification
 - [ ] External references sweep (personal site, CV, papers, Scholar) 👤
 
 ---
+
+## Follow-ups after the cutover
+
+- [ ] PR #278 (A5 stimulated echo, targets `next`) still imports `maxwellbloch`: merge `next` into it and rename imports
+      (`perl -pi -e 's/maxwellbloch/clerq/g'` on its files) before it merges; its notebook needs a `docs/_freeze` refresh (`make docs_execute`)
+- [ ] Dependabot PRs #297–#300 target `master`; they should rebase cleanly, otherwise `@dependabot rebase`
+- [ ] `mbsolve --help` crashes on Python 3.14 (unescaped `%` in a help string; `-p/--pbarchunksize` may be dead). Branch
+      `fix/mbsolve-help-percent` exists from a separate session; deliberately not included in 0.13.0, ships in 0.13.1
+- [ ] Quarto API page titles come out lowercased (`mb_solve.mbsolve`); cosmetic
+- [ ] Release workflow attaches `default.gitignore` (uv writes `dist/.gitignore`); cosmetic: use `dist/*.whl dist/*.tar.gz` in `publish.yml`
+- [ ] quartodoc prints ~14 docstring warnings (parameters documented but not in the signature) in `ob_atom.py`, `hyperfine.py`, `spectral.py`
+- [ ] CHANGELOG has no entries between 0.9.0 and 0.12.0
 
 ## Open issues and risks
 
