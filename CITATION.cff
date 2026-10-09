@@ -17,6 +17,7 @@ license: MIT
 repository-code: "https://github.com/tpogden/clerq"
 url: "https://clerq.org"
 repository-artifact: "https://pypi.org/project/clerq/"
+doi: "10.5281/zenodo.23269881"
 keywords:
   - maxwell-bloch equations
   - quantum optics
