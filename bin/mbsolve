@@ -19,9 +19,6 @@ def main():
     parser.add_argument('-r', '--recalc', required=False, action="store_true",
         help='Recalculate the solution even if a savefile exists?', 
         default=False)
-    parser.add_argument('-p', '--pbarchunksize', required=False, type=int,
-        help="How often should the progress bar be updated? Default is 10, to\
-            update every 10%.", default=10)
     args = vars(parser.parse_args())
 
     print('Loading problem definition from file {0}'.format(args['file']))
@@ -33,7 +30,7 @@ def main():
         print(f'Loading from file.')
 
     mbs.mbsolve(step=args['step'], rho0=None, recalc=args['recalc'],
-                         pbar_chunk_size=args['pbarchunksize'])
+                progress=True)
 
     return 0
 
