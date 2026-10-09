@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic
 Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Security
+- Lockfile updated to clear 19 Dependabot alerts in transitive docs/dev packages (`tornado`, `notebook`, `jupyterlab`,
+  `urllib3`, `mistune`, `anyio`, `soupsieve`; `setuptools` dropped from the lock). None are dependencies of the
+  installed package (`qutip`, `tqdm`), so `pip install clerq` is unaffected.
+
 ## [0.13.1] 2026-10-09
 
 ### Fixed
