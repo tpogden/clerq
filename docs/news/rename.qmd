@@ -21,6 +21,21 @@ Recompute any cached `.qu` results and any figures you made with earlier
 versions. See the [changelog](https://github.com/tpogden/clerq/blob/master/CHANGELOG.md).
 :::
 
+## Why a new name
+
+The package was never really solving the Maxwell–Bloch equations. The optical
+Bloch equations describe a two-level atom. What the solver does is evolve the
+full density matrix of an arbitrary multi-level atom under the **Lindblad master
+equation** (it wraps QuTiP's `mesolve`), with spontaneous decay and dephasing
+as collapse operators, hyperfine structure and several fields, and couple that
+to the Maxwell propagation equation along the medium. That is a
+*Maxwell–Lindblad* solver, and "MaxwellBloch" undersold it and named only its
+two-level special case. The new name drops the equations from the title, and the
+*q* stands for quantum.
+
+"Maxwell–Bloch" is still the familiar name for the two-level case, so it
+appears in these docs where that is what is meant.
+
 ## What changed
 
 | | Before | Now |
