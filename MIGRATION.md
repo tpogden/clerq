@@ -38,6 +38,20 @@ not exist in this repo.
 
 ## Phase 2: Notebook reproducibility audit 🤖
 
+**Blocked on the factor-of-2 fix.** `fix/maxwell-propagation-factor-of-2` (`9b02515`) is not merged
+into `next`/`master`. It changes `mb_solve.py` and `spectral.py`, so every `.qu` cache and every
+frozen output made before it lands is wrong. Merge it first, then do the steps below.
+
+Findings from the first static pass and a trial `quarto render --execute` (5 min, no errors):
+
+- 15 of 20 notebooks have **no stored outputs** (Sphinx executed them at build time), so the
+  site only shows figures after an execute-render; `_freeze/` is therefore required, not optional.
+- No notebook uses random numbers or seeds. Timing noise is limited to `%time` cells in 4 notebooks.
+- Most notebooks call `mbsolve(recalc=False)`, so they **load committed `.qu` caches instead of solving**.
+  Stale caches are the main reproducibility risk. 20 caches changed on a trial run.
+- Rendering a notebook with `--execute` writes outputs back into the source `.ipynb`; the render
+  step must restore them (or the policy must change to store outputs in the notebooks).
+
 - [ ] 2.1 Inventory nondeterminism in each notebook (seeds, `%time`, timing output, plot rendering)
 - [ ] 2.2 Fix and pin: seeds, strip timing cells, pin matplotlib/plotly/kaleido for the docs env
 - [ ] 2.3 Re-execute all notebooks twice in a clean env; diff outputs
