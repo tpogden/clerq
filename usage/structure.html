@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thomas Ogden">
+
+<title>Structure and Angular Momentum – clerq</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9ce5ae7ac05a2cb9bb4eec0b8cae176b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">clerq</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../installation.html"> 
+<span class="menu-text">Install</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../usage/two-level.html" aria-current="page"> 
+<span class="menu-text">Usage</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../examples/index.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../api/index.html"> 
+<span class="menu-text">API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../support/troubleshooting.html"> 
+<span class="menu-text">Support</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/structure.html">Structure and Angular Momentum</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/two-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-level systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/three-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-level systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/structure.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Structure and Angular Momentum</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/spectral-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spectral analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/velocity-classes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocity Classes for Modelling Doppler Broadening in Thermal Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/counter-propagating.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Counter-Propagating Fields</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/built-in-time-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Built-in time functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts for Making Movies</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#adding-structure" id="toc-adding-structure" class="nav-link active" data-scroll-target="#adding-structure">Adding Structure</a>
+  <ul class="collapse">
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  </ul></li>
+  <li><a href="#hyperfine-structure-for-single-outer-electron-atoms" id="toc-hyperfine-structure-for-single-outer-electron-atoms" class="nav-link" data-scroll-target="#hyperfine-structure-for-single-outer-electron-atoms">Hyperfine Structure for Single (Outer) Electron Atoms</a>
+  <ul class="collapse">
+  <li><a href="#energies-and-detuning" id="toc-energies-and-detuning" class="nav-link" data-scroll-target="#energies-and-detuning">Energies and Detuning</a></li>
+  <li><a href="#field-channels-and-factors" id="toc-field-channels-and-factors" class="nav-link" data-scroll-target="#field-channels-and-factors">Field Channels and Factors</a></li>
+  <li><a href="#decay-channels-and-factors" id="toc-decay-channels-and-factors" class="nav-link" data-scroll-target="#decay-channels-and-factors">Decay Channels and Factors</a></li>
+  <li><a href="#initial-state" id="toc-initial-state" class="nav-link" data-scroll-target="#initial-state">Initial State</a></li>
+  <li><a href="#putting-it-all-into-mbsolve" id="toc-putting-it-all-into-mbsolve" class="nav-link" data-scroll-target="#putting-it-all-into-mbsolve">Putting it all into MBSolve</a></li>
+  <li><a href="#output-1" id="toc-output-1" class="nav-link" data-scroll-target="#output-1">Output</a></li>
+  <li><a href="#plotting-populations-and-coherences" id="toc-plotting-populations-and-coherences" class="nav-link" data-scroll-target="#plotting-populations-and-coherences">Plotting Populations and Coherences</a></li>
+  </ul></li>
+  <li><a href="#note-on-stength-factors" id="toc-note-on-stength-factors" class="nav-link" data-scroll-target="#note-on-stength-factors">Note on Stength Factors</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/usage/structure.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Structure and Angular Momentum</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thomas Ogden </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-1" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="adding-structure" class="level2">
+<h2 class="anchored" data-anchor-id="adding-structure">Adding Structure</h2>
+<p>So far we’ve looked at simple 2 and 3 level systems, but to accurately model a physical system we may need to consider complex structures. For example, the hyperfine structure of alkali metals used commonly in optical experiments. It is possible to define structure in clerq and provide strength factors for the field couplings and decays between pairs of sublevels.</p>
+<p>We’ll take the example of a Rubidium 87 atom addressed with a weak field resonant with the <span class="math inline">\(5\mathrm{S}_{1/2} F=1 \rightarrow 5\mathrm{P}_{1/2} F=1\)</span> transition. We can neglect the other upper level in the fine structure manifold, <span class="math inline">\(5\mathrm{P}_{1/2} F={2}\)</span>, as it is far from resonance. However, the decay to <span class="math inline">\(5\mathrm{S}_{1/2} F={2}\)</span> should be considered.</p>
+<p>If we start with the case of an isotropic field (with equal components in all three polarizations), we can neglect the substructure and just add the hyperfine levels, as the coupling how the population is distributed among the sublevels. For now, the relative strengths of the transitions are given in the following table</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>F’=1</th>
+<th>F’=2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F=1</td>
+<td><span class="math inline">\(\tfrac{1}{6}\)</span></td>
+<td><span class="math inline">\(\tfrac{5}{6}\)</span></td>
+</tr>
+<tr class="even">
+<td>F=2</td>
+<td><span class="math inline">\(\tfrac{1}{2}\)</span></td>
+<td><span class="math inline">\(\tfrac{1}{2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>and below (see <strong>Note on Strength Factors</strong>) we’ll see how these are computed.</p>
+<p>We will index the three hyperfine levels we require as in the following table.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>idx</th>
+<th>Hyperfine level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><span class="math inline">\(5\mathrm{S}_{1/2} F~=~1\)</span></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><span class="math inline">\(5\mathrm{S}_{1/2} F~=~2\)</span></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><span class="math inline">\(5\mathrm{P}_{1/2} F'~=~1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>How do we include those transition strengths in the system? Both the fields and decays have optional <code>factors</code> mapped to them for this purpose. For the decays, we have transitions <span class="math inline">\(\left|0\right&gt; \rightarrow \left|2\right&gt;\)</span> and <span class="math inline">\(\left|1\right&gt; \rightarrow \left|2\right&gt;\)</span>. As per the table above, <span class="math inline">\(S_{11} = \tfrac{1}{6}\)</span> and <span class="math inline">\(S_{21} = \tfrac{1}{2}\)</span>. Our factors for the isotropic field are then <span class="math inline">\(\sqrt{\tfrac{1}{3}\cdot\tfrac{1}{6}}\)</span> and <span class="math inline">\(\sqrt{\tfrac{1}{3}\cdot\tfrac{1}{2}}\)</span> respectively: the square roots of these strength factors multiplied by a third (as any given polarization of the field only interacts with one of the three components of the dipole moment.</p>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.sqrt(<span class="dv">1</span> <span class="op">/</span> <span class="dv">6</span> <span class="op">/</span> <span class="dv">3</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.sqrt(<span class="dv">1</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.23570226039551584
+0.408248290463863</code></pre>
+</div>
+</div>
+<p>We’ll put those <code>channels</code> and their respective <code>factors</code> into the MBSolve object.</p>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">  "atom": {</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "decays": [</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">      {</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">        "rate": 1.0,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">        "channels": [[0,2], [1,2]],</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": [0.23570226039551587, 0.408248290463863]</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">      }</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">    "fields": [</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">      {</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": [[0, 2]],</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": [0.23570226039551584],</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 1e-3,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": {</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">          "ampl": 1.0,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">          "centre": 0.0,</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">          "fwhm": 1.0</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">        },</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "gaussian"</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">      }</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">    "num_states": 3,</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">    "initial_state": [0.5, 0.5, 0]</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">  },</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_min": -2.0,</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_max": 10.0,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_steps": 100,</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_min": -0.2,</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 1,</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0e2</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "structure-1"</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+  0%|          | 0/100 [00:00&lt;?, ?z/s]
+  1%|          | 1/100 [00:00&lt;00:00, 894.31z/s, Ω_max=0.00626]
+  2%|▏         | 2/100 [00:00&lt;00:00, 495.52z/s, Ω_max=0.00626]
+  3%|▎         | 3/100 [00:00&lt;00:00, 457.58z/s, Ω_max=0.00626]
+  4%|▍         | 4/100 [00:00&lt;00:00, 445.08z/s, Ω_max=0.00626]
+  5%|▌         | 5/100 [00:00&lt;00:00, 428.37z/s, Ω_max=0.00626]
+  6%|▌         | 6/100 [00:00&lt;00:00, 421.61z/s, Ω_max=0.00626]
+  7%|▋         | 7/100 [00:00&lt;00:00, 422.62z/s, Ω_max=0.00626]
+  8%|▊         | 8/100 [00:00&lt;00:00, 423.12z/s, Ω_max=0.00626]
+  9%|▉         | 9/100 [00:00&lt;00:00, 423.42z/s, Ω_max=0.00626]
+ 10%|█         | 10/100 [00:00&lt;00:00, 418.72z/s, Ω_max=0.00626]
+ 11%|█         | 11/100 [00:00&lt;00:00, 419.72z/s, Ω_max=0.00626]
+ 12%|█▏        | 12/100 [00:00&lt;00:00, 421.39z/s, Ω_max=0.00626]
+ 13%|█▎        | 13/100 [00:00&lt;00:00, 420.88z/s, Ω_max=0.00626]
+ 14%|█▍        | 14/100 [00:00&lt;00:00, 421.40z/s, Ω_max=0.00626]
+ 15%|█▌        | 15/100 [00:00&lt;00:00, 423.37z/s, Ω_max=0.00609]
+ 16%|█▌        | 16/100 [00:00&lt;00:00, 425.46z/s, Ω_max=0.00593]
+ 17%|█▋        | 17/100 [00:00&lt;00:00, 424.69z/s, Ω_max=0.00578]
+ 18%|█▊        | 18/100 [00:00&lt;00:00, 425.84z/s, Ω_max=0.00565]
+ 19%|█▉        | 19/100 [00:00&lt;00:00, 427.05z/s, Ω_max=0.00553]
+ 20%|██        | 20/100 [00:00&lt;00:00, 428.19z/s, Ω_max=0.00541]
+ 21%|██        | 21/100 [00:00&lt;00:00, 425.27z/s, Ω_max=0.00529]
+ 22%|██▏       | 22/100 [00:00&lt;00:00, 425.36z/s, Ω_max=0.00517]
+ 23%|██▎       | 23/100 [00:00&lt;00:00, 426.07z/s, Ω_max=0.00505]
+ 24%|██▍       | 24/100 [00:00&lt;00:00, 427.81z/s, Ω_max=0.00494]
+ 25%|██▌       | 25/100 [00:00&lt;00:00, 429.01z/s, Ω_max=0.00482]
+ 26%|██▌       | 26/100 [00:00&lt;00:00, 430.68z/s, Ω_max=0.00471]
+ 27%|██▋       | 27/100 [00:00&lt;00:00, 429.84z/s, Ω_max=0.0046] 
+ 28%|██▊       | 28/100 [00:00&lt;00:00, 431.05z/s, Ω_max=0.0045]
+ 29%|██▉       | 29/100 [00:00&lt;00:00, 430.28z/s, Ω_max=0.00439]
+ 30%|███       | 30/100 [00:00&lt;00:00, 430.84z/s, Ω_max=0.00429]
+ 31%|███       | 31/100 [00:00&lt;00:00, 432.04z/s, Ω_max=0.00418]
+ 32%|███▏      | 32/100 [00:00&lt;00:00, 432.06z/s, Ω_max=0.00408]
+ 33%|███▎      | 33/100 [00:00&lt;00:00, 432.75z/s, Ω_max=0.00398]
+ 34%|███▍      | 34/100 [00:00&lt;00:00, 433.15z/s, Ω_max=0.00389]
+ 35%|███▌      | 35/100 [00:00&lt;00:00, 433.25z/s, Ω_max=0.00379]
+ 36%|███▌      | 36/100 [00:00&lt;00:00, 432.21z/s, Ω_max=0.0037] 
+ 37%|███▋      | 37/100 [00:00&lt;00:00, 432.66z/s, Ω_max=0.00361]
+ 38%|███▊      | 38/100 [00:00&lt;00:00, 433.58z/s, Ω_max=0.00354]
+ 39%|███▉      | 39/100 [00:00&lt;00:00, 434.01z/s, Ω_max=0.00347]
+ 40%|████      | 40/100 [00:00&lt;00:00, 433.18z/s, Ω_max=0.0034] 
+ 41%|████      | 41/100 [00:00&lt;00:00, 433.82z/s, Ω_max=0.00333]
+ 42%|████▏     | 42/100 [00:00&lt;00:00, 434.65z/s, Ω_max=0.00326]
+ 43%|████▎     | 43/100 [00:00&lt;00:00, 434.69z/s, Ω_max=0.00319]
+ 44%|████▍     | 44/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00319]
+ 44%|████▍     | 44/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00313]
+ 45%|████▌     | 45/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00306]
+ 46%|████▌     | 46/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.003]  
+ 47%|████▋     | 47/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00293]
+ 48%|████▊     | 48/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00287]
+ 49%|████▉     | 49/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00281]
+ 50%|█████     | 50/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00275]
+ 51%|█████     | 51/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00269]
+ 52%|█████▏    | 52/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00263]
+ 53%|█████▎    | 53/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00257]
+ 54%|█████▍    | 54/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
+ 55%|█████▌    | 55/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
+ 56%|█████▌    | 56/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 57%|█████▋    | 57/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 58%|█████▊    | 58/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 59%|█████▉    | 59/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 60%|██████    | 60/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 61%|██████    | 61/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00253]
+ 62%|██████▏   | 62/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
+ 63%|██████▎   | 63/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 64%|██████▍   | 64/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 65%|██████▌   | 65/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 66%|██████▌   | 66/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 67%|██████▋   | 67/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 68%|██████▊   | 68/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
+ 69%|██████▉   | 69/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
+ 70%|███████   | 70/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
+ 71%|███████   | 71/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00253]
+ 72%|███████▏  | 72/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
+ 73%|███████▎  | 73/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
+ 74%|███████▍  | 74/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0025] 
+ 75%|███████▌  | 75/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00248]
+ 76%|███████▌  | 76/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00247]
+ 77%|███████▋  | 77/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00245]
+ 78%|███████▊  | 78/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00244]
+ 79%|███████▉  | 79/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00244]
+ 80%|████████  | 80/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00243]
+ 81%|████████  | 81/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00243]
+ 82%|████████▏ | 82/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00242]
+ 83%|████████▎ | 83/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00241]
+ 84%|████████▍ | 84/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00241]
+ 85%|████████▌ | 85/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024] 
+ 86%|████████▌ | 86/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
+ 87%|████████▋ | 87/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
+ 88%|████████▊ | 88/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
+ 89%|████████▉ | 89/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 89%|████████▉ | 89/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 90%|█████████ | 90/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 91%|█████████ | 91/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 92%|█████████▏| 92/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 93%|█████████▎| 93/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 94%|█████████▍| 94/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 95%|█████████▌| 95/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 96%|█████████▌| 96/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 97%|█████████▋| 97/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 98%|█████████▊| 98/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+ 99%|█████████▉| 99/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+100%|██████████| 100/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
+100%|██████████| 100/100 [00:00&lt;00:00, 437.66z/s, Ω_max=0.0024]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to structure-1.qu</code></pre>
+</div>
+</div>
+<section id="output" class="level3">
+<h3 class="anchored" data-anchor-id="output">Output</h3>
+<div id="cell-9" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="structure_files/figure-html/cell-8-output-1.png" width="1166" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hyperfine-structure-for-single-outer-electron-atoms" class="level2">
+<h2 class="anchored" data-anchor-id="hyperfine-structure-for-single-outer-electron-atoms">Hyperfine Structure for Single (Outer) Electron Atoms</h2>
+<p>In experiments with single outer electron atoms like Rubidium involving polarised (non-isotropic) light, we may need to consider the effect of hyperfine pumping mechanisms. Our state basis must then include the hyperfine structure and magnetic substructure of these fine structure manifolds, consisting of <span class="math inline">\(2F+1\)</span> degenerate sublevels <span class="math inline">\(m_F=\{F,−F+1, . . . ,F−1,F\}\)</span> within each hyperfine level.</p>
+<p>The coupling of each pair of hyperfine sublevels is factored by the <em>reduced dipole matrix element</em> for that pair. This is not the place to go into how we calculate those reduced dipole matrix elements, see <a href="https://github.com/tpogden/phd-thesis">Ogden 2016, chapter 5</a> for details.</p>
+<p>The good news is that clerq has helper functions in the <code>hyperfine</code> module to</p>
+<ul>
+<li>build the hyperfine structure for us, and</li>
+<li>calculate the reduced dipole matrix element factors.</li>
+</ul>
+<p>First we can use the <code>hyperfine</code> module to create the hyperfine structure (<span class="math inline">\(F\)</span> levels). As before we will model a weak field resonant with the <span class="math inline">\(5\mathrm{S}_{1/2} F=1 \rightarrow 5\mathrm{P}_{1/2} F=1\)</span> transition. Again we can neglect the other upper level in the fine structure manifold, <span class="math inline">\(5\mathrm{P}_{1/2} F={2}\)</span>, as it is far from resonance, but the decay to <span class="math inline">\(5\mathrm{S}_{1/2} F={2}\)</span> will be considered.</p>
+<div id="cell-13" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> hyperfine</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the two lower F levels</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F2 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">2</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the upper F level</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>Rb87_5p12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can see looking at the lower <span class="math inline">\(F=1\)</span> level that the hyperfine structure <span class="math inline">\(m_F=\{-1, 0 ,1\}\)</span> is built automatically based on the angular moment numbers <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span> and <span class="math inline">\(F\)</span>.</p>
+<div id="cell-15" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Rb87_5s12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{
+  "F": 1,
+  "I": 1.5,
+  "J": 0.5,
+  "energy": 0.0,
+  "mF_levels": [
+    {
+      "energy": 0.0,
+      "mF": -1.0
+    },
+    {
+      "energy": 0.0,
+      "mF": 0.0
+    },
+    {
+      "energy": 0.0,
+      "mF": 1.0
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<p>If there are levels to be addressed that are off resonance, we would need to add <span class="math inline">\(F\)</span> level energies (e.g.&nbsp;if we included the <span class="math inline">\(F'=2\)</span> upper level). Note that these only need to be relative to the resonance freq. If the mF levels are split (for example with a magnetic field), the individual mf level energies can be added relative to the <span class="math inline">\(F\)</span> level energy.</p>
+<p>We add the <span class="math inline">\(F\)</span> levels to the atom structure object.</p>
+<div id="cell-17" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the atom structure object and add the F levels</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>atom1e <span class="op">=</span> hyperfine.Atom1e()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F1)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F2)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5p12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We now have everything we need to build our MBSolve object. First, the total number of states:</p>
+<div id="cell-19" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>NUM_STATES <span class="op">=</span> atom1e.get_num_mF_levels()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(NUM_STATES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>11</code></pre>
+</div>
+</div>
+<section id="energies-and-detuning" class="level3">
+<h3 class="anchored" data-anchor-id="energies-and-detuning">Energies and Detuning</h3>
+<p>Then the energies of these states, if they have been specified (no need in this case but here for completeness):</p>
+<div id="cell-22" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ENERGIES <span class="op">=</span> atom1e.get_energies()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ENERGIES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
+</div>
+</div>
+<p>As for the solvers without structure, if desired we can specify a detuning:</p>
+<div id="cell-24" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tune to be on resonance with the F1 -&gt; F1 transition</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>DETUNING <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DETUNING)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0</code></pre>
+</div>
+</div>
+<p>Now the levels to be coupled by the field are each F=1 to F’=1 combination pair. atom1e has a helper function for that (based on the order we added them above. <code>F_level_idxs_a</code> is for the lower level, <code>F_level_idxs_b</code> is for the upper):</p>
+</section>
+<section id="field-channels-and-factors" class="level3">
+<h3 class="anchored" data-anchor-id="field-channels-and-factors">Field Channels and Factors</h3>
+<div id="cell-27" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>FIELD_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0, 8], [0, 9], [0, 10], [1, 8], [1, 9], [1, 10], [2, 8], [2, 9], [2, 10]]</code></pre>
+</div>
+</div>
+<p>And now the important part, we need to calculate the <a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients">Clebsch-Gordan coefficients</a> that couple each <span class="math inline">\(M_F\)</span> substructure pair. The <code>atom1e</code> class has a method to calculate these for us. We need to specify the polarisation of the light using <span class="math inline">\(q=\{-1, 0 ,1\}\)</span>. In this case we’ll choose <span class="math inline">\(q=1\)</span>.</p>
+<div id="cell-29" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Field polarisation</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>FIELD_FACTORS <span class="op">=</span> atom1e.get_clebsch_hf_factors(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>], q<span class="op">=</span>q</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 0.          0.          0.          0.28867513 -0.         -0.
+  0.          0.28867513  0.        ]</code></pre>
+</div>
+</div>
+</section>
+<section id="decay-channels-and-factors" class="level3">
+<h3 class="anchored" data-anchor-id="decay-channels-and-factors">Decay Channels and Factors</h3>
+<p>Similarly to the levels coupled by the field, we need to specify the pairs of levels that will be channels for spontaneous decay. This time the lower levels are all in both F=1 and F=2, so there are more combinations.</p>
+<div id="cell-32" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>DECAY_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0, 8], [0, 9], [0, 10], [1, 8], [1, 9], [1, 10], [2, 8], [2, 9], [2, 10], [3, 8], [3, 9], [3, 10], [4, 8], [4, 9], [4, 10], [5, 8], [5, 9], [5, 10], [6, 8], [6, 9], [6, 10], [7, 8], [7, 9], [7, 10]]</code></pre>
+</div>
+</div>
+<p>The spontaneous decay factors matching those channels (in order) can be obtained with the <code>get_decay_factors</code> method. This is equivalent to summing the <code>get_clebsch_hf_factors_hf</code> for all polarisations as decay photons are of all polarisations.</p>
+<div id="cell-34" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>DECAY_FACTORS <span class="op">=</span> atom1e.get_decay_factors(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ 0.28867513 -0.28867513  0.          0.28867513 -0.         -0.28867513
+  0.          0.28867513 -0.28867513  0.70710678  0.          0.
+  0.5         0.5        -0.          0.28867513  0.57735027  0.28867513
+ -0.          0.5         0.5         0.          0.          0.70710678]</code></pre>
+</div>
+</div>
+</section>
+<section id="initial-state" class="level3">
+<h3 class="anchored" data-anchor-id="initial-state">Initial State</h3>
+<p>In the two and three level models we didn’t specify an initial state for the system, which defaults to all population in the first (i.e.&nbsp;ground state). Here we need to correctly distribute the population in the ground state <span class="math inline">\(m_F\)</span> levels, which should of course sum to one.</p>
+<div id="cell-37" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>INITIAL_STATE <span class="op">=</span> (</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">3.0</span>] <span class="op">*</span> <span class="dv">3</span>  <span class="co"># s12_F1b</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">5.0</span>] <span class="op">*</span> <span class="dv">5</span>  <span class="co"># s12_F2</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.0</span>] <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># p12_F1</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(INITIAL_STATE)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(INITIAL_STATE))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.1, 0.1, 0.1, 0.1, 0.1, 0.0, 0.0, 0.0]
+1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="putting-it-all-into-mbsolve" class="level3">
+<h3 class="anchored" data-anchor-id="putting-it-all-into-mbsolve">Putting it all into MBSolve</h3>
+<p>We now have everything we need to build the <code>MBSolve</code> object.</p>
+<div id="cell-40" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="sc">{{</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="st">  "atom": </span><span class="sc">{{</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "decays": [</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">        "channels": </span><span class="sc">{decay_channels}</span><span class="st">,</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">        "rate": 1.0,</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{decay_factors}</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="st">    "energies": </span><span class="sc">{energies}</span><span class="st">,</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">    "fields": [</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": </span><span class="sc">{field_channels}</span><span class="st">,</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{field_factors}</span><span class="st">,</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning": </span><span class="sc">{detuning}</span><span class="st">,</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning_positive": true,</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="st">        "label": "probe",</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 1e-3,</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": </span><span class="sc">{{</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">          "ampl": 1.0,</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="st">          "centre": 0.0,</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="st">          "fwhm": 1.0</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="st">        </span><span class="sc">}}</span><span class="st">,</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "gaussian"</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="st">    "num_states": </span><span class="sc">{num_states}</span><span class="st">,</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="st">    "initial_state": </span><span class="sc">{initial_state}</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">}}</span><span class="st">,</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_min": -2.0,</span></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_max": 10.0,</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_steps": 100,</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_min": -0.2,</span></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 1,</span></span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0e2</span></span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "structure-2"</span></span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="sc">}}</span></span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    num_states<span class="op">=</span>NUM_STATES,</span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    energies<span class="op">=</span>ENERGIES,</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>    initial_state<span class="op">=</span>INITIAL_STATE,</span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    detuning<span class="op">=</span>DETUNING,</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    field_channels<span class="op">=</span>FIELD_CHANNELS,</span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    field_factors<span class="op">=</span>FIELD_FACTORS.tolist(),</span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>    decay_channels<span class="op">=</span>DECAY_CHANNELS,</span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    decay_factors<span class="op">=</span>DECAY_FACTORS.tolist(),</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-41" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-42" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+  0%|          | 0/100 [00:00&lt;?, ?z/s]
+  1%|          | 1/100 [00:00&lt;00:00, 1718.27z/s, Ω_max=0.00626]
+  2%|▏         | 2/100 [00:00&lt;00:00, 108.61z/s, Ω_max=0.00626] 
+  3%|▎         | 3/100 [00:00&lt;00:01, 83.78z/s, Ω_max=0.00626] 
+  4%|▍         | 4/100 [00:00&lt;00:01, 74.92z/s, Ω_max=0.00626]
+  5%|▌         | 5/100 [00:00&lt;00:01, 70.44z/s, Ω_max=0.00626]
+  6%|▌         | 6/100 [00:00&lt;00:01, 67.90z/s, Ω_max=0.00626]
+  7%|▋         | 7/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+  7%|▋         | 7/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+  8%|▊         | 8/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+  9%|▉         | 9/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+ 10%|█         | 10/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+ 11%|█         | 11/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+ 12%|█▏        | 12/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+ 13%|█▎        | 13/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
+ 14%|█▍        | 14/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00626]
+ 14%|█▍        | 14/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00626]
+ 15%|█▌        | 15/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00615]
+ 16%|█▌        | 16/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00604]
+ 17%|█▋        | 17/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00593]
+ 18%|█▊        | 18/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00583]
+ 19%|█▉        | 19/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00573]
+ 20%|██        | 20/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00563]
+ 21%|██        | 21/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00563]
+ 21%|██        | 21/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00554]
+ 22%|██▏       | 22/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00546]
+ 23%|██▎       | 23/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00537]
+ 24%|██▍       | 24/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00529]
+ 25%|██▌       | 25/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00521]
+ 26%|██▌       | 26/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00512]
+ 27%|██▋       | 27/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00512]
+ 27%|██▋       | 27/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00504]
+ 28%|██▊       | 28/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00496]
+ 29%|██▉       | 29/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00489]
+ 30%|███       | 30/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00481]
+ 31%|███       | 31/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00473]
+ 32%|███▏      | 32/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00466]
+ 33%|███▎      | 33/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00466]
+ 33%|███▎      | 33/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00459]
+ 34%|███▍      | 34/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00451]
+ 35%|███▌      | 35/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00444]
+ 36%|███▌      | 36/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00437]
+ 37%|███▋      | 37/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.0043] 
+ 38%|███▊      | 38/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00423]
+ 39%|███▉      | 39/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00423]
+ 39%|███▉      | 39/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00416]
+ 40%|████      | 40/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00409]
+ 41%|████      | 41/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00403]
+ 42%|████▏     | 42/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00396]
+ 43%|████▎     | 43/100 [00:00&lt;00:00, 57.60z/s, Ω_max=0.0039] 
+ 44%|████▍     | 44/100 [00:00&lt;00:00, 57.60z/s, Ω_max=0.00383]
+ 45%|████▌     | 45/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00383]
+ 45%|████▌     | 45/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00377]
+ 46%|████▌     | 46/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00371]
+ 47%|████▋     | 47/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00365]
+ 48%|████▊     | 48/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00359]
+ 49%|████▉     | 49/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00353]
+ 50%|█████     | 50/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00347]
+ 51%|█████     | 51/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00347]
+ 51%|█████     | 51/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00341]
+ 52%|█████▏    | 52/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00336]
+ 53%|█████▎    | 53/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.0033] 
+ 54%|█████▍    | 54/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00324]
+ 55%|█████▌    | 55/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00319]
+ 56%|█████▌    | 56/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00313]
+ 57%|█████▋    | 57/100 [00:00&lt;00:00, 56.28z/s, Ω_max=0.00313]
+ 57%|█████▋    | 57/100 [00:00&lt;00:00, 56.28z/s, Ω_max=0.00308]
+ 58%|█████▊    | 58/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00303]
+ 59%|█████▉    | 59/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00298]
+ 60%|██████    | 60/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00293]
+ 61%|██████    | 61/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00288]
+ 62%|██████▏   | 62/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00284]
+ 63%|██████▎   | 63/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00284]
+ 63%|██████▎   | 63/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.0028] 
+ 64%|██████▍   | 64/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00276]
+ 65%|██████▌   | 65/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00271]
+ 66%|██████▌   | 66/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00267]
+ 67%|██████▋   | 67/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00263]
+ 68%|██████▊   | 68/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00259]
+ 69%|██████▉   | 69/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00259]
+ 69%|██████▉   | 69/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00255]
+ 70%|███████   | 70/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00252]
+ 71%|███████   | 71/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00248]
+ 72%|███████▏  | 72/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00244]
+ 73%|███████▎  | 73/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.0024] 
+ 74%|███████▍  | 74/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00237]
+ 75%|███████▌  | 75/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00237]
+ 75%|███████▌  | 75/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00233]
+ 76%|███████▌  | 76/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00229]
+ 77%|███████▋  | 77/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00226]
+ 78%|███████▊  | 78/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00222]
+ 79%|███████▉  | 79/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00219]
+ 80%|████████  | 80/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00216]
+ 81%|████████  | 81/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00216]
+ 81%|████████  | 81/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00212]
+ 82%|████████▏ | 82/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00209]
+ 83%|████████▎ | 83/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00206]
+ 84%|████████▍ | 84/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00203]
+ 85%|████████▌ | 85/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00199]
+ 86%|████████▌ | 86/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00199]
+ 87%|████████▋ | 87/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 87%|████████▋ | 87/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 88%|████████▊ | 88/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 89%|████████▉ | 89/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 90%|█████████ | 90/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 91%|█████████ | 91/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 92%|█████████▏| 92/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
+ 93%|█████████▎| 93/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 93%|█████████▎| 93/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 94%|█████████▍| 94/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 95%|█████████▌| 95/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 96%|█████████▌| 96/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 97%|█████████▋| 97/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 98%|█████████▊| 98/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
+ 99%|█████████▉| 99/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
+ 99%|█████████▉| 99/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
+100%|██████████| 100/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
+100%|██████████| 100/100 [00:01&lt;00:00, 57.48z/s, Ω_max=0.00199]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to structure-2.qu</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+</div>
+</section>
+<section id="output-1" class="level3">
+<h3 class="anchored" data-anchor-id="output-1">Output</h3>
+<p>We can output the field exactly as we would do for the two-level system.</p>
+<div id="cell-44" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-45" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="structure_files/figure-html/cell-24-output-1.png" width="1166" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-populations-and-coherences" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-populations-and-coherences">Plotting Populations and Coherences</h3>
+<p>If we want to get the populations in all the levels coupled by a field, we have a helper function <code>mbs.populations_field</code>. For example, if we want to look at the total population of all the upper sublevels coupled by the field:</p>
+<div id="cell-48" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.populations_field(field_idx<span class="op">=</span><span class="dv">0</span>, upper<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Reds,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="structure_files/figure-html/cell-25-output-1.png" width="1152" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And for the sum of all the complex coherences on a field transition, we similarly have <code>mbs.coherences_field</code>:</p>
+<div id="cell-50" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    np.imag(mbs.coherences_field(field_idx<span class="op">=</span><span class="dv">0</span>)),</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Greens,</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="structure_files/figure-html/cell-26-output-1.png" width="1144" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="note-on-stength-factors" class="level2">
+<h2 class="anchored" data-anchor-id="note-on-stength-factors">Note on Stength Factors</h2>
+<p>The strength factor gives the relative strength hyperfine transition. This is the sum <span class="math inline">\(S_{FF'}\)</span> of the matrix elements from a single ground-state sublevel to the levels in a particular <span class="math inline">\(F'\)</span> energy level, and the sum is independent of the ground state sublevel chosen. The sum of <span class="math inline">\(S_{FF'}\)</span> over upper <span class="math inline">\(F'\)</span> levels is <span class="math inline">\(1\)</span>.</p>
+<div id="cell-52" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>s_11 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">0</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_11)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>s_12 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">1</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_12)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.16666666666666657
+0.4999999999999999</code></pre>
+</div>
+</div>
+<p>So this is where the <span class="math inline">\(S_{11} = \tfrac{1}{6}\)</span> and <span class="math inline">\(S_{21} = \tfrac{1}{2}\)</span> factors came from.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/clerq\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/usage/structure.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thomas Ogden">
+
+<title>Counter-Propagating Fields – clerq</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9ce5ae7ac05a2cb9bb4eec0b8cae176b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">clerq</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../installation.html"> 
+<span class="menu-text">Install</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../usage/two-level.html" aria-current="page"> 
+<span class="menu-text">Usage</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../examples/index.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../api/index.html"> 
+<span class="menu-text">API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../support/troubleshooting.html"> 
+<span class="menu-text">Support</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/counter-propagating.html">Counter-Propagating Fields</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/two-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-level systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/three-level.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-level systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure and Angular Momentum</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/spectral-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spectral analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/velocity-classes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Velocity Classes for Modelling Doppler Broadening in Thermal Systems</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/counter-propagating.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Counter-Propagating Fields</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/built-in-time-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Built-in time functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scripts for Making Movies</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-a-counter-propagating-geometry-changes-the-doppler-shift" id="toc-why-a-counter-propagating-geometry-changes-the-doppler-shift" class="nav-link active" data-scroll-target="#why-a-counter-propagating-geometry-changes-the-doppler-shift">Why a counter-propagating geometry changes the Doppler shift</a></li>
+  <li><a href="#how-clerq-handles-this" id="toc-how-clerq-handles-this" class="nav-link" data-scroll-target="#how-clerq-handles-this">How clerq handles this</a></li>
+  <li><a href="#basic-usage-counter_propagating" id="toc-basic-usage-counter_propagating" class="nav-link" data-scroll-target="#basic-usage-counter_propagating">Basic usage: <code>counter_propagating</code></a>
+  <ul class="collapse">
+  <li><a href="#depletion-check" id="toc-depletion-check" class="nav-link" data-scroll-target="#depletion-check">Depletion check</a></li>
+  </ul></li>
+  <li><a href="#advanced-factor_doppler_shift" id="toc-advanced-factor_doppler_shift" class="nav-link" data-scroll-target="#advanced-factor_doppler_shift">Advanced: <code>factor_doppler_shift</code></a></li>
+  <li><a href="#pulse-area-check" id="toc-pulse-area-check" class="nav-link" data-scroll-target="#pulse-area-check">Pulse-area check</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/usage/counter-propagating.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Counter-Propagating Fields</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thomas Ogden </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Many atomic physics experiments use fields that propagate in opposite directions through the medium. A common example is Rydberg EIT, where a near-infrared probe and a blue coupling field enter the vapour cell from opposite ends to reduce (or eliminate) the Doppler broadening of the two-photon resonance.</p>
+<section id="why-a-counter-propagating-geometry-changes-the-doppler-shift" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-counter-propagating-geometry-changes-the-doppler-shift">Why a counter-propagating geometry changes the Doppler shift</h2>
+<p>An atom moving with velocity <span class="math inline">\(v\)</span> along the propagation axis sees each field at a Doppler-shifted frequency. For a field with wave-vector <span class="math inline">\(\mathbf{k}\)</span>:</p>
+<ul>
+<li><strong>Co-propagating</strong> (<span class="math inline">\(\mathbf{k} \parallel \hat{z}\)</span>): the atom sees the field blue-shifted by <span class="math inline">\(kv\)</span>, so its effective one-photon detuning shifts by <span class="math inline">\(+kv\)</span>.</li>
+<li><strong>Counter-propagating</strong> (<span class="math inline">\(\mathbf{k} \antiparallel \hat{z}\)</span>): the shift is <span class="math inline">\(-kv\)</span>.</li>
+</ul>
+<p>In a two-photon (Ξ or Λ) scheme, the <em>two-photon</em> detuning is the sum of the individual detunings. When both fields propagate in the same direction, the two-photon detuning picks up <span class="math inline">\(+kv + kv = 2kv\)</span>, and the resonance is Doppler-broadened. When the fields counter-propagate with similar wavelengths, the shifts partially or fully cancel, giving a narrower (Doppler-reduced or Doppler-free) two-photon resonance.</p>
+</section>
+<section id="how-clerq-handles-this" class="level2">
+<h2 class="anchored" data-anchor-id="how-clerq-handles-this">How clerq handles this</h2>
+<p>clerq propagates all fields in the <span class="math inline">\(+z\)</span> direction (it solves an initial-value problem marching from <span class="math inline">\(z_\mathrm{min}\)</span> to <span class="math inline">\(z_\mathrm{max}\)</span>). A genuinely counter-propagating field would require boundary data at <span class="math inline">\(z_\mathrm{max}\)</span> and backward integration, turning the problem into a boundary-value problem.</p>
+<p>However, when the counter-propagating field <strong>does not deplete significantly</strong> across the cell—a valid approximation for many coupling fields in EIT experiments—the forward-propagating solver is equivalent to the true counter-propagating geometry. The only physical difference is the <strong>sign of the Doppler shift</strong> each velocity class contributes to that field. clerq exposes this sign via the <code>counter_propagating</code> field attribute.</p>
+<blockquote class="blockquote">
+<p><strong>Note on phrasing.</strong> This is <em>not</em> an ‘undepleted-coupling approximation’ in the sense of neglecting absorption. The solver computes absorption honestly for every velocity class. The approximation is purely geometric: it exploits the spatial symmetry that holds when the counter-propagating field’s intensity profile is essentially flat across the cell.</p>
+</blockquote>
+</section>
+<section id="basic-usage-counter_propagating" class="level2">
+<h2 class="anchored" data-anchor-id="basic-usage-counter_propagating">Basic usage: <code>counter_propagating</code></h2>
+<p>Set <code>"counter_propagating": true</code> on any field in the JSON configuration. This tells clerq to apply the Doppler shift with the opposite sign for that field, while leaving the forward-propagation geometry unchanged.</p>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">  "atom": {</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "num_states": 3,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">    "decays": [{"channels": [[0, 1], [1, 2]], "rate": 1.0}],</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">    "fields": [</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">      {</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "label": "probe",</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": [[0, 1]],</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 1.0e-3,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "gaussian",</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": {"ampl": 1.0, "centre": 0.0, "fwhm": 1.0}</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">      },</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">      {</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st">        "label": "coupling",</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": [[1, 2]],</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 5.0,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "ramp_onoff",</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": {"ampl": 1.0, "fwhm": 0.2, "on": -2.0, "off": 8.0},</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="st">        "counter_propagating": true</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="st">      }</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">    ]</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">  },</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_min": -2.0,</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_max": 8.0,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_steps": 120,</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_min": 0.0,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.0,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 20,</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 2,</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [1.0, 1.0],</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "velocity_classes": {</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_width": 5.0,</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_delta_min": -15.0,</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_delta_max": 15.0,</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_delta_steps": 10</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="st">  },</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "counter-propagating-eit"</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coupling field counter_propagating: </span><span class="sc">{</span>mbs<span class="sc">.</span>atom<span class="sc">.</span>fields[<span class="dv">1</span>]<span class="sc">.</span>counter_propagating<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coupling factor_doppler_shift:      </span><span class="sc">{</span>mbs<span class="sc">.</span>atom<span class="sc">.</span>fields[<span class="dv">1</span>]<span class="sc">.</span>factor_doppler_shift<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coupling field counter_propagating: True
+Coupling factor_doppler_shift:      -1.0</code></pre>
+</div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+  0%|          | 0/20 [00:00&lt;?, ?z/s]
+  5%|▌         | 1/20 [00:00&lt;00:00, 746.32z/s, Ω_max=31.4]
+ 10%|█         | 2/20 [00:00&lt;00:03,  4.86z/s, Ω_max=31.4] 
+ 10%|█         | 2/20 [00:00&lt;00:03,  4.86z/s, Ω_max=31.4]
+ 15%|█▌        | 3/20 [00:00&lt;00:04,  3.42z/s, Ω_max=31.4]
+ 15%|█▌        | 3/20 [00:00&lt;00:04,  3.42z/s, Ω_max=31.4]
+ 20%|██        | 4/20 [00:01&lt;00:05,  2.97z/s, Ω_max=31.4]
+ 20%|██        | 4/20 [00:01&lt;00:05,  2.97z/s, Ω_max=31.4]
+ 25%|██▌       | 5/20 [00:01&lt;00:05,  2.76z/s, Ω_max=31.4]
+ 25%|██▌       | 5/20 [00:01&lt;00:05,  2.76z/s, Ω_max=31.4]
+ 30%|███       | 6/20 [00:02&lt;00:05,  2.67z/s, Ω_max=31.4]
+ 30%|███       | 6/20 [00:02&lt;00:05,  2.67z/s, Ω_max=31.4]
+ 35%|███▌      | 7/20 [00:02&lt;00:04,  2.60z/s, Ω_max=31.4]
+ 35%|███▌      | 7/20 [00:02&lt;00:04,  2.60z/s, Ω_max=31.4]
+ 40%|████      | 8/20 [00:02&lt;00:04,  2.56z/s, Ω_max=31.4]
+ 40%|████      | 8/20 [00:02&lt;00:04,  2.56z/s, Ω_max=31.4]
+ 45%|████▌     | 9/20 [00:03&lt;00:04,  2.54z/s, Ω_max=31.4]
+ 45%|████▌     | 9/20 [00:03&lt;00:04,  2.54z/s, Ω_max=31.4]
+ 50%|█████     | 10/20 [00:03&lt;00:03,  2.51z/s, Ω_max=31.4]
+ 50%|█████     | 10/20 [00:03&lt;00:03,  2.51z/s, Ω_max=31.4]
+ 55%|█████▌    | 11/20 [00:04&lt;00:03,  2.50z/s, Ω_max=31.4]
+ 55%|█████▌    | 11/20 [00:04&lt;00:03,  2.50z/s, Ω_max=31.4]
+ 60%|██████    | 12/20 [00:04&lt;00:03,  2.49z/s, Ω_max=31.4]
+ 60%|██████    | 12/20 [00:04&lt;00:03,  2.49z/s, Ω_max=31.4]
+ 65%|██████▌   | 13/20 [00:04&lt;00:02,  2.49z/s, Ω_max=31.4]
+ 65%|██████▌   | 13/20 [00:04&lt;00:02,  2.49z/s, Ω_max=31.4]
+ 70%|███████   | 14/20 [00:05&lt;00:02,  2.48z/s, Ω_max=31.4]
+ 70%|███████   | 14/20 [00:05&lt;00:02,  2.48z/s, Ω_max=31.4]
+ 75%|███████▌  | 15/20 [00:05&lt;00:02,  2.49z/s, Ω_max=31.4]
+ 75%|███████▌  | 15/20 [00:05&lt;00:02,  2.49z/s, Ω_max=31.4]
+ 80%|████████  | 16/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
+ 80%|████████  | 16/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
+ 85%|████████▌ | 17/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
+ 85%|████████▌ | 17/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
+ 90%|█████████ | 18/20 [00:06&lt;00:00,  2.48z/s, Ω_max=31.4]
+ 90%|█████████ | 18/20 [00:06&lt;00:00,  2.48z/s, Ω_max=31.4]
+ 95%|█████████▌| 19/20 [00:07&lt;00:00,  2.48z/s, Ω_max=31.4]
+ 95%|█████████▌| 19/20 [00:07&lt;00:00,  2.48z/s, Ω_max=31.4]
+100%|██████████| 20/20 [00:07&lt;00:00,  2.47z/s, Ω_max=31.4]
+100%|██████████| 20/20 [00:07&lt;00:00,  2.47z/s, Ω_max=31.4]
+100%|██████████| 20/20 [00:07&lt;00:00,  2.60z/s, Ω_max=31.4]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to counter-propagating-eit.qu</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+</div>
+<section id="depletion-check" class="level3">
+<h3 class="anchored" data-anchor-id="depletion-check">Depletion check</h3>
+<p>After solving, clerq automatically checks whether the counter-propagating field depleted significantly across the cell. The check computes</p>
+<p><span class="math display">\[
+\text{depletion} = 1 - \frac{\max_t |\Omega(z_\mathrm{max}, t)|}{\max_t |\Omega(z_\mathrm{min}, t)|}
+\]</span></p>
+<ul>
+<li><strong>&lt; 1 %</strong> — check passes silently. The forward-propagation result is reliable.</li>
+<li><strong>1 – 10 %</strong> — a <code>UserWarning</code> is emitted. Results may still be usable but caution is advised.</li>
+<li><strong>&gt; 10 %</strong> — a <code>CounterPropagatingDepletionError</code> is raised. The approximation has broken down.</li>
+</ul>
+<p>You can suppress the check with <code>check_counter_prop_depletion=False</code> if you know the depletion is acceptable for your purposes.</p>
+<div id="cell-7" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>coupling_idx <span class="op">=</span> <span class="dv">1</span>  <span class="co"># second field</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Omega_coupling <span class="op">=</span> Omegas_zt[coupling_idx]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>peak_in  <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="dv">0</span>]))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>peak_out <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>depletion <span class="op">=</span> <span class="fl">1.0</span> <span class="op">-</span> peak_out <span class="op">/</span> peak_in</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coupling field depletion: </span><span class="sc">{</span>depletion<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coupling field depletion: -0.00%</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="advanced-factor_doppler_shift" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-factor_doppler_shift">Advanced: <code>factor_doppler_shift</code></h2>
+<p>For schemes where the two counter-propagating fields have <strong>different wavelengths</strong> (e.g.&nbsp;a three-photon Doppler-free ladder where <span class="math inline">\(k_1 \neq k_2\)</span>), the Doppler cancellation is only partial. Use <code>factor_doppler_shift</code> directly to set the fractional weight:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"coupled_levels"</span><span class="fu">:</span> <span class="ot">[[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">]]</span><span class="fu">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rabi_freq"</span><span class="fu">:</span> <span class="fl">1.5</span><span class="fu">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"factor_doppler_shift"</span><span class="fu">:</span> <span class="fl">-0.62</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The sign determines the direction; the magnitude scales the Doppler shift relative to the thermal width unit. <code>factor_doppler_shift = 1.0</code> (the default) gives standard co-propagating behaviour; <code>-1.0</code> is equivalent to <code>counter_propagating = true</code>.</p>
+<blockquote class="blockquote">
+<p><strong>Note on <code>detuning_positive</code>.</strong> The <code>detuning_positive</code> flag on a field is a <strong>separate and orthogonal</strong> concept. It controls the sign convention for the RWA Hamiltonian based on the level ordering (used when the second coupled level sits below the first in energy, e.g.&nbsp;the lower leg of a Λ system). It has nothing to do with the laser k-vector direction. Both flags can be set independently.</p>
+</blockquote>
+</section>
+<section id="pulse-area-check" class="level2">
+<h2 class="anchored" data-anchor-id="pulse-area-check">Pulse-area check</h2>
+<p>As a sanity check, verify that the probe pulse area at the input is correct.</p>
+<div id="cell-10" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>probe_area_in <span class="op">=</span> np.trapezoid(np.<span class="bu">abs</span>(Omegas_zt[<span class="dv">0</span>, <span class="dv">0</span>, :]), mbs.tlist) <span class="op">/</span> np.pi</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probe area at z=z_min: </span><span class="sc">{</span>probe_area_in<span class="sc">:.4f}</span><span class="ss"> π"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Probe area at z=z_min: 0.0021 π</code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>Mohapatra, Jackson, Adams — <em>Coherent Optical Detection of Highly Excited Rydberg States Using Electromagnetically Induced Transparency</em>, PRL <strong>98</strong>, 113003 (2007). Example of the counter-propagating Rydberg EIT geometry this feature supports.</li>
+<li>Adams, Pritchard, Shaffer — <em>Rydberg atom physics</em>, J. Phys. B <strong>53</strong>, 012002 (2020). Broader review including Doppler-free multi-photon spectroscopy.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/clerq\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/usage/counter-propagating.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
