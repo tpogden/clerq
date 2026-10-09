@@ -104,7 +104,7 @@ Deferred to Phase 4/5 (needs the repo rename, PyPI or you):
   register `clerq` as a trusted publisher (or use a project token) before tagging 👤
 - GitHub URLs in README, `pyproject.toml` and `_quarto.yml` point at `tpogden/clerq`, which only exists after
   the repo rename (Phase 4.2)
-- Zenodo DOI and clerq citation
+- ~~Zenodo DOI and clerq citation~~ done (concept DOI `10.5281/zenodo.23269881`)
 - Existing bug found in passing, unrelated to the rename: `mbsolve --help` crashes under Python 3.14 (unescaped `%`
   in an argparse help string)
 
@@ -172,8 +172,24 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 ## Phase 5: Post-cutover
 
 - [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
-- [ ] New Zenodo DOI; add to README citation block alongside the old one 👤. `CITATION.cff` added (no ORCID yet). On Zenodo: enable `tpogden/clerq` under GitHub settings (Sync now after the rename); only releases published *after* the switch are archived, so the first archived release will be `v0.13.1`. Check whether the repo was already enabled under the old name: if so, releases join the existing MaxwellBloch record (same concept DOI)
+- [x] Zenodo: `v0.13.1` archived 2026-10-09. Concept DOI (all versions, used in the README and `CITATION.cff`) `10.5281/zenodo.23269881`; version DOI for v0.13.1 `10.5281/zenodo.23269882`. The old MaxwellBloch citation stays for earlier versions 👤
 - [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
+- [x] Releases, both 2026-10-09 and verified from fresh venvs:
+  - `clerq 0.13.0`: the rename, the factor-of-2 fix (breaking: results change), Quarto docs, `maxwellbloch 0.12.1` shim
+  - `clerq 0.13.1`: `mbsolve` and `obsolve` scripts fixed (both crashed in 0.13.0), examples recalibrated for the
+    factor-of-2 fix with clean outputs, new description, rename announcement, `CITATION.cff`, stimulated-echo example
+- [x] Release checklist for next time (each item cost a detour once):
+  1. Everything merged to `next`, CI green. No `Unreleased` leftovers in `CHANGELOG.md`.
+  2. `bump-my-version bump <part> --no-commit --no-tag` on a clean tree (or add `--allow-dirty` after editing the
+     changelog), then `uv lock` (the bump does not touch the project version in `uv.lock`), then commit and `git tag -a vX.Y.Z`.
+  3. Re-run `ruff`, `pytest -n auto`, `uv build` + `twine check`, and a docs render on the final tree. If `next` moves
+     after tagging, redo the bump on the new tip and re-tag.
+  4. Tag names starting with `v` start `publish.yml`: never use `v-...` for markers.
+  5. Optional: enable Zenodo for the repo first (it only archives releases published afterwards).
+  6. `git push origin next`, then on `master`: `git merge --no-ff next && git push && git push origin vX.Y.Z`.
+  7. Approve the `pypi` environment gate (required reviewer) on the Publish run.
+  8. Verify: fresh venv install, the CLI scripts, the shim, clerq.org, the GitHub release. PyPI's `/pypi/<name>/json`
+     summary endpoint lags by minutes; trust `/simple/` and `/pypi/<name>/<version>/json`.
 - [ ] External references sweep 👤 (done 2026-10-09 except the items marked open):
   - [x] `tpogden/clerq` repo description and homepage (`https://clerq.org`)
   - [x] Site `index.qmd` Projects entry in `tpogden.github.com` (master, `fb70693`) and `tpogden-quarto` (main, `ce6796e`).
@@ -181,10 +197,10 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
         changes when you next run `quarto publish gh-pages`
   - [x] `tpogden.github.com/environment.yml`: pip `clerq`, python 3.11, dropped the `qutip=4` / python 3.7 pins (no
         `maxwellbloch` >= 0.8 could install with them). The file is unreferenced; the site is built with uv
-  - [ ] Read the Docs, `maxwellbloch.readthedocs.io`: still live and stale, no banner. Admin -> Redirects -> add an
-        exact redirect from `/$rest` (or `/en/latest/$rest` and `/en/stable/$rest`) to `https://clerq.org/` with
-        *Force redirect* on, otherwise existing pages are served instead. Removing `.readthedocs.yml` means new RTD
-        builds will fail, which is fine once redirected
+  - [x] Read the Docs, `maxwellbloch.readthedocs.io`: exact redirect with *Force redirect* on, verified 2026-10-09:
+        `/`, `/en/latest/`, `/en/stable/`, deep pages (`/en/latest/examples/...`), the API index and old tagged versions
+        (`/en/v0.8.1/...`) all return 301 to `https://clerq.org/` (deep links land on the new home page, since page names
+        differ). `.readthedocs.yml` is gone, so new RTD builds fail, which no longer matters
   - [ ] CV (`tpogden/cv`, `tpo-cv.tex`): project entry still says MaxwellBloch
   - [ ] `paper-maxwellbloch`: title and "Program Title" say MaxwellBloch and the abstract frames the package as solving
         the Maxwell-Bloch equations; a rewrite decision, not a find and replace
@@ -198,11 +214,9 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 
 ## Follow-ups after the cutover
 
-- [ ] PR #278 (A5 stimulated echo, targets `next`) still imports `maxwellbloch`: merge `next` into it and rename imports
-      (`perl -pi -e 's/maxwellbloch/clerq/g'` on its files) before it merges; its notebook needs its outputs refreshed (`make docs_execute`)
-- [ ] Dependabot PRs #297–#300 target `master`; they should rebase cleanly, otherwise `@dependabot rebase`
-- [ ] `mbsolve --help` crashes on Python 3.14 (unescaped `%` in a help string; `-p/--pbarchunksize` may be dead). Branch
-      `fix/mbsolve-help-percent` exists from a separate session; deliberately not included in 0.13.0, ships in 0.13.1
+- [x] PR #278 (A5 stimulated echo): recalibrated, merged 2026-10-09 and released in 0.13.1
+- [ ] Dependabot: 19 alerts (1 critical), all transitive docs/dev packages in `uv.lock` (see the lock-upgrade PR). Dependabot PRs target `master`; consider `target-branch: next` in `.github/dependabot.yml`
+- [x] `mbsolve` and `obsolve` scripts crashed in 0.13.0 (not only `--help`): fixed in #312, with end-to-end tests, shipped in 0.13.1
 - [ ] Quarto API page titles come out lowercased (`mb_solve.mbsolve`); cosmetic
 - [ ] Release workflow attaches `default.gitignore` (uv writes `dist/.gitignore`); cosmetic: use `dist/*.whl dist/*.tar.gz` in `publish.yml`
 - [ ] quartodoc prints ~14 docstring warnings (parameters documented but not in the signature) in `ob_atom.py`, `hyperfine.py`, `spectral.py`
@@ -211,7 +225,6 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 
 ## Open issues and risks
 
-- `next` is level with `master`, so the plan's `main` maps to `next` for PRs and to `master` for the release.
+- `next` and `master` show as diverged by the release merge commits. That is expected: each release merges `next` into `master`.
 - The `.qu` cache files are committed under `docs/` (`!docs/examples/*.qu`). Resolved: `.qu` caches are no longer committed.
 - The spike's counter-propagation exclusion vs the `usage/counter-propagating` notebook: the notebook documents existing behaviour, so it migrates as is.
-- The `pip install clerq` command in `installation.qmd` only works after the Phase 4.4 release.

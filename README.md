@@ -3,6 +3,7 @@
 [![Build Status](https://github.com/tpogden/clerq/actions/workflows/ci.yml/badge.svg)](https://github.com/tpogden/clerq/actions/workflows/ci.yml)
 [![Documentation](https://img.shields.io/badge/docs-clerq.org-blue)](https://clerq.org)
 [![PyPI](https://img.shields.io/pypi/v/clerq)](https://pypi.org/project/clerq/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23269881.svg)](https://doi.org/10.5281/zenodo.23269881)
 
 clerq solves the propagation of classical electromagnetic fields through media
 of open quantum systems, using Maxwell's equations coupled to the Lindblad
@@ -58,8 +59,23 @@ More detailed installation instructions can be found in the [docs][docs] along w
 
 ## Attribution
 
-If you use clerq for research, please cite the original package, which was
-published as MaxwellBloch:
+If you use clerq for research, please cite it. The DOI below is the concept DOI,
+which covers all versions and always resolves to the latest; Zenodo also gives
+each release its own version DOI.
+
+```
+@software{ogden_clerq,
+  author = {Ogden, Thomas P.},
+  title = {clerq},
+  year = {2026},
+  publisher = {Zenodo},
+  doi = {10.5281/zenodo.23269881},
+  url = {https://doi.org/10.5281/zenodo.23269881}
+}
+```
+
+Work that used earlier versions, published as MaxwellBloch, can also cite the
+original package:
 ```
 @misc{ogden2020maxwellbloch,
   author = {Ogden, Thomas P.},
@@ -73,9 +89,7 @@ published as MaxwellBloch:
   howpublished = {\url{https://github.com/tpogden/clerq}}
 }
 ```
-A `CITATION.cff` for clerq is included (GitHub's "Cite this repository" button
-reads it). A citation with its own DOI will be added once the first archived
-release under the new name is available.
+A `CITATION.cff` is included too (GitHub's "Cite this repository" button reads it).
 
 ## Changelog
 
