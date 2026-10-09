@@ -362,7 +362,7 @@ window.Quarto = {
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.0,</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 20,</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 2,</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [1.0, 1.0],</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [0.5, 0.5],</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "velocity_classes": {</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_width": 5.0,</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_delta_min": -15.0,</span></span>
@@ -386,55 +386,8 @@ Coupling factor_doppler_shift:      -1.0</code></pre>
 </div>
 <div id="cell-5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-  0%|          | 0/20 [00:00&lt;?, ?z/s]
-  5%|▌         | 1/20 [00:00&lt;00:00, 746.32z/s, Ω_max=31.4]
- 10%|█         | 2/20 [00:00&lt;00:03,  4.86z/s, Ω_max=31.4] 
- 10%|█         | 2/20 [00:00&lt;00:03,  4.86z/s, Ω_max=31.4]
- 15%|█▌        | 3/20 [00:00&lt;00:04,  3.42z/s, Ω_max=31.4]
- 15%|█▌        | 3/20 [00:00&lt;00:04,  3.42z/s, Ω_max=31.4]
- 20%|██        | 4/20 [00:01&lt;00:05,  2.97z/s, Ω_max=31.4]
- 20%|██        | 4/20 [00:01&lt;00:05,  2.97z/s, Ω_max=31.4]
- 25%|██▌       | 5/20 [00:01&lt;00:05,  2.76z/s, Ω_max=31.4]
- 25%|██▌       | 5/20 [00:01&lt;00:05,  2.76z/s, Ω_max=31.4]
- 30%|███       | 6/20 [00:02&lt;00:05,  2.67z/s, Ω_max=31.4]
- 30%|███       | 6/20 [00:02&lt;00:05,  2.67z/s, Ω_max=31.4]
- 35%|███▌      | 7/20 [00:02&lt;00:04,  2.60z/s, Ω_max=31.4]
- 35%|███▌      | 7/20 [00:02&lt;00:04,  2.60z/s, Ω_max=31.4]
- 40%|████      | 8/20 [00:02&lt;00:04,  2.56z/s, Ω_max=31.4]
- 40%|████      | 8/20 [00:02&lt;00:04,  2.56z/s, Ω_max=31.4]
- 45%|████▌     | 9/20 [00:03&lt;00:04,  2.54z/s, Ω_max=31.4]
- 45%|████▌     | 9/20 [00:03&lt;00:04,  2.54z/s, Ω_max=31.4]
- 50%|█████     | 10/20 [00:03&lt;00:03,  2.51z/s, Ω_max=31.4]
- 50%|█████     | 10/20 [00:03&lt;00:03,  2.51z/s, Ω_max=31.4]
- 55%|█████▌    | 11/20 [00:04&lt;00:03,  2.50z/s, Ω_max=31.4]
- 55%|█████▌    | 11/20 [00:04&lt;00:03,  2.50z/s, Ω_max=31.4]
- 60%|██████    | 12/20 [00:04&lt;00:03,  2.49z/s, Ω_max=31.4]
- 60%|██████    | 12/20 [00:04&lt;00:03,  2.49z/s, Ω_max=31.4]
- 65%|██████▌   | 13/20 [00:04&lt;00:02,  2.49z/s, Ω_max=31.4]
- 65%|██████▌   | 13/20 [00:04&lt;00:02,  2.49z/s, Ω_max=31.4]
- 70%|███████   | 14/20 [00:05&lt;00:02,  2.48z/s, Ω_max=31.4]
- 70%|███████   | 14/20 [00:05&lt;00:02,  2.48z/s, Ω_max=31.4]
- 75%|███████▌  | 15/20 [00:05&lt;00:02,  2.49z/s, Ω_max=31.4]
- 75%|███████▌  | 15/20 [00:05&lt;00:02,  2.49z/s, Ω_max=31.4]
- 80%|████████  | 16/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
- 80%|████████  | 16/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
- 85%|████████▌ | 17/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
- 85%|████████▌ | 17/20 [00:06&lt;00:01,  2.50z/s, Ω_max=31.4]
- 90%|█████████ | 18/20 [00:06&lt;00:00,  2.48z/s, Ω_max=31.4]
- 90%|█████████ | 18/20 [00:06&lt;00:00,  2.48z/s, Ω_max=31.4]
- 95%|█████████▌| 19/20 [00:07&lt;00:00,  2.48z/s, Ω_max=31.4]
- 95%|█████████▌| 19/20 [00:07&lt;00:00,  2.48z/s, Ω_max=31.4]
-100%|██████████| 20/20 [00:07&lt;00:00,  2.47z/s, Ω_max=31.4]
-100%|██████████| 20/20 [00:07&lt;00:00,  2.47z/s, Ω_max=31.4]
-100%|██████████| 20/20 [00:07&lt;00:00,  2.60z/s, Ω_max=31.4]</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Saving MBSolve to counter-propagating-eit.qu</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
 </div>
 </div>
 <section id="depletion-check" class="level3">
@@ -450,14 +403,14 @@ Coupling factor_doppler_shift:      -1.0</code></pre>
 </ul>
 <p>You can suppress the check with <code>check_counter_prop_depletion=False</code> if you know the depletion is acceptable for your purposes.</p>
 <div id="cell-7" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>coupling_idx <span class="op">=</span> <span class="dv">1</span>  <span class="co"># second field</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Omega_coupling <span class="op">=</span> Omegas_zt[coupling_idx]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>peak_in  <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="dv">0</span>]))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>peak_out <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="op">-</span><span class="dv">1</span>]))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>depletion <span class="op">=</span> <span class="fl">1.0</span> <span class="op">-</span> peak_out <span class="op">/</span> peak_in</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coupling field depletion: </span><span class="sc">{</span>depletion<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>coupling_idx <span class="op">=</span> <span class="dv">1</span>  <span class="co"># second field</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>Omega_coupling <span class="op">=</span> Omegas_zt[coupling_idx]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>peak_in  <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="dv">0</span>]))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>peak_out <span class="op">=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(Omega_coupling[<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>depletion <span class="op">=</span> <span class="fl">1.0</span> <span class="op">-</span> peak_out <span class="op">/</span> peak_in</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Coupling field depletion: </span><span class="sc">{</span>depletion<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coupling field depletion: -0.00%</code></pre>
 </div>
@@ -467,11 +420,11 @@ Coupling factor_doppler_shift:      -1.0</code></pre>
 <section id="advanced-factor_doppler_shift" class="level2">
 <h2 class="anchored" data-anchor-id="advanced-factor_doppler_shift">Advanced: <code>factor_doppler_shift</code></h2>
 <p>For schemes where the two counter-propagating fields have <strong>different wavelengths</strong> (e.g.&nbsp;a three-photon Doppler-free ladder where <span class="math inline">\(k_1 \neq k_2\)</span>), the Doppler cancellation is only partial. Use <code>factor_doppler_shift</code> directly to set the fractional weight:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"coupled_levels"</span><span class="fu">:</span> <span class="ot">[[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">]]</span><span class="fu">,</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rabi_freq"</span><span class="fu">:</span> <span class="fl">1.5</span><span class="fu">,</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"factor_doppler_shift"</span><span class="fu">:</span> <span class="fl">-0.62</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"coupled_levels"</span><span class="fu">:</span> <span class="ot">[[</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">]]</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"rabi_freq"</span><span class="fu">:</span> <span class="fl">1.5</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"factor_doppler_shift"</span><span class="fu">:</span> <span class="fl">-0.62</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The sign determines the direction; the magnitude scales the Doppler shift relative to the thermal width unit. <code>factor_doppler_shift = 1.0</code> (the default) gives standard co-propagating behaviour; <code>-1.0</code> is equivalent to <code>counter_propagating = true</code>.</p>
 <blockquote class="blockquote">
 <p><strong>Note on <code>detuning_positive</code>.</strong> The <code>detuning_positive</code> flag on a field is a <strong>separate and orthogonal</strong> concept. It controls the sign convention for the RWA Hamiltonian based on the level ordering (used when the second coupled level sits below the first in energy, e.g.&nbsp;the lower leg of a Λ system). It has nothing to do with the laser k-vector direction. Both flags can be set independently.</p>
@@ -481,8 +434,8 @@ Coupling factor_doppler_shift:      -1.0</code></pre>
 <h2 class="anchored" data-anchor-id="pulse-area-check">Pulse-area check</h2>
 <p>As a sanity check, verify that the probe pulse area at the input is correct.</p>
 <div id="cell-10" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>probe_area_in <span class="op">=</span> np.trapezoid(np.<span class="bu">abs</span>(Omegas_zt[<span class="dv">0</span>, <span class="dv">0</span>, :]), mbs.tlist) <span class="op">/</span> np.pi</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probe area at z=z_min: </span><span class="sc">{</span>probe_area_in<span class="sc">:.4f}</span><span class="ss"> π"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>probe_area_in <span class="op">=</span> np.trapezoid(np.<span class="bu">abs</span>(Omegas_zt[<span class="dv">0</span>, <span class="dv">0</span>, :]), mbs.tlist) <span class="op">/</span> np.pi</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probe area at z=z_min: </span><span class="sc">{</span>probe_area_in<span class="sc">:.4f}</span><span class="ss"> π"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Probe area at z=z_min: 0.0021 π</code></pre>
 </div>

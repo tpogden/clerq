@@ -352,7 +352,7 @@ f(v) = \frac{1}{u\sqrt{\pi}} \mathrm{e}^{-(kv/u)^2}
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 50,</span></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="st">    0.5</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "velocity_classes": {</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="st">    "thermal_delta_min": -0.1,</span></span>
@@ -407,26 +407,29 @@ f(v) = \frac{1}{u\sqrt{\pi}} \mathrm{e}^{-(kv/u)^2}
 <p>Now we can solve as before. Now at each <span class="math inline">\(z\)</span>-step, the system will be solved <code>thermal_delta_steps</code> times, once for each velocity class, and so the time taken to solve scales linearly.</p>
 <div id="cell-14" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to velocity-classes.qu</code></pre>
+</div>
 </div>
 <section id="results-in-the-time-domain" class="level2">
 <h2 class="anchored" data-anchor-id="results-in-the-time-domain">Results in the Time Domain</h2>
 <div id="cell-16" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cmap_range <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, <span class="fl">1.0e-3</span>, <span class="dv">11</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    cmap_range,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cmap_range <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, <span class="fl">1.0e-3</span>, <span class="dv">11</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    cmap_range,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -438,76 +441,78 @@ f(v) = \frac{1}{u\sqrt{\pi}} \mathrm{e}^{-(kv/u)^2}
 </section>
 <section id="results-in-the-frequency-domain" class="level2">
 <h2 class="anchored" data-anchor-id="results-in-the-frequency-domain">Results in the Frequency Domain</h2>
-<p>For a two-level system in the linear regime, this convolution of a Lorentzian function with a Gaussian can be determined analytically and is known as a Voigt proﬁle. It is provided in clerq as <code>spectral.voigt_two_linear_known(freq_list, decay_rate, thermal_width)</code> so we can compare the simulation solution with the known analytic result.</p>
+<p>For a two-level system in the linear regime, this convolution of a Lorentzian function with a Gaussian can be determined analytically and is known as a Voigt proﬁle. It is provided in clerq as <code>spectral.voigt_two_linear_known(freq_list, decay_rate, thermal_width)</code> so we can compare the simulation solution with the known analytic result. The function returns the profile for unit interaction strength, so we multiply by the interaction strength of our medium.</p>
 <div id="cell-18" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> spectral, utility</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> spectral, utility</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-19" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>interaction_strength <span class="op">=</span> mbs.interaction_strengths[<span class="dv">0</span>]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>decay_rate <span class="op">=</span> mbs.atom.decays[<span class="dv">0</span>][<span class="st">"rate"</span>]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>freq_list <span class="op">=</span> spectral.freq_list(mbs)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>absorption_linear_known <span class="op">=</span> spectral.absorption_two_linear_known(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    freq_list, interaction_strength, decay_rate</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>dispersion_linear_known <span class="op">=</span> spectral.dispersion_two_linear_known(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    freq_list, interaction_strength, decay_rate</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>pal <span class="op">=</span> sns.color_palette(<span class="st">"deep"</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    freq_list, spectral.absorption(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), label<span class="op">=</span><span class="st">"Absorption"</span>, lw<span class="op">=</span><span class="fl">5.0</span>, c<span class="op">=</span>pal[<span class="dv">0</span>]</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    freq_list, spectral.dispersion(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), label<span class="op">=</span><span class="st">"Dispersion"</span>, lw<span class="op">=</span><span class="fl">5.0</span>, c<span class="op">=</span>pal[<span class="dv">1</span>]</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    absorption_linear_known,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dotted"</span>,</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">0</span>],</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Absorption, No Thermal"</span>,</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    dispersion_linear_known,</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dotted"</span>,</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">1</span>],</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Dispersion, No Thermal"</span>,</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Widths</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>hm, r1, r2 <span class="op">=</span> utility.half_max_roots(freq_list, spectral.absorption(mbs, field_idx<span class="op">=</span><span class="dv">0</span>))</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>plt.hlines(y<span class="op">=</span>hm, xmin<span class="op">=</span>r1, xmax<span class="op">=</span>r2, linestyle<span class="op">=</span><span class="st">"dotted"</span>, color<span class="op">=</span>pal[<span class="dv">0</span>])</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>plt.annotate(</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FWHM: "</span> <span class="op">+</span> <span class="st">"</span><span class="sc">%0.2f</span><span class="st">"</span> <span class="op">%</span> (r2 <span class="op">-</span> r1),</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    xy<span class="op">=</span>(r2, hm),</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>pal[<span class="dv">0</span>],</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    xycoords<span class="op">=</span><span class="st">"data"</span>,</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    xytext<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>),</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>voigt <span class="op">=</span> spectral.voigt_two_linear_known(freq_list, <span class="fl">1.0</span>, <span class="fl">0.05</span>).imag</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    voigt,</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"white"</span>,</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dashed"</span>,</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Known Absorption, Voigt Profile"</span>,</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">3.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.0</span>)</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>ax.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>interaction_strength <span class="op">=</span> mbs.interaction_strengths[<span class="dv">0</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>decay_rate <span class="op">=</span> mbs.atom.decays[<span class="dv">0</span>][<span class="st">"rate"</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>freq_list <span class="op">=</span> spectral.freq_list(mbs)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>absorption_linear_known <span class="op">=</span> spectral.absorption_two_linear_known(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    freq_list, interaction_strength, decay_rate</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>dispersion_linear_known <span class="op">=</span> spectral.dispersion_two_linear_known(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    freq_list, interaction_strength, decay_rate</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">4</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>pal <span class="op">=</span> sns.color_palette(<span class="st">"deep"</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    freq_list, spectral.absorption(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), label<span class="op">=</span><span class="st">"Absorption"</span>, lw<span class="op">=</span><span class="fl">5.0</span>, c<span class="op">=</span>pal[<span class="dv">0</span>]</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    freq_list, spectral.dispersion(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), label<span class="op">=</span><span class="st">"Dispersion"</span>, lw<span class="op">=</span><span class="fl">5.0</span>, c<span class="op">=</span>pal[<span class="dv">1</span>]</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    absorption_linear_known,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dotted"</span>,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">0</span>],</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Absorption, No Thermal"</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    dispersion_linear_known,</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dotted"</span>,</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">1</span>],</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Dispersion, No Thermal"</span>,</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Widths</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>hm, r1, r2 <span class="op">=</span> utility.half_max_roots(freq_list, spectral.absorption(mbs, field_idx<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>plt.hlines(y<span class="op">=</span>hm, xmin<span class="op">=</span>r1, xmax<span class="op">=</span>r2, linestyle<span class="op">=</span><span class="st">"dotted"</span>, color<span class="op">=</span>pal[<span class="dv">0</span>])</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>plt.annotate(</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"FWHM: "</span> <span class="op">+</span> <span class="st">"</span><span class="sc">%0.2f</span><span class="st">"</span> <span class="op">%</span> (r2 <span class="op">-</span> r1),</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    xy<span class="op">=</span>(r2, hm),</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>pal[<span class="dv">0</span>],</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    xycoords<span class="op">=</span><span class="st">"data"</span>,</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    xytext<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>),</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co"># voigt_two_linear_known returns the profile for unit interaction strength;</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a><span class="co"># the linear-regime absorption is proportional to the interaction strength.</span></span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>voigt <span class="op">=</span> interaction_strength <span class="op">*</span> spectral.voigt_two_linear_known(freq_list, decay_rate, <span class="fl">0.05</span>).imag</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>    voigt,</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>    ls<span class="op">=</span><span class="st">"dashed"</span>,</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Known Absorption, Voigt Profile"</span>,</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">3.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">1.0</span>, <span class="fl">1.0</span>)</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>ax.legend()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -517,19 +522,19 @@ f(v) = \frac{1}{u\sqrt{\pi}} \mathrm{e}^{-(kv/u)^2}
 </div>
 </div>
 <div id="cell-20" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">2</span>))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    spectral.absorption(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>) <span class="op">-</span> voigt,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Absorption"</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">0</span>],</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">3.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">3e-2</span>, <span class="fl">3e-2</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">2</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    freq_list,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    spectral.absorption(mbs, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>) <span class="op">-</span> voigt,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Absorption"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">2.0</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>pal[<span class="dv">0</span>],</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">3.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">3e-2</span>, <span class="fl">3e-2</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -543,30 +548,30 @@ f(v) = \frac{1}{u\sqrt{\pi}} \mathrm{e}^{-(kv/u)^2}
 <h2 class="anchored" data-anchor-id="adding-inner-steps">Adding Inner Steps</h2>
 <p>If the thermal width is much larger than the decay rate, you may wish to add a narrower band around the resonance frequency to sample the Lorentzian sufficiently while covering the Maxwell-Boltzmann distribution efficiently. This can be done by providing an inner range defined by <code>thermal_delta_inner_min</code>, <code>thermal_delta_inner_min</code> and <code>thermal_delta_inner_steps</code>. Any duplicated velocity classes (in the constructed <code>thermal_delta_list</code>) will only be counted once. Below is an example.</p>
 <div id="cell-22" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> {</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_min"</span>: <span class="op">-</span><span class="fl">0.1</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_max"</span>: <span class="fl">0.1</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_steps"</span>: <span class="dv">4</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_min"</span>: <span class="op">-</span><span class="fl">0.05</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_max"</span>: <span class="fl">0.05</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_steps"</span>: <span class="dv">10</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_width"</span>: <span class="fl">0.05</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vc <span class="op">=</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_min"</span>: <span class="op">-</span><span class="fl">0.1</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_max"</span>: <span class="fl">0.1</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_steps"</span>: <span class="dv">4</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_min"</span>: <span class="op">-</span><span class="fl">0.05</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_max"</span>: <span class="fl">0.05</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_delta_inner_steps"</span>: <span class="dv">10</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"thermal_width"</span>: <span class="fl">0.05</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So the thermal delta range is <span class="math inline">\([-0.1, -0.05, 0.05, 1.0]\)</span> and the inner range is <span class="math inline">\([-0.05, -0.04, \dots, 0.04, 0.05]\)</span>. These are combined to form:</p>
 <div id="cell-24" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mbs.build_velocity_classes(velocity_classes<span class="op">=</span>vc)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mbs.thermal_delta_list <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mbs.build_velocity_classes(velocity_classes<span class="op">=</span>vc)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mbs.thermal_delta_list <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[-0.1  -0.05 -0.04 -0.03 -0.02 -0.01  0.    0.01  0.02  0.03  0.04  0.05
   0.1 ]</code></pre>
 </div>
 </div>
 <div id="cell-25" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>maxboltz <span class="op">=</span> mb_solve.maxwell_boltzmann(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    mbs.thermal_delta_list, <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> mbs.velocity_classes[<span class="st">"thermal_width"</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.plot(mbs.thermal_delta_list, maxboltz, marker<span class="op">=</span><span class="st">"o"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>maxboltz <span class="op">=</span> mb_solve.maxwell_boltzmann(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    mbs.thermal_delta_list, <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> mbs.velocity_classes[<span class="st">"thermal_width"</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.plot(mbs.thermal_delta_list, maxboltz, marker<span class="op">=</span><span class="st">"o"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

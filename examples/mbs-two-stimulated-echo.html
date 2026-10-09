@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Thomas Ogden">
+
+<title>Two-Level: Stimulated Three-Pulse Photon Echo – clerq</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9ce5ae7ac05a2cb9bb4eec0b8cae176b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.5.0.min"</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">clerq</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../installation.html"> 
+<span class="menu-text">Install</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../usage/two-level.html"> 
+<span class="menu-text">Usage</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../examples/index.html" aria-current="page"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../api/index.html"> 
+<span class="menu-text">API</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../support/troubleshooting.html"> 
+<span class="menu-text">Support</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../examples/mbs-two-stimulated-echo.html">Two-Level: Stimulated Three-Pulse Photon Echo</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Examples</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-linear-absorption.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Absorption — Beer–Lambert Law</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-sit-area-theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Self-Induced Transparency: Area Theorem and Solitons</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-two-photon-echo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Level: Two-Pulse Photon Echo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-two-stimulated-echo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Two-Level: Stimulated Three-Pulse Photon Echo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-lambda-eit-slow-light.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Λ-Type Three-Level: EIT, Slow Light and Storage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-lambda-cpt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Λ-Type Three-Level: Coherent Population Trapping (CPT)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-lambda-adiabatons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Λ-Type Three-Level: Adiabatons</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-vee-simultons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">V-Type Three-Level: Simultons</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-ladder-weak-pulse-coupling-decay.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ladder-Type Three-Level: Weak Pulse with Coupling — EIT</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-ladder-autler-townes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Three-Level Ladder (Ξ): Autler–Townes Splitting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hyperfine Structure: Weak Pulse, q=1, Decay — Optical Pumping</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-Rb87_5s12_5p12_F11_q1-sech-2pi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hyperfine Structure: Sech Pulse 2π, q=1 — Self-Induced Transparency</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-Rb87_5s12_5p32_F23_q1-weak-pulse-decay.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rb 87 D2: Cycling Transition, σ⁺ Optical Pumping</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#physical-mechanism" id="toc-physical-mechanism" class="nav-link active" data-scroll-target="#physical-mechanism">Physical mechanism</a></li>
+  <li><a href="#hard-pulse-condition" id="toc-hard-pulse-condition" class="nav-link" data-scroll-target="#hard-pulse-condition">Hard-pulse condition</a></li>
+  <li><a href="#level-structure" id="toc-level-structure" class="nav-link" data-scroll-target="#level-structure">Level structure</a></li>
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#output-field-stimulated-echo-at-t-tau" id="toc-output-field-stimulated-echo-at-t-tau" class="nav-link" data-scroll-target="#output-field-stimulated-echo-at-t-tau">Output field: stimulated echo at <span class="math inline">\(t = +\tau\)</span></a></li>
+  <li><a href="#macroscopic-polarisation-fid-collapse-and-revival" id="toc-macroscopic-polarisation-fid-collapse-and-revival" class="nav-link" data-scroll-target="#macroscopic-polarisation-fid-collapse-and-revival">Macroscopic polarisation: FID, collapse, and revival</a>
+  <ul class="collapse">
+  <li><a href="#coherence-during-t_w" id="toc-coherence-during-t_w" class="nav-link" data-scroll-target="#coherence-during-t_w">Coherence during <span class="math inline">\(T_w\)</span></a></li>
+  </ul></li>
+  <li><a href="#echo-amplitude-vs-t_w-t_1-measurement" id="toc-echo-amplitude-vs-t_w-t_1-measurement" class="nav-link" data-scroll-target="#echo-amplitude-vs-t_w-t_1-measurement">Echo amplitude vs <span class="math inline">\(T_w\)</span>: <span class="math inline">\(T_1\)</span> measurement</a></li>
+  <li><a href="#pulse-area-sanity-check" id="toc-pulse-area-sanity-check" class="nav-link" data-scroll-target="#pulse-area-sanity-check">Pulse-area sanity check</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/examples/mbs-two-stimulated-echo.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Two-Level: Stimulated Three-Pulse Photon Echo</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Thomas Ogden </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Three short π/2 pulses separated by delays τ and <span class="math inline">\(T_w\)</span> generate a <strong>stimulated photon echo</strong> at time <span class="math inline">\(t = +\tau\)</span> after the third pulse. The defining feature compared to the two-pulse echo (A4) is that coherence information is stored as a <strong>population grating</strong> during <span class="math inline">\(T_w\)</span>, so the echo amplitude decays with the <em>population</em> lifetime <span class="math inline">\(T_1\)</span> rather than the coherence lifetime <span class="math inline">\(T_2\)</span>:</p>
+<p><span class="math display">\[
+A_{\rm echo}(\tau, T_w) \propto e^{-2\tau/T_2}\, e^{-T_w/T_1}
+\]</span></p>
+<p>A <span class="math inline">\(T_w\)</span> sweep isolates <span class="math inline">\(T_1\)</span>; a τ sweep (already covered in the photon-echo example) isolates <span class="math inline">\(T_2\)</span>. The stimulated echo is the optical analogue of the NMR stimulated echo (Hahn 1950; Mossberg 1982).</p>
+<section id="physical-mechanism" class="level2">
+<h2 class="anchored" data-anchor-id="physical-mechanism">Physical mechanism</h2>
+<ol type="1">
+<li><p><strong>π/2 pulse</strong> at <span class="math inline">\(t_1 = -(\tau + T_w)\)</span>: creates a ground/excited superposition. Each velocity class begins precessing at its own Doppler- shifted frequency.</p></li>
+<li><p><strong>Free precession</strong> over τ: the macroscopic polarisation <span class="math inline">\(P \propto \sum_j \rho_{10}^{(j)}\)</span> dephases on the Doppler timescale <span class="math inline">\(1/\sigma\)</span>.</p></li>
+<li><p><strong>π/2 pulse</strong> at <span class="math inline">\(t_2 = -T_w\)</span>: maps the surviving coherences onto a <strong>sinusoidal population grating</strong> in velocity space. The net coherence vanishes (destructive interference among velocity classes), but the population difference carries the phase record.</p></li>
+<li><p><strong>Storage interval</strong> <span class="math inline">\(T_w\)</span>: the population grating persists. Its amplitude decays as <span class="math inline">\(e^{-T_w/T_1}\)</span> (spontaneous emission). There is <em>no</em> macroscopic coherence here — this is the defining distinction from the two-pulse echo.</p></li>
+<li><p><strong>π/2 pulse</strong> at <span class="math inline">\(t_3 = 0\)</span>: reads the population grating back into coherences with the same phase record as step 2.</p></li>
+<li><p><strong>Rephasing</strong> over τ: the restored coherences rephase — echo at <span class="math inline">\(t = +\tau\)</span>.</p></li>
+</ol>
+</section>
+<section id="hard-pulse-condition" class="level2">
+<h2 class="anchored" data-anchor-id="hard-pulse-condition">Hard-pulse condition</h2>
+<p>All three pulses must be hard (spectrally broad enough to rotate every velocity class by exactly π/2):</p>
+<p><span class="math display">\[\Omega_{\rm peak} \gg \Delta_{\rm Doppler}\]</span></p>
+<p>Here <span class="math inline">\(T = 0.025\,\gamma^{-1}\)</span> gives <span class="math inline">\(\Omega_{\rm peak} = 10\,{\rm rad}\,\gamma\)</span> and <span class="math inline">\(\Omega_{\rm peak}/\sigma \approx 2.4\)</span>, satisfying the condition for all significantly-weighted velocity classes.</p>
+</section>
+<section id="level-structure" class="level2">
+<h2 class="anchored" data-anchor-id="level-structure">Level structure</h2>
+<pre><code>      |1⟩ ════════════════  (excited)
+       │   decay rate 0.1 → T₁ ≈ 1.59 γ⁻¹,  T₂ ≈ 3.18 γ⁻¹
+  Ω   │   three π/2 sech pulses (hard-pulse limit)
+       │
+      |0⟩ ════════════════  (ground)</code></pre>
+<p>Inhomogeneous broadening: Gaussian Doppler distribution, <span class="math inline">\(\sigma \approx 4.2\,{\rm rad}\,\gamma\)</span> (<code>thermal_width = 0.15</code>).</p>
+</section>
+<section id="parameters" class="level2">
+<h2 class="anchored" data-anchor-id="parameters">Parameters</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Value</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decay <code>rate</code></td>
+<td><span class="math inline">\(0.1\)</span></td>
+<td><span class="math inline">\(\Gamma = 2\pi\times 0.1 \approx 0.63\,{\rm rad}\,\gamma\)</span>; <span class="math inline">\(T_1 \approx 1.59\)</span>, <span class="math inline">\(T_2 \approx 3.18\,\gamma^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td>Doppler σ</td>
+<td><span class="math inline">\(4.2\,{\rm rad}\,\gamma\)</span></td>
+<td>40 velocity classes over <span class="math inline">\(\pm 0.75\)</span></td>
+</tr>
+<tr class="odd">
+<td>Pulse width</td>
+<td><span class="math inline">\(T = 0.025\,\gamma^{-1}\)</span></td>
+<td>hard-pulse: <span class="math inline">\(\Omega_{\rm peak} = 10\,{\rm rad}\,\gamma\)</span></td>
+</tr>
+<tr class="even">
+<td>Inter-pulse delay</td>
+<td><span class="math inline">\(\tau = 0.5\,\gamma^{-1}\)</span></td>
+<td>echo at <span class="math inline">\(t = +0.5\,\gamma^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Storage interval</td>
+<td><span class="math inline">\(T_w = 1.0\,\gamma^{-1}\)</span> (main)</td>
+<td><span class="math inline">\(e^{-T_w/T_1} \approx 53\%\)</span> amplitude</td>
+</tr>
+</tbody>
+</table>
+<div id="imports" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:20.325775Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:20.325675Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:21.133109Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:21.132643Z&quot;}}" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve, plot</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq.plot <span class="im">import</span> theme  <span class="co"># register Plotly template</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="solve-main" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:21.134990Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:21.134852Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:21.142736Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:21.142245Z&quot;}}" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># interaction_strengths = 0.5: clerq 0.13.0 corrected a factor of 2 in the Maxwell</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># propagation equation, so 0.5 gives the optical depth that 1.0 gave in earlier versions.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tau <span class="op">=</span> <span class="fl">0.5</span>    <span class="co"># delay between pulse 1–2 and rephasing time after pulse 3</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Tw  <span class="op">=</span> <span class="fl">1.0</span>    <span class="co"># storage interval (between pulse 2 and pulse 3)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>T   <span class="op">=</span> <span class="fl">0.025</span>  <span class="co"># sech half-width — short hard pulses, Ω_peak &gt;&gt; σ</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pulse centres:</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   pulse 1 (π/2) at t₁ = −(τ + Tw)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   pulse 2 (π/2) at t₂ = −Tw</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   pulse 3 (π/2) at t₃ =  0</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   echo            at t_echo = +τ</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> <span class="op">-</span>(tau <span class="op">+</span> Tw)   <span class="co"># = −1.5</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> <span class="op">-</span>Tw           <span class="co"># = −1.0</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>t3 <span class="op">=</span>  <span class="fl">0.0</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ch">{{</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">  "atom": </span><span class="ch">{{</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">    "num_states": 2,</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">    "decays": [</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{</span><span class="ss">"channels": [[0, 1]], "rate": 0.1</span><span class="ch">}}</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">    ],</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">    "fields": [</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ss">        "label": "p1",</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ss">        "coupled_levels": [[0, 1]],</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq": 1.0,</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_func": "sech",</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_args": </span><span class="ch">{{</span><span class="ss">"n_pi": 0.5, "centre": </span><span class="sc">{</span>t1<span class="sc">}</span><span class="ss">, "width": </span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="ss">        "label": "p2",</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">        "coupled_levels": [[0, 1]],</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq": 1.0,</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_func": "sech",</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_args": </span><span class="ch">{{</span><span class="ss">"n_pi": 0.5, "centre": </span><span class="sc">{</span>t2<span class="sc">}</span><span class="ss">, "width": </span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">        "label": "p3",</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="ss">        "coupled_levels": [[0, 1]],</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq": 1.0,</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_func": "sech",</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">        "rabi_freq_t_args": </span><span class="ch">{{</span><span class="ss">"n_pi": 0.5, "centre": </span><span class="sc">{</span>t3<span class="sc">}</span><span class="ss">, "width": </span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">}}</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="ss">    ]</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">  "t_min": </span><span class="sc">{</span><span class="op">-</span>(tau <span class="op">+</span> Tw <span class="op">+</span> <span class="fl">1.0</span>)<span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="ss">  "t_max":  </span><span class="sc">{</span>tau <span class="op">+</span> <span class="fl">0.5</span><span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">  "t_steps": 1000,</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  "z_min": 0.0,</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  "z_max": 1.0,</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  "z_steps": 20,</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">  "z_steps_inner": 2,</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  "interaction_strengths": [0.5, 0.5, 0.5],</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  "velocity_classes": </span><span class="ch">{{</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="ss">    "thermal_width": 0.15,</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="ss">    "thermal_delta_min": -0.75,</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="ss">    "thermal_delta_max":  0.75,</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">    "thermal_delta_steps": 40</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">  "savefile": "mbs-two-stimulated-echo"</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="ch">}}</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>mbs.mbsolve(recalc<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Done"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to mbs-two-stimulated-echo.qu
+Done</code></pre>
+</div>
+</div>
+</section>
+<section id="output-field-stimulated-echo-at-t-tau" class="level2">
+<h2 class="anchored" data-anchor-id="output-field-stimulated-echo-at-t-tau">Output field: stimulated echo at <span class="math inline">\(t = +\tau\)</span></h2>
+<p>The total transmitted field <span class="math inline">\(|\Omega_{p1}(z_{\rm max},t)| + |\Omega_{p2}(z_{\rm max},t)| + |\Omega_{p3}(z_{\rm max},t)|\)</span> shows three attenuated input pulses and the <strong>stimulated echo</strong> at <span class="math inline">\(t = +\tau\)</span>. All three pulses drive the same transition so they all experience Beer-Lambert absorption at their respective times.</p>
+<p>Vertical dashed lines mark the three pulse centres (<span class="math inline">\(t_1\)</span>, <span class="math inline">\(t_2\)</span>, <span class="math inline">\(t_3\)</span>) and the echo time <span class="math inline">\(t_{\rm echo} = +\tau\)</span>.</p>
+<div id="plot-output-field" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:21.144113Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:21.144036Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:30.961510Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:30.960824Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> mbs.tlist</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Omega_in  <span class="op">=</span> (np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>,  <span class="dv">0</span>, :]) <span class="op">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">1</span>,  <span class="dv">0</span>, :]) <span class="op">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>             np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">2</span>,  <span class="dv">0</span>, :]))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Omega_out <span class="op">=</span> (np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>, :]) <span class="op">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>             np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, :]) <span class="op">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>             np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, :]))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure(layout<span class="op">=</span>go.Layout(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Stimulated photon echo: transmitted field at z = z_max"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"time (γ⁻¹)"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"|Ω| (γ)"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">"clerq"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>fig.add_trace(go.Scatter(x<span class="op">=</span>t, y<span class="op">=</span>Omega_in,  name<span class="op">=</span><span class="st">"input  (z = 0)"</span>,   line<span class="op">=</span><span class="bu">dict</span>(dash<span class="op">=</span><span class="st">"dot"</span>)))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>fig.add_trace(go.Scatter(x<span class="op">=</span>t, y<span class="op">=</span>Omega_out, name<span class="op">=</span><span class="st">"output (z = z_max)"</span>))</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t1,   line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p1)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t2,   line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p2)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t3,   line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p3)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>tau,  line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"echo"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>fig.show(renderer<span class="op">=</span><span class="st">'notebook_connected'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="00000000-0000-0000-0000-000000000001" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("00000000-0000-0000-0000-000000000001")) {                    Plotly.newPlot(                        "00000000-0000-0000-0000-000000000001",                        [{"line":{"dash":"dot"},"name":"input  (z = 0)","x":{"dtype":"f8","bdata":"AAAAAAAABMBGtvP91PgDwIts5\u002fup8QPA0SLb+X7qA8AX2c73U+MDwFyPwvUo3APAokW28\u002f3UA8Dn+6nx0s0DwC2yne+nxgPAc2iR7Xy\u002fA8C4HoXrUbgDwP7UeOkmsQPARIts5\u002fupA8CJQWDl0KIDwM\u002f3U+OlmwPAFK5H4XqUA8BaZDvfT40DwKAaL90khgPA5dAi2\u002fl+A8ArhxbZzncDwHE9CtejcAPAtvP91HhpA8D8qfHSTWIDwEJg5dAiWwPAhxbZzvdTA8DNzMzMzEwDwBKDwMqhRQPAWDm0yHY+A8Ce76fGSzcDwOOlm8QgMAPAKVyPwvUoA8BvEoPAyiEDwLTIdr6fGgPA+n5qvHQTA8A\u002fNV66SQwDwIXrUbgeBQPAy6FFtvP9AsAQWDm0yPYCwFYOLbKd7wLAnMQgsHLoAsDhehSuR+ECwCcxCKwc2gLAbef7qfHSAsCyne+nxssCwPhT46WbxALAPQrXo3C9AsCDwMqhRbYCwMl2vp8arwLADi2yne+nAsBU46WbxKACwJqZmZmZmQLA30+Nl26SAsAlBoGVQ4sCwGq8dJMYhALAsHJoke18AsD2KFyPwnUCwDvfT42XbgLAgZVDi2xnAsDHSzeJQWACwAwCK4cWWQLAUrgehetRAsCYbhKDwEoCwN0kBoGVQwLAI9v5fmo8AsBoke18PzUCwK5H4XoULgLA9P3UeOkmAsA5tMh2vh8CwH9qvHSTGALAxSCwcmgRAsAK16NwPQoCwFCNl24SAwLAlkOLbOf7AcDb+X5qvPQBwCGwcmiR7QHAZmZmZmbmAcCsHFpkO98BwPLSTWIQ2AHAN4lBYOXQAcB9PzVeuskBwML1KFyPwgHACKwcWmS7AcBOYhBYObQBwJQYBFYOrQHA2c73U+OlAcAfhetRuJ4BwGQ730+NlwHAqvHSTWKQAcDwp8ZLN4kBwDVeukkMggHAexSuR+F6AcDAyqFFtnMBwAaBlUOLbAHATDeJQWBlAcCR7Xw\u002fNV4BwNejcD0KVwHAHVpkO99PAcBiEFg5tEgBwKjGSzeJQQHA7nw\u002fNV46AcAzMzMzMzMBwHnpJjEILAHAvp8aL90kAcAEVg4tsh0BwEoMAiuHFgHAj8L1KFwPAcDVeOkmMQgBwBsv3SQGAQHAYOXQItv5AMCmm8QgsPIAwOxRuB6F6wDAMQisHFrkAMB3vp8aL90AwLx0kxgE1gDAAiuHFtnOAMBI4XoUrscAwI2XbhKDwADA001iEFi5AMAYBFYOLbIAwF66SQwCqwDApHA9CtejAMDqJjEIrJwAwC\u002fdJAaBlQDAdZMYBFaOAMC6SQwCK4cAwAAAAAAAgADARrbz\u002fdR4AMCLbOf7qXEAwNEi2\u002fl+agDAFtnO91NjAMBcj8L1KFwAwKJFtvP9VADA5\u002fup8dJNAMAtsp3vp0YAwHNoke18PwDAuB6F61E4AMD+1HjpJjEAwESLbOf7KQDAiUFg5dAiAMDP91PjpRsAwBSuR+F6FADAWmQ7308NAMCgGi\u002fdJAYAwMqhRbbz\u002ff+\u002fVg4tsp3v\u002f7\u002fhehSuR+H\u002fv2zn+6nx0v+\u002f+FPjpZvE\u002f7+DwMqhRbb\u002fvw4tsp3vp\u002f+\u002fmpmZmZmZ\u002f78lBoGVQ4v\u002fv7ByaJHtfP+\u002fPN9PjZdu\u002f7\u002fGSzeJQWD\u002fv1K4HoXrUf+\u002f3SQGgZVD\u002f79oke18PzX\u002fv\u002fT91HjpJv+\u002ff2q8dJMY\u002f78K16NwPQr\u002fv5ZDi2zn+\u002f6\u002fILByaJHt\u002fr+sHFpkO9\u002f+vzeJQWDl0P6\u002fwvUoXI\u002fC\u002fr9OYhBYObT+v9nO91Pjpf6\u002fZDvfT42X\u002fr\u002fwp8ZLN4n+v3sUrkfhev6\u002fBoGVQ4ts\u002fr+S7Xw\u002fNV7+vxxaZDvfT\u002f6\u002fqMZLN4lB\u002fr8zMzMzMzP+v76fGi\u002fdJP6\u002fSgwCK4cW\u002fr\u002fVeOkmMQj+v2Dl0CLb+f2\u002f7FG4HoXr\u002fb92vp8aL939vwIrhxbZzv2\u002fjpduEoPA\u002fb8YBFYOLbL9v6RwPQrXo\u002f2\u002fL90kBoGV\u002fb+6SQwCK4f9v0a28\u002f3UeP2\u002f0SLb+X5q\u002fb9cj8L1KFz9v+j7qfHSTf2\u002fcmiR7Xw\u002f\u002fb\u002f+1HjpJjH9v4lBYOXQIv2\u002fFK5H4XoU\u002fb+gGi\u002fdJAb9vyuHFtnO9\u002fy\u002ftvP91Hjp\u002fL9CYOXQItv8v8zMzMzMzPy\u002fWDm0yHa+\u002fL\u002fkpZvEILD8v24Sg8DKofy\u002f+n5qvHST\u002fL+F61G4HoX8vxBYObTIdvy\u002fnMQgsHJo\u002fL8nMQisHFr8v7Kd76fGS\u002fy\u002fPgrXo3A9\u002fL\u002fIdr6fGi\u002f8v1TjpZvEIPy\u002f30+Nl24S\u002fL9qvHSTGAT8v\u002fYoXI\u002fC9fu\u002fgZVDi2zn+78MAiuHFtn7v5huEoPAyvu\u002fItv5fmq8+7+uR+F6FK77vzq0yHa+n\u002fu\u002fxCCwcmiR+79QjZduEoP7v9v5fmq8dPu\u002fZmZmZmZm+7\u002fy0k1iEFj7v30\u002fNV66Sfu\u002fCKwcWmQ7+7+UGARWDi37vx6F61G4Hvu\u002fqvHSTWIQ+781XrpJDAL7v8DKoUW28\u002fq\u002fTDeJQWDl+r\u002fXo3A9Ctf6v2IQWDm0yPq\u002f7nw\u002fNV66+r956SYxCKz6vwRWDi2ynfq\u002fkML1KFyP+r8aL90kBoH6v6abxCCwcvq\u002fMQisHFpk+r+8dJMYBFb6v0jhehSuR\u002fq\u002f001iEFg5+r9eukkMAiv6v+omMQisHPq\u002fdJMYBFYO+r8AAAAAAAD6v4ts5\u002fup8fm\u002fFtnO91Pj+b+iRbbz\u002fdT5vy2yne+nxvm\u002fuB6F61G4+b9Ei2zn+6n5v8\u002f3U+Olm\u002fm\u002fWmQ730+N+b\u002fm0CLb+X75v3A9CtejcPm\u002f\u002fKnx0k1i+b+HFtnO91P5vxKDwMqhRfm\u002fnu+nxks3+b8pXI\u002fC9Sj5v7TIdr6fGvm\u002fQDVeukkM+b\u002fKoUW28\u002f34v1YOLbKd7\u002fi\u002f4XoUrkfh+L9s5\u002fup8dL4v\u002fhT46WbxPi\u002fg8DKoUW2+L8OLbKd76f4v5qZmZmZmfi\u002fJQaBlUOL+L+wcmiR7Xz4vzzfT42Xbvi\u002fxks3iUFg+L9SuB6F61H4v90kBoGVQ\u002fi\u002faJHtfD81+L\u002f0\u002fdR46Sb4v39qvHSTGPi\u002fCtejcD0K+L+VQ4ts5\u002fv3vyGwcmiR7fe\u002frBxaZDvf9783iUFg5dD3v8L1KFyPwve\u002fTmIQWDm097\u002fZzvdT46X3v2Q730+Nl\u002fe\u002f8KfGSzeJ9797FK5H4Xr3vwaBlUOLbPe\u002fke18PzVe978dWmQ730\u002f3v6jGSzeJQfe\u002fMzMzMzMz97++nxov3ST3v0oMAiuHFve\u002f1XjpJjEI979g5dAi2\u002fn2v+tRuB6F6\u002fa\u002fd76fGi\u002fd9r8CK4cW2c72v42XbhKDwPa\u002fGARWDi2y9r+kcD0K16P2vy\u002fdJAaBlfa\u002fukkMAiuH9r9GtvP91Hj2v9Ei2\u002fl+ava\u002fXI\u002fC9Shc9r\u002fn+6nx0k32v3Noke18P\u002fa\u002f\u002ftR46SYx9r+JQWDl0CL2vxSuR+F6FPa\u002foBov3SQG9r8rhxbZzvf1v7bz\u002fdR46fW\u002fQWDl0CLb9b\u002fNzMzMzMz1v1g5tMh2vvW\u002f46WbxCCw9b9uEoPAyqH1v\u002fp+arx0k\u002fW\u002fhetRuB6F9b8QWDm0yHb1v5zEILByaPW\u002fJzEIrBxa9b+yne+nxkv1vz0K16NwPfW\u002fyXa+nxov9b9U46WbxCD1v99PjZduEvW\u002farx0kxgE9b\u002f2KFyPwvX0v4GVQ4ts5\u002fS\u002fDAIrhxbZ9L+XbhKDwMr0vyPb+X5qvPS\u002frkfhehSu9L85tMh2vp\u002f0v8QgsHJokfS\u002fUI2XbhKD9L\u002fb+X5qvHT0v2ZmZmZmZvS\u002f8tJNYhBY9L99PzVeukn0vwisHFpkO\u002fS\u002fkxgEVg4t9L8fhetRuB70v6rx0k1iEPS\u002fNV66SQwC9L\u002fAyqFFtvPzv0w3iUFg5fO\u002f16NwPQrX879iEFg5tMjzv+18PzVeuvO\u002feekmMQis878EVg4tsp3zv4\u002fC9Shcj\u002fO\u002fGy\u002fdJAaB87+mm8QgsHLzvzEIrBxaZPO\u002fvHSTGARW879I4XoUrkfzv9NNYhBYOfO\u002fXrpJDAIr87\u002fpJjEIrBzzv3WTGARWDvO\u002fAAAAAAAA87+LbOf7qfHyvxbZzvdT4\u002fK\u002fokW28\u002f3U8r8tsp3vp8byv7gehetRuPK\u002fQ4ts5\u002fup8r\u002fP91PjpZvyv1pkO99PjfK\u002f5dAi2\u002fl+8r9xPQrXo3Dyv\u002fyp8dJNYvK\u002fhxbZzvdT8r8Sg8DKoUXyv57vp8ZLN\u002fK\u002fKVyPwvUo8r+0yHa+nxryvz81XrpJDPK\u002fy6FFtvP98b9WDi2yne\u002fxv+F6FK5H4fG\u002fbOf7qfHS8b\u002f4U+Olm8Txv4PAyqFFtvG\u002fDi2yne+n8b+ZmZmZmZnxvyUGgZVDi\u002fG\u002fsHJoke188b8730+Nl27xv8dLN4lBYPG\u002fUrgehetR8b\u002fdJAaBlUPxv2iR7Xw\u002fNfG\u002f9P3UeOkm8b9\u002farx0kxjxvwrXo3A9CvG\u002flUOLbOf78L8hsHJoke3wv6wcWmQ73\u002fC\u002fN4lBYOXQ8L\u002fC9Shcj8Lwv05iEFg5tPC\u002f2c73U+Ol8L9kO99PjZfwv++nxks3ifC\u002fexSuR+F68L8GgZVDi2zwv5HtfD81XvC\u002fHVpkO99P8L+oxks3iUHwvzMzMzMzM\u002fC\u002fvp8aL90k8L9KDAIrhxbwv9V46SYxCPC\u002fwMqhRbbz77\u002fWo3A9Ctfvv+58PzVeuu+\u002fBFYOLbKd778aL90kBoHvvzAIrBxaZO+\u002fSOF6FK5H779eukkMAivvv3STGARWDu+\u002fimzn+6nx7r+iRbbz\u002fdTuv7gehetRuO6\u002fzvdT46Wb7r\u002fm0CLb+X7uv\u002fyp8dJNYu6\u002fEoPAyqFF7r8oXI\u002fC9Sjuv0A1XrpJDO6\u002fVg4tsp3v7b9s5\u002fup8dLtv4LAyqFFtu2\u002fmpmZmZmZ7b+wcmiR7Xztv8ZLN4lBYO2\u002f3CQGgZVD7b\u002f0\u002fdR46SbtvwrXo3A9Cu2\u002fILByaJHt7L82iUFg5dDsv05iEFg5tOy\u002fZDvfT42X7L96FK5H4Xrsv5LtfD81Xuy\u002fqMZLN4lB7L++nxov3STsv9R46SYxCOy\u002f7FG4HoXr678CK4cW2c7rvxgEVg4tsuu\u002fLt0kBoGV679GtvP91Hjrv1yPwvUoXOu\u002fcmiR7Xw\u002f67+IQWDl0CLrv6AaL90kBuu\u002ftvP91Hjp6r\u002fMzMzMzMzqv+Slm8QgsOq\u002f+n5qvHST6r8QWDm0yHbqvyYxCKwcWuq\u002fPgrXo3A96r9U46WbxCDqv2q8dJMYBOq\u002fgJVDi2zn6b+YbhKDwMrpv65H4XoUrum\u002fxCCwcmiR6b\u002fa+X5qvHTpv\u002fLSTWIQWOm\u002fCKwcWmQ76b8ehetRuB7pvzReukkMAum\u002fTDeJQWDl6L9iEFg5tMjov3jpJjEIrOi\u002fkML1KFyP6L+mm8QgsHLov7x0kxgEVui\u002f0k1iEFg56L\u002fqJjEIrBzovwAAAAAAAOi\u002fFtnO91Pj578ssp3vp8bnv0SLbOf7qee\u002fWmQ730+N579wPQrXo3Dnv4YW2c73U+e\u002fnu+nxks357+0yHa+nxrnv8qhRbbz\u002fea\u002f4HoUrkfh5r\u002f4U+Olm8Tmvw4tsp3vp+a\u002fJAaBlUOL5r8830+Nl27mv1K4HoXrUea\u002faJHtfD815r9+arx0kxjmv5ZDi2zn++W\u002frBxaZDvf5b\u002fC9Shcj8Llv9jO91PjpeW\u002f8KfGSzeJ5b8GgZVDi2zlvxxaZDvfT+W\u002fMjMzMzMz5b9KDAIrhxblv2Dl0CLb+eS\u002fdr6fGi\u002fd5L+Ml24Sg8Dkv6RwPQrXo+S\u002fukkMAiuH5L\u002fQItv5fmrkv+j7qfHSTeS\u002f\u002ftR46SYx5L8UrkfhehTkvyqHFtnO9+O\u002fQmDl0CLb479YObTIdr7jv24Sg8DKoeO\u002fhOtRuB6F47+cxCCwcmjjv7Kd76fGS+O\u002fyHa+nxov47\u002feT42XbhLjv\u002fYoXI\u002fC9eK\u002fDAIrhxbZ4r8i2\u002fl+arzivzi0yHa+n+K\u002fUI2XbhKD4r9mZmZmZmbiv3w\u002fNV66SeK\u002flBgEVg4t4r+q8dJNYhDiv8DKoUW28+G\u002f1qNwPQrX4b\u002fufD81XrrhvwRWDi2yneG\u002fGi\u002fdJAaB4b8wCKwcWmThv0jhehSuR+G\u002fXrpJDAIr4b90kxgEVg7hv4ps5\u002fup8eC\u002fokW28\u002f3U4L+4HoXrUbjgv873U+Olm+C\u002f5tAi2\u002fl+4L\u002f8qfHSTWLgvxKDwMqhReC\u002fKFyPwvUo4L9ANV66SQzgv6gcWmQ739+\u002f2M73U+Ol378IgZVDi2zfvzAzMzMzM9+\u002fYOXQItv53r+Ql24Sg8Dev7hJDAIrh96\u002f6Pup8dJN3r8QrkfhehTev0Bg5dAi292\u002fcBKDwMqh3b+YxCCwcmjdv8h2vp8aL92\u002f+Chcj8L13L8g2\u002fl+arzcv1CNl24Sg9y\u002fgD81XrpJ3L+o8dJNYhDcv9ijcD0K19u\u002fAFYOLbKd278wCKwcWmTbv2C6SQwCK9u\u002fiGzn+6nx2r+4HoXrUbjav+jQItv5ftq\u002fEIPAyqFF2r9ANV66SQzav2jn+6nx0tm\u002fmJmZmZmZ2b\u002fISzeJQWDZv\u002fD91HjpJtm\u002fILByaJHt2L9QYhBYObTYv3gUrkfheti\u002fqMZLN4lB2L\u002fYeOkmMQjYvwArhxbZzte\u002fMN0kBoGV179Yj8L1KFzXv4hBYOXQIte\u002fuPP91Hjp1r\u002fgpZvEILDWvxBYObTIdta\u002fQArXo3A91r9ovHSTGATWv5huEoPAytW\u002fwCCwcmiR1b\u002fw0k1iEFjVvyCF61G4HtW\u002fSDeJQWDl1L946SYxCKzUv6ibxCCwctS\u002f0E1iEFg51L8AAAAAAADUvzCyne+nxtO\u002fWGQ730+N07+IFtnO91PTv7DIdr6fGtO\u002f4HoUrkfh0r8QLbKd76fSvzjfT42XbtK\u002faJHtfD810r+YQ4ts5\u002fvRv8D1KFyPwtG\u002f8KfGSzeJ0b8YWmQ730\u002fRv0gMAiuHFtG\u002feL6fGi\u002fd0L+gcD0K16PQv9Ai2\u002fl+atC\u002fANV46SYx0L9QDi2yne\u002fPv7ByaJHtfM+\u002fENejcD0Kz79gO99PjZfOv8CfGi\u002fdJM6\u002fEARWDi2yzb9waJHtfD\u002fNv9DMzMzMzMy\u002fIDEIrBxazL+AlUOLbOfLv+D5fmq8dMu\u002fMF66SQwCy7+QwvUoXI\u002fKv+AmMQisHMq\u002fQIts5\u002fupyb+g76fGSzfJv\u002fBT46WbxMi\u002fULgehetRyL+wHFpkO9\u002fHvwCBlUOLbMe\u002fYOXQItv5xr\u002fASQwCK4fGvxCuR+F6FMa\u002fcBKDwMqhxb\u002fAdr6fGi\u002fFvyDb+X5qvMS\u002fgD81XrpJxL\u002fQo3A9CtfDvzAIrBxaZMO\u002fkGzn+6nxwr\u002fg0CLb+X7Cv0A1XrpJDMK\u002fkJmZmZmZwb\u002fw\u002fdR46SbBv1BiEFg5tMC\u002foMZLN4lBwL8AVg4tsp2\u002fv8AehetRuL6\u002fYOf7qfHSvb8gsHJoke28v+B46SYxCLy\u002fgEFg5dAiu79ACtejcD26v+DSTWIQWLm\u002foJvEILByuL9gZDvfT423vwAtsp3vp7a\u002fwPUoXI\u002fCtb+Avp8aL920vyCHFtnO97O\u002f4E+Nl24Ss7+AGARWDi2yv0DhehSuR7G\u002fAKrx0k1isL9A5dAi2\u002fmuv8B2vp8aL62\u002fQAisHFpkq7+AmZmZmZmpvwArhxbZzqe\u002fgLx0kxgEpr\u002fATWIQWDmkv0DfT42XbqK\u002fgHA9CtejoL8ABFYOLbKdvwAnMQisHJq\u002fgEkMAiuHlr+AbOf7qfGSvwAfhetRuI6\u002fAGQ730+Nh78AqvHSTWKAvwDeT42XbnK\u002fAKjx0k1iUL8AFK5H4XpkPwCAarx0k3g\u002fAPp+arx0gz8AtMh2vp+KP4A3iUFg5ZA\u002fgBSuR+F6lD+A8dJNYhCYPwDP91PjpZs\u002fAKwcWmQ7nz\u002fAxCCwcmihP0AzMzMzM6M\u002fwKFFtvP9pD+AEFg5tMimPwB\u002farx0k6g\u002fgO18PzVeqj9AXI\u002fC9SisP8DKoUW2860\u002fQDm0yHa+rz8AVOOlm8SwP0CLbOf7qbE\u002foML1KFyPsj\u002fg+X5qvHSzPyAxCKwcWrQ\u002fgGiR7Xw\u002ftT\u002fAnxov3SS2PwDXo3A9Crc\u002fYA4tsp3vtz+gRbbz\u002fdS4PwB9PzVeurk\u002fQLTIdr6fuj+A61G4HoW7P+Ai2\u002fl+arw\u002fIFpkO99PvT9gke18PzW+P8DIdr6fGr8\u002fAAAAAAAAwD+gm8QgsHLAP1A3iUFg5cA\u002f8NJNYhBYwT+gbhKDwMrBP0AK16NwPcI\u002f4KWbxCCwwj+QQWDl0CLDPzDdJAaBlcM\u002f0HjpJjEIxD+AFK5H4XrEPyCwcmiR7cQ\u002f0Es3iUFgxT9w5\u002fup8dLFPxCDwMqhRcY\u002fwB6F61G4xj9gukkMAivHPwBWDi2yncc\u002fsPHSTWIQyD9QjZduEoPIP\u002fAoXI\u002fC9cg\u002foMQgsHJoyT9AYOXQItvJP\u002fD7qfHSTco\u002fkJduEoPAyj8wMzMzMzPLP+DO91Pjpcs\u002fgGq8dJMYzD8gBoGVQ4vMP9ChRbbz\u002fcw\u002fcD0K16NwzT8g2c73U+PNP8B0kxgEVs4\u002fYBBYObTIzj8QrBxaZDvPP7BH4XoUrs8\u002fqPHSTWIQ0D+APzVeuknQP1CNl24Sg9A\u002fINv5fmq80D\u002f4KFyPwvXQP8h2vp8aL9E\u002foMQgsHJo0T9wEoPAyqHRP0Bg5dAi29E\u002fGK5H4XoU0j\u002fo+6nx0k3SP7hJDAIrh9I\u002fkJduEoPA0j9g5dAi2\u002fnSPzgzMzMzM9M\u002fCIGVQ4ts0z\u002fYzvdT46XTP7AcWmQ739M\u002fgGq8dJMY1D9QuB6F61HUPygGgZVDi9Q\u002f+FPjpZvE1D\u002fIoUW28\u002f3UP6Dvp8ZLN9U\u002fcD0K16Nw1T9Ii2zn+6nVPxjZzvdT49U\u002f6CYxCKwc1j\u002fAdJMYBFbWP5DC9Shcj9Y\u002fYBBYObTI1j84XrpJDALXPwisHFpkO9c\u002f4Pl+arx01z+wR+F6FK7XP4CVQ4ts59c\u002fWOOlm8Qg2D8oMQisHFrYP\u002fh+arx0k9g\u002f0MzMzMzM2D+gGi\u002fdJAbZP3Boke18P9k\u002fSLbz\u002fdR42T8YBFYOLbLZP\u002fBRuB6F69k\u002fwJ8aL90k2j+Q7Xw\u002fNV7aP2g730+Nl9o\u002fOIlBYOXQ2j8I16NwPQrbP+AkBoGVQ9s\u002fsHJoke182z+IwMqhRbbbP1gOLbKd79s\u002fKFyPwvUo3D8AqvHSTWLcP9D3U+Olm9w\u002foEW28\u002f3U3D94kxgEVg7dP0jhehSuR90\u002fGC\u002fdJAaB3T\u002fwfD81XrrdP8DKoUW2890\u002fmBgEVg4t3j9oZmZmZmbePzi0yHa+n94\u002fEAIrhxbZ3j\u002fgT42XbhLfP7Cd76fGS98\u002fiOtRuB6F3z9YObTIdr7fPzCHFtnO998\u002fgGq8dJMY4D9oke18PzXgP1S4HoXrUeA\u002fPN9PjZdu4D8kBoGVQ4vgPxAtsp3vp+A\u002f+FPjpZvE4D\u002fgehSuR+HgP8yhRbbz\u002feA\u002ftMh2vp8a4T+g76fGSzfhP4gW2c73U+E\u002fcD0K16Nw4T9cZDvfT43hP0SLbOf7qeE\u002fLLKd76fG4T8Y2c73U+PhPwAAAAAAAOI\u002f7CYxCKwc4j\u002fUTWIQWDniP7x0kxgEVuI\u002fqJvEILBy4j+QwvUoXI\u002fiP3jpJjEIrOI\u002fZBBYObTI4j9MN4lBYOXiPzReukkMAuM\u002fIIXrUbge4z8IrBxaZDvjP\u002fTSTWIQWOM\u002f3Pl+arx04z\u002fEILByaJHjP7BH4XoUruM\u002fmG4Sg8DK4z+AlUOLbOfjP2y8dJMYBOQ\u002fVOOlm8Qg5D9ACtejcD3kPygxCKwcWuQ\u002fEFg5tMh25D\u002f8fmq8dJPkP+Slm8QgsOQ\u002fzMzMzMzM5D+48\u002f3UeOnkP6AaL90kBuU\u002fiEFg5dAi5T90aJHtfD\u002flP1yPwvUoXOU\u002fSLbz\u002fdR45T8w3SQGgZXlPxgEVg4tsuU\u002fBCuHFtnO5T\u002fsUbgehevlP9R46SYxCOY\u002fwJ8aL90k5j+oxks3iUHmP5TtfD81XuY\u002ffBSuR+F65j9kO99PjZfmP1BiEFg5tOY\u002fOIlBYOXQ5j8gsHJoke3mPwzXo3A9Cuc\u002f9P3UeOkm5z\u002fcJAaBlUPnP8hLN4lBYOc\u002fsHJoke185z+cmZmZmZnnP4TAyqFFtuc\u002fbOf7qfHS5z9YDi2yne\u002fnP0A1XrpJDOg\u002fKFyPwvUo6D8Ug8DKoUXoP\u002fyp8dJNYug\u002f5NAi2\u002fl+6D\u002fQ91PjpZvoP7gehetRuOg\u002fpEW28\u002f3U6D+MbOf7qfHoP3STGARWDuk\u002fYLpJDAIr6T9I4XoUrkfpPzAIrBxaZOk\u002fHC\u002fdJAaB6T8EVg4tsp3pP\u002fB8PzVeuuk\u002f2KNwPQrX6T\u002fAyqFFtvPpP6zx0k1iEOo\u002flBgEVg4t6j98PzVeuknqP2hmZmZmZuo\u002fUI2XbhKD6j84tMh2vp\u002fqPyTb+X5qvOo\u002fDAIrhxbZ6j\u002f4KFyPwvXqP+BPjZduEus\u002fyHa+nxov6z+0ne+nxkvrP5zEILByaOs\u002fhOtRuB6F6z9wEoPAyqHrP1g5tMh2vus\u002fRGDl0CLb6z8shxbZzvfrPxSuR+F6FOw\u002fANV46SYx7D\u002fo+6nx0k3sP9Ai2\u002fl+auw\u002fvEkMAiuH7D+kcD0K16PsP4yXbhKDwOw\u002feL6fGi\u002fd7D9g5dAi2\u002fnsP0wMAiuHFu0\u002fNDMzMzMz7T8cWmQ730\u002ftPwiBlUOLbO0\u002f8KfGSzeJ7T\u002fYzvdT46XtP8T1KFyPwu0\u002frBxaZDvf7T+YQ4ts5\u002fvtP4BqvHSTGO4\u002faJHtfD817j9UuB6F61HuPzzfT42Xbu4\u002fJAaBlUOL7j8QLbKd76fuP\u002fhT46WbxO4\u002f4HoUrkfh7j\u002fMoUW28\u002f3uP7TIdr6fGu8\u002foO+nxks37z+IFtnO91PvP3A9CtejcO8\u002fXGQ730+N7z9Ei2zn+6nvPyyyne+nxu8\u002fGNnO91Pj7z8AAAAAAADwPw=="},"y":{"dtype":"f8","bdata":"qK3a3HZ9qDwDPA68mSusPGbRQ1aoM7A8wuJzG\u002fGisjyQqzuu42+1PD\u002fN6EqTqLg8WxCXpjBdvDwR3dSmLVDAPJGORZ6\u002fw8I8ujOMRKCVxTym6uec+9PIPCyWk9wej8w8lQY+LOVs0Dyxc2Hhx+TSPJn110ifu9U8ue5vWLD\u002f2DwKEK\u002f3ZMHcPHzE4D7PieA8cgtxSgoG4zzgXA8w4eHlPKrtAwSyK+k8QUOjkgP07DzQILo37KbwPIrE0D+HJ\u002fM8vq\u002fwb2YI9jyCxhMnAVj5PAlUOkn7Jv08g8xjcDzEAD3tP5EoP0kDPTd5CX8vLwY9n8H9SZ6ECT2MpFC4TFoNPdMyFUPA4RA9TIt4bDJrEz0J9rfUPFYWPe41EPaJsRk9d7nWffiNHT3rjqQKeP8gPT9iA3RhjSM9fYMs6Y59Jj0wL4u1xN4pPVgd0zj\u002fwS09NwOIImQdMT1qb2aozK8zPXMTazUmpTY9YheiE08MOj3dS2SJYfY9Peyz1uaEO0E9QpCPc3TSQz2lnUwzA81GPZNifZwpOko9Ip7CECArTj3Y4Em02llRPRsbJ0BZ9VM9vZiAXSb1Vj21QDzdVGhaPe86QnE7YF494QM+6GV4YT3zJpF5exhkPXNzji+QHWc9O0z2Y9GWaj2ICVVOtJVuPfTvs+Aml3E9lNfui9s7dD2tENclQUZ3PedBvb+fxXo9nKuMTIvLfj2f8lH8HbaBPQaoH+R5X4Q92kWWvTlvhz11uJ6AwPSKPXBznBHBAY89ovZkmkvVkT0lu8LvVoOUPTVe5HR6mJc99tulNzQkmz25ZFtEVjifPd6q4Rqw9KE9qSw4HXOnpD0cnLfKA8KnPTgs3Xb7U6s9VDXGjEtvrz2Dp2XeSxSyPW5kotvOy7Q9nsHlPtbrtz2xPVDRFoS7PV5SAZShpr890Jg4Rh80wj0YbueaavDEPXaZJVLyFcg9NYAN24a0yz2p6FoEWd7PPRpqTbQqVNI9DE+yy0YV1T0xgxCGWEDYPWIDKClM5ds9KnimRDkL4D1Dc0OLbnTiPc1idN9jOuU9jgEkXQlr6D2cQ7lRZxbsPX2fv2d3J\u002fA9QahnLuuU8j28t2ZIwl\u002f1PQBOw1oFlvg9cffi69hH\u002fD2yy2RC50MAPljKtQGhtQI+mW6LeWKFBT4y6jgDTcEIPizg0I+heQw+g+EaLIlgED5PndlpkNYSPn8cr+ZEqxU+GDm42+DsGD5qoLrWwascPgfWAH1dfSA+EhswzLn3Ij5KL2oEatElPl0YX2rBGCk+RZDlWjreLD6avdCNZJowPhetyI4dGTM+91MiSNL3NT4ufTc270Q5PmaaprcLET0+N97gt563QD4jZmYYvDpDPrHhCyh+HkY+0hM5x2pxST58GWSJNkRNPn3AJFUM1VA+jj6B0JVcUz4KQysbbkVWPqbhSqY0nlk+mLmXbbt3XT7MRS7ArfJgPk1SRx+rfmM++2VWmaJsZj5n7ERdTctpPtNc0AKbq20+tL4uVIMQcT4cI55t\u002fKBzPkUsNhsclHY+g9\u002fxdrX4eT4MA7To1d99Pp0D+GyNLoE+ENkjJYrDgz6g3kca27uGPie5EH9tJoo+3rUBwGwUjj49j\u002f1mzEyRPiSJMLBU5pM+D6PeEODjlj7ld1YCdlSaPlR3kypgSZ4+qJtVn0BroT4jfNd5XAmkPmL1JHorDKc+kMtvjs+Cqj7WMmDLsH6uPsc\u002funPqibE+Nnjo7aEstD5SIR7SvTS3PgLKArJ6sbo+67N9Rl+0vj4vkYpCyqjBPn0M8XglUMQ+GsGnlZddxz6WpLD8d+DKPnueIkFs6s4+G8XLauDH0T5+3z2I53PUPk49e0K5htc+FWQX\u002f8cP2z75a6hh2CDfPn1VKkwt5+E+Lv\u002fbieiX5D4YTy9XI7DnPuai00prP+s+nGiNT6RX7z5aJvtGsQbyPnkxmuwovPQ+YoQ5U9bZ9z5TS4JyYm\u002f7PuKzdrPQjv8+ZKo8vGwmAj+HRAogqeAEPzW\u002f77bSAwg\u002fPU3CCa6fCz8QMjI3XsYPPwz\u002flw1gRhI\u002fB0+ClGkFFT9+nYkDGS4YP6MwNqVO0Bs\u002fmUe4hU3+Hz+T22Gdi2YiP6KsHbtqKiU\u002fv3khu6lYKD+nBYXaRAEsP2JPlqVPGzA\u002fiMWazu+GMj+W3rwFrU81P7u4s2CFgzg\u002ftMJYQJEyPD+Hfm0aqjdAPztG7ASNp0I\u002ftdkA5zB1RT8iIhd4rK5IPy0HUm40ZEw\u002f5vyReDZUUD9x2ZmkY8hSP4WlM9L2mlU\u002fT8rYhR\u002faWD\u002fNl9D8LpZcP2Xokxf1cGA\u002faLg\u002fEnTpYj9MrOQ6\u002f8BlPxbTow7fBWk\u002fXhILhIHIbD9rE7JO5o1wP\u002f7lxLG+CnM\u002f4WpNk0rndT9i6M6U6zF5PwnKVJgs+3w\u002frZgDcgqrgD8TMgniQyyDP7G3vUXZDYY\u002fUSlZjkVeiT9rROC6MC6NP0aI3sZhyJA\u002fRqE96wNOkz8SqbyZqzSWP9\u002fnAzztipk\u002fKUx\u002fG45hnT8IoXhU7OWgP9\u002fKyrb+b6M\u002fRFRMRsFbpj8C204C4repP2m9cZpDla0\u002fnJx3IqkDsT9vjumoMpKzP7Ch17EXg7Y\u002fqgKGvx\u002fluT+0X4G6Ssm9P6PFISOTIcE\u002fc2+W7pe0wz8Wcb\u002fMoqrGP+HZdOuTEso\u002fDW6DE4f9zT8sI9KalD\u002fRPwuEJVIN19M\u002fnHTg5C\u002fS1j9HmYgx8T\u002faP8Kgr8GCMd4\u002f7SNPt1Nd4T9E3coACvnjP+LaN53u+OY\u002f8pJ3Vfpr6j+IpGffWmPuPyu6zQFhefE\u002fQJU91l4Y9D8fNcxVjBv3PyYtlZihkfo\u002f5xRwTmCL\u002fj+onLKM5Y0BQIA8HL4sLARAh8c2AJEsB0AbHQY+eJwKQBu0mXOcig5AUtto13ODEUBGBoXDEBEUQOjEzd2q9hZAi3leY2k8GkAOcXnASukdQBF6k8D7ACFAoaSlVoxDI0CHlccwkLklQK5oB1\u002fGWyhAXv8WffAcK0ASSIB6cugtQEcq2CnKUDBAaYF\u002fsgmSMUAbmt73V6MyQHOeMoAAcDNAGVHYmYHmM0B5A9Mg6PszQEmo2UQprjNAlH7f+JcEM0CkAJZPRw4yQEJMYsT63jBAAWhzbG0XL0C+vdJpzk8sQADB4u03hylAiEDerrfVJkBARfP9jkskQJPrP19g8iFAtjhdg1+dH0DhWd8yrcIbQKmwrLt7URhAKKplWaFDFUBc7ukaWJESQOTjWy8vMhBAu7fLZVA7DECdnxC1L5cIQBbFqVe5aAVAV1ZqcfOhAkDW02K5PjYAQP6yKZGjNPw\u002fFxlmEE+I+D9sIYWvzVX1P6MKrp6OjfI\u002fwoamC+sh8D99Vcwd4Q3sP3BdhRVeZOg\u002f+qr\u002fexU15T\u002f8KG+TJXDiP21O5jm4B+A\u002fOg+cMILf2z\u002ffka0PhzvYP9CHAPM+EdU\u002fzUTQUMlQ0j+eWTWYrdjPP0vJP23Jr8s\u002f9BzomwISyD+ye5JFL+3EPwXRYm2EMcI\u002fRG+L4I2ivz8s4tR3DYG7P++Re+rF6bc\u002favyy0KvKtD+JE12BDxSyP5wDBqOccK8\u002fWSz2NRxXqz9sJDlpA8enP8pM8GRqrqQ\u002fh7Ys1sH9oT\u002fylo6BCU+fP\u002fNGMiHpP5s\u002fpDGOKry5lz8YzNqAzKqUP95Vp0m7A5I\u002fop2wXGdujz\u002fcwoC5T3OLPzW2hewtAog\u002fxWyKk7UJhT98HKy3+HqCP24nPMUcSYA\u002fuJFY5DPSfD9MysecB6N5P3Jw0M6z9HY\u002fVdmpIr+5dD9DDxYW9OZyP2Jo2qYoc3E\u002fCW01RBBXcD+cVrU\u002fLhpvP\u002fghMEyMIm4\u002fzgaKIF7CbT9wRKhawPdtP+IoREa\u002fw24\u002fcKaoEC4VcD9EklKeUBlxP33iA69ic3I\u002f157Aii8qdD+w\u002f++DVEZ2P00h10Js0ng\u002fIj\u002fhEETbez9b1osvHHB\u002fP5SQJz960YE\u002fcP1aeHNEhD8w8aDNSB2HP6KBBjZJaoo\u002fOehyfgs8jj88ymbU4FKRP7K9FbLM3pM\u002fkBJewZXOlj8HortO\u002fjCaP3A05bUIF54\u002fIS8abiZKoT8a1HNTrd+jP33vz60V2aY\u002fCgsYElJFqj+74EwiljWuP5FSHn3WXrE\u002fqf+DTy76sz\u002f2hqMx7Pm2P\u002fM05D0ibbo\u002fm4LgqiZlvj9WYg5o9XrBP8o9RJovG8Q\u002fopLlSnMgxz+NEEEP7ZnKP1nB2agQmc4\u002fBp7RIviY0T\u002fXRBdW0D3UP8uAlBVWSNc\u002fgHiELsvH2j\u002fG7vWFuc3eP3DYyK4kt+E\u002fvgx\u002f41Fg5D+DGCFZsW\u002fnP57dGAKI9Oo\u002fl9Vdg1oA7z8qR97OntPxP22ILcEXgPQ\u002fGhXM47yS9z9bVnVpjRr7P\u002fbc7w+aKP8\u002fntELIx7oAUATsFCVpJMEQBPRRsocowdAE2IZMh4kC0BG0c1LkSUPQAUoLxnD2xFAkJaa0Wx1FEBHm6yAR2gXQJHg1mFevBpAPo7Pim94HkBHTClIV1AhQHwH36iDmiNAgatZDWkXJkBFdfZfA78oQIalPUcagytArGLs\u002fO5NLkC9NN9N0YAwQAxaqkGDvDFAOyVfKj7FMkBo3Nroi4YzQPqQjduo7zNAFQMsPsz2M0AaqXqER5szQFHnQJyt5TJAgRx8cPLlMUBlvmzlO7AwQC6aRdz1si5AW+\u002fRyWrpK0C2Bm1m2CIpQNdq3J8jdiZA8L9J5YXyI0Ano2F+zqAhQO2+sxjLCR9AGbPvanM+G0AVdYBk4NsXQIVgzbSa2xRAZIdAeLc1EkAUkTvjd8MPQPVyPbJhrgtArKlNBfgbCECPqqGqJP0EQLBy3toeRAJADcbonvHI\u002fz8rIil+Mab7P6Fr3gdMDPg\u002fynlkS+Dp9D\u002fud8LWpi\u002fyP6CP0sh0oO8\u002fz4gvZ8V\u002f6z9uDP7xxejnPxLixSSZyeQ\u002flY7YXqwS4j+mTAFo3WzfP\u002fji3n8gUts\u002ftV8XLpLA1z+SCQ0+TqbUPzq7vTDE89E\u002fn4iupdQ2zz8DMGke9SLLPye3Eqdvl8c\u002fMkss9XWCxD\u002f4eFqYjNTBPwzySfp6AL8\u002f2Mlf96jzuj9UrUlSSW63P\u002fHWcpaqXrQ\u002f\u002fSrg4mq1sT85V6leVcquP\u002fIEHkeTxKo\u002fkQvuYlhFpz+mhJWcETukP66PPpl3lqE\u002f14L+54OUnj8HIcb+yJWaP0AyxnyqHJc\u002ff7UY47MXlD8aLxF2uHeRPxO8GfUNX44\u002fjkbn0k5nij9gJ7OYQvSGP1YjV0OT9IM\u002fcA9BmS5ZgT8IRibY9Cl+P1sTx34lOXo\u002fp+BlEyHMdj8VNNXfr9FzP\u002fYsjQLaOnE\u002fArDxaDj1bT\u002fBw1fFTAtqP3XapqZFpGY\u002faEhJcAmvYz9cUr9ruhxhP4oAxSPYwF0\u002fzRHQLcTdWT\u002f4x2Plr3xWPyD6RpOfjFM\u002fnVOEfs\u002f+UD97MpNw04xNP09p7TKLsEk\u002fh8BMW19VRj+bjqrjcWpDP5LNPeMY4UA\u002ftcYpuClZPT90etlSoYM5P6eVi5lTLjY\u002fasqQA4BIMz9GiThLlsMwPwHKhnjaJS0\u002fJnp7JAZXKT+bU+xNjAcmPwY7FbbJJiM\u002f36yyjUemID\u002fFytiG5fIcP7N04aK5Khk\u002f3ZFGmQnhFT+R+n9CTwUTPwVXzBktiRA\u002fw7FuFUzADD+HhW1avf4IP9R42GnNugU\u002f066fAhPkAj\u002f2iLXASWwAP2W3vNEUjvw+8b03JRnT+D7cddTt4JT1Pvrc5KYfw\u002fI+wb\u002fV6qlP8D410Td5XFzsPgY+zD3up+g+BhTeg2pv5T7qIeFyoaLiPoHkIp+AM+A+qx18oZgr3D44JWwQxH3YPiEzdxcGS9U+CoT24EuD0j6ZguRsnBjQPlwxJa+k\u002fcs+O4j6nL1WyD7Jx+YAKSrFPi8MxvzyZ8I+RC7+ST4CwD77lRUX\u002fdm7PkTxL4F3O7g+GnKxTrsWtT5\u002frVcP\u002fFuyPhP8Wf8D+68+\u002fw04L8reqz5fGEZnok6oPrnD01ekOKU+fAyuqE2Noj5YJfYGND+gPh\u002fXznGDhZw+3uVjyfYbmT7hwpbLmzCWPrmjKmnGtJM+UbSFD\u002fubkT6krMLYX7ePPkJNJ+4v1ow+DMaFau2Fij4cGmy597qIPvRN9zZMbIc+d50c51iThj40xldw2yuGPuKvybPLM4Y+JKwyl1Grhj7OvXbNxZSHPlaqm6G99Ig+tq6F\u002fyHSij5HrjYuUjaNPh86DHWpFpA+CUwGZgXjkT7cJ2qWRgmUPgnnl346lJY+G\u002fCiraiQmT4X+oUDkw2dPmdB0Y5AjqA+8TNOOOzooj7yZSxloaKlPmiqp58Syag+BfNw7BRsrD5M+Cuu906wPjYrLHTbubI++uLaMtyCtT55WFNT+be4PvYhrJZRabw+G+saDbpUwD4bW9HO3sbCPuge7+9hl8U+7fMUl2jUyD79aT1JOY7MPmHS6trGa9A+AWBsafji0j76A\u002fSQFbnVPkJIQp9f\u002fNg+nf+zkzy93D6dbcfERIfgPhQBEcP8AuM+3b+ZQ0He5T7Tgul6bSfpPoJUBvoE7+w++k6uVgOk8D58cGoqJiTzPmb4cip8BPY+tTZHBHpT+T6R1IiHwCH9Pg0a7xs4wQA\u002fxxTttsRFAz96PAR1LSsGP45Y7IIAgAk\u002f3Q7SAPxUDT\u002fNy8YTsd4QP8KJeQmtZxM\u002fKqvXiy9SFj+C6x5q4KwZP88+TUCbiB0\u002fga1CGGL8ID9hu+ar1IkjP0jY+XN5eSY\u002f8vr+DBLaKT\u002fkpprAl7wtPzneD2pIGjE\u002fW8xvVDmsMz8yorNNCaE2P6+rd+yTBzo\u002fh6bBW\u002fDwPT9\u002f39yfYzhBPxfhW8HazkM\u002fsiuZ\u002fd7IRj\u002f1R94SZjVKPyGHCUKlJU4\u002fVU495bNWUT\u002fW+4UyufFTP05YCNn68FY\u002fclS47IhjWj8VPDT5tlpeP3fh9oo5dWE\u002fS+gfCNUUZD+mQ2xRXRlnP21uwv78kWo\u002fbIK3GyaQbj\u002fR\u002fn3q9JNxP\u002feIXakuOHQ\u002fhjhk3QZCdz80V9HQwsB6P9QFdkTzxX4\u002f8jCwW+aygT+evk55xluEP8PCsev3aoc\u002f+PZQ3drvij9HA5P4HvyOP94oPCUO0pE\u002fDXhAwJx\u002flD+IfcLBMJSXP1\u002fkLV9FH5s\u002fK67xW6kynz82IX5DbPGhP6hrDFWxo6Q\u002fE2P997C9pz++7pmJAU+rPw1GpACRaa8\u002fqwDPgP8Qsj9Smoo8Asi0P\u002fFCPmF157c\u002f+cCKVwp\u002fuz9zoUgMzqC\u002fP\u002fp368PBMMI\u002fPx5wCobsxD\u002fqSZV8bxHIPyUkVIZJr8s\u002fyX3hZj7Yzz\u002fisof7mFDSP7GpL+4UEdU\u002fuMomiGI72D\u002fcdchuYt\u002fbP9ymCGyqB+A\u002fliU9kxlw4j9SDSkNCzXlP\u002fsLmwNVZOg\u002f7NM4O9kN7D\u002ftsjee5yHwP1tW4KOLjfI\u002ff9leGMtV9T8xYuLPTIj4P\u002fIa95uhNPw\u002fR6GG3z02AECbUQS08qECQPIMArO4aAVAsa3rJS+XCEBPIlrpTzsMQDoQRPkuMhBAdDXj61eREkD9s4MwoUMVQP4EIph7URhAjFj5E63CG0BqmIBoX50fQD\u002fLklNg8iFATqbM845LJEB4Hgumt9UmQAvCNuY3hylAb1MnY85PLEDSDKdmbRcvQEkU3cH63jBAoBNlTUcOMkBE2ff2lwQzQPi3MUMprjNAeHViH+j7M0Aj6ZeYgeYzQDMSHH8AcDNAu3Hs9lejMkDU+6yxCZIxQFwlISnKUDBASRBCeXLoLUAnWgJ88BwrQK3nFl7GWyhAAYD2L5C5JUCf3+9VjEMjQFl09b\u002f7ACFAgq9mv0rpHUDGnG9iaTwaQO4c\u002ftyq9hZANn\u002fQwhARFEC16cvWc4MRQOzSiHKcig5AMOIYPXicCkCaimj\u002fkCwHQA\u002fxaL0sLARAb70WjOWNAUDNEGFNYIv+P\u002fyQqZehkfo\u002fi2D\u002fVIwb9z9Gg4vVXhj0P6DrMgFhefE\u002fQXpa3lpj7j+0ko1U+mvqP2lsbJzu+OY\u002fnQIaAAr54z8JZLW2U13hP8dMpMCCMd4\u002fJTKgMPE\u002f2j8HahbkL9LWP2bedVEN19M\u002fFnA5mpQ\u002f0T+87XkSh\u002f3NPxAJjuqTEso\u002fvcf2y6Kqxj\u002fk\u002fOftl7TDP4UdiiKTIcE\u002fkq95uUrJvT8jxaC+H+W5PylXELEXg7Y\u002fD008qDKSsz+j\u002feAhqQOxP0raa5lDla0\u002fRS5rAeK3qT8qZoZFwVumP2e4Hrb+b6M\u002fOQnjU+zloD\u002fnMnsajmGdP27JITvtipk\u002fzBT4mKs0lj+ku5LqA06TPyz2ScZhyJA\u002f5vHduTAujT80lniNRV6JPxp7+kTZDYY\u002fOndf4UMsgz9TCnBxCquAP906VJcs+3w\u002f5t3vk+sxeT\u002fXg4uSSud1P+NTHLG+CnM\u002fCocfTuaNcD92QwyDgchsP41Oxg3fBWk\u002fRBgkOv\u002fAZT\u002fUTJgRdOliPztcAhf1cGA\u002f8YbT+y6WXD\u002fQyPyEH9pYPy1idNH2mlU\u002fwZLzo2PIUj8zbwF4NlRQP8KwVm00ZEw\u002fSaE8d6yuSD\u002fB5ELmMHVFP0AiRwSNp0I\u002fZe3dGao3QD+0I18\u002fkTI8PyK22l+Fgzg\u002fvTUABa1PNT9FwvbN74YyPxi5B6VPGzA\u002fExuN2UQBLD+N8km6qVgoP2tNYrpqKiU\u002fD\u002fe+nItmIj86Dp2ETf4fPzr3P6RO0Bs\u002fHI+zAhkuGD+bN8iTaQUVP1I39gxgRhI\u002f3OcYNl7GDz9Mws0Irp8LPxEnG7bSAwg\u002fdHJRH6ngBD9U\u002fZu7bCYCP3dVX7LQjv8+M2yPcWJv+z7tX2ZS1tn3Poai4usovPQ+CZJbRrEG8j6e8ndOpFfvPmRs4klrP+s+jJtdViOw5z4msSWJ6JfkPoTYi0st5+E+xNqUYNgg3z5L0yf+xw\u002fbPp74qkG5htc+MdCIh+dz1D44XS5q4MfRPv\u002fuEEBs6s4+o7bC+3fgyj6J6NiUl13HPoA5PXglUMQ+fzzuQcqowT5J421FX7S+Prl7FrF6sbo+Y7JQ0b00tz513zXtoSy0Pmj8HnPqibE+bT1SyrB+rj5rGoWNz4KqPp3tWHkrDKc+BRwmeVwJpD6IZ7ueQGuhPuVZhylgSZ4+YGFtAXZUmj4AABQQ4OOWPiJfgK9U5pM+t2hkZsxMkT4vbfe+bBSOPiU6KX5tJoo+lJ1+Gdu7hj4M43QkisODPgvpX2yNLoE+kYur59XffT489Qt2tfh5PuhKbhoclHY++17wbPygcz4PrpdTgxBxPnuzyQGbq20+GJRgXE3LaT6C4o+YomxmPvm9mh6rfmM+RD2Yv63yYD4M3JJsu3ddPo8YaKU0nlk+ohpmGm5FVj6T19XPlVxTPkO+j1QM1VA+BARhiDZETT671lfGanFJPvsRSCd+HkY+Miu8F7w6Qz6B4Ey3nrdAPuRJpbYLET0+38lXNe9EOT6Y2l9H0vc1PsWbH44dGTM+ocI9jWSaMD6hAeZZOt4sPqfsgGnBGCk+fwmpA2rRJT5VMYjLufciPgbcbnxdfSA+ktC81cGrHD7Qkdva4OwYPmRI7+VEqxU+I9kyaZDWEj655okriWAQPhPM1I6heQw+sMRdAk3BCD5K6sx4YoUFPrwpEAGhtQI+Yc7UQedDAD6Cm+jq2Ef8PaGn6VkFlvg9g4CpR8Jf9T3aKMMt65TyPemdMGd3J\u002fA9753AUGcW7D2110tcCWvoPWN2uN5jOuU90ROgim504j2bcBhEOQvgPWwQMShM5ds9y9I5hVhA2D0vq\u002ffKRhXVPUkoq7MqVNI9jclAA1nezz3+PBjahrTLPeFgUFHyFcg9ihAummrwxD2scpdFHzTCPYEg6ZKhpr89R6dc0BaEuz3R\u002fRE+1uu3PfRK6trOy7Q9HZvF3UsUsj3y7a+LS2+vPSM\u002f63X7U6s9i0rlyQPCpz0NVYEcc6ekPUm2Qhqw9KE93ANHQ1Y4nz3YlbU2NCSbPVh8E3R6mJc9NCMN71aDlD31F8eZS9WRPcb1iRDBAY898xawf8D0ij0v0ca8OW+HPZFNa+N5X4Q99Ce1+x22gT3ZDXxLi8t+PZlB0L6fxXo9QAYJJUFGdz1wuDuL2zt0PWg3GOAml3E9ZEhGTbSVbj1I6gpj0ZZqPbTRwS6QHWc9+EDfeHsYZD2WW6PnZXhhPXNSNXA7YF49SHpS3FRoWj3BXLVcJvVWPdZrdj9Z9VM98Uaws9pZUT1+jLcPICtOPd00lZspOko9+8SCMgPNRj00FuBydNJDPZAmPuaEO0E9JQ1biGH2PT39frsSTww6Pa6bojQmpTY9Jii4p8yvMz2RgPAhZB0xPVyuyzf\u002fwS09jSqmtMTeKT0zamXojn0mPa1LVnNhjSM95RQOCnj\u002fID0MF9F8+I0dPbHBLPWJsRk9Tzjy0zxWFj1Xo8xrMmsTPSXAf0LA4RA9jctMt0xaDT0M2xtJnoQJPbsVRX4vLwY9hYTmJz9JAz0eX89vPMQAPeNAOEj7Jv084mozJgFY+Tyboy1vZgj2PKAzJz+HJ\u002fM867YmN+ym8DzB86KRA\u002fTsPEoaJQOyK+k8v6VNL+Hh5TyKoshJCgbjPFFcTj7PieA8p4Cw9mTB3DyIoJJXsP\u002fYPCWRF0ifu9U8qzG64Mfk0jxhnqwr5WzQPNfDltsej8w8wR8MnPvTyDykH81DoJXFPPdwn52\u002fw8I8s3JEpi1QwDwJ+JulMF28PJ+CDkqTqLg8i+V9reNvtTyU584a8aKyPOZjtFWoM7A8sNoUu5krrDyt4AHcdn2oPA=="},"type":"scatter"},{"name":"output (z = z_max)","x":{"dtype":"f8","bdata":"AAAAAAAABMBGtvP91PgDwIts5\u002fup8QPA0SLb+X7qA8AX2c73U+MDwFyPwvUo3APAokW28\u002f3UA8Dn+6nx0s0DwC2yne+nxgPAc2iR7Xy\u002fA8C4HoXrUbgDwP7UeOkmsQPARIts5\u002fupA8CJQWDl0KIDwM\u002f3U+OlmwPAFK5H4XqUA8BaZDvfT40DwKAaL90khgPA5dAi2\u002fl+A8ArhxbZzncDwHE9CtejcAPAtvP91HhpA8D8qfHSTWIDwEJg5dAiWwPAhxbZzvdTA8DNzMzMzEwDwBKDwMqhRQPAWDm0yHY+A8Ce76fGSzcDwOOlm8QgMAPAKVyPwvUoA8BvEoPAyiEDwLTIdr6fGgPA+n5qvHQTA8A\u002fNV66SQwDwIXrUbgeBQPAy6FFtvP9AsAQWDm0yPYCwFYOLbKd7wLAnMQgsHLoAsDhehSuR+ECwCcxCKwc2gLAbef7qfHSAsCyne+nxssCwPhT46WbxALAPQrXo3C9AsCDwMqhRbYCwMl2vp8arwLADi2yne+nAsBU46WbxKACwJqZmZmZmQLA30+Nl26SAsAlBoGVQ4sCwGq8dJMYhALAsHJoke18AsD2KFyPwnUCwDvfT42XbgLAgZVDi2xnAsDHSzeJQWACwAwCK4cWWQLAUrgehetRAsCYbhKDwEoCwN0kBoGVQwLAI9v5fmo8AsBoke18PzUCwK5H4XoULgLA9P3UeOkmAsA5tMh2vh8CwH9qvHSTGALAxSCwcmgRAsAK16NwPQoCwFCNl24SAwLAlkOLbOf7AcDb+X5qvPQBwCGwcmiR7QHAZmZmZmbmAcCsHFpkO98BwPLSTWIQ2AHAN4lBYOXQAcB9PzVeuskBwML1KFyPwgHACKwcWmS7AcBOYhBYObQBwJQYBFYOrQHA2c73U+OlAcAfhetRuJ4BwGQ730+NlwHAqvHSTWKQAcDwp8ZLN4kBwDVeukkMggHAexSuR+F6AcDAyqFFtnMBwAaBlUOLbAHATDeJQWBlAcCR7Xw\u002fNV4BwNejcD0KVwHAHVpkO99PAcBiEFg5tEgBwKjGSzeJQQHA7nw\u002fNV46AcAzMzMzMzMBwHnpJjEILAHAvp8aL90kAcAEVg4tsh0BwEoMAiuHFgHAj8L1KFwPAcDVeOkmMQgBwBsv3SQGAQHAYOXQItv5AMCmm8QgsPIAwOxRuB6F6wDAMQisHFrkAMB3vp8aL90AwLx0kxgE1gDAAiuHFtnOAMBI4XoUrscAwI2XbhKDwADA001iEFi5AMAYBFYOLbIAwF66SQwCqwDApHA9CtejAMDqJjEIrJwAwC\u002fdJAaBlQDAdZMYBFaOAMC6SQwCK4cAwAAAAAAAgADARrbz\u002fdR4AMCLbOf7qXEAwNEi2\u002fl+agDAFtnO91NjAMBcj8L1KFwAwKJFtvP9VADA5\u002fup8dJNAMAtsp3vp0YAwHNoke18PwDAuB6F61E4AMD+1HjpJjEAwESLbOf7KQDAiUFg5dAiAMDP91PjpRsAwBSuR+F6FADAWmQ7308NAMCgGi\u002fdJAYAwMqhRbbz\u002ff+\u002fVg4tsp3v\u002f7\u002fhehSuR+H\u002fv2zn+6nx0v+\u002f+FPjpZvE\u002f7+DwMqhRbb\u002fvw4tsp3vp\u002f+\u002fmpmZmZmZ\u002f78lBoGVQ4v\u002fv7ByaJHtfP+\u002fPN9PjZdu\u002f7\u002fGSzeJQWD\u002fv1K4HoXrUf+\u002f3SQGgZVD\u002f79oke18PzX\u002fv\u002fT91HjpJv+\u002ff2q8dJMY\u002f78K16NwPQr\u002fv5ZDi2zn+\u002f6\u002fILByaJHt\u002fr+sHFpkO9\u002f+vzeJQWDl0P6\u002fwvUoXI\u002fC\u002fr9OYhBYObT+v9nO91Pjpf6\u002fZDvfT42X\u002fr\u002fwp8ZLN4n+v3sUrkfhev6\u002fBoGVQ4ts\u002fr+S7Xw\u002fNV7+vxxaZDvfT\u002f6\u002fqMZLN4lB\u002fr8zMzMzMzP+v76fGi\u002fdJP6\u002fSgwCK4cW\u002fr\u002fVeOkmMQj+v2Dl0CLb+f2\u002f7FG4HoXr\u002fb92vp8aL939vwIrhxbZzv2\u002fjpduEoPA\u002fb8YBFYOLbL9v6RwPQrXo\u002f2\u002fL90kBoGV\u002fb+6SQwCK4f9v0a28\u002f3UeP2\u002f0SLb+X5q\u002fb9cj8L1KFz9v+j7qfHSTf2\u002fcmiR7Xw\u002f\u002fb\u002f+1HjpJjH9v4lBYOXQIv2\u002fFK5H4XoU\u002fb+gGi\u002fdJAb9vyuHFtnO9\u002fy\u002ftvP91Hjp\u002fL9CYOXQItv8v8zMzMzMzPy\u002fWDm0yHa+\u002fL\u002fkpZvEILD8v24Sg8DKofy\u002f+n5qvHST\u002fL+F61G4HoX8vxBYObTIdvy\u002fnMQgsHJo\u002fL8nMQisHFr8v7Kd76fGS\u002fy\u002fPgrXo3A9\u002fL\u002fIdr6fGi\u002f8v1TjpZvEIPy\u002f30+Nl24S\u002fL9qvHSTGAT8v\u002fYoXI\u002fC9fu\u002fgZVDi2zn+78MAiuHFtn7v5huEoPAyvu\u002fItv5fmq8+7+uR+F6FK77vzq0yHa+n\u002fu\u002fxCCwcmiR+79QjZduEoP7v9v5fmq8dPu\u002fZmZmZmZm+7\u002fy0k1iEFj7v30\u002fNV66Sfu\u002fCKwcWmQ7+7+UGARWDi37vx6F61G4Hvu\u002fqvHSTWIQ+781XrpJDAL7v8DKoUW28\u002fq\u002fTDeJQWDl+r\u002fXo3A9Ctf6v2IQWDm0yPq\u002f7nw\u002fNV66+r956SYxCKz6vwRWDi2ynfq\u002fkML1KFyP+r8aL90kBoH6v6abxCCwcvq\u002fMQisHFpk+r+8dJMYBFb6v0jhehSuR\u002fq\u002f001iEFg5+r9eukkMAiv6v+omMQisHPq\u002fdJMYBFYO+r8AAAAAAAD6v4ts5\u002fup8fm\u002fFtnO91Pj+b+iRbbz\u002fdT5vy2yne+nxvm\u002fuB6F61G4+b9Ei2zn+6n5v8\u002f3U+Olm\u002fm\u002fWmQ730+N+b\u002fm0CLb+X75v3A9CtejcPm\u002f\u002fKnx0k1i+b+HFtnO91P5vxKDwMqhRfm\u002fnu+nxks3+b8pXI\u002fC9Sj5v7TIdr6fGvm\u002fQDVeukkM+b\u002fKoUW28\u002f34v1YOLbKd7\u002fi\u002f4XoUrkfh+L9s5\u002fup8dL4v\u002fhT46WbxPi\u002fg8DKoUW2+L8OLbKd76f4v5qZmZmZmfi\u002fJQaBlUOL+L+wcmiR7Xz4vzzfT42Xbvi\u002fxks3iUFg+L9SuB6F61H4v90kBoGVQ\u002fi\u002faJHtfD81+L\u002f0\u002fdR46Sb4v39qvHSTGPi\u002fCtejcD0K+L+VQ4ts5\u002fv3vyGwcmiR7fe\u002frBxaZDvf9783iUFg5dD3v8L1KFyPwve\u002fTmIQWDm097\u002fZzvdT46X3v2Q730+Nl\u002fe\u002f8KfGSzeJ9797FK5H4Xr3vwaBlUOLbPe\u002fke18PzVe978dWmQ730\u002f3v6jGSzeJQfe\u002fMzMzMzMz97++nxov3ST3v0oMAiuHFve\u002f1XjpJjEI979g5dAi2\u002fn2v+tRuB6F6\u002fa\u002fd76fGi\u002fd9r8CK4cW2c72v42XbhKDwPa\u002fGARWDi2y9r+kcD0K16P2vy\u002fdJAaBlfa\u002fukkMAiuH9r9GtvP91Hj2v9Ei2\u002fl+ava\u002fXI\u002fC9Shc9r\u002fn+6nx0k32v3Noke18P\u002fa\u002f\u002ftR46SYx9r+JQWDl0CL2vxSuR+F6FPa\u002foBov3SQG9r8rhxbZzvf1v7bz\u002fdR46fW\u002fQWDl0CLb9b\u002fNzMzMzMz1v1g5tMh2vvW\u002f46WbxCCw9b9uEoPAyqH1v\u002fp+arx0k\u002fW\u002fhetRuB6F9b8QWDm0yHb1v5zEILByaPW\u002fJzEIrBxa9b+yne+nxkv1vz0K16NwPfW\u002fyXa+nxov9b9U46WbxCD1v99PjZduEvW\u002farx0kxgE9b\u002f2KFyPwvX0v4GVQ4ts5\u002fS\u002fDAIrhxbZ9L+XbhKDwMr0vyPb+X5qvPS\u002frkfhehSu9L85tMh2vp\u002f0v8QgsHJokfS\u002fUI2XbhKD9L\u002fb+X5qvHT0v2ZmZmZmZvS\u002f8tJNYhBY9L99PzVeukn0vwisHFpkO\u002fS\u002fkxgEVg4t9L8fhetRuB70v6rx0k1iEPS\u002fNV66SQwC9L\u002fAyqFFtvPzv0w3iUFg5fO\u002f16NwPQrX879iEFg5tMjzv+18PzVeuvO\u002feekmMQis878EVg4tsp3zv4\u002fC9Shcj\u002fO\u002fGy\u002fdJAaB87+mm8QgsHLzvzEIrBxaZPO\u002fvHSTGARW879I4XoUrkfzv9NNYhBYOfO\u002fXrpJDAIr87\u002fpJjEIrBzzv3WTGARWDvO\u002fAAAAAAAA87+LbOf7qfHyvxbZzvdT4\u002fK\u002fokW28\u002f3U8r8tsp3vp8byv7gehetRuPK\u002fQ4ts5\u002fup8r\u002fP91PjpZvyv1pkO99PjfK\u002f5dAi2\u002fl+8r9xPQrXo3Dyv\u002fyp8dJNYvK\u002fhxbZzvdT8r8Sg8DKoUXyv57vp8ZLN\u002fK\u002fKVyPwvUo8r+0yHa+nxryvz81XrpJDPK\u002fy6FFtvP98b9WDi2yne\u002fxv+F6FK5H4fG\u002fbOf7qfHS8b\u002f4U+Olm8Txv4PAyqFFtvG\u002fDi2yne+n8b+ZmZmZmZnxvyUGgZVDi\u002fG\u002fsHJoke188b8730+Nl27xv8dLN4lBYPG\u002fUrgehetR8b\u002fdJAaBlUPxv2iR7Xw\u002fNfG\u002f9P3UeOkm8b9\u002farx0kxjxvwrXo3A9CvG\u002flUOLbOf78L8hsHJoke3wv6wcWmQ73\u002fC\u002fN4lBYOXQ8L\u002fC9Shcj8Lwv05iEFg5tPC\u002f2c73U+Ol8L9kO99PjZfwv++nxks3ifC\u002fexSuR+F68L8GgZVDi2zwv5HtfD81XvC\u002fHVpkO99P8L+oxks3iUHwvzMzMzMzM\u002fC\u002fvp8aL90k8L9KDAIrhxbwv9V46SYxCPC\u002fwMqhRbbz77\u002fWo3A9Ctfvv+58PzVeuu+\u002fBFYOLbKd778aL90kBoHvvzAIrBxaZO+\u002fSOF6FK5H779eukkMAivvv3STGARWDu+\u002fimzn+6nx7r+iRbbz\u002fdTuv7gehetRuO6\u002fzvdT46Wb7r\u002fm0CLb+X7uv\u002fyp8dJNYu6\u002fEoPAyqFF7r8oXI\u002fC9Sjuv0A1XrpJDO6\u002fVg4tsp3v7b9s5\u002fup8dLtv4LAyqFFtu2\u002fmpmZmZmZ7b+wcmiR7Xztv8ZLN4lBYO2\u002f3CQGgZVD7b\u002f0\u002fdR46SbtvwrXo3A9Cu2\u002fILByaJHt7L82iUFg5dDsv05iEFg5tOy\u002fZDvfT42X7L96FK5H4Xrsv5LtfD81Xuy\u002fqMZLN4lB7L++nxov3STsv9R46SYxCOy\u002f7FG4HoXr678CK4cW2c7rvxgEVg4tsuu\u002fLt0kBoGV679GtvP91Hjrv1yPwvUoXOu\u002fcmiR7Xw\u002f67+IQWDl0CLrv6AaL90kBuu\u002ftvP91Hjp6r\u002fMzMzMzMzqv+Slm8QgsOq\u002f+n5qvHST6r8QWDm0yHbqvyYxCKwcWuq\u002fPgrXo3A96r9U46WbxCDqv2q8dJMYBOq\u002fgJVDi2zn6b+YbhKDwMrpv65H4XoUrum\u002fxCCwcmiR6b\u002fa+X5qvHTpv\u002fLSTWIQWOm\u002fCKwcWmQ76b8ehetRuB7pvzReukkMAum\u002fTDeJQWDl6L9iEFg5tMjov3jpJjEIrOi\u002fkML1KFyP6L+mm8QgsHLov7x0kxgEVui\u002f0k1iEFg56L\u002fqJjEIrBzovwAAAAAAAOi\u002fFtnO91Pj578ssp3vp8bnv0SLbOf7qee\u002fWmQ730+N579wPQrXo3Dnv4YW2c73U+e\u002fnu+nxks357+0yHa+nxrnv8qhRbbz\u002fea\u002f4HoUrkfh5r\u002f4U+Olm8Tmvw4tsp3vp+a\u002fJAaBlUOL5r8830+Nl27mv1K4HoXrUea\u002faJHtfD815r9+arx0kxjmv5ZDi2zn++W\u002frBxaZDvf5b\u002fC9Shcj8Llv9jO91PjpeW\u002f8KfGSzeJ5b8GgZVDi2zlvxxaZDvfT+W\u002fMjMzMzMz5b9KDAIrhxblv2Dl0CLb+eS\u002fdr6fGi\u002fd5L+Ml24Sg8Dkv6RwPQrXo+S\u002fukkMAiuH5L\u002fQItv5fmrkv+j7qfHSTeS\u002f\u002ftR46SYx5L8UrkfhehTkvyqHFtnO9+O\u002fQmDl0CLb479YObTIdr7jv24Sg8DKoeO\u002fhOtRuB6F47+cxCCwcmjjv7Kd76fGS+O\u002fyHa+nxov47\u002feT42XbhLjv\u002fYoXI\u002fC9eK\u002fDAIrhxbZ4r8i2\u002fl+arzivzi0yHa+n+K\u002fUI2XbhKD4r9mZmZmZmbiv3w\u002fNV66SeK\u002flBgEVg4t4r+q8dJNYhDiv8DKoUW28+G\u002f1qNwPQrX4b\u002fufD81XrrhvwRWDi2yneG\u002fGi\u002fdJAaB4b8wCKwcWmThv0jhehSuR+G\u002fXrpJDAIr4b90kxgEVg7hv4ps5\u002fup8eC\u002fokW28\u002f3U4L+4HoXrUbjgv873U+Olm+C\u002f5tAi2\u002fl+4L\u002f8qfHSTWLgvxKDwMqhReC\u002fKFyPwvUo4L9ANV66SQzgv6gcWmQ739+\u002f2M73U+Ol378IgZVDi2zfvzAzMzMzM9+\u002fYOXQItv53r+Ql24Sg8Dev7hJDAIrh96\u002f6Pup8dJN3r8QrkfhehTev0Bg5dAi292\u002fcBKDwMqh3b+YxCCwcmjdv8h2vp8aL92\u002f+Chcj8L13L8g2\u002fl+arzcv1CNl24Sg9y\u002fgD81XrpJ3L+o8dJNYhDcv9ijcD0K19u\u002fAFYOLbKd278wCKwcWmTbv2C6SQwCK9u\u002fiGzn+6nx2r+4HoXrUbjav+jQItv5ftq\u002fEIPAyqFF2r9ANV66SQzav2jn+6nx0tm\u002fmJmZmZmZ2b\u002fISzeJQWDZv\u002fD91HjpJtm\u002fILByaJHt2L9QYhBYObTYv3gUrkfheti\u002fqMZLN4lB2L\u002fYeOkmMQjYvwArhxbZzte\u002fMN0kBoGV179Yj8L1KFzXv4hBYOXQIte\u002fuPP91Hjp1r\u002fgpZvEILDWvxBYObTIdta\u002fQArXo3A91r9ovHSTGATWv5huEoPAytW\u002fwCCwcmiR1b\u002fw0k1iEFjVvyCF61G4HtW\u002fSDeJQWDl1L946SYxCKzUv6ibxCCwctS\u002f0E1iEFg51L8AAAAAAADUvzCyne+nxtO\u002fWGQ730+N07+IFtnO91PTv7DIdr6fGtO\u002f4HoUrkfh0r8QLbKd76fSvzjfT42XbtK\u002faJHtfD810r+YQ4ts5\u002fvRv8D1KFyPwtG\u002f8KfGSzeJ0b8YWmQ730\u002fRv0gMAiuHFtG\u002feL6fGi\u002fd0L+gcD0K16PQv9Ai2\u002fl+atC\u002fANV46SYx0L9QDi2yne\u002fPv7ByaJHtfM+\u002fENejcD0Kz79gO99PjZfOv8CfGi\u002fdJM6\u002fEARWDi2yzb9waJHtfD\u002fNv9DMzMzMzMy\u002fIDEIrBxazL+AlUOLbOfLv+D5fmq8dMu\u002fMF66SQwCy7+QwvUoXI\u002fKv+AmMQisHMq\u002fQIts5\u002fupyb+g76fGSzfJv\u002fBT46WbxMi\u002fULgehetRyL+wHFpkO9\u002fHvwCBlUOLbMe\u002fYOXQItv5xr\u002fASQwCK4fGvxCuR+F6FMa\u002fcBKDwMqhxb\u002fAdr6fGi\u002fFvyDb+X5qvMS\u002fgD81XrpJxL\u002fQo3A9CtfDvzAIrBxaZMO\u002fkGzn+6nxwr\u002fg0CLb+X7Cv0A1XrpJDMK\u002fkJmZmZmZwb\u002fw\u002fdR46SbBv1BiEFg5tMC\u002foMZLN4lBwL8AVg4tsp2\u002fv8AehetRuL6\u002fYOf7qfHSvb8gsHJoke28v+B46SYxCLy\u002fgEFg5dAiu79ACtejcD26v+DSTWIQWLm\u002foJvEILByuL9gZDvfT423vwAtsp3vp7a\u002fwPUoXI\u002fCtb+Avp8aL920vyCHFtnO97O\u002f4E+Nl24Ss7+AGARWDi2yv0DhehSuR7G\u002fAKrx0k1isL9A5dAi2\u002fmuv8B2vp8aL62\u002fQAisHFpkq7+AmZmZmZmpvwArhxbZzqe\u002fgLx0kxgEpr\u002fATWIQWDmkv0DfT42XbqK\u002fgHA9CtejoL8ABFYOLbKdvwAnMQisHJq\u002fgEkMAiuHlr+AbOf7qfGSvwAfhetRuI6\u002fAGQ730+Nh78AqvHSTWKAvwDeT42XbnK\u002fAKjx0k1iUL8AFK5H4XpkPwCAarx0k3g\u002fAPp+arx0gz8AtMh2vp+KP4A3iUFg5ZA\u002fgBSuR+F6lD+A8dJNYhCYPwDP91PjpZs\u002fAKwcWmQ7nz\u002fAxCCwcmihP0AzMzMzM6M\u002fwKFFtvP9pD+AEFg5tMimPwB\u002farx0k6g\u002fgO18PzVeqj9AXI\u002fC9SisP8DKoUW2860\u002fQDm0yHa+rz8AVOOlm8SwP0CLbOf7qbE\u002foML1KFyPsj\u002fg+X5qvHSzPyAxCKwcWrQ\u002fgGiR7Xw\u002ftT\u002fAnxov3SS2PwDXo3A9Crc\u002fYA4tsp3vtz+gRbbz\u002fdS4PwB9PzVeurk\u002fQLTIdr6fuj+A61G4HoW7P+Ai2\u002fl+arw\u002fIFpkO99PvT9gke18PzW+P8DIdr6fGr8\u002fAAAAAAAAwD+gm8QgsHLAP1A3iUFg5cA\u002f8NJNYhBYwT+gbhKDwMrBP0AK16NwPcI\u002f4KWbxCCwwj+QQWDl0CLDPzDdJAaBlcM\u002f0HjpJjEIxD+AFK5H4XrEPyCwcmiR7cQ\u002f0Es3iUFgxT9w5\u002fup8dLFPxCDwMqhRcY\u002fwB6F61G4xj9gukkMAivHPwBWDi2yncc\u002fsPHSTWIQyD9QjZduEoPIP\u002fAoXI\u002fC9cg\u002foMQgsHJoyT9AYOXQItvJP\u002fD7qfHSTco\u002fkJduEoPAyj8wMzMzMzPLP+DO91Pjpcs\u002fgGq8dJMYzD8gBoGVQ4vMP9ChRbbz\u002fcw\u002fcD0K16NwzT8g2c73U+PNP8B0kxgEVs4\u002fYBBYObTIzj8QrBxaZDvPP7BH4XoUrs8\u002fqPHSTWIQ0D+APzVeuknQP1CNl24Sg9A\u002fINv5fmq80D\u002f4KFyPwvXQP8h2vp8aL9E\u002foMQgsHJo0T9wEoPAyqHRP0Bg5dAi29E\u002fGK5H4XoU0j\u002fo+6nx0k3SP7hJDAIrh9I\u002fkJduEoPA0j9g5dAi2\u002fnSPzgzMzMzM9M\u002fCIGVQ4ts0z\u002fYzvdT46XTP7AcWmQ739M\u002fgGq8dJMY1D9QuB6F61HUPygGgZVDi9Q\u002f+FPjpZvE1D\u002fIoUW28\u002f3UP6Dvp8ZLN9U\u002fcD0K16Nw1T9Ii2zn+6nVPxjZzvdT49U\u002f6CYxCKwc1j\u002fAdJMYBFbWP5DC9Shcj9Y\u002fYBBYObTI1j84XrpJDALXPwisHFpkO9c\u002f4Pl+arx01z+wR+F6FK7XP4CVQ4ts59c\u002fWOOlm8Qg2D8oMQisHFrYP\u002fh+arx0k9g\u002f0MzMzMzM2D+gGi\u002fdJAbZP3Boke18P9k\u002fSLbz\u002fdR42T8YBFYOLbLZP\u002fBRuB6F69k\u002fwJ8aL90k2j+Q7Xw\u002fNV7aP2g730+Nl9o\u002fOIlBYOXQ2j8I16NwPQrbP+AkBoGVQ9s\u002fsHJoke182z+IwMqhRbbbP1gOLbKd79s\u002fKFyPwvUo3D8AqvHSTWLcP9D3U+Olm9w\u002foEW28\u002f3U3D94kxgEVg7dP0jhehSuR90\u002fGC\u002fdJAaB3T\u002fwfD81XrrdP8DKoUW2890\u002fmBgEVg4t3j9oZmZmZmbePzi0yHa+n94\u002fEAIrhxbZ3j\u002fgT42XbhLfP7Cd76fGS98\u002fiOtRuB6F3z9YObTIdr7fPzCHFtnO998\u002fgGq8dJMY4D9oke18PzXgP1S4HoXrUeA\u002fPN9PjZdu4D8kBoGVQ4vgPxAtsp3vp+A\u002f+FPjpZvE4D\u002fgehSuR+HgP8yhRbbz\u002feA\u002ftMh2vp8a4T+g76fGSzfhP4gW2c73U+E\u002fcD0K16Nw4T9cZDvfT43hP0SLbOf7qeE\u002fLLKd76fG4T8Y2c73U+PhPwAAAAAAAOI\u002f7CYxCKwc4j\u002fUTWIQWDniP7x0kxgEVuI\u002fqJvEILBy4j+QwvUoXI\u002fiP3jpJjEIrOI\u002fZBBYObTI4j9MN4lBYOXiPzReukkMAuM\u002fIIXrUbge4z8IrBxaZDvjP\u002fTSTWIQWOM\u002f3Pl+arx04z\u002fEILByaJHjP7BH4XoUruM\u002fmG4Sg8DK4z+AlUOLbOfjP2y8dJMYBOQ\u002fVOOlm8Qg5D9ACtejcD3kPygxCKwcWuQ\u002fEFg5tMh25D\u002f8fmq8dJPkP+Slm8QgsOQ\u002fzMzMzMzM5D+48\u002f3UeOnkP6AaL90kBuU\u002fiEFg5dAi5T90aJHtfD\u002flP1yPwvUoXOU\u002fSLbz\u002fdR45T8w3SQGgZXlPxgEVg4tsuU\u002fBCuHFtnO5T\u002fsUbgehevlP9R46SYxCOY\u002fwJ8aL90k5j+oxks3iUHmP5TtfD81XuY\u002ffBSuR+F65j9kO99PjZfmP1BiEFg5tOY\u002fOIlBYOXQ5j8gsHJoke3mPwzXo3A9Cuc\u002f9P3UeOkm5z\u002fcJAaBlUPnP8hLN4lBYOc\u002fsHJoke185z+cmZmZmZnnP4TAyqFFtuc\u002fbOf7qfHS5z9YDi2yne\u002fnP0A1XrpJDOg\u002fKFyPwvUo6D8Ug8DKoUXoP\u002fyp8dJNYug\u002f5NAi2\u002fl+6D\u002fQ91PjpZvoP7gehetRuOg\u002fpEW28\u002f3U6D+MbOf7qfHoP3STGARWDuk\u002fYLpJDAIr6T9I4XoUrkfpPzAIrBxaZOk\u002fHC\u002fdJAaB6T8EVg4tsp3pP\u002fB8PzVeuuk\u002f2KNwPQrX6T\u002fAyqFFtvPpP6zx0k1iEOo\u002flBgEVg4t6j98PzVeuknqP2hmZmZmZuo\u002fUI2XbhKD6j84tMh2vp\u002fqPyTb+X5qvOo\u002fDAIrhxbZ6j\u002f4KFyPwvXqP+BPjZduEus\u002fyHa+nxov6z+0ne+nxkvrP5zEILByaOs\u002fhOtRuB6F6z9wEoPAyqHrP1g5tMh2vus\u002fRGDl0CLb6z8shxbZzvfrPxSuR+F6FOw\u002fANV46SYx7D\u002fo+6nx0k3sP9Ai2\u002fl+auw\u002fvEkMAiuH7D+kcD0K16PsP4yXbhKDwOw\u002feL6fGi\u002fd7D9g5dAi2\u002fnsP0wMAiuHFu0\u002fNDMzMzMz7T8cWmQ730\u002ftPwiBlUOLbO0\u002f8KfGSzeJ7T\u002fYzvdT46XtP8T1KFyPwu0\u002frBxaZDvf7T+YQ4ts5\u002fvtP4BqvHSTGO4\u002faJHtfD817j9UuB6F61HuPzzfT42Xbu4\u002fJAaBlUOL7j8QLbKd76fuP\u002fhT46WbxO4\u002f4HoUrkfh7j\u002fMoUW28\u002f3uP7TIdr6fGu8\u002foO+nxks37z+IFtnO91PvP3A9CtejcO8\u002fXGQ730+N7z9Ei2zn+6nvPyyyne+nxu8\u002fGNnO91Pj7z8AAAAAAADwPw=="},"y":{"dtype":"f8","bdata":"qK3a3HZ9qDxDhFqjnHesPDyPQbmahLA8pN4xb3AkszwtX6DtVSi2PNnhHcxHn7k8SjWQSoSavTz6KiYY8RbBPA7OIlkauMM8WsvXLN+9xjx30CaWWjfKPFF2JFftNc48t0NOrspm0Tz4XLUlqQrUPKLFc5TME9c8am3MsWyR2jy\u002fTFfsCpXePDw10zVlmeE8dW+NpepA5DyaW1WFaE7nPL58Zj8y0eo8XyJZ8Oja7jxDPEYB6r\u002fxPCDQGY2ja\u002fQ8lHojqQt+9zyJfMoLkQb7PNP\u002f3CP0Fv88QNnnJ9DhAT1E1ZI+CZIEPSk845mnqQc97vtELzU4Cz3sYrS9kU8PPWVHE1EmAhI9zIndFQa3FD21+IM7AtQXPZxv7RLAaBs936hH0T6HHz1qf1YBGSIiPbYhLMq02yQ92cOkwCT+Jz0GB2m9KZkrPTz0b6Divi89UEp2sRNCMj1ZVFvseAA1PffU1BdrKDg9eoNJxcbJOz1f6CS4yvY\u002fPQ4mDsw5YkI9It+CtXIlRT3skC108lJIPZobFoSx+ks9Tgi5YocXUD0iZCvolYJSPXOQH5SrSlU9pfORMsN9WD20qQ1c8StcPTaxbaPaM2A9j4qd3iqjYj0R2u4FJnBlPRi+BIHfqGg9wf\u002fKNohdbD1KmXT2X1BwParN0HD5w3I9\u002fLpDu+KVdT29qpQESNR4PVpvDrR2j3w9WIcYrBdtgD1t6KryAeWCPRCz9g7iu4U98LSWIv3\u002fiD3SHHFHvcGMPSTpUQcCipA9Nt+HskQGkz3VPDZdJOKVPXxbvEf\u002fK5k95NklcVz0nD35xadTH6egPUsFPwnCJ6M9C25LDqoIpj1CHyvuTlipPUZV7r9UJ609P01a5G\u002fEsD2bV7pXekmzPYe21pJzL7Y9aAWTmOyEuT3fmjvLplq9PYg0DhH04cA9QCVRA25rwz2MHexfgVbGPbbnHM7Ysck9VEf9LlOOzT2LVqszrP\u002fQPTmHo3OdjdM9Cazw7NN91j2rRk4YFN\u002fZPQqNj4lawt09ynFap5gd4T1bNqARCbDjPeV5qbJrpeY9+HAiAp8M6j0cMN96vfbtPXXTHMi5O\u002fE9vBEiR7HS8z1ZL98qSc32PVEStBd6Ovo93B8ZpHwr\u002fj3tJKfyD1oBPnznzX6W9QM+xbs+0Gz1Bj7zxSDmpWgKPrTZkKeYYA4+C\u002f1VhJt4ET5\u002fWwgkuRgUPiCHUB7XHRc+CY6B+yKXGj7PHbooEpYePgJUK9tclyE+Q\u002fLzohk8JD7CFneRiEYnPoAP6ubxxSo+KMAozOnLLj5Au85VVLYxPmuacWi4XzQ+FujvpoFvNz6cxGk4E\u002fU6PgA7kjcgAj8+tliOU4LVQT4p3SHilYNEPobe1NzCmEc+ua0NgYckSz6loM8RtjhPPtUWYDTn9FE+fAZmfrKnVD5ZcR6yTMJXPhKp31JPVFs+A7foAqxvXz68Lyb\u002fgRRiPi0Gj9ALzGQ+RCW+OQ7pZz4ZyfAL431rPmPWen5QnG8+EnqzSaQscj5HSv4xUOZ0Pp57sXDhCHg+ohbo0xukez7khBp1Icp\u002fPlJnvQDnR4I+2r4Kv48GhT7LGVpu1y6IPi++UVad0Is+DnmGUSP+jz4tbELHNGaSPsKNUQ3MKZU+Jq+NJLxXmD4kl0ksAACcPnx3OQV9GqA+7yYgZ+eFoj6B3nt6aE6lPrO8cVP9gag+VHdmKb0wrD7S9KkalTawPlsakltHprI+gvLJ+rNztT6FjC2p8Ky4PksSm+4wYrw+zbk1DgBTwD6ZYKvz8MbCPtLCWNY9mcU++LuBJxbYyD50edOUyZPMPneY1bmNb9A+Gt82bdDn0j7wRk2FFr\u002fVPvl9CjCnA9k+jFvQ3u7F3D5pRDo9aIzgPgdBQBYECeM+72JqOUrl5T7NXxQnmy\u002fpPiKesi6A+Ow+25LRaH+p8D5OlDIqfCrzPvjtv8LLC\u002fY++Bh\u002f2edb+T49fgrVdiv9PpywH9vPxgA\u002fySR1HzVMAz9m21TZljIGP95jURqIiAk\u002fVEbxoMxeDT\u002fzgSqOVuQQPzD1mQssbhM\u002f7w2ct6hZFj8VBCdMebUZPwXqygp\u002fkh0\u002fj2O+ShICIT9AsxbBX5AjP552qk0AgSY\u002fpiN3frriKT91gYxMjcYtP9905MMCIDE\u002f3t5lC9CyMz9YSOR+nag2P45\u002ftK5LEDo\u002fKmtmf\u002ff6PT8IwV4VKD5BP2CL3hZ91UM\u002fmK+8ioDQRj+CbagxLT5KPy3HKRC+L04\u002fnE1Mg4JcUT+wff42Z\u002fhTP\u002fvrNdap+FY\u002fWLEugF9sWj\u002frhmaO4WReP8VSamISe2E\u002fyrpPz44bZD8ekOPVGSFnP4hsSiLjmmo\u002f73lOmGKabj8O5kQO2JlxP3y7Wkn0PnQ\u002flTmEAtFJdz\u002fmYBehuMl6P5hTochB0H4\u002fZZiX3tO4gT9y1+cImGKEP0zjP83Pcoc\u002fTgqlfOD4ij9gCe+tfwaPP4ZItx8G2JE\u002fg\u002fc8XXqGlD\u002fNhbCHFpyXP9mOfv5aKJs\u002fY5Uufhw9nz9X4crbbvehP2D45i+bqqQ\u002ffHxl4qTFpz8xiwqMJ1irP5L1Fh4XdK8\u002fyH5cGA0Xsj8fASje+M60P4YGFjB477c\u002f0pQsyEGIuz8bb6y9aKu\u002fP4WXIaHbNsI\u002f4dfaY4vzxD\u002fPvhUahBnIPyMovMeWuMs\u002fLoZEOPTizz+NcHf3w1bSP\u002fZ3Xk8wGNU\u002fn1wXE5RD2D9GyH1r1ujbPzJ\u002fy8cfDeA\u002fPo\u002f\u002fU2l24j8jyXVvWjzlP52KmCbRbOg\u002f+2VZd7kX7D8hstxHrCfwP9iPA4xQlPI\u002fcTvRoshd9T\u002fQN40kzZH4P3rqcx8IQPw\u002fSNPHESg9AEB6RRoMcqoCQDDWkPtRcwVAK3zl7p+kCEBo\u002fn+OqUwMQIzKOtKWPRBAbYhXypygEkDlpayOa1gVQInFX544bhhA5xyz8ubqG0DNy2v7N9YfQD7HaiXLGiJAGm83dy+FJEAV+vd1yycnQJQyRe+J+ylAoSHjqynzLEAbzNycyfkvQFB9T1wLeTFADVtQ6mbbMkCmetk2og40QHkNIYgk\u002fTRAKwRgsGmUNUC7wuRzd8g1QLXhQMdUljVAvGjeJJkENUB22x\u002fC3iE0QAEn0K61ATNA+Hud4Cu5MUAVbzLg5FswQGjfquyJ9C1ArOdo8mtBK0C+f74afq8oQKlTA\u002fooSSZAmcFoMKgTJEA3OyugexAiQCjGGkGhPiBAKUV5MhI3HUCT2oHAjUcaQHacs0YZpxdAGB+nWvZNFUA8RT\u002fSpzQTQCy2ncsqVBFAXo2AsSZMD0Aqyol6LUkMQL81FNwTlQlAyJpZdrMmB0CUujCK\u002fvUEQAo++vKc2ANA0GJQ+upSA0AoEIMADq0CQFtE9LbP7QFAX1biYiAbAUDx9mAxLToAQCGlYZDpnv4\u002f+95L+rG9\u002fD9g3+xGYdf6P1hOPvOo8fg\u002fAG6l8lwR9z+6XDeCiDr1P5JlfOWEcPM\u002fDiOX2g228T9nquuiUA3wP5gl\u002f5L+7+w\u002ffvoTdLbu6T97v8o7jhjnP3LiPMiabuQ\u002f1Km3tl\u002fx4T8hoqeNvEHfPws5HhhN+do\u002frKrSyNsH1z9AQVEwKGvTP0GvrQt6INA\u002fHNZfeUJJyj+eorjvP+jEPxavcj5oFsA\u002fxgZXoqOXtz86zVd2xACwPyBb44Ier6I\u002fkkIUuvA7mT\u002f06ilIhbKPP8LbTCq93ZY\u002fJENb0+ucoj9ZQSw2RpGoP3pMO9Wwaa0\u002fjmNM62qhsD8ox51V3BuyP1oAtg4gMbM\u002f6mMrjUDtsz\u002fElby\u002fo1u0P2K1c6jVhrQ\u002fvuBpAad4tD8Cuz4lKjq0P9o+gZmj07M\u002fp0RmO8FMsz8UZfQkXqyyP59sx2TV+LE\u002fmBfv78g3sT8FzsIUXm6wPwLCXnFtQq8\u002f95FXhM+orT\u002fcQPShgBesPxdgBHoIlao\u002f93Ozuq4nqT+5ZGzo19SnP2oHS2LLoaY\u002f70w0m1mTpT8GYwMVHK6kPxUZNinZ9qM\u002fEnQ\u002fTP9xoz+u0JGMoSSjP3ft3R\u002fAE6M\u002fA1TPnyJFoz+Ol24w+r6jP8fjURBdiKQ\u002fUjtEZWyppT+IiAEtPSunP05Vx8izGKk\u002fyPGOs+F9qz9cfNMqO2muP9+q4SuKe7E\u002fhCgg4jREtD8+OdWnnnK3P36SbrifFrs\u002fMN0jFV5Cvz8syEQGXwXCP\u002fv8oD3Zw8Q\u002fw7CGS2Xqxz9O7P3P1IjLPwwDuYdWsc8\u002ft9nb3Gg80j\u002fzbmvUpPvUPwP1P9QtJNg\u002fUKCVUODF2z+W9DnY+PLfPzTNuAQ1YOI\u002fq9V37iIj5T96Hio8GFDoP3O5Zs3y9us\u002f300+HvMU8D97mrVF6H7yPx6DGyBLRfU\u002ftYV31cR1+D+rrlQH7B\u002f8Pwcco3K\u002fKgBACs0Vok6VAkA6+vcQ\u002f1oFQPlEAdmNiAhAkwXv2SMsDEAXYRDApioQQJqLHARpihJAtRNXUCw+FUDZYcaw4E4YQDopECIHxRtA9mdK09enH0AmCOqX\u002f\u002f0hQMN6njHsYCRAasLqZYr5JkCNnpEo778pQAEhyszcpSxAVih+cWSVL0BOywALIDgxQK1Y3uFMiDJAulr36PSlM0CLJ+L6EHw0QNHqH1k7+TRA8+GxgAgTNUAlqZQHOcg0QLJjdmXwIDRArFljYd0sM0A7GHDOCwAyQJU\u002fk513rzBAeduW1pmcLkD+R9tlh9grQCBzT64aKilA7\u002feHqw2hJkCy7ca9qkYkQOMTTnFLHyJAFkKoqMQrIEB8lkd\u002fLdUcQKhDiCSusRlARjh9n7DlFkAk1YI4O2kUQF7kaNpKNBJAXjOJjC4\u002fEECZdkbkdQUNQP2vJ2\u002fG8AlAvEncU4E0B0BP67rLH8YEQEsXVdlPnAJAIp7\u002f9NuuAEAKOWV+IO39Py76kqU+2vo\u002fLJgc0A8a+D+mWoXC+KL1P316zTmZbPM\u002fTNj7LaNv8T8R8oP6bkvvP+CxyrNik+0\u002fFGGsRoX\u002f6z\u002fOfwSINVfqPz6AmtUqo+g\u002fFR7VL8Pq5j+qaRfoKjTlP9QC9W5\u002fhOM\u002fInWpVO7f4T+OB8Ex0kngP2t8uP+Wid0\u002fI63AHLCl2j\u002fCtW0uzerXP+txMFLUWtU\u002fbwmk9tX20j8uweLxKb\u002fQPwZEQcIWZ80\u002fB6Fp62GmyT8g8WxiyTnGP23CpbknHsM\u002fTJOVHcpPwD82m7UnFZW7P2rk+G\u002fVE7c\u002fKuerVGUSsz9K7AK99Q2vP8zfR1pNz6g\u002fXvDw8tZUoz8Ier8hcRWdPybcLfWvupQ\u002f+6GovIkMkD\u002fB8eU159eIPyLtOa6lgoI\u002fr4DZg0TqeT+igbZhKPN+P7x1d5Awa4c\u002fpoXdUSTJjj81VAxw7eWSP2MSwN4oVJY\u002fkRgvulHImT8sE67jAVqdP5qBJT2hj6A\u002faJq9bX2Woj8aDAq4U8ukP1iGSw1VN6c\u002fxrpWCBrjqT\u002fOES\u002fw09asP\u002faVuE8KDbA\u002f2Ti\u002fRg\u002fasT9WiCSx4tWzPyCQ\u002fB+yA7Y\u002fdmVuU5FmuD+A6hbKVgG7P+xxJWS61r0\u002fcaUTz6B0wD8BJlnmqx3CP6\u002fWYhWW58M\u002fNGCG9mjTxT+CT4jUFuLHP3A3TY92FMo\u002fcOVHLU5rzD+Nc+o3QufOP9DIxgdwxNA\u002fzmIFOkoo0j9ZZDa+V5\u002fTP1NJugetKdU\u002ffmvMX07H1j+N2bn8K3jYP\u002fTf0mMgPNo\u002fhxVtOfIS3D9jmn2mT\u002fzdP+jDESvQ998\u002f7B5nsXgC4T8LqJI3jBHiP6RNQdvHKOM\u002fHQZnesNH5D\u002fqxPQLCW7lP8yPNUsVm+Y\u002fAGIvJ1fO5z8Hq5lGLwfpPxbl8U\u002fyROo\u002fKcwdIOaG6z+ARUoCRczsP0JJkeU8FO4\u002fzAiZwO9d7z944eqqOlTwP3iTh3Nt+fA\u002ffJD\u002f5RKe8T+Pt6v1qEHyP\u002flXdkir4\u002fI\u002fEGI10ZGD8z8AsglO0yD0Pz4WTs7kuvQ\u002fj3cDwzpR9T8WxQNiSuP1P\u002fi8XxCJcPY\u002fP\u002fQwI2\u002f49j8uSqp9dnr3P9WDCZ0d9vc\u002fXFRfYOZq+D+8dq2YWNj4P9Zx11YBPvk\u002fYvTCynSb+T+Bq\u002fuQTvD5P9DtdtoxPPo\u002fWuN5U8t++j\u002fSTspe0Lf6P6wInYMA5\u002fo\u002fHxkiPSUM+z\u002fYgWlkEyf7P8uZjs+pN\u002fs\u002fFwW3TtM9+z+Mv675hTn7PxuHmc7CKvs\u002f2kA43JYR+z+wy2BeGu76P4nKKCFwwPo\u002fAH++zMaI+j9E4OXbVkf6Pxhddj1j\u002fPk\u002fNNbSYTio+T8C6IY4LEv5P7Jrr4ec5fg\u002fkF+ifO93+D+lMP1bkgL4Px2F9+73hfc\u002fikvF7JkC9z\u002f2ksIS9Xj2P8MIbY+L6fU\u002fL7r4PeFU9T8NPO7VfLv0PyrO067lHfQ\u002f\u002fGeklaN88z8KfhLrPdjyP7GRB+s5MfI\u002f0fzmeRuI8T+nCwgBYt3wP4L0ZkyKMfA\u002fvKKHrxYK7z\u002fKl9yurrDtPyIpD1K0V+w\u002f0Gx6y\u002fH\u002f6j8GW+IlI6rpP2hU9BD0Vug\u002ffdOQoAAH5z9k7imY0rrlP\u002fDSDlHicuQ\u002fLEY3mJUv4z8eqpH7PfHhPwAo1GMbuOA\u002fs2iBXbAI3z8mnPECGKzcP6at4WZ0Wto\u002fMjDHEqUT2D8WWP3VYdfVP\u002fpfJh08pdM\u002f634iGqF80T99rbOBq7nOPzbXzjABiso\u002f7iG0fkJoxj9mY5AMNlLCP03VtcHBirw\u002fHiAf+CB+tD8NBi1af\u002fGoP9e+rny90ZE\u002fMq4zkmSqjD+Z5BXOeFanP5fzCpdj1LM\u002fGS8eg\u002fQXvD+pWlwMoD7CP7r0LLfYhcY\u002fiIH5IVblyj\u002fO+sz\u002fx2DPPyvw2nPm\u002fdE\u002fauHPNfZc1D8W\u002frIZRs\u002fWPwON2sV1Vtk\u002fMUyjYwj02z9\u002ff5RlZKneP4SWABvmu+A\u002fBgkwXCww4j8RajRN+7HjPyQTeBuvQeU\u002fehS5O4nf5j+Fs9Noq4voP7J+CsYYRuo\u002fHgrz6K8O7D\u002fq0nZrK+XtP6fGuf0eye8\u002fxaOWnPrc8D9kR0WBd9vxPzHaCHCQ3\u002fI\u002fj4BQmbno8z+\u002fJtIHUPb0PywLDeOZB\u002fY\u002fru0tpMUb9z+noZG36jH4P3YyJmIJSfk\u002fymvfhwpg+j9gqQdtwXX7P8Jni5nqiPw\u002fglA3CC6Y\u002fT+SDohnH6L+PxwKlmg+pf8\u002f1+susvxPAEDklD4sVsgAQFqut\u002fXROgFAoVb0S46mAUCqGvOoogoCQBfdFV4fZgJApPwYOQ64AkAxHKbfcv8CQE4kG75JOwNA2yZ9LolqA0AxRlwbH4wDQHS+3a7xngNA2j7RY9yhA0CQuH9br5MDQPb8bQMscwNAeN6zBQI\u002fA0DDbQAgzPUCQG3yH80JlgJAJiYxOhseAkDHODSoOIwBQImIqZpr3gBAppmFLYQSAEAJ1obRHEz+P7RIH7yKLPw\u002fhDdY7z1J+z+zEE0DAi39P02VVaqMXf8\u002fBSJVH9XzAEBRqQ\u002fF+2wCQOCI+oOMIgRAsIB1BfodBkDP4cso82kIQHVKYI58EgtAcl+NZwIlDkAkJsYcL9gQQAgOaJZi4hJA2vB5O8k5FUCYBk04bOcXQNzzCx5O9BpAg77UCctoHkDCNTVn0SUhQLwDHHdJUCNAIieCmzOzJUB6VGoqPEooQM0pZMvYCytA4Xykfr3nLUD6Tguv0WIwQApJZ2Z8wjFAMleGOxr\u002fMkCph6\u002fFLwM0QFya2N9qujRAR\u002fvfyB4VNUDAWJh4ZAs1QPfdK\u002f7InjRA3FDyquTZM0Aqju7XBs4yQEfNEFLYjzFAyxr+uww0MECllyry3ZktQNBsPQwi0ipAdmTng\u002fclKEDEOVa+EaMlQL1Ra9sfUSNAtWSpTE0zIUAWgYceP5MeQBmdYKkkJBtAfcZhpNoSGEBhPhzlt1cVQITgdUGn6hJALz9xE6rDEEAqb\u002fx6TbYNQB0S\u002fDomVApAnBRTQg9UB0Be4pijhqoEQCNJyZJNTQJA+zO9alQzAEBNBGs1Qqn8P\u002fgsSW9oVPk\u002fIt9xrttb9j\u002fH3avO57TzP4FLvWA0VvE\u002fti4gqTJv7j94lXWT8KPqPyi99yAzPuc\u002fEkoAThwz5D8jXPaBKHnhPz+kpd4CEN4\u002fUlOe\u002fqew2T+\u002feGmKW8fVPxIBthK9SNI\u002fw3P74HRVzj9A6E89ysjIP0EHL9KP28M\u002fAiHPnSP\u002fvj+wHa8HANLAP5p7U1wyKcQ\u002fvuaVpGYWxz+AS+JPB5jJP2sO\u002fta1rcs\u002fWpEaiCdYzT\u002f4UFsB3pjOP4sRqj4Ucs8\u002fDEGzNobmzz9CnMXoV\u002fnPP75n1l32rc8\u002fUeTkV\u002fYHzz+mIhGADAvOPwGmSObjusw\u002fSikKNScbyz\u002fIQEq4WS\u002fJP6rsEVXi+sY\u002fptarQvaAxD8by1oqlcTBP3VFeDMfkb0\u002fNolJO+setz\u002fJJ1hzUzewP+j+\u002fdFLvaE\u002fzbqUExWOcT\u002fiKNWKaVmcP8gehtpRV68\u002fygGZ1dyjuD\u002ftObuQ9P3AP9HTmUVk2MU\u002fqga8vbrfyj+y95X\u002fLwnQP9UrQqpTt9I\u002faLR8pFx51T9bhw6OSE7YP8yITeL1NNs\u002fcnbJxiEs3j\u002f2rLWAMJngP0NPPEUOI+I\u002fH\u002fm80Mey4z9HBedzYEflP8ZB6HLC3+Y\u002fNEBuc7t66D+uUZ3q\u002fhbqP4dO1Ekjs+s\u002f5UkmlKRN7T\u002fKs71V5OTuPyi6QzCVO\u002fA\u002fEyHkU1QB8T\u002f10CDovMLxPxG1vD3UfvI\u002fuZ0X5JY08z9OozRG\u002fOLzP5lFXln3iPQ\u002fLhLISXkl9T9Zvl27c7f1Pz74upfaPfY\u002fxTGapKe39j+BO6Bn2yP3P4Iq2MGBgfc\u002fvZ5XZrLP9z\u002fAbf9HlQ34P7BjKc1jOvg\u002fcMd1qWtV+D8Wemu7EV74P3YQaLXSU\u002fg\u002fNsm790Y2+D8QOxV8IgX4Pz6Yo9A3wPc\u002f1AKJC3hn9z\u002fbJ5+49Pr2PxfBM\u002fTfevY\u002fmm7Ei4zn9T9wY4febkH1Pxd07g8bifQ\u002f9Nt9C0a\u002f8z+g6xnGwuTyP59DL4qC+vE\u002fEO\u002fnAJIB8T\u002fub0XtL\u002fbvP4rpsomm0O0\u002fJOSByS6V6z9vXNtDl0bpPyhLqbHL5+Y\u002fDKcteNN75D+IblVYyAXiP\u002fbQW6KiEd8\u002f\u002fse5LTgQ2j+3lJvkqw3VP2IZXgZNENA\u002fKYSvmJw8xj8oXQH4APe4Pwb+j6TQR5c\u002f3CSSBc6+qT9Whz6ytQe\u002fPwhs4DtuScg\u002fWIcni4hb0D9b19SPF2LUP7nUKct+NNg\u002fJa1VyEjP2z+IK3gWcC\u002ffP4T2ObcyKeE\u002f9N9XHgeb4j+N3TOYZOzjPxTdM5O1HOU\u002fcxuJ6J4r5j8ZUzDi\u002fxjnPxyaQjnu5Oc\u002f3f6TULaP6D+WhFN31hnpP1aABGr9g+k\u002fT62tNAbP6T\u002f35EHO9PvpP6a4x3LyC+o\u002fai8XBkkA6j9ew2J9YNrpP2jEqIK4m+k\u002fbAgydOZF6T9u\u002f7i8j9roP9wv\u002f8RmW+g\u002fUebdPybK5z+m9sw4jijnPwG2DcxfeOY\u002fmFqu1Fm75T9Qz\u002fbjNvPkP\u002fjZu1ioIeQ\u002fxnBogFZI4z\u002fi2Qly22jiP6rYOHjDhOE\u002f2D71SIqd4D8s4+VkMmnfP3uniP2Olt0\u002fKTYe36\u002fF2z8N3TO78\u002fjZP+oQKFGOMtg\u002fI1qGtIx01j+wNkD\u002f0MDUP\u002fSjVdAWGdM\u002fSgJSCvN+0T8ZN23gpufPP1gRnrIK8sw\u002fOGwnomEfyj98Ndgkw3HHPxmuTNYH68Q\u002fMiP7PdSMwj\u002fI6Ug\u002fm1jAP66yt7hFn7w\u002ftuFttxbmuD\u002fkNE+5m4e1PzM9A1aVhbI\u002faMtq0gTDrz9UJwNLfDmrP+YV0YLvcKc\u002fTxOv0YBrpD\u002f5YiRMHCuiP1n6uQd\u002fsaA\u002fiDxB7UgAoD+qF41W7RigP+CNNIzX\u002fKA\u002f9eK9p0Ctoj\u002f\u002fjSy7YSulP2TcemVJeKg\u002fiEp2RuuUrD9O\u002fbmjEcGwPxosISlLoLM\u002f3TkmrmPotj\u002fUMhvCfJm6Pxzr\u002fDacs74\u002frLd4Kk6bwT\u002fmOEs5GhHEPxPCsJjyusY\u002fYFn\u002fXn6YyT9Wk03sR6nMPwzFzhe17M8\u002fVhL9zgax0T9K67D7NoTTP7iXzUNnb9U\u002fz5qqbPxx1z8WfRFJRovZPyI2jG98uts\u002fuvpZ3b3+3T9cjk1ViSvgP\u002fSU75wzYeE\u002fmMcXlsif4j+VzAxUpebjP66XuXUbNeU\u002fCnjQG2+K5j9gY9Os2eXnP\u002fqp9R6IRuk\u002fShVB35yr6j8C6rJXMBTsP6recMtQf+0\u002fxsL9HwXs7j8d8I+dpSzwPzhE3O4N4\u002fA\u002f6ecFz7SY8T+d9IXLEU3yP8zMZd2a\u002f\u002fI\u002fSCBWmsWv8z9c6wZsB130PypRSoTWBvU\u002fZAQS86qs9T8F2gdg\u002fk32P+DodFBO6vY\u002fhgH3QxuB9z9eQxCX6hH4P9Ocr\u002fVGnPg\u002f3iM7VMAf+T8aD6DH7Zv5P99b5eBsEPo\u002feHh8ZuN8+j+iKKud\u002fuD6P\u002f9div10PPs\u002fEh0djwWP+z8KI6a0eNj7P7BYlbWgGPw\u002fiDXw\u002flhP\u002fD+akYqkh3z8P9ziFPwboPw\u002ft4ol4w+6\u002fD98xYS7Zsr8P+jnS88t0fw\u002f9dDMGnzO\u002fD\u002fA8WRhccL8P58QijA3rfw\u002fcIHPvP6O\u002fD94M6JEAmj8PzJlyi6DOPw\u002f6nbpL8oA\u002fD8lVQHSJsH7P6874mruefs\u002fYoDb7nsr+z+XvNUML9b6P8aD68trevo\u002fNDGjhJkY+j92g8ixIrH5P2PEGN1zRPk\u002ftK5iIvvS+D+vl5bQJ134P9csXCpp4\u002fc\u002fmpe9aS5m9z+gyKL65eX2P4SvK4X8YvY\u002f1JJWE93d9T\u002fi8+4P7Fb1Pw=="},"type":"scatter"}],                        {"template":{"layout":{"colorscale":{"diverging":[[0.0,"rgb(103,0,31)"],[0.1,"rgb(178,24,43)"],[0.2,"rgb(214,96,77)"],[0.3,"rgb(244,165,130)"],[0.4,"rgb(253,219,199)"],[0.5,"rgb(247,247,247)"],[0.6,"rgb(209,229,240)"],[0.7,"rgb(146,197,222)"],[0.8,"rgb(67,147,195)"],[0.9,"rgb(33,102,172)"],[1.0,"rgb(5,48,97)"]],"sequential":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]]},"colorway":["#4477AA","#EE6677","#228833","#CCBB44","#66CCEE","#AA3377","#BBBBBB"],"font":{"family":"sans-serif","size":13},"legend":{"bgcolor":"rgba(255,255,255,0.8)","bordercolor":"#cccccc","borderwidth":1},"margin":{"b":60,"l":60,"r":20,"t":50},"paper_bgcolor":"white","plot_bgcolor":"white","xaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1},"yaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1}}},"title":{"text":"Stimulated photon echo: transmitted field at z = z_max"},"xaxis":{"title":{"text":"time (γ⁻¹)"}},"yaxis":{"title":{"text":"|Ω| (γ)"}},"shapes":[{"line":{"color":"grey","dash":"dash"},"type":"line","x0":-1.5,"x1":-1.5,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"grey","dash":"dash"},"type":"line","x0":-1.0,"x1":-1.0,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"grey","dash":"dash"},"type":"line","x0":0.0,"x1":0.0,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"red","dash":"dash"},"type":"line","x0":0.5,"x1":0.5,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"showarrow":false,"text":"π\u002f2 (p1)","x":-1.5,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"π\u002f2 (p2)","x":-1.0,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"π\u002f2 (p3)","x":0.0,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"echo","x":0.5,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"}]},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('00000000-0000-0000-0000-000000000001');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+</section>
+<section id="macroscopic-polarisation-fid-collapse-and-revival" class="level2">
+<h2 class="anchored" data-anchor-id="macroscopic-polarisation-fid-collapse-and-revival">Macroscopic polarisation: FID, collapse, and revival</h2>
+<p><span class="math inline">\(\mathrm{Im}[\rho_{10}(z=0,t)]\)</span> is the velocity-class-averaged coherence. Three stages are visible:</p>
+<ol type="1">
+<li><strong>FID</strong> after pulse 1: the polarisation builds up then dephases on the Doppler timescale <span class="math inline">\(1/\sigma \approx 0.24\,\gamma^{-1}\)</span>.</li>
+<li><strong>Population-grating interval</strong> (<span class="math inline">\(T_w\)</span>, between pulse 2 and pulse 3): the net coherence collapses to near zero. The phase information is stored in population, not coherence — no FID is detectable here.</li>
+<li><strong>Echo</strong> at <span class="math inline">\(t = +\tau\)</span>: pulse 3 reads the population grating back into coherences, which rephase to produce the echo.</li>
+</ol>
+<div id="plot-coherence" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:30.962837Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:30.962742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:30.992629Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:30.992083Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot.coherence(mbs, i<span class="op">=</span><span class="dv">1</span>, j<span class="op">=</span><span class="dv">0</span>, z_idx<span class="op">=</span><span class="dv">0</span>, component<span class="op">=</span><span class="st">"imag"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Im[ρ₁₀(t)] at z = 0 — FID, population-grating storage, echo"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t1,  line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p1)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t2,  line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p2)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>t3,  line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"grey"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"π/2 (p3)"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>fig.add_vline(x<span class="op">=</span>tau, line_dash<span class="op">=</span><span class="st">"dash"</span>, line_color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"echo"</span>, annotation_position<span class="op">=</span><span class="st">"top right"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Shade the storage interval T_w</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>fig.add_vrect(x0<span class="op">=</span>t2, x1<span class="op">=</span>t3, fillcolor<span class="op">=</span><span class="st">"grey"</span>, opacity<span class="op">=</span><span class="fl">0.08</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>              layer<span class="op">=</span><span class="st">"below"</span>, line_width<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>              annotation_text<span class="op">=</span><span class="st">"T_w (population storage)"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>              annotation_position<span class="op">=</span><span class="st">"top left"</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>fig.show(renderer<span class="op">=</span><span class="st">'notebook_connected'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="00000000-0000-0000-0000-000000000002" class="plotly-graph-div" style="height:400px; width:700px;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("00000000-0000-0000-0000-000000000002")) {                    Plotly.newPlot(                        "00000000-0000-0000-0000-000000000002",                        [{"mode":"lines","x":{"dtype":"f8","bdata":"AAAAAAAABMBGtvP91PgDwIts5\u002fup8QPA0SLb+X7qA8AX2c73U+MDwFyPwvUo3APAokW28\u002f3UA8Dn+6nx0s0DwC2yne+nxgPAc2iR7Xy\u002fA8C4HoXrUbgDwP7UeOkmsQPARIts5\u002fupA8CJQWDl0KIDwM\u002f3U+OlmwPAFK5H4XqUA8BaZDvfT40DwKAaL90khgPA5dAi2\u002fl+A8ArhxbZzncDwHE9CtejcAPAtvP91HhpA8D8qfHSTWIDwEJg5dAiWwPAhxbZzvdTA8DNzMzMzEwDwBKDwMqhRQPAWDm0yHY+A8Ce76fGSzcDwOOlm8QgMAPAKVyPwvUoA8BvEoPAyiEDwLTIdr6fGgPA+n5qvHQTA8A\u002fNV66SQwDwIXrUbgeBQPAy6FFtvP9AsAQWDm0yPYCwFYOLbKd7wLAnMQgsHLoAsDhehSuR+ECwCcxCKwc2gLAbef7qfHSAsCyne+nxssCwPhT46WbxALAPQrXo3C9AsCDwMqhRbYCwMl2vp8arwLADi2yne+nAsBU46WbxKACwJqZmZmZmQLA30+Nl26SAsAlBoGVQ4sCwGq8dJMYhALAsHJoke18AsD2KFyPwnUCwDvfT42XbgLAgZVDi2xnAsDHSzeJQWACwAwCK4cWWQLAUrgehetRAsCYbhKDwEoCwN0kBoGVQwLAI9v5fmo8AsBoke18PzUCwK5H4XoULgLA9P3UeOkmAsA5tMh2vh8CwH9qvHSTGALAxSCwcmgRAsAK16NwPQoCwFCNl24SAwLAlkOLbOf7AcDb+X5qvPQBwCGwcmiR7QHAZmZmZmbmAcCsHFpkO98BwPLSTWIQ2AHAN4lBYOXQAcB9PzVeuskBwML1KFyPwgHACKwcWmS7AcBOYhBYObQBwJQYBFYOrQHA2c73U+OlAcAfhetRuJ4BwGQ730+NlwHAqvHSTWKQAcDwp8ZLN4kBwDVeukkMggHAexSuR+F6AcDAyqFFtnMBwAaBlUOLbAHATDeJQWBlAcCR7Xw\u002fNV4BwNejcD0KVwHAHVpkO99PAcBiEFg5tEgBwKjGSzeJQQHA7nw\u002fNV46AcAzMzMzMzMBwHnpJjEILAHAvp8aL90kAcAEVg4tsh0BwEoMAiuHFgHAj8L1KFwPAcDVeOkmMQgBwBsv3SQGAQHAYOXQItv5AMCmm8QgsPIAwOxRuB6F6wDAMQisHFrkAMB3vp8aL90AwLx0kxgE1gDAAiuHFtnOAMBI4XoUrscAwI2XbhKDwADA001iEFi5AMAYBFYOLbIAwF66SQwCqwDApHA9CtejAMDqJjEIrJwAwC\u002fdJAaBlQDAdZMYBFaOAMC6SQwCK4cAwAAAAAAAgADARrbz\u002fdR4AMCLbOf7qXEAwNEi2\u002fl+agDAFtnO91NjAMBcj8L1KFwAwKJFtvP9VADA5\u002fup8dJNAMAtsp3vp0YAwHNoke18PwDAuB6F61E4AMD+1HjpJjEAwESLbOf7KQDAiUFg5dAiAMDP91PjpRsAwBSuR+F6FADAWmQ7308NAMCgGi\u002fdJAYAwMqhRbbz\u002ff+\u002fVg4tsp3v\u002f7\u002fhehSuR+H\u002fv2zn+6nx0v+\u002f+FPjpZvE\u002f7+DwMqhRbb\u002fvw4tsp3vp\u002f+\u002fmpmZmZmZ\u002f78lBoGVQ4v\u002fv7ByaJHtfP+\u002fPN9PjZdu\u002f7\u002fGSzeJQWD\u002fv1K4HoXrUf+\u002f3SQGgZVD\u002f79oke18PzX\u002fv\u002fT91HjpJv+\u002ff2q8dJMY\u002f78K16NwPQr\u002fv5ZDi2zn+\u002f6\u002fILByaJHt\u002fr+sHFpkO9\u002f+vzeJQWDl0P6\u002fwvUoXI\u002fC\u002fr9OYhBYObT+v9nO91Pjpf6\u002fZDvfT42X\u002fr\u002fwp8ZLN4n+v3sUrkfhev6\u002fBoGVQ4ts\u002fr+S7Xw\u002fNV7+vxxaZDvfT\u002f6\u002fqMZLN4lB\u002fr8zMzMzMzP+v76fGi\u002fdJP6\u002fSgwCK4cW\u002fr\u002fVeOkmMQj+v2Dl0CLb+f2\u002f7FG4HoXr\u002fb92vp8aL939vwIrhxbZzv2\u002fjpduEoPA\u002fb8YBFYOLbL9v6RwPQrXo\u002f2\u002fL90kBoGV\u002fb+6SQwCK4f9v0a28\u002f3UeP2\u002f0SLb+X5q\u002fb9cj8L1KFz9v+j7qfHSTf2\u002fcmiR7Xw\u002f\u002fb\u002f+1HjpJjH9v4lBYOXQIv2\u002fFK5H4XoU\u002fb+gGi\u002fdJAb9vyuHFtnO9\u002fy\u002ftvP91Hjp\u002fL9CYOXQItv8v8zMzMzMzPy\u002fWDm0yHa+\u002fL\u002fkpZvEILD8v24Sg8DKofy\u002f+n5qvHST\u002fL+F61G4HoX8vxBYObTIdvy\u002fnMQgsHJo\u002fL8nMQisHFr8v7Kd76fGS\u002fy\u002fPgrXo3A9\u002fL\u002fIdr6fGi\u002f8v1TjpZvEIPy\u002f30+Nl24S\u002fL9qvHSTGAT8v\u002fYoXI\u002fC9fu\u002fgZVDi2zn+78MAiuHFtn7v5huEoPAyvu\u002fItv5fmq8+7+uR+F6FK77vzq0yHa+n\u002fu\u002fxCCwcmiR+79QjZduEoP7v9v5fmq8dPu\u002fZmZmZmZm+7\u002fy0k1iEFj7v30\u002fNV66Sfu\u002fCKwcWmQ7+7+UGARWDi37vx6F61G4Hvu\u002fqvHSTWIQ+781XrpJDAL7v8DKoUW28\u002fq\u002fTDeJQWDl+r\u002fXo3A9Ctf6v2IQWDm0yPq\u002f7nw\u002fNV66+r956SYxCKz6vwRWDi2ynfq\u002fkML1KFyP+r8aL90kBoH6v6abxCCwcvq\u002fMQisHFpk+r+8dJMYBFb6v0jhehSuR\u002fq\u002f001iEFg5+r9eukkMAiv6v+omMQisHPq\u002fdJMYBFYO+r8AAAAAAAD6v4ts5\u002fup8fm\u002fFtnO91Pj+b+iRbbz\u002fdT5vy2yne+nxvm\u002fuB6F61G4+b9Ei2zn+6n5v8\u002f3U+Olm\u002fm\u002fWmQ730+N+b\u002fm0CLb+X75v3A9CtejcPm\u002f\u002fKnx0k1i+b+HFtnO91P5vxKDwMqhRfm\u002fnu+nxks3+b8pXI\u002fC9Sj5v7TIdr6fGvm\u002fQDVeukkM+b\u002fKoUW28\u002f34v1YOLbKd7\u002fi\u002f4XoUrkfh+L9s5\u002fup8dL4v\u002fhT46WbxPi\u002fg8DKoUW2+L8OLbKd76f4v5qZmZmZmfi\u002fJQaBlUOL+L+wcmiR7Xz4vzzfT42Xbvi\u002fxks3iUFg+L9SuB6F61H4v90kBoGVQ\u002fi\u002faJHtfD81+L\u002f0\u002fdR46Sb4v39qvHSTGPi\u002fCtejcD0K+L+VQ4ts5\u002fv3vyGwcmiR7fe\u002frBxaZDvf9783iUFg5dD3v8L1KFyPwve\u002fTmIQWDm097\u002fZzvdT46X3v2Q730+Nl\u002fe\u002f8KfGSzeJ9797FK5H4Xr3vwaBlUOLbPe\u002fke18PzVe978dWmQ730\u002f3v6jGSzeJQfe\u002fMzMzMzMz97++nxov3ST3v0oMAiuHFve\u002f1XjpJjEI979g5dAi2\u002fn2v+tRuB6F6\u002fa\u002fd76fGi\u002fd9r8CK4cW2c72v42XbhKDwPa\u002fGARWDi2y9r+kcD0K16P2vy\u002fdJAaBlfa\u002fukkMAiuH9r9GtvP91Hj2v9Ei2\u002fl+ava\u002fXI\u002fC9Shc9r\u002fn+6nx0k32v3Noke18P\u002fa\u002f\u002ftR46SYx9r+JQWDl0CL2vxSuR+F6FPa\u002foBov3SQG9r8rhxbZzvf1v7bz\u002fdR46fW\u002fQWDl0CLb9b\u002fNzMzMzMz1v1g5tMh2vvW\u002f46WbxCCw9b9uEoPAyqH1v\u002fp+arx0k\u002fW\u002fhetRuB6F9b8QWDm0yHb1v5zEILByaPW\u002fJzEIrBxa9b+yne+nxkv1vz0K16NwPfW\u002fyXa+nxov9b9U46WbxCD1v99PjZduEvW\u002farx0kxgE9b\u002f2KFyPwvX0v4GVQ4ts5\u002fS\u002fDAIrhxbZ9L+XbhKDwMr0vyPb+X5qvPS\u002frkfhehSu9L85tMh2vp\u002f0v8QgsHJokfS\u002fUI2XbhKD9L\u002fb+X5qvHT0v2ZmZmZmZvS\u002f8tJNYhBY9L99PzVeukn0vwisHFpkO\u002fS\u002fkxgEVg4t9L8fhetRuB70v6rx0k1iEPS\u002fNV66SQwC9L\u002fAyqFFtvPzv0w3iUFg5fO\u002f16NwPQrX879iEFg5tMjzv+18PzVeuvO\u002feekmMQis878EVg4tsp3zv4\u002fC9Shcj\u002fO\u002fGy\u002fdJAaB87+mm8QgsHLzvzEIrBxaZPO\u002fvHSTGARW879I4XoUrkfzv9NNYhBYOfO\u002fXrpJDAIr87\u002fpJjEIrBzzv3WTGARWDvO\u002fAAAAAAAA87+LbOf7qfHyvxbZzvdT4\u002fK\u002fokW28\u002f3U8r8tsp3vp8byv7gehetRuPK\u002fQ4ts5\u002fup8r\u002fP91PjpZvyv1pkO99PjfK\u002f5dAi2\u002fl+8r9xPQrXo3Dyv\u002fyp8dJNYvK\u002fhxbZzvdT8r8Sg8DKoUXyv57vp8ZLN\u002fK\u002fKVyPwvUo8r+0yHa+nxryvz81XrpJDPK\u002fy6FFtvP98b9WDi2yne\u002fxv+F6FK5H4fG\u002fbOf7qfHS8b\u002f4U+Olm8Txv4PAyqFFtvG\u002fDi2yne+n8b+ZmZmZmZnxvyUGgZVDi\u002fG\u002fsHJoke188b8730+Nl27xv8dLN4lBYPG\u002fUrgehetR8b\u002fdJAaBlUPxv2iR7Xw\u002fNfG\u002f9P3UeOkm8b9\u002farx0kxjxvwrXo3A9CvG\u002flUOLbOf78L8hsHJoke3wv6wcWmQ73\u002fC\u002fN4lBYOXQ8L\u002fC9Shcj8Lwv05iEFg5tPC\u002f2c73U+Ol8L9kO99PjZfwv++nxks3ifC\u002fexSuR+F68L8GgZVDi2zwv5HtfD81XvC\u002fHVpkO99P8L+oxks3iUHwvzMzMzMzM\u002fC\u002fvp8aL90k8L9KDAIrhxbwv9V46SYxCPC\u002fwMqhRbbz77\u002fWo3A9Ctfvv+58PzVeuu+\u002fBFYOLbKd778aL90kBoHvvzAIrBxaZO+\u002fSOF6FK5H779eukkMAivvv3STGARWDu+\u002fimzn+6nx7r+iRbbz\u002fdTuv7gehetRuO6\u002fzvdT46Wb7r\u002fm0CLb+X7uv\u002fyp8dJNYu6\u002fEoPAyqFF7r8oXI\u002fC9Sjuv0A1XrpJDO6\u002fVg4tsp3v7b9s5\u002fup8dLtv4LAyqFFtu2\u002fmpmZmZmZ7b+wcmiR7Xztv8ZLN4lBYO2\u002f3CQGgZVD7b\u002f0\u002fdR46SbtvwrXo3A9Cu2\u002fILByaJHt7L82iUFg5dDsv05iEFg5tOy\u002fZDvfT42X7L96FK5H4Xrsv5LtfD81Xuy\u002fqMZLN4lB7L++nxov3STsv9R46SYxCOy\u002f7FG4HoXr678CK4cW2c7rvxgEVg4tsuu\u002fLt0kBoGV679GtvP91Hjrv1yPwvUoXOu\u002fcmiR7Xw\u002f67+IQWDl0CLrv6AaL90kBuu\u002ftvP91Hjp6r\u002fMzMzMzMzqv+Slm8QgsOq\u002f+n5qvHST6r8QWDm0yHbqvyYxCKwcWuq\u002fPgrXo3A96r9U46WbxCDqv2q8dJMYBOq\u002fgJVDi2zn6b+YbhKDwMrpv65H4XoUrum\u002fxCCwcmiR6b\u002fa+X5qvHTpv\u002fLSTWIQWOm\u002fCKwcWmQ76b8ehetRuB7pvzReukkMAum\u002fTDeJQWDl6L9iEFg5tMjov3jpJjEIrOi\u002fkML1KFyP6L+mm8QgsHLov7x0kxgEVui\u002f0k1iEFg56L\u002fqJjEIrBzovwAAAAAAAOi\u002fFtnO91Pj578ssp3vp8bnv0SLbOf7qee\u002fWmQ730+N579wPQrXo3Dnv4YW2c73U+e\u002fnu+nxks357+0yHa+nxrnv8qhRbbz\u002fea\u002f4HoUrkfh5r\u002f4U+Olm8Tmvw4tsp3vp+a\u002fJAaBlUOL5r8830+Nl27mv1K4HoXrUea\u002faJHtfD815r9+arx0kxjmv5ZDi2zn++W\u002frBxaZDvf5b\u002fC9Shcj8Llv9jO91PjpeW\u002f8KfGSzeJ5b8GgZVDi2zlvxxaZDvfT+W\u002fMjMzMzMz5b9KDAIrhxblv2Dl0CLb+eS\u002fdr6fGi\u002fd5L+Ml24Sg8Dkv6RwPQrXo+S\u002fukkMAiuH5L\u002fQItv5fmrkv+j7qfHSTeS\u002f\u002ftR46SYx5L8UrkfhehTkvyqHFtnO9+O\u002fQmDl0CLb479YObTIdr7jv24Sg8DKoeO\u002fhOtRuB6F47+cxCCwcmjjv7Kd76fGS+O\u002fyHa+nxov47\u002feT42XbhLjv\u002fYoXI\u002fC9eK\u002fDAIrhxbZ4r8i2\u002fl+arzivzi0yHa+n+K\u002fUI2XbhKD4r9mZmZmZmbiv3w\u002fNV66SeK\u002flBgEVg4t4r+q8dJNYhDiv8DKoUW28+G\u002f1qNwPQrX4b\u002fufD81XrrhvwRWDi2yneG\u002fGi\u002fdJAaB4b8wCKwcWmThv0jhehSuR+G\u002fXrpJDAIr4b90kxgEVg7hv4ps5\u002fup8eC\u002fokW28\u002f3U4L+4HoXrUbjgv873U+Olm+C\u002f5tAi2\u002fl+4L\u002f8qfHSTWLgvxKDwMqhReC\u002fKFyPwvUo4L9ANV66SQzgv6gcWmQ739+\u002f2M73U+Ol378IgZVDi2zfvzAzMzMzM9+\u002fYOXQItv53r+Ql24Sg8Dev7hJDAIrh96\u002f6Pup8dJN3r8QrkfhehTev0Bg5dAi292\u002fcBKDwMqh3b+YxCCwcmjdv8h2vp8aL92\u002f+Chcj8L13L8g2\u002fl+arzcv1CNl24Sg9y\u002fgD81XrpJ3L+o8dJNYhDcv9ijcD0K19u\u002fAFYOLbKd278wCKwcWmTbv2C6SQwCK9u\u002fiGzn+6nx2r+4HoXrUbjav+jQItv5ftq\u002fEIPAyqFF2r9ANV66SQzav2jn+6nx0tm\u002fmJmZmZmZ2b\u002fISzeJQWDZv\u002fD91HjpJtm\u002fILByaJHt2L9QYhBYObTYv3gUrkfheti\u002fqMZLN4lB2L\u002fYeOkmMQjYvwArhxbZzte\u002fMN0kBoGV179Yj8L1KFzXv4hBYOXQIte\u002fuPP91Hjp1r\u002fgpZvEILDWvxBYObTIdta\u002fQArXo3A91r9ovHSTGATWv5huEoPAytW\u002fwCCwcmiR1b\u002fw0k1iEFjVvyCF61G4HtW\u002fSDeJQWDl1L946SYxCKzUv6ibxCCwctS\u002f0E1iEFg51L8AAAAAAADUvzCyne+nxtO\u002fWGQ730+N07+IFtnO91PTv7DIdr6fGtO\u002f4HoUrkfh0r8QLbKd76fSvzjfT42XbtK\u002faJHtfD810r+YQ4ts5\u002fvRv8D1KFyPwtG\u002f8KfGSzeJ0b8YWmQ730\u002fRv0gMAiuHFtG\u002feL6fGi\u002fd0L+gcD0K16PQv9Ai2\u002fl+atC\u002fANV46SYx0L9QDi2yne\u002fPv7ByaJHtfM+\u002fENejcD0Kz79gO99PjZfOv8CfGi\u002fdJM6\u002fEARWDi2yzb9waJHtfD\u002fNv9DMzMzMzMy\u002fIDEIrBxazL+AlUOLbOfLv+D5fmq8dMu\u002fMF66SQwCy7+QwvUoXI\u002fKv+AmMQisHMq\u002fQIts5\u002fupyb+g76fGSzfJv\u002fBT46WbxMi\u002fULgehetRyL+wHFpkO9\u002fHvwCBlUOLbMe\u002fYOXQItv5xr\u002fASQwCK4fGvxCuR+F6FMa\u002fcBKDwMqhxb\u002fAdr6fGi\u002fFvyDb+X5qvMS\u002fgD81XrpJxL\u002fQo3A9CtfDvzAIrBxaZMO\u002fkGzn+6nxwr\u002fg0CLb+X7Cv0A1XrpJDMK\u002fkJmZmZmZwb\u002fw\u002fdR46SbBv1BiEFg5tMC\u002foMZLN4lBwL8AVg4tsp2\u002fv8AehetRuL6\u002fYOf7qfHSvb8gsHJoke28v+B46SYxCLy\u002fgEFg5dAiu79ACtejcD26v+DSTWIQWLm\u002foJvEILByuL9gZDvfT423vwAtsp3vp7a\u002fwPUoXI\u002fCtb+Avp8aL920vyCHFtnO97O\u002f4E+Nl24Ss7+AGARWDi2yv0DhehSuR7G\u002fAKrx0k1isL9A5dAi2\u002fmuv8B2vp8aL62\u002fQAisHFpkq7+AmZmZmZmpvwArhxbZzqe\u002fgLx0kxgEpr\u002fATWIQWDmkv0DfT42XbqK\u002fgHA9CtejoL8ABFYOLbKdvwAnMQisHJq\u002fgEkMAiuHlr+AbOf7qfGSvwAfhetRuI6\u002fAGQ730+Nh78AqvHSTWKAvwDeT42XbnK\u002fAKjx0k1iUL8AFK5H4XpkPwCAarx0k3g\u002fAPp+arx0gz8AtMh2vp+KP4A3iUFg5ZA\u002fgBSuR+F6lD+A8dJNYhCYPwDP91PjpZs\u002fAKwcWmQ7nz\u002fAxCCwcmihP0AzMzMzM6M\u002fwKFFtvP9pD+AEFg5tMimPwB\u002farx0k6g\u002fgO18PzVeqj9AXI\u002fC9SisP8DKoUW2860\u002fQDm0yHa+rz8AVOOlm8SwP0CLbOf7qbE\u002foML1KFyPsj\u002fg+X5qvHSzPyAxCKwcWrQ\u002fgGiR7Xw\u002ftT\u002fAnxov3SS2PwDXo3A9Crc\u002fYA4tsp3vtz+gRbbz\u002fdS4PwB9PzVeurk\u002fQLTIdr6fuj+A61G4HoW7P+Ai2\u002fl+arw\u002fIFpkO99PvT9gke18PzW+P8DIdr6fGr8\u002fAAAAAAAAwD+gm8QgsHLAP1A3iUFg5cA\u002f8NJNYhBYwT+gbhKDwMrBP0AK16NwPcI\u002f4KWbxCCwwj+QQWDl0CLDPzDdJAaBlcM\u002f0HjpJjEIxD+AFK5H4XrEPyCwcmiR7cQ\u002f0Es3iUFgxT9w5\u002fup8dLFPxCDwMqhRcY\u002fwB6F61G4xj9gukkMAivHPwBWDi2yncc\u002fsPHSTWIQyD9QjZduEoPIP\u002fAoXI\u002fC9cg\u002foMQgsHJoyT9AYOXQItvJP\u002fD7qfHSTco\u002fkJduEoPAyj8wMzMzMzPLP+DO91Pjpcs\u002fgGq8dJMYzD8gBoGVQ4vMP9ChRbbz\u002fcw\u002fcD0K16NwzT8g2c73U+PNP8B0kxgEVs4\u002fYBBYObTIzj8QrBxaZDvPP7BH4XoUrs8\u002fqPHSTWIQ0D+APzVeuknQP1CNl24Sg9A\u002fINv5fmq80D\u002f4KFyPwvXQP8h2vp8aL9E\u002foMQgsHJo0T9wEoPAyqHRP0Bg5dAi29E\u002fGK5H4XoU0j\u002fo+6nx0k3SP7hJDAIrh9I\u002fkJduEoPA0j9g5dAi2\u002fnSPzgzMzMzM9M\u002fCIGVQ4ts0z\u002fYzvdT46XTP7AcWmQ739M\u002fgGq8dJMY1D9QuB6F61HUPygGgZVDi9Q\u002f+FPjpZvE1D\u002fIoUW28\u002f3UP6Dvp8ZLN9U\u002fcD0K16Nw1T9Ii2zn+6nVPxjZzvdT49U\u002f6CYxCKwc1j\u002fAdJMYBFbWP5DC9Shcj9Y\u002fYBBYObTI1j84XrpJDALXPwisHFpkO9c\u002f4Pl+arx01z+wR+F6FK7XP4CVQ4ts59c\u002fWOOlm8Qg2D8oMQisHFrYP\u002fh+arx0k9g\u002f0MzMzMzM2D+gGi\u002fdJAbZP3Boke18P9k\u002fSLbz\u002fdR42T8YBFYOLbLZP\u002fBRuB6F69k\u002fwJ8aL90k2j+Q7Xw\u002fNV7aP2g730+Nl9o\u002fOIlBYOXQ2j8I16NwPQrbP+AkBoGVQ9s\u002fsHJoke182z+IwMqhRbbbP1gOLbKd79s\u002fKFyPwvUo3D8AqvHSTWLcP9D3U+Olm9w\u002foEW28\u002f3U3D94kxgEVg7dP0jhehSuR90\u002fGC\u002fdJAaB3T\u002fwfD81XrrdP8DKoUW2890\u002fmBgEVg4t3j9oZmZmZmbePzi0yHa+n94\u002fEAIrhxbZ3j\u002fgT42XbhLfP7Cd76fGS98\u002fiOtRuB6F3z9YObTIdr7fPzCHFtnO998\u002fgGq8dJMY4D9oke18PzXgP1S4HoXrUeA\u002fPN9PjZdu4D8kBoGVQ4vgPxAtsp3vp+A\u002f+FPjpZvE4D\u002fgehSuR+HgP8yhRbbz\u002feA\u002ftMh2vp8a4T+g76fGSzfhP4gW2c73U+E\u002fcD0K16Nw4T9cZDvfT43hP0SLbOf7qeE\u002fLLKd76fG4T8Y2c73U+PhPwAAAAAAAOI\u002f7CYxCKwc4j\u002fUTWIQWDniP7x0kxgEVuI\u002fqJvEILBy4j+QwvUoXI\u002fiP3jpJjEIrOI\u002fZBBYObTI4j9MN4lBYOXiPzReukkMAuM\u002fIIXrUbge4z8IrBxaZDvjP\u002fTSTWIQWOM\u002f3Pl+arx04z\u002fEILByaJHjP7BH4XoUruM\u002fmG4Sg8DK4z+AlUOLbOfjP2y8dJMYBOQ\u002fVOOlm8Qg5D9ACtejcD3kPygxCKwcWuQ\u002fEFg5tMh25D\u002f8fmq8dJPkP+Slm8QgsOQ\u002fzMzMzMzM5D+48\u002f3UeOnkP6AaL90kBuU\u002fiEFg5dAi5T90aJHtfD\u002flP1yPwvUoXOU\u002fSLbz\u002fdR45T8w3SQGgZXlPxgEVg4tsuU\u002fBCuHFtnO5T\u002fsUbgehevlP9R46SYxCOY\u002fwJ8aL90k5j+oxks3iUHmP5TtfD81XuY\u002ffBSuR+F65j9kO99PjZfmP1BiEFg5tOY\u002fOIlBYOXQ5j8gsHJoke3mPwzXo3A9Cuc\u002f9P3UeOkm5z\u002fcJAaBlUPnP8hLN4lBYOc\u002fsHJoke185z+cmZmZmZnnP4TAyqFFtuc\u002fbOf7qfHS5z9YDi2yne\u002fnP0A1XrpJDOg\u002fKFyPwvUo6D8Ug8DKoUXoP\u002fyp8dJNYug\u002f5NAi2\u002fl+6D\u002fQ91PjpZvoP7gehetRuOg\u002fpEW28\u002f3U6D+MbOf7qfHoP3STGARWDuk\u002fYLpJDAIr6T9I4XoUrkfpPzAIrBxaZOk\u002fHC\u002fdJAaB6T8EVg4tsp3pP\u002fB8PzVeuuk\u002f2KNwPQrX6T\u002fAyqFFtvPpP6zx0k1iEOo\u002flBgEVg4t6j98PzVeuknqP2hmZmZmZuo\u002fUI2XbhKD6j84tMh2vp\u002fqPyTb+X5qvOo\u002fDAIrhxbZ6j\u002f4KFyPwvXqP+BPjZduEus\u002fyHa+nxov6z+0ne+nxkvrP5zEILByaOs\u002fhOtRuB6F6z9wEoPAyqHrP1g5tMh2vus\u002fRGDl0CLb6z8shxbZzvfrPxSuR+F6FOw\u002fANV46SYx7D\u002fo+6nx0k3sP9Ai2\u002fl+auw\u002fvEkMAiuH7D+kcD0K16PsP4yXbhKDwOw\u002feL6fGi\u002fd7D9g5dAi2\u002fnsP0wMAiuHFu0\u002fNDMzMzMz7T8cWmQ730\u002ftPwiBlUOLbO0\u002f8KfGSzeJ7T\u002fYzvdT46XtP8T1KFyPwu0\u002frBxaZDvf7T+YQ4ts5\u002fvtP4BqvHSTGO4\u002faJHtfD817j9UuB6F61HuPzzfT42Xbu4\u002fJAaBlUOL7j8QLbKd76fuP\u002fhT46WbxO4\u002f4HoUrkfh7j\u002fMoUW28\u002f3uP7TIdr6fGu8\u002foO+nxks37z+IFtnO91PvP3A9CtejcO8\u002fXGQ730+N7z9Ei2zn+6nvPyyyne+nxu8\u002fGNnO91Pj7z8AAAAAAADwPw=="},"y":{"dtype":"f8","bdata":"AAAAAAAAAAAXb8YPbTcZvKpD+CAQDiu87N5l6GTLNbzb7ktYJEA\u002fvLAQJ2gTCEW8BiG142w2S7wCjN4AziNRvIifVtM7LlW8MuBJemzNWbxkoxqaLhdfvELIUCxRkmK8L\u002fCcuFwJZrxP6Yk3ZQFqvNOjUvecjW68yUCETQ\u002ficbwV0QF9Lt90vAuy3eHRTHi8KubQttU7fLz5Mm7U0F+AvEw9ElVF94K8BbPluSHxhbxq+gz2LlyJvPZjnv1vSY28+Q+mrjvmkLzCkMfW5H2TvHJQF2ineJa8zxiuGGrlmbz5b5JNUdWdvIR0FqMKLqG8cl5PnTLIo7wZfZuvLMamvAz4DwX7Nqq88Oo9R+ErrrxIcM2wXVyxvAsdb6cw+rO8Oij78oz8trxKc8xzj3K6vN2oE3Kabb68EMdWfdaAwbwCQnqu4yLEvGvHT2EvKse8z3pTE\u002fGlyrx\u002f\u002fbmjqafOvAdWQ6W9odG8HWTdY0dI1Lwg0ZPjw1TXvKKx7GCF1tq87qX7fivf3rwJ08TsfcHhvJVvTPOjbOS8q8umE3F+57zejpt6UgbrvGL5usgGFu+8JNBCoPvg8bzKZK4tz5D0vETXZOT+p\u002fe8qbqRFBM2+7xT1tyW6Uz\u002fvDfRysuHAAK9A\u002fkecBS1BL2q3EZTs9EHvQbWBRsIZgu9KamIERCED70O\u002flFHPiASvUhGmXuN2RS9SHafLqb7F73S0ReNR5YbvaW1QouOux+98eypdihAIr35ePH+Qv4kvWY+VYDfJSi9PQp339jGK73FpOzya\u002fMvvY\u002fh8pVJYDK9NJR4AjgjNb2vkGEkYlA4vVUqQMm+9zu9AO0pcdUVQL02gETnooBCvbqEa8FtSEW9k\u002fFBUy97SL0lW4CE+ihMvQc300wmMlC9zkw4EDWhUr12+Yrp5G1VvYdHwMVHpli9qzg22IxaXL1oN834qE5gve7e+YcAwmK9CWoE\u002f52TZb0S7YMPrNFovVB2TWp2jGy9Ih3F0l1rcL1Ag7q4BeNyvYl1mnqZuXW9EJI4ulz9eL35sgjYt758vdhUsDRFiIC9W8OFCUUEg70J5HLS19+FvfiSbk1aKYm9Kv0KvVHxjL3vW\u002fB3X6WQvenjDeG+JZO9\u002fI+UfFkGlr3+TNJQpVWZvbjfT7VEJJ2913Iy9qzCoL0JQ3Kmc0ejvdcvl+8eLaa94MzHTD6Cqb1yMbVdkVetvbWXrAku4LC9plJ1wWNps70\u002fI9OiKFS2vU4slcolr7m97a8gVDiLvb3VQy4N4\u002f3AvemLi5qPi8O9c9tuDnd7xr1Sr25UXNzJvSYJizc6v829ln0lXMwb0b16J+Ca963TvQ9SY6sKo9a9iA17deIJ2r20CQSol\u002fPdvQzvoFLqOeG9ZDtXLJzQ472oOX7z48rmvae+1bm4N+q9Oha1RlEo7r03PFFNPVjxvQI1j7l98\u002fO9w6FjYQPz9r25eSsu\u002flz6vblCQw9PSv69OGtixzxHAb4Vbs0jY7sDvmACdSj2jQa+EUV216rNCb4C68bK\u002fIoNvmIMLS1t7BC+JIBpBoVmE778A1E8S0AWvqYcV3EmiBm+mJPfwaZOHb53wQR2bNMgvtbmDP1SUyO+\u002f\u002fQVpaAzJr5lOcWQ04IpvvhBOiOXUS2+D+cJ34vZML4oJ8yKsV4zvqbok3\u002frRDa+kX1yc9CaOb76X5k2KHE9vszSOQOg7UC+vuFzxqV3Q774Yp85amNGvh3Qt1ydv0m+gndoKySdTb4qP4jCtgdRvviWlOtpllO+o\u002fYOmmKGVr6QJOuzXOdZvjtxbK1Nyl2+rpKEuGUhYb4k5lcVqLNjvu82BQ7aqGa+LB3wdtoPar52c7xhw\u002fltvnMPloEgPXG+OWTNKfrTc74JVU30Xs52vt4zwgxXO3q+UOMQMxksfr5uGA+9OlqBvsGlXxCa9YO+gEnNdkT1hr4cAvmhTGiKvqZVeXwGYI6+ut8laTJ4kb4LTIbUKxiUvjRMWO4gHZe+wsPhkT6Wmr5b1Cc++ZSevt5IB4yylqG+0MCbVE07pL43qXR8lUWnvszYMJnSxKq+A8Nh4pfKrr5XeAlwjrWxvlvaXV3RXrS+wdmzpHRut75T476x2vO6vu1oK8y1AL++M+BmgLDUwb4fleQ1o4LEvuNwCH6ql8e+ScES1EMjy77\u002flXypQDfPvsx57e0P9NG+bQ2FYrqm1L7HAy7bLsHXvqyjqhoGU9u+VWX87jBu3755i4sjqRPivnWLPIATy+S+DGswkv7q575toTiTHoPrvjisB+WDpe++w3xg5Xoz8r4q6Hd3re\u002f0vsTBqrMYFfi+7ayfeoyz+74702wBOd3\u002fvk32KhCFUwK\u002fZnq8SIgUBb\u002fgkhldfT8Iv1HW0AVQ5Au\u002fGmC9PqgKEL9Oe46zx3MSv8oPJfGjORW\u002fjkM\u002fkixqGL8rXvlUaRUcv9zvXFPlJiC\u002fQPaoH0OUIr+5tqjwAF8lvzi3tukmlSi\u002fLatG\u002fdhGLL8GFwgFVEMwv21uvpL3tDK\u002fmZYVfJ+ENb+we76kbMA4v8BypYafeDy\u002fxi8TqPRfQL9mZ2BX5dVCvyTpFrJ\u002fqkW\u002fThO2aP3rSL88aQJSu6pMv98nJPHFfFC\u002f1RpJnAr3Ur8VG7jxntBVvwdqcnDVF1m\u002fatLiWyfdXL+bJeoSxJlgv5cuEyZhGGO\u002fSyfJJfP2Zb\u002fZcnfE5ENpv1RxUXHKD22\u002fc3wSs9q2cL\u002fS0FagyTlzv2XaMxRNHXa\u002f2FLbXuNveb\u002fGSNSROEJ9vw1mfcC504C\u002fW+jdUctag78ZOAvA9UKGv+SPvnS9mom\u002f3dM8zMtyjb\u002fUxJoIHu+Qv9mutgl5eZO\u002fUGmJu\u002fxklr+RmhGe9r+ZvyVjPQmzmp2\u002fKYKkyNoDob+oMljq942jv7aJSIl4d6a\u002fPvetNYPNqb90OIFcn56tv6W8naxP\u002fbC\u002feYRIpDJ5s7\u002fyHVNyt0u2vyFnS0iIfbm\u002fjI9yLKAWvb+xQI5xtI7Av73VFWPCysK\u002fYmaHVCE\u002fxb\u002fKnmrlaejHvx\u002fa\u002ftQ\u002fv8q\u002fcaPOo6K3zb+Z6tBKYGDQv1+DmfHL4tG\u002fDYkwnkdX078P3uEo77HUv1jYE6cm6NW\u002fA4Yib8nx1r8ERQc13cnXv8Hh8fqmbti\u002fbDBn3jjh2L\u002fXhhidsiTZvwQhavxwPdm\u002fkukis1sw2b+bj4tSYALZv0dzS7QkuNi\u002fMJQ0MdlV2L87Obm3MN\u002fXvyZd92dgV9e\u002foi+A3i7B1r+CJsqwAh\u002fWvzL1PizyctW\u002fHzG13tG+1L95v9TdPwTUv\u002fxQ6GquRNO\u002f4kVKNGqB0r\u002fiNU32obvRv3Wtln1o9NC\u002fz8t+7ros0L8Hg4tA\u002f8rOv0CGGiIXP82\u002f\u002f3aCrEC3y7\u002f9\u002f20S3zTKv8KdVvozuci\u002fPywN+GFFx78jnWkNbdrFv1fILa07ecS\u002fzdu2Epciw798NDA9LdfBv0WWMYOQl8C\u002f3q8xxXHIvr+2O48gDXu8vys2DB5\u002fR7q\u002fBL12RywuuL\u002f2zQ8gSC+2vwS\u002fFvjiSrS\u002ffYwwCOSAsr+KsneJEtGwv3REXDMrdq6\u002fw\u002fCAjep8q78t+KCgSrWovy6dH9r2Haa\u002fkVPraIO1o78b9qzYUnqhvxjXdwpx1Z6\u002fjB87Ws4Jm7\u002few7fiCY6Xv\u002f7k22NQXpS\u002fI9azDLx2kb96lCo4yaaNv4Eq2Pam4Ii\u002fgAaVBE+ThL+58fmm9LaAv7TFA2oYiHq\u002fECIJrzpmdL8abw9C1\u002fNtv9mbY8VUamS\u002fxpkV5TgqWL+ZlZI9gmlDvyfPOmi75yU\u002fNDqEMOOySj8c4SctUU1WP7mCJOaUwV0\u002fxWzZtvLuYT+E3XBcOGNkP+yJL1mVTmY\u002f+vwQX+vAZz\u002fWyRaelchoP7DII0Qsc2k\u002fF5TCGbjMaT8fkIz0juBpP\u002f8nWuCcuGk\u002fLpmTyUteaT9x\u002fCARl9loP4Wjk575MWg\u002fou3cdBluZz\u002fk+aF1YZNmPwi8mjVbp2U\u002flx+T9\u002f2tZD928Sw6XatjP3E1pUWfomI\u002feah9M2+WYT+U2GQtDIlgP4eB1XKD+F4\u002fGpWub9fiXD8PjmnD9NJaP+5Q+lCBylg\u002fAKloiZTJVj+uykq1ptBUP0EU25DV3lI\u002f8FbNshDzUD9fQ+3vFRdOP9\u002fnt7IJTEo\u002fxxMoqgN\u002fRj+NQEoXRalCPxg9Q\u002fg9hD0\u002f1a5ZPUCANT89www7imAqP8RYZOHG5RE\u002fiIkrkW8AE7+NKG91n0Atv+4g\u002fg37Szm\u002fDkAkjHp4Qr+CL4PqmeBIv\u002fU3A3mE+0+\u002fZbA3ABj1U785ssaqdmlYvzJOHOujcF2\u002fYAX3TtWRYb\u002fY4hcqss9kv1ud3s5agmi\u002f770Dqui8bL9CUuhJjcpwv+UQpqgFknO\u002fBlVBv0zDdr8H0XTq5256v8TpWFLQp36\u002fKjFIWeTBgb9VwAGbx42Ev7i5wRHDxYe\u002fAxD9SNt5i78ZItZPJ7yPvwr63616UJK\u002fUqQ7QVcflb8vHlPk8laYv9tWUT1nBJy\u002faabH7qsaoL9pvlC5pnuiv7CECsReK6W\u002feKjR19ouqL9u8vV264irv+e2+uf+OK+\u002fC60vldKcsb8iUESOnL+zv5qRV8Vd+7W\u002farZWZNNCuL887R4EcIW6v2tzyhqrsLy\u002fMLONONSxvr\u002fgysNNHzzAvxDlJ+CC+8C\u002fIRKGFA+Twb+0XpfAOwHCv+0L1NakRsK\u002fgNKe54Blwr9Bf0qhBGHCv62tZarfPMK\u002fg5MLh9z8wb9RwuCaoKTBv5FuUTqPN8G\u002fPYTclbi4wL\u002f6DJLw3irAvykf54\u002fvIL+\u002fYOMcpHLXvb\u002f+q1\u002fbPn28vyHgNiXvFbu\u002fMbLTzcqkub\u002fSpMX70Sy4vzCWn7vIsLa\u002fp732uzUztb+JglVuc7azv\u002fWdb5OkPLK\u002fjFlLL8PHsL+wAUHOM7Ouv\u002fAwjxmS56u\u002flLucFowvqb8GKAd2uY2mvxeO+OJgBKS\u002fegTdk3SVob9mKph3PYWev3jOtsRuGpq\u002fXQnr253slb87nPKSYf2Rv8xbSLN8m4y\u002fjM6QUoS8hb+mp8p36Lt+v+4Ej\u002f0f\u002fnK\u002fsGc9GeJ4YL+\u002fG9rkOdw4P4aipY4lzWQ\u002f3OfAoEpVcj9UicOjMWJ5P3mTV5i+ln8\u002fmQ3HeHd+gj9Gux2D2M+EPx\u002fhjoshxYY\u002fa5esxEJkiD93Y1nrPrOJP9gsag88uIo\u002fplPamWp5iz9UFE1X8fyLP5fKwugDSYw\u002fnMqNq55jjD9geLTnxVKMP9anPnk1HIw\u002fJgNhp5nFiz8w1lh+XlSLP4v14DK\u002fzYo\u002fUJRmS8A2ij80GPAEKZSJP6s661SJ6og\u002fPHsxUSs+iD9LzZQzLZOHP4YlUihY7YY\u002frVFTiVdQhj8DvLvSiL+FP9\u002f8V8McPoU\u002fDm73HAvPhD\u002fk\u002fFLYHHWEP\u002fTGFOfoMoQ\u002fYHuxnN8KhD8tJlasQv+DP+auXuUtEoQ\u002f3FVv9aJFhD+fEGOpbZuEPyEtyoRXFYU\u002fdnZ4Rfi0hT97VKXy1nuGPySikUpea4c\u002f9V+4zOiEiD+1fgKqrcmJP0aoNELiOos\u002fHpzfhZPZjD9cXUFkw6aOPyQZ3dyzUZA\u002fAaP\u002f6SVokT+p5+6VG5eSPyQ5GLvo3pM\u002fa6Ydo9U\u002flT9jJsmlHLqWP4s+PG7tTZg\u002fXX9jO2P7mT+7DtrQi8KbP\u002f0T9rdlo50\u002fVvRXedednz8S9Zxg3digP8s2nQhn76E\u002fRfjT0l4Soz\u002fEUPMrjkGkP6fpdR6zfKU\u002f+BPmiH7Dpj84qRfvlBWoP81PcJSLcqk\u002fBniZXevZqj9nm8\u002fOL0usPyXrTT7Cxa0\u002fDrYHQANJrz+kg867H2qwP9xhMOtcM7E\u002fVvrqJ9L\u002fsT9ti6g6Es+yP0E+476ooLM\u002f\u002fD27ixt0tD9lSp7w6Ui1P1eHVquNHrY\u002f3hS63nv0tj8jJ0yPI8q3Py+DkGXxnrg\u002fyY80KUxyuT9ewXjbmkO6P9yp8d0+Ers\u002f4b0VkZrduz9qoY+JDqW8P4fof+j6Z70\u002fP282r8Ilvj+i1MHfxt2+P9\u002feWZRvj78\u002fvPc03xEdwD\u002fUvCQ2qW7AP+I53xw2vMA\u002fv9QXT3UFwT9inGl8JUrBP0MlF+kJisE\u002fWE2RlunEwT\u002foiuxdj\u002frBP1R\u002fyz3MKsI\u002fnMIurHNVwj9N1M9ZYXrCP36SvYRzmcI\u002f+xeUL5Cywj8iBQixocXCP9\u002ftT\u002f6Y0sI\u002fD1k93mzZwj8XiCmJGdrCP3bmhFyi1MI\u002foxxy0w7Jwj\u002fd6lmubrfCPyFcIGLUn8I\u002fJIXzB1uCwj\u002fhOZ+dIF\u002fCP3jG\u002fIpJNsI\u002f+Kb8L\u002f8Hwj+AyztabtTBP9J1Wa7Jm8E\u002fhvxL7UVewT+iGaVUHRzBP+PiH0CL1cA\u002fZomaA9CKwD+x2DH1KzzAP5OqhVfG078\u002fpEj+EnUovz+Afutp7na+P4VZTXrBv70\u002fqoD0fnkDvT\u002fFjWnWpEK8P4vPQLDNfbs\u002fCBbS1321uj\u002fsHAAOO+q5P\u002fDlWl6HHLk\u002fvPc0heFMuD9bxFp3wHu3P6hxmc+YqbY\u002fU8HrZ9TWtT+FDB8\u002f2gO1P4R18ZMGMbQ\u002fBZ2tHa9esz+Mj+3zII2yP2q+coqfvLE\u002ftyjUbGbtsD8ZdaYcph+wP8V1sKkPp64\u002fZSZU208SrT9yVEX5OIGrP7\u002fpzSTd86k\u002feZZTKj5qqD9di3arSuSmP4\u002f5f\u002ffaYaU\u002fuLzE0rjioz9vweXVlmaiP3YflaAb7aA\u002f5TBzXqzrnj8G8MqOmACcP1EPx0zdF5k\u002fJg9ZhkYwlj+qujwXhkiTPxWRtr0yX5A\u002f+U5MEqrlij9qLAgvuQOFP1wHFYXOKn4\u002fZ8CkE8Qucj+MJwFDAjNYP7Zm1FZhCFm\u002feAtK4lTEcr+8F8MTrYB\u002fv2T91NzEPoa\u002fIYIgG4\u002fgjL9z\u002fVPdWdSRv85HZRP3TJW\u002fxz9b\u002fGnbmL+J04Ru04Ccv6nkL3EZH6C\u002fDU87KisKor\u002fmBCAs8gGkv6nu8amhBqa\u002fuX04ilQYqL+YyCmSBTeqv2lYrdiMYqy\u002fFBicGaSarr+50zCubW+wv935JoRRl7G\u002fLqkoHaDEsr\u002fwTABx6vazv7LnGfOrLbW\u002frzhzEk1otr+Pyp43Iqa3v2i5oNRr5ri\u002fmONZflgour+tNG76Amu7vx374X52rby\u002fvYq\u002faazuvb+qMk5PkC2\u002fv7qnJTyANMC\u002fzHJyVufPwL8mLLqQYmjBv9j4qWhS\u002fcG\u002feL6VzhWOwr8gFI\u002fJCRrDv058fQmMoMO\u002fwDnLzPsgxL+m1Osnu5rEv1rmplExDcW\u002fv\u002fz\u002fEst3xb+urwTs\u002fdnFv25OxZ5HM8a\u002f5BFOdDKDxr9aTTj+U8nGv\u002fX9qCRRBce\u002f5C8He942x79s35BuwV3HvzE75IfTece\u002fYne4\u002fwGLx79KWT5mUJHHv\u002fUrXDfZjMe\u002fgT6tr9B9x7\u002fqN3rRg2THv7Ox2g5cQce\u002fly4sLt8Ux79pUfmjsN\u002fGvwdmQeiTosa\u002fQPSY\u002fWtexr+bdHs3PhTGvydPCboyxcW\u002feZ\u002f7mpVyxb82ddjP1x3Fv7TWfJGQyMS\u002fqSjJQXx0xL95o6wVfSPEvwifjTaZ18O\u002fB0Tk9\u002fWSw7\u002f3he6001fDvzT+hP2BKMO\u002fmW0\u002fdE8Hw7857ZxfdPbCv4wNKYTu98K\u002fJ0LLGVUNw7+WGsiDnDfDv93p0mfLdsO\u002f4PEOGavJw79ppVhwdC3Ev3oS\u002fMOXncS\u002fSCBlPrATxb8SqFlLyYfFv5JjKsD28MW\u002fzltZRUZGxr\u002f6K2tuz3\u002fGv9Cdx0ull8a\u002fMkPy3WOKxr+57t04TFfGv5AWAqjL\u002f8W\u002fdcVmW\u002feGxb+d4LpHxfDEv8xRjl19QcS\u002f84RYek59w78l6bfbDqjCvyaynU0jxcG\u002fTFi3U3vXwL\u002fZej3gNsO\u002fv8HuB2pWy72\u002f8adWZRPLu78xyIrUqsW5v62SitYCvre\u002fHjhu8q+2tb8jhkr\u002fCrKzvwXNxhc7srG\u002f4r4LPHdyr797z2a5wpGrv4S2N5K8xae\u002fsJYkuoURpL961vSs\u002fHegvyKqd66E95m\u002f2fYK2Wg+k78bThkIxJGJv6SjA9Csanq\u002f080Q3tzfRr9NM+Z3u31zP\u002fqzXhS8TIQ\u002fMtWRbz44jj+HvtCzZ7+TP\u002fZpLlB4D5g\u002fl6t9ofILnD+PgMPx8bSfPxBENDZ5haE\u002f+yOtHWcHoz95sPCA32CkP3utCJyhkqU\u002fcMAYLZqdpj\u002fy5oVvyYKnPw63NulXQ6g\u002fPVlc7nrgqD9wSO7eglupPwm5U1rKtak\u002f3Eeqp7bwqT+GzQyVtw2qP2NXebw5Dqo\u002fTB+gWLDzqT\u002fHYUnkgr+pP5chx6kac6k\u002f+W6CFc0PqT9ugmQU7paoP2DmEm+8Cag\u002fdT4RBGhppz\u002fSp4a\u002fE7emP25Vmy3L86U\u002fbi1lR4wgpT8S8NvXPj6kP6pSYz65TaM\u002fqFMqrb9Poj9T+PSxBEWhP1QzVeAqLqA\u002f45HLH4kXnj+CdtyGs7ybPzqqNYrETJk\u002fu7ldVqTIlj9la7tkJDGUP4fWjDwOh5E\u002fMSg5c1SWjT+kqq6BevyHPyIuCO8qQoI\u002fVFdmzCDSeD+UZM1VCcxpP4BGennTfCg\u002f8JbF0Z8fZ7+\u002f4heUWhB4vzHW\u002f3MiXIK\u002f5Bnki9TAiL+QEES16zKPv1XD6iJm15K\u002fmwB\u002fDzUYlr\u002fLcbbqtVmZv3Cyx+qKmZy\u002fNMmj2B\u002fVn7916Qvt34Shv2dLqYY7GqO\u002fOxV7BB6ppL\u002fmjGzL5S+mv+9D6t7orKe\u002fYHlyRWYeqb9MurclmYKqv9x3juOs16u\u002flBmNNssbrb8xvYQNHk2uv8LzVXvLaa+\u002fyrue9gQ4sL83DWX\u002fB6+wv8YzLRwXGbG\u002fS\u002finQWB1sb\u002fDi0cXIcOxvwncVNeiAbK\u002fD8i7+EEwsr9uj3fUa06yv30WSyqjW7K\u002fdYmKi4FXsr9EyBtct0GyvwVk+TIQGrK\u002f5NOO33Dgsb8v7jO52pSxv0Xmv6RrN7G\u002fA6oHM17IsL9Zzw7kCEiwvxag7m\u002fEba+\u002fOzw1RPIqrr+PP44k+Misv9onCqZjSau\u002f2BI0S\u002fmtqb\u002fEEYZtqvinvzypApGYK6a\u002fI7m3SwpJpL+Q+3QAbVOivyJAwoFNTaC\u002fOghWb51ynL8L0NlFYjSYv+Phpgl05ZO\u002fB7eySwYXj785t+ZldFiGv8ulDrclNXu\u002fdHa4nkuiY7+mpCHX4ZNdP5vhydLRV3g\u002fG3JjTFJ5hD8qsmyu0ZCMP0pNwj2FNJI\u002fFRmK+5H8lT\u002faVDJogJyZPzVapEySEJ0\u002f3RKjiLUqoD9UHe0\u002fCLShP+QGZWr5IqM\u002fyPD+VnB2pD\u002fo11TKka2lP+epVK6vx6Y\u002f4NY8w1fEpz95DfZvSKOoP2f6ZQp1ZKk\u002fDqV07gEIqj90KalaRI6qP+iJW6++96o\u002fpSGqfBtFqz8eSyxiM3erP8xHPRX6jqs\u002f0O4fao+Nqz8irQPYKHSrP+JsfE8aRKs\u002fzJ\u002fyIs3+qj+kk1oQvqWqPza+t9Z4Oqo\u002f5pSAnpW+qT9TYEJutTOpP5sEp6R7m6g\u002fJWHIY5T3pz83QPyxoUmnP+B+VDFKk6Y\u002fKAPZwynWpT9B+CES1BOlPwFk5mjTTaQ\u002fcS3j9KWFoz8inK5fubyiPy7Skvxu9KE\u002fvdrWmBUuoT9Uojv46mqgPwMXg444WJ8\u002f3tKKGoXlnT\u002foLrl3yX+cP3gj4H3wKJs\u002fldkNF73imT8Iea\u002f1za6YPwUJDeOhjpc\u002f6D3uFY+Dlj8SgLBfz46VPz2Kqet8sZQ\u002fumXp4o\u002fskz8O7kew50CTP6qKyFhJr5I\u002fDR9951o4kj+kOcjps9yRP8AcrE3PnJE\u002faLda3Rd5kT+lFtAi5XGRP09DhXl\u002fh5E\u002f\u002fgHuxhq6kT\u002f9bnD25QmSP2tp0Yv3dpI\u002fQQ49WGIBkz\u002f3L1vLLamTP1E3gjJObpQ\u002fgmnKl7pQlT\u002fG\u002fQf9UlCWPyocHP74bJc\u002f49iwA3immD+4XoTRn\u002fyZPyr3s5Inb5s\u002fNz22K8f9nD9hoWU0JaiePxttNwTtNqA\u002fA8R6Ez4noT9o\u002fPEdwSSiPxtVUYY0L6M\u002fHiMKEEZGpD+iUeKto2mlPx+lDJjpmKY\u002fio90abTTpz\u002f\u002fZLeOjxmpP54il1IBaqo\u002f\u002fp70soTEqz8K9RE9iCitP0zIWrl0la4\u002fXOEXjlAFsD+P6Yt9sMOwP1Kz9C17hbE\u002fyaUz2U5Ksj8FqzfrwRGzP8H1kB5o27M\u002fwuSpCM6mtD+RqgJ0fHO1P1my6433QLY\u002fDp2gsb4Otz\u002fsnT58Tty3P4Bg\u002f30eqbg\u002fRravCaV0uT9CbSpRVD66P6esNUieBbs\u002fLVqYuPHJuz9za2Wqvoq8P5lszPhyR70\u002f99A4jX7\u002fvT\u002flIyA6UrK+PxmymxdgX78\u002fboudNw8DwD8eO3GDAlPAP7qfd8NIn8A\u002fiXXbUqLnwD8w5TPw0ivBP2Cfd0mha8E\u002fE68q79amwT9wLJrRQd3BP6f+SSCzDsI\u002fxeErEgE7wj927SY7BWLCP7RZ8syeg8I\u002f0H9lP7Gfwj+SMdMKJbbCP1IVdTjoxsI\u002f4gIw2ezRwj9U5xHzK9fCP7V2cZGh1sI\u002fu4FKhlHQwj\u002fhpBo7QsTCP0ourYqBssI\u002fz0TmkyCbwj+QsXorNn7CP8uOUfHdW8I\u002fMFFNIDc0wj9qPLrPZgfCP4+LdC2U1cE\u002fMdC6OeyewT\u002fMi2CDnWPBP+OlEdbbI8E\u002fhJFIw9vfwD82aC1n1pfAP1CPncsFTMA\u002fsWzc20z5vz95sUtR7VO\u002fP9CJzUhqqL4\u002fyKyGokX3vT8wPluL\u002f0C9P3Afw1Ebhrw\u002fcQwDkxnHuz93+n8mfQS7P59uIu\u002fDPro\u002fRRjrtW12uT9TtlWP9Ku4Pw=="},"type":"scatter"}],                        {"height":400,"template":{"layout":{"colorscale":{"diverging":[[0.0,"rgb(103,0,31)"],[0.1,"rgb(178,24,43)"],[0.2,"rgb(214,96,77)"],[0.3,"rgb(244,165,130)"],[0.4,"rgb(253,219,199)"],[0.5,"rgb(247,247,247)"],[0.6,"rgb(209,229,240)"],[0.7,"rgb(146,197,222)"],[0.8,"rgb(67,147,195)"],[0.9,"rgb(33,102,172)"],[1.0,"rgb(5,48,97)"]],"sequential":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]]},"colorway":["#4477AA","#EE6677","#228833","#CCBB44","#66CCEE","#AA3377","#BBBBBB"],"font":{"family":"sans-serif","size":13},"legend":{"bgcolor":"rgba(255,255,255,0.8)","bordercolor":"#cccccc","borderwidth":1},"margin":{"b":60,"l":60,"r":20,"t":50},"paper_bgcolor":"white","plot_bgcolor":"white","xaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1},"yaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1}}},"title":{"text":"Im[ρ₁₀(t)] at z = 0 — FID, population-grating storage, echo"},"width":700,"xaxis":{"title":{"text":"t (γ⁻¹)"},"minallowed":-2.5,"maxallowed":1.0},"yaxis":{"title":{"text":"Im(ρ_10)"}},"shapes":[{"line":{"color":"grey","dash":"dash"},"type":"line","x0":-1.5,"x1":-1.5,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"grey","dash":"dash"},"type":"line","x0":-1.0,"x1":-1.0,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"grey","dash":"dash"},"type":"line","x0":0.0,"x1":0.0,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"red","dash":"dash"},"type":"line","x0":0.5,"x1":0.5,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"fillcolor":"grey","layer":"below","line":{"width":0},"opacity":0.08,"type":"rect","x0":-1.0,"x1":0.0,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"showarrow":false,"text":"π\u002f2 (p1)","x":-1.5,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"π\u002f2 (p2)","x":-1.0,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"π\u002f2 (p3)","x":0.0,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"echo","x":0.5,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"},{"showarrow":false,"text":"T_w (population storage)","x":-1.0,"xanchor":"left","xref":"x","y":1,"yanchor":"top","yref":"y domain"}]},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('00000000-0000-0000-0000-000000000002');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+<section id="coherence-during-t_w" class="level3">
+<h3 class="anchored" data-anchor-id="coherence-during-t_w">Coherence during <span class="math inline">\(T_w\)</span></h3>
+<p>The “zero coherence during <span class="math inline">\(T_w\)</span>” picture has two caveats worth noting:</p>
+<ol type="1">
+<li><strong>FID from pulse 2 itself</strong> dephases on the same Doppler timescale <span class="math inline">\(1/\sigma \approx 0.24\,\gamma^{-1}\)</span>.</li>
+<li><strong>Secondary two-pulse echo from pulses 1 and 2</strong> — a pair of <span class="math inline">\(\pi/2\)</span> pulses does generate a partial photon echo, peaking at <span class="math inline">\(t_2 + \tau = -T_w + \tau\)</span>. With <span class="math inline">\(T_w = 1.0\)</span> and <span class="math inline">\(\tau = 0.5\)</span> this secondary echo sits at <span class="math inline">\(t = -0.5\,\gamma^{-1}\)</span>, only <span class="math inline">\(0.5\,\gamma^{-1}\)</span> before <span class="math inline">\(t_3\)</span>, so its dephasing tail overlaps the late storage window. For large <span class="math inline">\(T_w \gg \tau\)</span> this echo has time to fully dephase.</li>
+</ol>
+<p>The cell below measures the maximum net coherence in the late storage window (after the FID from pulse 2 has died) and at the echo time.</p>
+<div id="coherence-check" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:30.994048Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:30.993955Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:30.997001Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:30.996521Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rho10 <span class="op">=</span> mbs.states_zt[<span class="dv">0</span>, :, <span class="dv">1</span>, <span class="dv">0</span>]   <span class="co"># at z = 0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>t_arr <span class="op">=</span> mbs.tlist</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Late storage window — after FID from pulse 2 but may overlap secondary echo</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># secondary echo from pulses 1+2 is at t2 + tau = -T_w + tau = -0.5</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>storage_mask <span class="op">=</span> (t_arr <span class="op">&gt;</span> t2 <span class="op">+</span> <span class="fl">0.7</span>) <span class="op">&amp;</span> (t_arr <span class="op">&lt;</span> t3 <span class="op">-</span> <span class="fl">0.05</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>rho_storage_max <span class="op">=</span> <span class="bu">float</span>(np.<span class="bu">abs</span>(rho10[storage_mask]).<span class="bu">max</span>())</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Echo peak |ρ₁₀| near t = +τ</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>echo_mask <span class="op">=</span> (t_arr <span class="op">&gt;</span> tau <span class="op">-</span> <span class="dv">5</span><span class="op">*</span>T) <span class="op">&amp;</span> (t_arr <span class="op">&lt;</span> tau <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>T)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>rho_echo_max <span class="op">=</span> <span class="bu">float</span>(np.<span class="bu">abs</span>(rho10[echo_mask]).<span class="bu">max</span>())</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"|ρ₁₀| max in late T_w window [t₂+0.7, t₃−0.05] : </span><span class="sc">{</span>rho_storage_max<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"|ρ₁₀| max at echo (t ≈ +τ)                     : </span><span class="sc">{</span>rho_echo_max<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Suppression ratio (storage / echo)              : </span><span class="sc">{</span>rho_storage_max<span class="op">/</span>rho_echo_max<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The secondary two-pulse echo from pulses 1+2 overlaps this window at T_w=1.0;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># for T_w &gt;&gt; tau the secondary echo fully dephases before t3 and this value drops.</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"(The residual coherence at T_w=1.0 is the tail of the secondary echo"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">" from pulses 1+2, which peaks at t2+tau=-0.5 and dephases over ~0.5 γ⁻¹.)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>|ρ₁₀| max in late T_w window [t₂+0.7, t₃−0.05] : 0.1841
+|ρ₁₀| max at echo (t ≈ +τ)                     : 0.0716
+Suppression ratio (storage / echo)              : 2.570
+(The residual coherence at T_w=1.0 is the tail of the secondary echo
+ from pulses 1+2, which peaks at t2+tau=-0.5 and dephases over ~0.5 γ⁻¹.)</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="echo-amplitude-vs-t_w-t_1-measurement" class="level2">
+<h2 class="anchored" data-anchor-id="echo-amplitude-vs-t_w-t_1-measurement">Echo amplitude vs <span class="math inline">\(T_w\)</span>: <span class="math inline">\(T_1\)</span> measurement</h2>
+<p>Running the simulation for storage intervals <span class="math inline">\(T_w \in [1.0, 2.5]\,\gamma^{-1}\)</span> at fixed <span class="math inline">\(\tau = 0.5\,\gamma^{-1}\)</span> demonstrates the exponential decay:</p>
+<p><span class="math display">\[
+A_{\rm echo}(T_w) \propto e^{-T_w/T_1},
+\qquad T_1 = \frac{1}{\Gamma} = \frac{1}{2\pi\times {\rm rate}}
+\approx 1.59\,\gamma^{-1}
+\]</span></p>
+<p>The range <span class="math inline">\(T_w \ge 1.0\,\gamma^{-1}\)</span> is used because shorter <span class="math inline">\(T_w\)</span> values are contaminated by the Hahn echo from pulse-pair (2,3), which appears at <span class="math inline">\(t = T_w\)</span> and falls inside the measurement window when <span class="math inline">\(T_w \le 0.75\,\gamma^{-1}\)</span>.</p>
+<p>Echo amplitude is measured as the peak of the transmitted field <span class="math inline">\(\sum_i |\Omega_i(z_{\rm max},t)|\)</span> in the window <span class="math inline">\(t\in[0.2,\,0.75]\,\gamma^{-1}\)</span> (after the three input pulses have passed, before the (2,3) echo at <span class="math inline">\(t=T_w\)</span>).</p>
+<div id="tw-sweep" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:30.998160Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:30.998096Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:31.021472Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:31.020678Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rate <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>T1 <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> rate)   <span class="co"># ≈ 1.592 γ⁻¹</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>T2 <span class="op">=</span> <span class="fl">2.0</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> math.pi <span class="op">*</span> rate)   <span class="co"># ≈ 3.183 γ⁻¹</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># T_w ≥ 1.0: the Hahn echo from pulses (2,3) at t = T_w is outside</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the measurement window [0.2, 0.75], leaving only the stimulated echo.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Tw_values <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>echo_amps <span class="op">=</span> []</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> Tw_val <span class="kw">in</span> Tw_values:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    t1_v <span class="op">=</span> <span class="op">-</span>(tau <span class="op">+</span> Tw_val)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    t2_v <span class="op">=</span> <span class="op">-</span>Tw_val</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    t_min_v <span class="op">=</span> <span class="op">-</span>(tau <span class="op">+</span> Tw_val <span class="op">+</span> <span class="fl">1.0</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    t_max_v <span class="op">=</span> tau <span class="op">+</span> <span class="fl">0.5</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Maintain dt ≤ 0.004 so hard pulses (T = 0.025) remain well resolved</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    t_steps_v <span class="op">=</span> <span class="bu">max</span>(<span class="dv">500</span>, <span class="bu">int</span>((t_max_v <span class="op">-</span> t_min_v) <span class="op">/</span> <span class="fl">0.004</span>))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    j <span class="op">=</span> <span class="ss">f"""</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ch">{{</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">atom</span><span class="ch">\"</span><span class="ss">: </span><span class="ch">{{</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">num_states</span><span class="ch">\"</span><span class="ss">: 2,</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">decays</span><span class="ch">\"</span><span class="ss">: [</span><span class="ch">{{\"</span><span class="ss">channels</span><span class="ch">\"</span><span class="ss">: [[0, 1]], </span><span class="ch">\"</span><span class="ss">rate</span><span class="ch">\"</span><span class="ss">: </span><span class="sc">{</span>rate<span class="sc">}</span><span class="ch">}}</span><span class="ss">],</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">fields</span><span class="ch">\"</span><span class="ss">: [</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{\"</span><span class="ss">label</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">p1</span><span class="ch">\"</span><span class="ss">,</span><span class="ch">\"</span><span class="ss">coupled_levels</span><span class="ch">\"</span><span class="ss">:[[0,1]],</span><span class="ch">\"</span><span class="ss">rabi_freq</span><span class="ch">\"</span><span class="ss">:1.0,</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_func</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">sech</span><span class="ch">\"</span><span class="ss">,</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_args</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">{{\"</span><span class="ss">n_pi</span><span class="ch">\"</span><span class="ss">:0.5,</span><span class="ch">\"</span><span class="ss">centre</span><span class="ch">\"</span><span class="ss">:</span><span class="sc">{</span>t1_v<span class="sc">}</span><span class="ss">,</span><span class="ch">\"</span><span class="ss">width</span><span class="ch">\"</span><span class="ss">:</span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}}}</span><span class="ss">,</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{\"</span><span class="ss">label</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">p2</span><span class="ch">\"</span><span class="ss">,</span><span class="ch">\"</span><span class="ss">coupled_levels</span><span class="ch">\"</span><span class="ss">:[[0,1]],</span><span class="ch">\"</span><span class="ss">rabi_freq</span><span class="ch">\"</span><span class="ss">:1.0,</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_func</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">sech</span><span class="ch">\"</span><span class="ss">,</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_args</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">{{\"</span><span class="ss">n_pi</span><span class="ch">\"</span><span class="ss">:0.5,</span><span class="ch">\"</span><span class="ss">centre</span><span class="ch">\"</span><span class="ss">:</span><span class="sc">{</span>t2_v<span class="sc">}</span><span class="ss">,</span><span class="ch">\"</span><span class="ss">width</span><span class="ch">\"</span><span class="ss">:</span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}}}</span><span class="ss">,</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="ss">      </span><span class="ch">{{\"</span><span class="ss">label</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">p3</span><span class="ch">\"</span><span class="ss">,</span><span class="ch">\"</span><span class="ss">coupled_levels</span><span class="ch">\"</span><span class="ss">:[[0,1]],</span><span class="ch">\"</span><span class="ss">rabi_freq</span><span class="ch">\"</span><span class="ss">:1.0,</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_func</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">\"</span><span class="ss">sech</span><span class="ch">\"</span><span class="ss">,</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="ss">       </span><span class="ch">\"</span><span class="ss">rabi_freq_t_args</span><span class="ch">\"</span><span class="ss">:</span><span class="ch">{{\"</span><span class="ss">n_pi</span><span class="ch">\"</span><span class="ss">:0.5,</span><span class="ch">\"</span><span class="ss">centre</span><span class="ch">\"</span><span class="ss">:0.0,</span><span class="ch">\"</span><span class="ss">width</span><span class="ch">\"</span><span class="ss">:</span><span class="sc">{</span>T<span class="sc">}</span><span class="ch">}}}}</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="ss">    ]</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">t_min</span><span class="ch">\"</span><span class="ss">: </span><span class="sc">{</span>t_min_v<span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">t_max</span><span class="ch">\"</span><span class="ss">: </span><span class="sc">{</span>t_max_v<span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">t_steps</span><span class="ch">\"</span><span class="ss">: </span><span class="sc">{</span>t_steps_v<span class="sc">}</span><span class="ss">,</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">z_min</span><span class="ch">\"</span><span class="ss">: 0.0, </span><span class="ch">\"</span><span class="ss">z_max</span><span class="ch">\"</span><span class="ss">: 1.0, </span><span class="ch">\"</span><span class="ss">z_steps</span><span class="ch">\"</span><span class="ss">: 20, </span><span class="ch">\"</span><span class="ss">z_steps_inner</span><span class="ch">\"</span><span class="ss">: 2,</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">interaction_strengths</span><span class="ch">\"</span><span class="ss">: [0.5, 0.5, 0.5],</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">velocity_classes</span><span class="ch">\"</span><span class="ss">: </span><span class="ch">{{</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">thermal_width</span><span class="ch">\"</span><span class="ss">: 0.15,</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">thermal_delta_min</span><span class="ch">\"</span><span class="ss">: -0.75,</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">thermal_delta_max</span><span class="ch">\"</span><span class="ss">:  0.75,</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="ss">    </span><span class="ch">\"</span><span class="ss">thermal_delta_steps</span><span class="ch">\"</span><span class="ss">: 40</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">}}</span><span class="ss">,</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  </span><span class="ch">\"</span><span class="ss">savefile</span><span class="ch">\"</span><span class="ss">: </span><span class="ch">\"</span><span class="ss">mbs-two-stimulated-echo-Tw</span><span class="sc">{</span>Tw_val<span class="sc">:.2f}</span><span class="ch">\"</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="ch">}}</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="ss">"""</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> mb_solve.MBSolve().from_json_str(j)</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    m.mbsolve(recalc<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    t_v <span class="op">=</span> m.tlist</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Peak of total output field in the echo window.</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Window [0.2, 0.75]: after input pulses (last at t=0) and before</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the (2,3) Hahn echo at t = T_w ≥ 1.0.</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    Omega_out <span class="op">=</span> <span class="bu">sum</span>(np.<span class="bu">abs</span>(m.Omegas_zt[i, <span class="op">-</span><span class="dv">1</span>, :]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    echo_mask <span class="op">=</span> (t_v <span class="op">&gt;=</span> <span class="fl">0.2</span>) <span class="op">&amp;</span> (t_v <span class="op">&lt;=</span> <span class="fl">0.75</span>)</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    amp <span class="op">=</span> <span class="bu">float</span>(Omega_out[echo_mask].<span class="bu">max</span>()) <span class="cf">if</span> echo_mask.<span class="bu">any</span>() <span class="cf">else</span> <span class="fl">0.0</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    echo_amps.append(amp)</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"T_w = </span><span class="sc">{</span>Tw_val<span class="sc">:.1f}</span><span class="ss"> γ⁻¹ — echo peak |Ω_out|: </span><span class="sc">{</span>amp<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to mbs-two-stimulated-echo-Tw1.00.qu
+T_w = 1.0 γ⁻¹ — echo peak |Ω_out|: 1.5223
+Saving MBSolve to mbs-two-stimulated-echo-Tw1.50.qu
+T_w = 1.5 γ⁻¹ — echo peak |Ω_out|: 1.0720
+Saving MBSolve to mbs-two-stimulated-echo-Tw2.00.qu
+T_w = 2.0 γ⁻¹ — echo peak |Ω_out|: 0.8760
+Saving MBSolve to mbs-two-stimulated-echo-Tw2.50.qu
+T_w = 2.5 γ⁻¹ — echo peak |Ω_out|: 0.6413</code></pre>
+</div>
+</div>
+<div id="plot-tw-sweep" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:31.023631Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:31.023462Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:31.041985Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:31.041637Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Tw_arr <span class="op">=</span> np.array(Tw_values)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>amps   <span class="op">=</span> np.array(echo_amps)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit normalised to T_w = 1.0 (first data point)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Tw_fine  <span class="op">=</span> np.linspace(Tw_arr[<span class="dv">0</span>], Tw_arr[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.5</span>, <span class="dv">200</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>analytic <span class="op">=</span> amps[<span class="dv">0</span>] <span class="op">*</span> np.exp(<span class="op">-</span>(Tw_fine <span class="op">-</span> Tw_arr[<span class="dv">0</span>]) <span class="op">/</span> T1)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> go.Figure(layout<span class="op">=</span>go.Layout(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="ss">f"Stimulated echo amplitude vs T_w — T₁ = </span><span class="sc">{</span>T1<span class="sc">:.2f}</span><span class="ss"> γ⁻¹"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">"T_w (γ⁻¹)"</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">"peak |Ω(z_max, t)| in echo window"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">"clerq"</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>fig.add_trace(go.Scatter(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>Tw_arr, y<span class="op">=</span>amps, mode<span class="op">=</span><span class="st">"markers+lines"</span>, name<span class="op">=</span><span class="st">"simulation"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=</span><span class="bu">dict</span>(size<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>fig.add_trace(go.Scatter(</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>Tw_fine, y<span class="op">=</span>analytic, mode<span class="op">=</span><span class="st">"lines"</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="ss">f"e^(−ΔT_w/T₁),  T₁ = </span><span class="sc">{</span>T1<span class="sc">:.2f}</span><span class="ss"> γ⁻¹"</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    line<span class="op">=</span><span class="bu">dict</span>(dash<span class="op">=</span><span class="st">"dash"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>fig.show(renderer<span class="op">=</span><span class="st">'notebook_connected'</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Print deviations from analytic</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"T_w (γ⁻¹)  |  measured  |  analytic  |  deviation"</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> tw, amp <span class="kw">in</span> <span class="bu">zip</span>(Tw_arr, amps):</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    expected <span class="op">=</span> amps[<span class="dv">0</span>] <span class="op">*</span> np.exp(<span class="op">-</span>(tw <span class="op">-</span> Tw_arr[<span class="dv">0</span>]) <span class="op">/</span> T1)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>tw<span class="sc">:.1f}</span><span class="ss">       |   </span><span class="sc">{</span>amp<span class="sc">:.4f}</span><span class="ss">   |   </span><span class="sc">{</span>expected<span class="sc">:.4f}</span><span class="ss">   |  </span><span class="sc">{</span>(amp<span class="op">-</span>expected)<span class="op">/</span>expected<span class="op">*</span><span class="dv">100</span><span class="sc">:+.1f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="00000000-0000-0000-0000-000000000003" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("00000000-0000-0000-0000-000000000003")) {                    Plotly.newPlot(                        "00000000-0000-0000-0000-000000000003",                        [{"marker":{"size":8},"mode":"markers+lines","name":"simulation","x":{"dtype":"f8","bdata":"AAAAAAAA8D8AAAAAAAD4PwAAAAAAAABAAAAAAAAABEA="},"y":{"dtype":"f8","bdata":"7PUvFWdb+D8eXINI0ibxPxYmgLcmCOw\u002fWkuB\u002fkOF5D8="},"type":"scatter"},{"line":{"dash":"dash"},"mode":"lines","name":"e^(−ΔT_w\u002fT₁),  T₁ = 1.59 γ⁻¹","x":{"dtype":"f8","bdata":"AAAAAAAA8D+hZcdzKinwP0LLjudUUvA\u002f4jBWW3978D+Dlh3PqaTwPyT85ELUzfA\u002fxWGstv728D9mx3MqKSDxPwYtO55TSfE\u002fp5ICEn5y8T9I+MmFqJvxP+ldkfnSxPE\u002fisNYbf3t8T8qKSDhJxfyP8uO51RSQPI\u002fbPSuyHxp8j8NWnY8p5LyP66\u002fPbDRu\u002fI\u002fTiUFJPzk8j\u002fvisyXJg7zP5DwkwtRN\u002fM\u002fMVZbf3tg8z\u002fSuyLzpYnzP3Ih6mbQsvM\u002fE4ex2vrb8z+07HhOJQX0P1VSQMJPLvQ\u002f9rcHNnpX9D+WHc+ppID0PzeDlh3PqfQ\u002f2OhdkfnS9D95TiUFJPz0Pxq07HhOJfU\u002fuhm07HhO9T9bf3tgo3f1P\u002fzkQtTNoPU\u002fnUoKSPjJ9T8+sNG7IvP1P94VmS9NHPY\u002fgHtgo3dF9j8g4ScXom72P8FG74rMl\u002fY\u002fYqy2\u002fvbA9j8CEn5yIer2P6R3ReZLE\u002fc\u002fRN0MWnY89z\u002flQtTNoGX3P4aom0HLjvc\u002fJg5jtfW39z\u002fIcyopIOH3P2jZ8ZxKCvg\u002fCT+5EHUz+D+qpICEn1z4P0oKSPjJhfg\u002f7G8PbPSu+D+M1dbfHtj4Py07nlNJAfk\u002fzqBlx3Mq+T9uBi07nlP5PxBs9K7IfPk\u002fsNG7IvOl+T9RN4OWHc\u002f5P\u002fKcSgpI+Pk\u002fkgISfnIh+j80aNnxnEr6P9TNoGXHc\u002fo\u002fdTNo2fGc+j8WmS9NHMb6P7b+9sBG7\u002fo\u002fWGS+NHEY+z\u002f4yYWom0H7P5kvTRzGavs\u002fOpUUkPCT+z\u002fa+tsDG737P3xgo3dF5vs\u002fHMZq628P\u002fD+9KzJfmjj8P16R+dLEYfw\u002f\u002f\u002fbARu+K\u002fD+gXIi6GbT8P0DCTy5E3fw\u002f4ScXom4G\u002fT+Cjd4VmS\u002f9PyPzpYnDWP0\u002fxFht\u002fe2B\u002fT9kvjRxGKv9PwUk\u002fORC1P0\u002fponDWG39\u002fT9H74rMlyb+P+hUUkDCT\u002f4\u002fiLoZtOx4\u002fj8pIOEnF6L+P8qFqJtBy\u002f4\u002fa+tvD2z0\u002fj8MUTeDlh3\u002fP6y2\u002fvbARv8\u002fTRzGautv\u002fz\u002fugY3eFZn\u002fP4\u002fnVFJAwv8\u002fME0cxmrr\u002fz9o2fGcSgoAQDiM1dbfHgBACT+5EHUzAEDa8ZxKCkgAQKqkgISfXABAeldkvjRxAEBKCkj4yYUAQBu9KzJfmgBA7G8PbPSuAEC8IvOlicMAQIzV1t8e2ABAXIi6GbTsAEAtO55TSQEBQP7tgY3eFQFAzqBlx3MqAUCeU0kBCT8BQG4GLTueUwFAP7kQdTNoAUAQbPSuyHwBQOAe2OhdkQFAsNG7IvOlAUCAhJ9ciLoBQFE3g5YdzwFAIupm0LLjAUDynEoKSPgBQMJPLkTdDAJAkgISfnIhAkBjtfW3BzYCQDRo2fGcSgJABBu9KzJfAkDUzaBlx3MCQKSAhJ9ciAJAdTNo2fGcAkBG5ksTh7ECQBaZL00cxgJA5ksTh7HaAkC2\u002fvbARu8CQIex2vrbAwNAWGS+NHEYA0AoF6JuBi0DQPjJhaibQQNAyHxp4jBWA0CZL00cxmoDQGriMFZbfwNAOpUUkPCTA0AKSPjJhagDQNr62wMbvQNAq62\u002fPbDRA0B8YKN3ReYDQEwTh7Ha+gNAHMZq628PBEDteE4lBSQEQL0rMl+aOARAjt4VmS9NBEBekfnSxGEEQC5E3QxadgRA\u002f\u002fbARu+KBEDPqaSAhJ8EQKBciLoZtARAcA9s9K7IBEBAwk8uRN0EQBF1M2jZ8QRA4ScXom4GBUCy2vrbAxsFQIKN3hWZLwVAUkDCTy5EBUAj86WJw1gFQPOlicNYbQVAxFht\u002fe2BBUCUC1E3g5YFQGS+NHEYqwVANXEYq62\u002fBUAFJPzkQtQFQNbW3x7Y6AVAponDWG39BUB2PKeSAhIGQEfvisyXJgZAF6JuBi07BkDoVFJAwk8GQLgHNnpXZAZAiLoZtOx4BkBZbf3tgY0GQCkg4ScXogZA+tLEYay2BkDKhaibQcsGQJo4jNXW3wZAa+tvD2z0BkA7nlNJAQkHQAxRN4OWHQdA3AMbvSsyB0Cstv72wEYHQH1p4jBWWwdATRzGautvB0Aez6mkgIQHQO6Bjd4VmQdAvjRxGKutB0CP51RSQMIHQGCaOIzV1gdAME0cxmrrB0AAAAAAAAAIQA=="},"y":{"dtype":"f8","bdata":"7PUvFWdb+D8q4lLTJjT4P9c6E9IlDfg\u002fZNiCq2Pm9z+U1Vf637\u002f3P9GG61mamfc\u002fGXM5ZpJz9z+qTt67x033Pzj3Fvg5KPc\u002f33G\u002fuOgC9z+h6lGc0932P5O15UH6uPY\u002flVEuSVyU9j+obHpS+W\u002f2P97psv7QS\u002fY\u002f2+hZ7+In9j\u002fezonGLgT2P2VR9Ca04PU\u002fVILhs3K99T+k3S4Rapr1P6JYTuOZd\u002fU\u002fpXJFzwFV9T9SR6x6oTL1P1SirIt4EPU\u002fmBQBqYbu9D8EC\u002fR5y8z0P6DmXqZGq\u002fQ\u002fOBap1veJ9D90Mcez3mj0P1gVOuf6R\u002fQ\u002fQgIOG0wn9D9Cu9n50Qb0P+mmvS6M5vM\u002ffPFiZXrG8z+HsPpJnKbzP98HPYnxhvM\u002f+09o0Hln8z+vPUDNNEjzP0ILDS4iKfM\u002f36KaoUEK8z9lyjfXkuvyP39QtX4VzfI\u002fGjtlSMmu8j8v9xnlrZDyP9CJJQbDcvI\u002fkcJYXQhV8j8ybwKdfTfyP5WQ7nciGvI\u002fAZFlofb88T+feyvN+d\u002fxP0c1f68rw\u002fE\u002ffrYZ\u002fYum8T\u002fIRi1rGorxPyK5ZK\u002fWbfE\u002fwqnif8BR8T8WvUCT1zXxP+nfjqAbGvE\u002fyYhSX4z+8D+j+oWHKePwP4KIl9Hyx\u002fA\u002fk9po9ues8D86NE6vCJLwP3C7DbZUd\u002fA\u002fN8HexMtc8D84C2mWbULwP5QexOU5KPA\u002fxot2bjAO8D9sd+rYoejvP897RTg2te8\u002fgC+ddB2C7z\u002f0KWkIV0\u002fvP0My+G7iHO8\u002faeRuJL\u002fq7j+yWMal7LjuP0fNynBqh+4\u002f+VEaBDhW7j8RdiPfVCXuP2L4I4LA9O0\u002fXnknbnrE7T9VLwYlgpTtP8acYynXZO0\u002fuUit\u002fng17T8+eRkpZwbtP+zvpS2h1+w\u002fZqgWkiap7D\u002fomPTc9nrsP+J0jJURTew\u002fgnHtQ3Yf7D9FDOhwJPLrP4LTDKYbxes\u002f4TCrbVuY6z\u002fNNdBS42vrP9NpReGyP+s\u002f9ZqPpckT6z\u002fSr+0sJ+jqP9B7VwXLvOo\u002fDpV8vbSR6j9QLMPk42bqP7HmRgtYPOo\u002fQLnXwRAS6j9vxviZDejpP0w93yVOvuk\u002fnTpx+NGU6T\u002fDq0SlmGvpP2IznsChQuk\u002f2Q9w3+wZ6T96A1mXefHoP40+o35Hyeg\u002fE0tDLFah6D84+tY3pXnoP41TpDk0Uug\u002f9YWYygIr6D9F2kaEEAToP6Kn5wBd3ec\u002fgElX2+e25z9FFxWvsJDnP7xdQhi3auc\u002f\u002f1mhs\u002fpE5z8zNpQeex\u002fnP70HHPc3+uY\u002fOM\u002fX2zDV5j\u002fteQNsZbDmP\u002fvkdkfVi+Y\u002fCuKkDoBn5j+TPZpiZUPmP8DG\u002fOSEH+Y\u002f2VgKON775T845pf+cNjlP9yEENw8teU\u002fa3x0dEGS5T\u002fIVVhsfm\u002flPyns42jzTOU\u002fsn\u002fRD6Aq5T+NyWwHhAjlP3kRkvae5uQ\u002f1USthPDE5D8nD7lZeKPkPxL0PR42guQ\u002fx2pReylh5D\u002fg+pQaUkDkP6BaNaavH+Q\u002ftI7pyEH\u002f4z9OC\u002fItCN\u002fjP6zWF4ECv+M\u002fBK2rbjCf4z\u002fPJYWjkX\u002fjP3baAc0lYOM\u002fZY4EmexA4z9vWPS15SHjP5TNu9IQA+M\u002fEy3Inm3k4j\u002fejQjK+8XiP2QN7QS7p+I\u002fl\u002f9lAKuJ4j9bIONty2viPy7GUv8bTuI\u002fJhYhZ5ww4j81OTdYTBPiP7OS+oUr9uE\u002fLvhLpDnZ4T926oZndrzhP\u002fTPgIThn+E\u002fPzCIsHqD4T\u002fb8GOhQWfhP1STUg02S+E\u002fbHQJq1cv4T+eDLQxphPhP8Qx81gh+OA\u002f91nc2Mjc4D+i3\u002fhpnMHgP7dGRcWbpuA\u002fH4MwpMaL4D9WQJvAHHHgPxwq19SdVuA\u002fbTamm0k84D978DnQHyLgP+jEMi4gCOA\u002fN54+45Tc3z9MT\u002fetPKnfP71nYTY3dt8\u002fBO0m94ND3z8Iw8hrIhHfP81RnRAS394\u002fZy3PYlKt3j8RwFvg4nveP2f2EQjDSt4\u002fwO2QWfIZ3j\u002fHpEZVcOndP\u002fitbnw8ud0\u002feeQQUVaJ3T\u002fJIgBWvVndP6v72A5xKt0\u002fI3UAAHH73D9UxaKuvMzcP50RsqBTntw\u002fji\u002flXDVw3D\u002f8Z7ZqYULcPww8YlLXFNw\u002fMizmnJbn2z8qgf\u002fTnrrbPw=="},"type":"scatter"}],                        {"template":{"layout":{"colorscale":{"diverging":[[0.0,"rgb(103,0,31)"],[0.1,"rgb(178,24,43)"],[0.2,"rgb(214,96,77)"],[0.3,"rgb(244,165,130)"],[0.4,"rgb(253,219,199)"],[0.5,"rgb(247,247,247)"],[0.6,"rgb(209,229,240)"],[0.7,"rgb(146,197,222)"],[0.8,"rgb(67,147,195)"],[0.9,"rgb(33,102,172)"],[1.0,"rgb(5,48,97)"]],"sequential":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]]},"colorway":["#4477AA","#EE6677","#228833","#CCBB44","#66CCEE","#AA3377","#BBBBBB"],"font":{"family":"sans-serif","size":13},"legend":{"bgcolor":"rgba(255,255,255,0.8)","bordercolor":"#cccccc","borderwidth":1},"margin":{"b":60,"l":60,"r":20,"t":50},"paper_bgcolor":"white","plot_bgcolor":"white","xaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1},"yaxis":{"gridcolor":"#e0e0e0","linecolor":"#888888","mirror":false,"showgrid":true,"showline":true,"ticks":"inside","zeroline":true,"zerolinecolor":"#aaaaaa","zerolinewidth":1}}},"title":{"text":"Stimulated echo amplitude vs T_w — T₁ = 1.59 γ⁻¹"},"xaxis":{"title":{"text":"T_w (γ⁻¹)"}},"yaxis":{"title":{"text":"peak |Ω(z_max, t)| in echo window"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('00000000-0000-0000-0000-000000000003');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>T_w (γ⁻¹)  |  measured  |  analytic  |  deviation
+  1.0       |   1.5223   |   1.5223   |  +0.0%
+  1.5       |   1.0720   |   1.1119   |  -3.6%
+  2.0       |   0.8760   |   0.8121   |  +7.9%
+  2.5       |   0.6413   |   0.5932   |  +8.1%</code></pre>
+</div>
+</div>
+</section>
+<section id="pulse-area-sanity-check" class="level2">
+<h2 class="anchored" data-anchor-id="pulse-area-sanity-check">Pulse-area sanity check</h2>
+<p>Each of the three input fields should carry a π/2 pulse area at <span class="math inline">\(z = 0\)</span>.</p>
+<div id="area-check" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-05-05T18:52:31.043697Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-05-05T18:52:31.043603Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-05-05T18:52:31.046207Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-05-05T18:52:31.045675Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="st">"p1 (π/2)"</span>, <span class="st">"p2 (π/2)"</span>, <span class="st">"p3 (π/2)"</span>]):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    area <span class="op">=</span> np.trapezoid(mbs.Omegas_zt[i, <span class="dv">0</span>, :].real, mbs.tlist) <span class="op">/</span> np.pi</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Field </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">: area = </span><span class="sc">{</span>area<span class="sc">:.4f}</span><span class="ss"> π"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">abs</span>(area <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">&lt;</span> <span class="fl">0.05</span>, <span class="ss">f"Expected 0.5π, got </span><span class="sc">{</span>area<span class="sc">:.4f}</span><span class="ss">π"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Field p1 (π/2): area = 0.5000 π
+Field p2 (π/2): area = 0.5000 π
+Field p3 (π/2): area = 0.5000 π</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<ul>
+<li><strong>Pulse 1</strong> (π/2) creates a superposition; the macroscopic polarisation free-induction decays on the Doppler timescale <span class="math inline">\(1/\sigma\)</span>.</li>
+<li><strong>Pulse 2</strong> (π/2) converts coherences into a <strong>population grating</strong> in velocity space; the net coherence vanishes.</li>
+<li>During <strong><span class="math inline">\(T_w\)</span></strong> the grating persists with amplitude <span class="math inline">\(e^{-T_w/T_1}\)</span>. No coherence is detectable — a key signature of the stimulated echo.</li>
+<li><strong>Pulse 3</strong> (π/2) reads the grating back into coherences.</li>
+<li><strong>Echo</strong> at <span class="math inline">\(t = +\tau\)</span>: coherences rephase and the medium emits a coherent burst.</li>
+<li>The <span class="math inline">\(T_w\)</span>-sweep directly measures <span class="math inline">\(T_1\)</span>; a τ-sweep (as in the <a href="../examples/mbs-two-photon-echo.html">two-pulse photon echo example</a>) measures <span class="math inline">\(T_2\)</span>. Together they give the full relaxation picture.</li>
+</ul>
+<p>Applications include quantum memory characterisation, optical spectroscopy of inhomogeneously broadened systems (rare-earth-doped crystals, atomic vapours), and the optical analogue of NMR relaxation measurements.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li>E. L. Hahn, <em>Spin Echoes</em>, Phys. Rev.&nbsp;<strong>80</strong>, 580 (1950). Original NMR stimulated echo.</li>
+<li>T. W. Mossberg, <em>Time-domain frequency-selective optical data storage</em>, Opt. Lett. <strong>7</strong>, 77 (1982). Optical stimulated echo; <span class="math inline">\(T_1/T_2\)</span> separation.</li>
+<li>N. A. Kurnit, I. D. Abella, S. R. Hartmann, <em>Observation of a Photon Echo</em>, PRL <strong>13</strong>, 567 (1964). First optical photon echo (context).</li>
+<li>L. Allen, J. H. Eberly, <em>Optical Resonance and Two-Level Atoms</em> (Dover, 1987), Ch. 9.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/clerq\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/tpogden/clerq/blob/main/examples/mbs-two-stimulated-echo.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

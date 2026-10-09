@@ -232,6 +232,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../examples/mbs-two-stimulated-echo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two-Level: Stimulated Three-Pulse Photon Echo</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../examples/mbs-lambda-eit-slow-light.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Λ-Type Three-Level: EIT, Slow Light and Storage</span></a>
   </div>
@@ -454,7 +460,7 @@ window.Quarto = {
 <span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
 <span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
 <span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0e2</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="st">    5.0e1</span></span>
 <span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
 <span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay"</span></span>
 <span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="sc">}}</span></span>
@@ -476,52 +482,30 @@ window.Quarto = {
 </div>
 <div id="cell-15" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saving MBSolve to mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay.qu</code></pre>
+</div>
 </div>
 <div id="cell-16" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-17" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay_files/figure-html/cell-16-output-1.png" width="1166" height="524" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="cell-18" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.populations_field(<span class="dv">0</span>, upper<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Reds,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
@@ -532,21 +516,21 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay_files/figure-html/cell-17-output-1.png" width="1152" height="524" class="figure-img"></p>
+<p><img src="mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay_files/figure-html/cell-16-output-1.png" width="1166" height="524" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="17">
+<div id="cell-18" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    np.imag(mbs.coherences_field(<span class="dv">0</span>)),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.populations_field(<span class="dv">0</span>, upper<span class="op">=</span><span class="va">False</span>)),</span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Greens,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Reds,</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
@@ -554,6 +538,31 @@ window.Quarto = {
 <span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
 <span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mbs-Rb87_5s12_5p12_F11_q1-weak-pulse-decay_files/figure-html/cell-17-output-1.png" width="1152" height="524" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    np.imag(mbs.coherences_field(<span class="dv">0</span>)),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Greens,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">

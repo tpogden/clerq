@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-10-09">
+<meta name="description" content="The package has been renamed. What changed, how to update, and one change to your results.">
 
-<title>clerq</title>
+<title>MaxwellBloch is now clerq – clerq</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,23 +31,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9ce5ae7ac05a2cb9bb4eec0b8cae176b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9ce5ae7ac05a2cb9bb4eec0b8cae176b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,6 +76,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -84,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">clerq</span>
     </a>
   </div>
@@ -95,27 +126,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./installation.html"> 
+    <a class="nav-link" href="../installation.html"> 
 <span class="menu-text">Install</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./usage/two-level.html"> 
+    <a class="nav-link" href="../usage/two-level.html"> 
 <span class="menu-text">Usage</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./examples/index.html"> 
+    <a class="nav-link" href="../examples/index.html"> 
 <span class="menu-text">Examples</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./api/index.html"> 
+    <a class="nav-link" href="../api/index.html"> 
 <span class="menu-text">API</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./support/troubleshooting.html"> 
+    <a class="nav-link" href="../support/troubleshooting.html"> 
 <span class="menu-text">Support</span></a>
   </li>  
 </ul>
@@ -129,22 +160,48 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-a-new-name" id="toc-why-a-new-name" class="nav-link active" data-scroll-target="#why-a-new-name">Why a new name</a></li>
+  <li><a href="#what-changed" id="toc-what-changed" class="nav-link" data-scroll-target="#what-changed">What changed</a></li>
+  <li><a href="#how-to-update" id="toc-how-to-update" class="nav-link" data-scroll-target="#how-to-update">How to update</a></li>
+  <li><a href="#what-happens-to-pip-install-maxwellbloch" id="toc-what-happens-to-pip-install-maxwellbloch" class="nav-link" data-scroll-target="#what-happens-to-pip-install-maxwellbloch">What happens to <code>pip install maxwellbloch</code></a></li>
+  <li><a href="#citing" id="toc-citing" class="nav-link" data-scroll-target="#citing">Citing</a></li>
+  <li><a href="#questions-and-problems" id="toc-questions-and-problems" class="nav-link" data-scroll-target="#questions-and-problems">Questions and problems</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/tpogden/clerq/edit/main/news/rename.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">clerq</h1>
-</div>
+<h1 class="title">MaxwellBloch is now clerq</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">news</div>
+    <div class="quarto-category">release</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    The package has been renamed. What changed, how to update, and one change to your results.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 9, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -154,52 +211,90 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
+<p>MaxwellBloch has been renamed to <strong>clerq</strong>, starting with version 0.13.0. The code, the solver and the JSON problem format are the same. The package name, the import name, the repository and the documentation address have changed.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Important</span>Results change in 0.13.0
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>MaxwellBloch is now <strong>clerq</strong>. See <a href="./news/rename.html">what changed and how to update</a>.</p>
+<p>Version 0.13.0 also contains a physics fix that is independent of the rename. The Maxwell propagation equation was missing a factor of 2, so the optical depth in earlier versions was <strong>half</strong> its physical value (the propagation step used the convention for a coupling of <span class="math inline">\(\Omega\)</span>, while the Bloch solver uses the standard <span class="math inline">\(\Omega/2\)</span>). Absorption and propagation results change. Recompute any cached <code>.qu</code> results and any figures you made with earlier versions. See the <a href="https://github.com/tpogden/clerq/blob/master/CHANGELOG.md">changelog</a>.</p>
 </div>
 </div>
-<p>clerq solves the propagation of classical electromagnetic fields through media of open quantum systems, using Maxwell’s equations coupled to the Lindblad master equation. It is used for near-resonant light in thermal atomic vapours, with two-, three- and many-level atoms, spontaneous decay, dephasing and Doppler broadening.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="example.gif" class="img-fluid figure-img"></p>
-<figcaption>Propagation of a 4π pulse through a dense atomic vapour. The pulse immediately breaks up on entering the medium and the resultant pulses form two optical solitons each with a pulse area of 2π.</figcaption>
-</figure>
-</div>
-<p>clerq is used for theoretical research, for modelling experiments and for undergraduate and graduate teaching. It can model two, three or many-level systems with physical effects including:</p>
-<ul>
-<li>Inhomogeneous broadening due to spontaneous decay,</li>
-<li>Doppler broadening in thermal systems,</li>
-<li>Collision dephasing,</li>
-<li>Sub-level structure.</li>
-</ul>
-<p>Modules are also available for:</p>
-<ul>
-<li>Generating hyperfine structure for alkali atoms with the correct channels and angular momentum factors for coupling and decay,</li>
-<li>Spectral analysis,</li>
-<li>Plotting and animating solutions.</li>
-</ul>
-<p>Some phenomena that can be demonstrated:</p>
-<ul>
-<li>Linear absorption and dispersion,</li>
-<li>Fast light and slow light,</li>
-<li>Electromagnetically Induced Transparency (EIT),</li>
-<li>Storage and retrieval of light pulses,</li>
-<li>Self-Induced Transparency (SIT) and optical solitons,</li>
-<li>Matched pulses and simultons,</li>
-<li>Hyperfine pumping.</li>
-</ul>
-<p>See the <a href="./examples/index.html">Examples</a> for details.</p>
+<section id="why-a-new-name" class="level2">
+<h2 class="anchored" data-anchor-id="why-a-new-name">Why a new name</h2>
+<p>The package was never really solving the Maxwell–Bloch equations. The optical Bloch equations describe a two-level atom. What the solver does is evolve the full density matrix of an arbitrary multi-level <strong>open quantum system</strong> under the Lindblad master equation (it wraps QuTiP’s <code>mesolve</code>), with spontaneous decay and dephasing as collapse operators, hyperfine structure and several fields, and couple it to a <strong>classical Maxwell field</strong> propagating through the medium. “MaxwellBloch” named only the two-level special case of that.</p>
+<p>The new name says what it is: <em>clerq</em> is <strong>Clerk</strong> (as in James Clerk Maxwell, for the classical fields) with a <strong>q</strong> for quantum (for the open quantum systems).</p>
+<p>“Maxwell–Bloch” is still the familiar name for the two-level case, so it appears in these docs where that is what is meant.</p>
+</section>
+<section id="what-changed" class="level2">
+<h2 class="anchored" data-anchor-id="what-changed">What changed</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Before</th>
+<th>Now</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Install</td>
+<td><code>pip install maxwellbloch</code></td>
+<td><code>pip install clerq</code></td>
+</tr>
+<tr class="even">
+<td>Import</td>
+<td><code>import maxwellbloch</code></td>
+<td><code>import clerq</code></td>
+</tr>
+<tr class="odd">
+<td>Source</td>
+<td><code>github.com/tpogden/maxwellbloch</code></td>
+<td><a href="https://github.com/tpogden/clerq"><code>github.com/tpogden/clerq</code></a></td>
+</tr>
+<tr class="even">
+<td>Documentation</td>
+<td>readthedocs</td>
+<td><a href="https://clerq.org">clerq.org</a></td>
+</tr>
+<tr class="odd">
+<td>Plotly theme name</td>
+<td><code>"maxwellbloch"</code></td>
+<td><code>"clerq"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Old GitHub links redirect to the new repository, so existing issue and pull request links keep working.</p>
+</section>
+<section id="how-to-update" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-update">How to update</h2>
+<ol type="1">
+<li>Install the new package: <code>pip install clerq</code>.</li>
+<li>Replace <code>maxwellbloch</code> with <code>clerq</code> in your imports, for example <code>from maxwellbloch import mb_solve</code> becomes <code>from clerq import mb_solve</code>.</li>
+<li>Re-run anything that depends on cached results, because of the physics fix above.</li>
+</ol>
+<p>The command-line tools <code>mbsolve</code> and <code>obsolve</code> keep their names.</p>
+</section>
+<section id="what-happens-to-pip-install-maxwellbloch" class="level2">
+<h2 class="anchored" data-anchor-id="what-happens-to-pip-install-maxwellbloch">What happens to <code>pip install maxwellbloch</code></h2>
+<p>The old name stays on PyPI as a transitional release (<code>maxwellbloch 0.12.1</code>). It installs <code>clerq</code> and re-exports it, so existing code keeps working: <code>from maxwellbloch import mb_solve</code> gives the same objects as <code>from clerq import mb_solve</code>. Importing it prints a <code>DeprecationWarning</code>. It will receive no further updates, and new features will only appear in <code>clerq</code>.</p>
+<p>If you pinned <code>maxwellbloch==0.12.0</code> or earlier, nothing changes for you until you upgrade.</p>
+</section>
+<section id="citing" class="level2">
+<h2 class="anchored" data-anchor-id="citing">Citing</h2>
+<p>If you use clerq in research, please cite the original package, which was published as MaxwellBloch. The citation is in the <a href="https://github.com/tpogden/clerq#attribution">README</a>. A citation with a DOI for clerq itself will be added once it is available.</p>
+</section>
+<section id="questions-and-problems" class="level2">
+<h2 class="anchored" data-anchor-id="questions-and-problems">Questions and problems</h2>
+<p>Please <a href="https://github.com/tpogden/clerq/issues">open an issue</a>. The <a href="../support/troubleshooting.html">troubleshooting page</a> lists common problems.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -607,4 +702,4 @@ Note
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/tpogden/clerq/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/tpogden/clerq/edit/main/news/rename.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/tpogden/clerq/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

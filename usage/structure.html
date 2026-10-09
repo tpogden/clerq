@@ -414,7 +414,7 @@ window.Quarto = {
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 1,</span></span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0e2</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="st">    5.0e1</span></span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "structure-1"</span></span>
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
@@ -427,113 +427,6 @@ window.Quarto = {
 </div>
 <div id="cell-7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-  0%|          | 0/100 [00:00&lt;?, ?z/s]
-  1%|          | 1/100 [00:00&lt;00:00, 894.31z/s, Ω_max=0.00626]
-  2%|▏         | 2/100 [00:00&lt;00:00, 495.52z/s, Ω_max=0.00626]
-  3%|▎         | 3/100 [00:00&lt;00:00, 457.58z/s, Ω_max=0.00626]
-  4%|▍         | 4/100 [00:00&lt;00:00, 445.08z/s, Ω_max=0.00626]
-  5%|▌         | 5/100 [00:00&lt;00:00, 428.37z/s, Ω_max=0.00626]
-  6%|▌         | 6/100 [00:00&lt;00:00, 421.61z/s, Ω_max=0.00626]
-  7%|▋         | 7/100 [00:00&lt;00:00, 422.62z/s, Ω_max=0.00626]
-  8%|▊         | 8/100 [00:00&lt;00:00, 423.12z/s, Ω_max=0.00626]
-  9%|▉         | 9/100 [00:00&lt;00:00, 423.42z/s, Ω_max=0.00626]
- 10%|█         | 10/100 [00:00&lt;00:00, 418.72z/s, Ω_max=0.00626]
- 11%|█         | 11/100 [00:00&lt;00:00, 419.72z/s, Ω_max=0.00626]
- 12%|█▏        | 12/100 [00:00&lt;00:00, 421.39z/s, Ω_max=0.00626]
- 13%|█▎        | 13/100 [00:00&lt;00:00, 420.88z/s, Ω_max=0.00626]
- 14%|█▍        | 14/100 [00:00&lt;00:00, 421.40z/s, Ω_max=0.00626]
- 15%|█▌        | 15/100 [00:00&lt;00:00, 423.37z/s, Ω_max=0.00609]
- 16%|█▌        | 16/100 [00:00&lt;00:00, 425.46z/s, Ω_max=0.00593]
- 17%|█▋        | 17/100 [00:00&lt;00:00, 424.69z/s, Ω_max=0.00578]
- 18%|█▊        | 18/100 [00:00&lt;00:00, 425.84z/s, Ω_max=0.00565]
- 19%|█▉        | 19/100 [00:00&lt;00:00, 427.05z/s, Ω_max=0.00553]
- 20%|██        | 20/100 [00:00&lt;00:00, 428.19z/s, Ω_max=0.00541]
- 21%|██        | 21/100 [00:00&lt;00:00, 425.27z/s, Ω_max=0.00529]
- 22%|██▏       | 22/100 [00:00&lt;00:00, 425.36z/s, Ω_max=0.00517]
- 23%|██▎       | 23/100 [00:00&lt;00:00, 426.07z/s, Ω_max=0.00505]
- 24%|██▍       | 24/100 [00:00&lt;00:00, 427.81z/s, Ω_max=0.00494]
- 25%|██▌       | 25/100 [00:00&lt;00:00, 429.01z/s, Ω_max=0.00482]
- 26%|██▌       | 26/100 [00:00&lt;00:00, 430.68z/s, Ω_max=0.00471]
- 27%|██▋       | 27/100 [00:00&lt;00:00, 429.84z/s, Ω_max=0.0046] 
- 28%|██▊       | 28/100 [00:00&lt;00:00, 431.05z/s, Ω_max=0.0045]
- 29%|██▉       | 29/100 [00:00&lt;00:00, 430.28z/s, Ω_max=0.00439]
- 30%|███       | 30/100 [00:00&lt;00:00, 430.84z/s, Ω_max=0.00429]
- 31%|███       | 31/100 [00:00&lt;00:00, 432.04z/s, Ω_max=0.00418]
- 32%|███▏      | 32/100 [00:00&lt;00:00, 432.06z/s, Ω_max=0.00408]
- 33%|███▎      | 33/100 [00:00&lt;00:00, 432.75z/s, Ω_max=0.00398]
- 34%|███▍      | 34/100 [00:00&lt;00:00, 433.15z/s, Ω_max=0.00389]
- 35%|███▌      | 35/100 [00:00&lt;00:00, 433.25z/s, Ω_max=0.00379]
- 36%|███▌      | 36/100 [00:00&lt;00:00, 432.21z/s, Ω_max=0.0037] 
- 37%|███▋      | 37/100 [00:00&lt;00:00, 432.66z/s, Ω_max=0.00361]
- 38%|███▊      | 38/100 [00:00&lt;00:00, 433.58z/s, Ω_max=0.00354]
- 39%|███▉      | 39/100 [00:00&lt;00:00, 434.01z/s, Ω_max=0.00347]
- 40%|████      | 40/100 [00:00&lt;00:00, 433.18z/s, Ω_max=0.0034] 
- 41%|████      | 41/100 [00:00&lt;00:00, 433.82z/s, Ω_max=0.00333]
- 42%|████▏     | 42/100 [00:00&lt;00:00, 434.65z/s, Ω_max=0.00326]
- 43%|████▎     | 43/100 [00:00&lt;00:00, 434.69z/s, Ω_max=0.00319]
- 44%|████▍     | 44/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00319]
- 44%|████▍     | 44/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00313]
- 45%|████▌     | 45/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00306]
- 46%|████▌     | 46/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.003]  
- 47%|████▋     | 47/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00293]
- 48%|████▊     | 48/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00287]
- 49%|████▉     | 49/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00281]
- 50%|█████     | 50/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00275]
- 51%|█████     | 51/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00269]
- 52%|█████▏    | 52/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00263]
- 53%|█████▎    | 53/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00257]
- 54%|█████▍    | 54/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
- 55%|█████▌    | 55/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
- 56%|█████▌    | 56/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 57%|█████▋    | 57/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 58%|█████▊    | 58/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 59%|█████▉    | 59/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 60%|██████    | 60/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 61%|██████    | 61/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00253]
- 62%|██████▏   | 62/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
- 63%|██████▎   | 63/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 64%|██████▍   | 64/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 65%|██████▌   | 65/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 66%|██████▌   | 66/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 67%|██████▋   | 67/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 68%|██████▊   | 68/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00255]
- 69%|██████▉   | 69/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
- 70%|███████   | 70/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00254]
- 71%|███████   | 71/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00253]
- 72%|███████▏  | 72/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00252]
- 73%|███████▎  | 73/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00251]
- 74%|███████▍  | 74/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0025] 
- 75%|███████▌  | 75/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00248]
- 76%|███████▌  | 76/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00247]
- 77%|███████▋  | 77/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00245]
- 78%|███████▊  | 78/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00244]
- 79%|███████▉  | 79/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00244]
- 80%|████████  | 80/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00243]
- 81%|████████  | 81/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00243]
- 82%|████████▏ | 82/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00242]
- 83%|████████▎ | 83/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00241]
- 84%|████████▍ | 84/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.00241]
- 85%|████████▌ | 85/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024] 
- 86%|████████▌ | 86/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
- 87%|████████▋ | 87/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
- 88%|████████▊ | 88/100 [00:00&lt;00:00, 434.62z/s, Ω_max=0.0024]
- 89%|████████▉ | 89/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 89%|████████▉ | 89/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 90%|█████████ | 90/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 91%|█████████ | 91/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 92%|█████████▏| 92/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 93%|█████████▎| 93/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 94%|█████████▍| 94/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 95%|█████████▌| 95/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 96%|█████████▌| 96/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 97%|█████████▋| 97/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 98%|█████████▊| 98/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
- 99%|█████████▉| 99/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
-100%|██████████| 100/100 [00:00&lt;00:00, 439.58z/s, Ω_max=0.0024]
-100%|██████████| 100/100 [00:00&lt;00:00, 437.66z/s, Ω_max=0.0024]</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Saving MBSolve to structure-1.qu</code></pre>
 </div>
@@ -541,30 +434,30 @@ window.Quarto = {
 <section id="output" class="level3">
 <h3 class="anchored" data-anchor-id="output">Output</h3>
 <div id="cell-9" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-10" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -586,17 +479,17 @@ window.Quarto = {
 </ul>
 <p>First we can use the <code>hyperfine</code> module to create the hyperfine structure (<span class="math inline">\(F\)</span> levels). As before we will model a weak field resonant with the <span class="math inline">\(5\mathrm{S}_{1/2} F=1 \rightarrow 5\mathrm{P}_{1/2} F=1\)</span> transition. Again we can neglect the other upper level in the fine structure manifold, <span class="math inline">\(5\mathrm{P}_{1/2} F={2}\)</span>, as it is far from resonance, but the decay to <span class="math inline">\(5\mathrm{S}_{1/2} F={2}\)</span> will be considered.</p>
 <div id="cell-13" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> hyperfine</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the two lower F levels</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F2 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">2</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the upper F level</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>Rb87_5p12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> hyperfine</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the two lower F levels</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Rb87_5s12_F2 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">2</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the upper F level</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Rb87_5p12_F1 <span class="op">=</span> hyperfine.LevelF(I<span class="op">=</span><span class="fl">1.5</span>, J<span class="op">=</span><span class="fl">0.5</span>, F<span class="op">=</span><span class="dv">1</span>, energy<span class="op">=</span><span class="fl">0.0</span>, mF_energies<span class="op">=</span>[])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can see looking at the lower <span class="math inline">\(F=1\)</span> level that the hyperfine structure <span class="math inline">\(m_F=\{-1, 0 ,1\}\)</span> is built automatically based on the angular moment numbers <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span> and <span class="math inline">\(F\)</span>.</p>
 <div id="cell-15" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Rb87_5s12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Rb87_5s12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{
   "F": 1,
@@ -623,16 +516,16 @@ window.Quarto = {
 <p>If there are levels to be addressed that are off resonance, we would need to add <span class="math inline">\(F\)</span> level energies (e.g.&nbsp;if we included the <span class="math inline">\(F'=2\)</span> upper level). Note that these only need to be relative to the resonance freq. If the mF levels are split (for example with a magnetic field), the individual mf level energies can be added relative to the <span class="math inline">\(F\)</span> level energy.</p>
 <p>We add the <span class="math inline">\(F\)</span> levels to the atom structure object.</p>
 <div id="cell-17" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the atom structure object and add the F levels</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>atom1e <span class="op">=</span> hyperfine.Atom1e()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F1)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F2)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5p12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Init the atom structure object and add the F levels</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>atom1e <span class="op">=</span> hyperfine.Atom1e()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F1)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5s12_F2)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>atom1e.add_F_level(Rb87_5p12_F1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We now have everything we need to build our MBSolve object. First, the total number of states:</p>
 <div id="cell-19" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>NUM_STATES <span class="op">=</span> atom1e.get_num_mF_levels()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(NUM_STATES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>NUM_STATES <span class="op">=</span> atom1e.get_num_mF_levels()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(NUM_STATES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>11</code></pre>
 </div>
@@ -641,17 +534,17 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="energies-and-detuning">Energies and Detuning</h3>
 <p>Then the energies of these states, if they have been specified (no need in this case but here for completeness):</p>
 <div id="cell-22" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ENERGIES <span class="op">=</span> atom1e.get_energies()</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ENERGIES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ENERGIES <span class="op">=</span> atom1e.get_energies()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ENERGIES)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]</code></pre>
 </div>
 </div>
 <p>As for the solvers without structure, if desired we can specify a detuning:</p>
 <div id="cell-24" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tune to be on resonance with the F1 -&gt; F1 transition</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>DETUNING <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DETUNING)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tune to be on resonance with the F1 -&gt; F1 transition</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DETUNING <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DETUNING)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0</code></pre>
 </div>
@@ -661,19 +554,19 @@ window.Quarto = {
 <section id="field-channels-and-factors" class="level3">
 <h3 class="anchored" data-anchor-id="field-channels-and-factors">Field Channels and Factors</h3>
 <div id="cell-27" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>FIELD_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>FIELD_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0, 8], [0, 9], [0, 10], [1, 8], [1, 9], [1, 10], [2, 8], [2, 9], [2, 10]]</code></pre>
 </div>
 </div>
 <p>And now the important part, we need to calculate the <a href="https://en.wikipedia.org/wiki/Clebsch%E2%80%93Gordan_coefficients">Clebsch-Gordan coefficients</a> that couple each <span class="math inline">\(M_F\)</span> substructure pair. The <code>atom1e</code> class has a method to calculate these for us. We need to specify the polarisation of the light using <span class="math inline">\(q=\{-1, 0 ,1\}\)</span>. In this case we’ll choose <span class="math inline">\(q=1\)</span>.</p>
 <div id="cell-29" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Field polarisation</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>FIELD_FACTORS <span class="op">=</span> atom1e.get_clebsch_hf_factors(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>], q<span class="op">=</span>q</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">1</span>  <span class="co"># Field polarisation</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>FIELD_FACTORS <span class="op">=</span> atom1e.get_clebsch_hf_factors(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>], q<span class="op">=</span>q</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(FIELD_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[ 0.          0.          0.          0.28867513 -0.         -0.
   0.          0.28867513  0.        ]</code></pre>
@@ -684,16 +577,16 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="decay-channels-and-factors">Decay Channels and Factors</h3>
 <p>Similarly to the levels coupled by the field, we need to specify the pairs of levels that will be channels for spontaneous decay. This time the lower levels are all in both F=1 and F=2, so there are more combinations.</p>
 <div id="cell-32" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>DECAY_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>DECAY_CHANNELS <span class="op">=</span> atom1e.get_coupled_levels(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_CHANNELS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[0, 8], [0, 9], [0, 10], [1, 8], [1, 9], [1, 10], [2, 8], [2, 9], [2, 10], [3, 8], [3, 9], [3, 10], [4, 8], [4, 9], [4, 10], [5, 8], [5, 9], [5, 10], [6, 8], [6, 9], [6, 10], [7, 8], [7, 9], [7, 10]]</code></pre>
 </div>
 </div>
 <p>The spontaneous decay factors matching those channels (in order) can be obtained with the <code>get_decay_factors</code> method. This is equivalent to summing the <code>get_clebsch_hf_factors_hf</code> for all polarisations as decay photons are of all polarisations.</p>
 <div id="cell-34" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>DECAY_FACTORS <span class="op">=</span> atom1e.get_decay_factors(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>DECAY_FACTORS <span class="op">=</span> atom1e.get_decay_factors(F_level_idxs_a<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], F_level_idxs_b<span class="op">=</span>[<span class="dv">2</span>])</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DECAY_FACTORS)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[ 0.28867513 -0.28867513  0.          0.28867513 -0.         -0.28867513
   0.          0.28867513 -0.28867513  0.70710678  0.          0.
@@ -706,13 +599,13 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="initial-state">Initial State</h3>
 <p>In the two and three level models we didn’t specify an initial state for the system, which defaults to all population in the first (i.e.&nbsp;ground state). Here we need to correctly distribute the population in the ground state <span class="math inline">\(m_F\)</span> levels, which should of course sum to one.</p>
 <div id="cell-37" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>INITIAL_STATE <span class="op">=</span> (</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">3.0</span>] <span class="op">*</span> <span class="dv">3</span>  <span class="co"># s12_F1b</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">5.0</span>] <span class="op">*</span> <span class="dv">5</span>  <span class="co"># s12_F2</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.0</span>] <span class="op">*</span> <span class="dv">3</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># p12_F1</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(INITIAL_STATE)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(INITIAL_STATE))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>INITIAL_STATE <span class="op">=</span> (</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">3.0</span>] <span class="op">*</span> <span class="dv">3</span>  <span class="co"># s12_F1b</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.5</span> <span class="op">/</span> <span class="fl">5.0</span>] <span class="op">*</span> <span class="dv">5</span>  <span class="co"># s12_F2</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="fl">0.0</span>] <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)  <span class="co"># p12_F1</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(INITIAL_STATE)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(INITIAL_STATE))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.1, 0.1, 0.1, 0.1, 0.1, 0.0, 0.0, 0.0]
 1.0</code></pre>
@@ -723,192 +616,68 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="putting-it-all-into-mbsolve">Putting it all into MBSolve</h3>
 <p>We now have everything we need to build the <code>MBSolve</code> object.</p>
 <div id="cell-40" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="sc">{{</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="st">  "atom": </span><span class="sc">{{</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "decays": [</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="st">        "channels": </span><span class="sc">{decay_channels}</span><span class="st">,</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">        "rate": 1.0,</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{decay_factors}</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="st">    "energies": </span><span class="sc">{energies}</span><span class="st">,</span></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">    "fields": [</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": </span><span class="sc">{field_channels}</span><span class="st">,</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{field_factors}</span><span class="st">,</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning": </span><span class="sc">{detuning}</span><span class="st">,</span></span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning_positive": true,</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="st">        "label": "probe",</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 1e-3,</span></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": </span><span class="sc">{{</span></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">          "ampl": 1.0,</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="st">          "centre": 0.0,</span></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="st">          "fwhm": 1.0</span></span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="st">        </span><span class="sc">}}</span><span class="st">,</span></span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "gaussian"</span></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a><span class="st">    "num_states": </span><span class="sc">{num_states}</span><span class="st">,</span></span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a><span class="st">    "initial_state": </span><span class="sc">{initial_state}</span></span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">}}</span><span class="st">,</span></span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_min": -2.0,</span></span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_max": 10.0,</span></span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_steps": 100,</span></span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_min": -0.2,</span></span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 1,</span></span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="st">    1.0e2</span></span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "structure-2"</span></span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a><span class="sc">}}</span></span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(</span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    num_states<span class="op">=</span>NUM_STATES,</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>    energies<span class="op">=</span>ENERGIES,</span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>    initial_state<span class="op">=</span>INITIAL_STATE,</span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>    detuning<span class="op">=</span>DETUNING,</span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>    field_channels<span class="op">=</span>FIELD_CHANNELS,</span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>    field_factors<span class="op">=</span>FIELD_FACTORS.tolist(),</span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>    decay_channels<span class="op">=</span>DECAY_CHANNELS,</span>
-<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>    decay_factors<span class="op">=</span>DECAY_FACTORS.tolist(),</span>
-<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mb_solve_json <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="sc">{{</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="st">  "atom": </span><span class="sc">{{</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="st">    "decays": [</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="st">        "channels": </span><span class="sc">{decay_channels}</span><span class="st">,</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="st">        "rate": 1.0,</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{decay_factors}</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="st">    "energies": </span><span class="sc">{energies}</span><span class="st">,</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="st">    "fields": [</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">{{</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="st">        "coupled_levels": </span><span class="sc">{field_channels}</span><span class="st">,</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="st">        "factors": </span><span class="sc">{field_factors}</span><span class="st">,</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning": </span><span class="sc">{detuning}</span><span class="st">,</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="st">        "detuning_positive": true,</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="st">        "label": "probe",</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq": 1e-3,</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_args": </span><span class="sc">{{</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="st">          "ampl": 1.0,</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="st">          "centre": 0.0,</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="st">          "fwhm": 1.0</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="st">        </span><span class="sc">}}</span><span class="st">,</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="st">        "rabi_freq_t_func": "gaussian"</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="st">      </span><span class="sc">}}</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="st">    ],</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="st">    "num_states": </span><span class="sc">{num_states}</span><span class="st">,</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="st">    "initial_state": </span><span class="sc">{initial_state}</span></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="st">  </span><span class="sc">}}</span><span class="st">,</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_min": -2.0,</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_max": 10.0,</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="st">  "t_steps": 100,</span></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_min": -0.2,</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_max": 1.2,</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps": 100,</span></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a><span class="st">  "z_steps_inner": 1,</span></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="st">  "interaction_strengths": [</span></span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="st">    5.0e1</span></span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="st">  ],</span></span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="st">  "savefile": "structure-2"</span></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="sc">}}</span></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>.<span class="bu">format</span>(</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>    num_states<span class="op">=</span>NUM_STATES,</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    energies<span class="op">=</span>ENERGIES,</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>    initial_state<span class="op">=</span>INITIAL_STATE,</span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>    detuning<span class="op">=</span>DETUNING,</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>    field_channels<span class="op">=</span>FIELD_CHANNELS,</span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>    field_factors<span class="op">=</span>FIELD_FACTORS.tolist(),</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>    decay_channels<span class="op">=</span>DECAY_CHANNELS,</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>    decay_factors<span class="op">=</span>DECAY_FACTORS.tolist(),</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-41" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> clerq <span class="im">import</span> mb_solve</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mbs <span class="op">=</span> mb_solve.MBSolve().from_json_str(mb_solve_json)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-42" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-  0%|          | 0/100 [00:00&lt;?, ?z/s]
-  1%|          | 1/100 [00:00&lt;00:00, 1718.27z/s, Ω_max=0.00626]
-  2%|▏         | 2/100 [00:00&lt;00:00, 108.61z/s, Ω_max=0.00626] 
-  3%|▎         | 3/100 [00:00&lt;00:01, 83.78z/s, Ω_max=0.00626] 
-  4%|▍         | 4/100 [00:00&lt;00:01, 74.92z/s, Ω_max=0.00626]
-  5%|▌         | 5/100 [00:00&lt;00:01, 70.44z/s, Ω_max=0.00626]
-  6%|▌         | 6/100 [00:00&lt;00:01, 67.90z/s, Ω_max=0.00626]
-  7%|▋         | 7/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
-  7%|▋         | 7/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
-  8%|▊         | 8/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
-  9%|▉         | 9/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
- 10%|█         | 10/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
- 11%|█         | 11/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
- 12%|█▏        | 12/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
- 13%|█▎        | 13/100 [00:00&lt;00:01, 66.15z/s, Ω_max=0.00626]
- 14%|█▍        | 14/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00626]
- 14%|█▍        | 14/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00626]
- 15%|█▌        | 15/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00615]
- 16%|█▌        | 16/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00604]
- 17%|█▋        | 17/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00593]
- 18%|█▊        | 18/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00583]
- 19%|█▉        | 19/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00573]
- 20%|██        | 20/100 [00:00&lt;00:01, 60.46z/s, Ω_max=0.00563]
- 21%|██        | 21/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00563]
- 21%|██        | 21/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00554]
- 22%|██▏       | 22/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00546]
- 23%|██▎       | 23/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00537]
- 24%|██▍       | 24/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00529]
- 25%|██▌       | 25/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00521]
- 26%|██▌       | 26/100 [00:00&lt;00:01, 58.96z/s, Ω_max=0.00512]
- 27%|██▋       | 27/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00512]
- 27%|██▋       | 27/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00504]
- 28%|██▊       | 28/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00496]
- 29%|██▉       | 29/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00489]
- 30%|███       | 30/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00481]
- 31%|███       | 31/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00473]
- 32%|███▏      | 32/100 [00:00&lt;00:01, 58.20z/s, Ω_max=0.00466]
- 33%|███▎      | 33/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00466]
- 33%|███▎      | 33/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00459]
- 34%|███▍      | 34/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00451]
- 35%|███▌      | 35/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00444]
- 36%|███▌      | 36/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00437]
- 37%|███▋      | 37/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.0043] 
- 38%|███▊      | 38/100 [00:00&lt;00:01, 57.88z/s, Ω_max=0.00423]
- 39%|███▉      | 39/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00423]
- 39%|███▉      | 39/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00416]
- 40%|████      | 40/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00409]
- 41%|████      | 41/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00403]
- 42%|████▏     | 42/100 [00:00&lt;00:01, 57.60z/s, Ω_max=0.00396]
- 43%|████▎     | 43/100 [00:00&lt;00:00, 57.60z/s, Ω_max=0.0039] 
- 44%|████▍     | 44/100 [00:00&lt;00:00, 57.60z/s, Ω_max=0.00383]
- 45%|████▌     | 45/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00383]
- 45%|████▌     | 45/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00377]
- 46%|████▌     | 46/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00371]
- 47%|████▋     | 47/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00365]
- 48%|████▊     | 48/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00359]
- 49%|████▉     | 49/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00353]
- 50%|█████     | 50/100 [00:00&lt;00:00, 57.49z/s, Ω_max=0.00347]
- 51%|█████     | 51/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00347]
- 51%|█████     | 51/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00341]
- 52%|█████▏    | 52/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00336]
- 53%|█████▎    | 53/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.0033] 
- 54%|█████▍    | 54/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00324]
- 55%|█████▌    | 55/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00319]
- 56%|█████▌    | 56/100 [00:00&lt;00:00, 57.35z/s, Ω_max=0.00313]
- 57%|█████▋    | 57/100 [00:00&lt;00:00, 56.28z/s, Ω_max=0.00313]
- 57%|█████▋    | 57/100 [00:00&lt;00:00, 56.28z/s, Ω_max=0.00308]
- 58%|█████▊    | 58/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00303]
- 59%|█████▉    | 59/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00298]
- 60%|██████    | 60/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00293]
- 61%|██████    | 61/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00288]
- 62%|██████▏   | 62/100 [00:01&lt;00:00, 56.28z/s, Ω_max=0.00284]
- 63%|██████▎   | 63/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00284]
- 63%|██████▎   | 63/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.0028] 
- 64%|██████▍   | 64/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00276]
- 65%|██████▌   | 65/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00271]
- 66%|██████▌   | 66/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00267]
- 67%|██████▋   | 67/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00263]
- 68%|██████▊   | 68/100 [00:01&lt;00:00, 56.47z/s, Ω_max=0.00259]
- 69%|██████▉   | 69/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00259]
- 69%|██████▉   | 69/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00255]
- 70%|███████   | 70/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00252]
- 71%|███████   | 71/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00248]
- 72%|███████▏  | 72/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00244]
- 73%|███████▎  | 73/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.0024] 
- 74%|███████▍  | 74/100 [00:01&lt;00:00, 56.72z/s, Ω_max=0.00237]
- 75%|███████▌  | 75/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00237]
- 75%|███████▌  | 75/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00233]
- 76%|███████▌  | 76/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00229]
- 77%|███████▋  | 77/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00226]
- 78%|███████▊  | 78/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00222]
- 79%|███████▉  | 79/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00219]
- 80%|████████  | 80/100 [00:01&lt;00:00, 56.89z/s, Ω_max=0.00216]
- 81%|████████  | 81/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00216]
- 81%|████████  | 81/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00212]
- 82%|████████▏ | 82/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00209]
- 83%|████████▎ | 83/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00206]
- 84%|████████▍ | 84/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00203]
- 85%|████████▌ | 85/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00199]
- 86%|████████▌ | 86/100 [00:01&lt;00:00, 57.10z/s, Ω_max=0.00199]
- 87%|████████▋ | 87/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 87%|████████▋ | 87/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 88%|████████▊ | 88/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 89%|████████▉ | 89/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 90%|█████████ | 90/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 91%|█████████ | 91/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 92%|█████████▏| 92/100 [00:01&lt;00:00, 57.06z/s, Ω_max=0.00199]
- 93%|█████████▎| 93/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 93%|█████████▎| 93/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 94%|█████████▍| 94/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 95%|█████████▌| 95/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 96%|█████████▌| 96/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 97%|█████████▋| 97/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 98%|█████████▊| 98/100 [00:01&lt;00:00, 56.98z/s, Ω_max=0.00199]
- 99%|█████████▉| 99/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
- 99%|█████████▉| 99/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
-100%|██████████| 100/100 [00:01&lt;00:00, 57.15z/s, Ω_max=0.00199]
-100%|██████████| 100/100 [00:01&lt;00:00, 57.48z/s, Ω_max=0.00199]</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Omegas_zt, states_zt <span class="op">=</span> mbs.mbsolve(recalc<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Saving MBSolve to structure-2.qu</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
 </div>
 </div>
 </section>
@@ -916,30 +685,30 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="output-1">Output</h3>
 <p>We can output the field exactly as we would do for the two-level system.</p>
 <div id="cell-44" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"dark"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-45" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.Omegas_zt[<span class="dv">0</span>] <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi)),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Blues,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -953,22 +722,22 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="plotting-populations-and-coherences">Plotting Populations and Coherences</h3>
 <p>If we want to get the populations in all the levels coupled by a field, we have a helper function <code>mbs.populations_field</code>. For example, if we want to look at the total population of all the upper sublevels coupled by the field:</p>
 <div id="cell-48" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.populations_field(field_idx<span class="op">=</span><span class="dv">0</span>, upper<span class="op">=</span><span class="va">False</span>)),</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Reds,</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">abs</span>(mbs.populations_field(field_idx<span class="op">=</span><span class="dv">0</span>, upper<span class="op">=</span><span class="va">False</span>)),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Reds,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -979,22 +748,22 @@ window.Quarto = {
 </div>
 <p>And for the sum of all the complex coherences on a field transition, we similarly have <code>mbs.coherences_field</code>:</p>
 <div id="cell-50" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    np.imag(mbs.coherences_field(field_idx<span class="op">=</span><span class="dv">0</span>)),</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Greens,</span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(<span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cmap_range = np.linspace(0.0, 1.0e-3, 11)</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>cf <span class="op">=</span> ax.contourf(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    mbs.tlist,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    mbs.zlist,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    np.imag(mbs.coherences_field(field_idx<span class="op">=</span><span class="dv">0</span>)),</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#                  cmap_range,</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>plt.cm.Greens,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"Rabi Frequency </span><span class="kw">(</span><span class="dv">$\G</span><span class="vs">amma / 2</span><span class="er">\</span><span class="vs">pi </span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"Time </span><span class="kw">(</span><span class="dv">$</span><span class="vs">1/</span><span class="dv">\G</span><span class="vs">amma</span><span class="dv">$</span><span class="kw">)</span><span class="vs">"</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Distance ($L$)"</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> y <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(y, c<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.0</span>, ls<span class="op">=</span><span class="st">"dotted"</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(cf)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1009,10 +778,10 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="note-on-stength-factors">Note on Stength Factors</h2>
 <p>The strength factor gives the relative strength hyperfine transition. This is the sum <span class="math inline">\(S_{FF'}\)</span> of the matrix elements from a single ground-state sublevel to the levels in a particular <span class="math inline">\(F'\)</span> energy level, and the sum is independent of the ground state sublevel chosen. The sum of <span class="math inline">\(S_{FF'}\)</span> over upper <span class="math inline">\(F'\)</span> levels is <span class="math inline">\(1\)</span>.</p>
 <div id="cell-52" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>s_11 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">0</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_11)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>s_12 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">1</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_12)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>s_11 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">0</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_11)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>s_12 <span class="op">=</span> atom1e.get_strength_factor(F_level_idx_lower<span class="op">=</span><span class="dv">1</span>, F_level_idx_upper<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(s_12)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.16666666666666657
 0.4999999999999999</code></pre>
