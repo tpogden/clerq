@@ -4,9 +4,11 @@
 [![Documentation](https://img.shields.io/badge/docs-clerq.org-blue)](https://clerq.org)
 [![PyPI](https://img.shields.io/pypi/v/clerq)](https://pypi.org/project/clerq/)
 
-clerq is a Python package for solving the coupled Maxwell-Bloch
-equations describing the nonlinear propagation of near-resonant light through
-thermal quantised systems such as atomic vapours.
+clerq solves the propagation of classical electromagnetic fields through media
+of open quantum systems, using Maxwell's equations coupled to the Lindblad
+master equation. It is used for near-resonant light in thermal atomic vapours,
+with two-, three- and many-level atoms, spontaneous decay, dephasing and
+Doppler broadening.
 
 > **Renamed from `maxwellbloch`.** This package was previously published as
 > `maxwellbloch`. Install `clerq` and change `import maxwellbloch` to
@@ -71,8 +73,9 @@ published as MaxwellBloch:
   howpublished = {\url{https://github.com/tpogden/clerq}}
 }
 ```
-A citation for clerq itself, with its own DOI, will be added with the first
-release under the new name.
+A `CITATION.cff` for clerq is included (GitHub's "Cite this repository" button
+reads it). A citation with its own DOI will be added once the first archived
+release under the new name is available.
 
 ## Changelog
 

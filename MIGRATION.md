@@ -153,7 +153,7 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 ## Phase 5: Post-cutover
 
 - [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
-- [ ] New Zenodo DOI; add to README citation block alongside the old one 👤
+- [ ] New Zenodo DOI; add to README citation block alongside the old one 👤. `CITATION.cff` added (no ORCID yet). On Zenodo: enable `tpogden/clerq` under GitHub settings (Sync now after the rename); only releases published *after* the switch are archived, so the first archived release will be `v0.13.1`. Check whether the repo was already enabled under the old name: if so, releases join the existing MaxwellBloch record (same concept DOI)
 - [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
 - [ ] External references sweep (personal site, CV, papers, Scholar) 👤
 

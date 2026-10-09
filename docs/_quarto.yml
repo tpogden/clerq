@@ -20,7 +20,7 @@ execute:
 
 website:
   title: "clerq"
-  description: "Maxwell–Bloch solver for near-resonant light propagation through atomic vapours"
+  description: "Classical Maxwell fields propagating through open quantum systems"
   site-url: https://clerq.org
   repo-url: https://github.com/tpogden/clerq
   repo-actions: [edit, issue]
