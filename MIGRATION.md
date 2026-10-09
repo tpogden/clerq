@@ -120,7 +120,7 @@ Steps
 
 1. [x] 👤 **Rename the GitHub repo** `maxwellbloch` → `clerq` (Settings → General). Then update local remotes:
        `git remote set-url origin git@github.com:tpogden/clerq.git`
-2. [ ] 👤 **Register PyPI trusted publishers** (PyPI → project `clerq` → Publishing): owner `tpogden`, repo `clerq`,
+2. [x] 👤 **Register PyPI trusted publishers** (PyPI → project `clerq` → Publishing): owner `tpogden`, repo `clerq`,
        workflow `publish.yml`, environment `pypi`. The old one is registered for `MaxwellBloch` and will not work for `clerq`.
        Check the GitHub environment `pypi` still exists after the rename
 3. [ ] 🤖/👤 Open the PR from this branch to `next` and merge it
