@@ -34,8 +34,8 @@ uv run ruff check .
 uv run ruff format .
 
 # Build docs
-make docs_html        # API pages + quarto render from docs/_freeze
-make docs_execute     # re-run every notebook and refresh docs/_freeze (~7 min)
+make docs_html        # API pages + quarto render (uses the outputs stored in the notebooks)
+make docs_execute     # re-run every notebook and store fresh outputs in the .ipynb files (~8 min)
 
 # Build distribution
 uv build
