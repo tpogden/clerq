@@ -59,24 +59,35 @@ Things learned:
 - Notebooks used `recalc=False` against committed `.qu` caches, so they never re-solved. Those caches are gone.
 - The `mbs-ladder-rydberg-eit-counter` draft is excluded and has no freeze.
 
-## Phase 3: Code rename 🤖 (one discrete commit)
+## Phase 3: Code rename ✅
 
-Use `git mv` and a reviewed search-and-replace. The plan's `sed -i` needs `-i ''` on
-macOS, and a blanket replace would also touch `uv.lock` and the changelog prose.
+Done 2026-10-09 (`61d85d4` rename, `aa6a2b0` regenerated docs). Version stays `0.12.0`.
 
-- [ ] `git mv src/maxwellbloch src/clerq`
-- [ ] Imports in `src/`, `tests/`, `bin/`, and notebook code cells
-- [ ] `pyproject.toml`: name, urls, `dev` extra self-reference, description, version stays `0.12.0`
-- [ ] Plotly template name `"maxwellbloch"` in `plot/` and the notebooks that use it
-- [ ] `.gitignore` (`maxwellbloch/version.py`, `_version.py`), `Makefile`, `MANIFEST.in`
-- [ ] `bin/` scripts (`mbsolve`, `obsolve`, movie scripts)
-- [ ] README: rename notice, install command, citation block, badges (CI, PyPI, coveralls; drop readthedocs)
-- [ ] CI workflows (`ci.yml`, `publish.yml`) and badge URLs
-- [ ] `CHANGELOG.md`: add a "Renamed to clerq" entry; do not rewrite history
-- [ ] `CLAUDE.md` and memory notes that mention `maxwellbloch`
-- [ ] `docs/` pages and notebooks (`install`, `troubleshooting`, import lines)
-- [ ] Gate: `uv run pytest -n auto` passes; `uv pip install -e .` gives a working `import clerq`
-- [ ] Gate: `uv run ruff check .` and `ruff format --check` clean
+- [x] `git mv src/maxwellbloch src/clerq`; imports in `src/`, `tests/`, `bin/` and notebook code cells
+- [x] `pyproject.toml` name, URL, `dev` extra self-reference; `uv.lock` re-locked
+- [x] Plotly template `"maxwellbloch"` → `"clerq"`; `.qu` metadata key now `clerq` (old savefiles still load)
+- [x] `.gitignore`, `bin/` scripts, `CLAUDE.md`, Makefile
+- [x] README: rename notice, install, `clerq.org`, citation (original MaxwellBloch citation kept; clerq DOI pending); coveralls badge dropped (not used in CI)
+- [x] `CHANGELOG.md`: `[Unreleased]` entry for the rename and docs move
+- [x] CI: no `maxwellbloch` strings in the workflows (docs job already switched to Quarto in Phase 1)
+- [x] Gate: 208 tests pass; `ruff check` and `ruff format --check` clean
+- [x] Gate: wheel builds as `clerq-0.12.0`, installs in a clean venv, `import clerq` works, `import maxwellbloch` fails, `mbsolve`/`obsolve`/movie scripts installed
+- [x] Gate: re-executed freeze is byte-identical to the pre-rename freeze once the name is normalised, so the rename changes no numerics
+- [x] Gate: clean-clone `quarto render` 24 s, 0 broken links, all pages have outputs
+
+Changed on purpose vs the plan: the site description in `_quarto.yml` says "Maxwell–Bloch solver", not
+"Differentiable Maxwell–Lindblad solver", because nothing is differentiable until the spike passes. The plan's
+pyproject description was left as the original.
+
+Deferred to Phase 4/5 (needs the repo rename, PyPI or you):
+
+- PyPI trusted publishing (`publish.yml`, environment `pypi`) is registered for project `MaxwellBloch`;
+  register `clerq` as a trusted publisher (or use a project token) before tagging 👤
+- GitHub URLs in README, `pyproject.toml` and `_quarto.yml` point at `tpogden/clerq`, which only exists after
+  the repo rename (Phase 4.2)
+- Zenodo DOI and clerq citation
+- Existing bug found in passing, unrelated to the rename: `mbsolve --help` crashes under Python 3.14 (unescaped `%`
+  in an argparse help string)
 
 ## Phase 4: Cutover (single session)
 
