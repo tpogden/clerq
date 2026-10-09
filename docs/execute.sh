@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
-# Re-execute every notebook and refresh docs/_freeze.
+# Re-execute every notebook and store the outputs in the .ipynb files.
 #
-# Rendering with --execute writes outputs back into the source .ipynb files.
-# We keep sources output-free (outputs live in _freeze), so back them up first
-# and restore them afterwards. Pass --fresh to also discard cached solver
-# results (*.qu) and the previous freeze so everything is solved from scratch.
+# Quarto does not execute .ipynb files on a plain `quarto render`; it shows the
+# outputs stored in the notebook. So the executed notebooks are the source of
+# truth for the site, and `quarto render --execute` writes the fresh outputs
+# back into them. Review the notebook diff and commit it.
+#
+# Solver results (*.qu) are build artifacts; they are deleted first so every
+# problem is solved from scratch. The startup script in .ipython silences
+# progress bars and makes plotly div ids deterministic, so two runs give
+# identical notebooks.
 set -euo pipefail
 cd "$(dirname "$0")"
 
-if [[ "${1:-}" == "--fresh" ]]; then
-  rm -rf _freeze
-  find examples usage -name '*.qu' -delete
-fi
+find examples usage -name '*.qu' -delete
 
-backup=$(mktemp -d)
-trap 'cp -p "$backup"/examples/*.ipynb examples/; cp -p "$backup"/usage/*.ipynb usage/; rm -rf "$backup"' EXIT
-mkdir -p "$backup/examples" "$backup/usage"
-cp -p examples/*.ipynb "$backup/examples/"
-cp -p usage/*.ipynb "$backup/usage/"
-
-# The startup script silences progress bars and makes plotly ids deterministic.
 IPYTHONDIR="$PWD/.ipython" quarto render --execute

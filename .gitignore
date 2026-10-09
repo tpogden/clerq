@@ -57,7 +57,7 @@ cover/
 .DS_Store
 .benchmarks/
 
-# Saved solver results (regenerated on demand; docs outputs live in docs/_freeze)
+# Saved solver results (regenerated on demand; docs outputs are stored in the notebooks)
 *.qu
 
 # Version files (generated at build time)

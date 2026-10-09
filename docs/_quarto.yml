@@ -12,14 +12,12 @@ project:
     - examples/*.ipynb
     - "!examples/mbs-ladder-rydberg-eit-counter.ipynb"  # draft
     - support/troubleshooting.md
+    - news/*.qmd
     - api/*.qmd
-
-execute:
-  freeze: auto
 
 website:
   title: "clerq"
-  description: "Maxwell–Bloch solver for near-resonant light propagation through atomic vapours"
+  description: "Classical Maxwell fields propagating through open quantum systems"
   site-url: https://clerq.org
   repo-url: https://github.com/tpogden/clerq
   repo-actions: [edit, issue]
@@ -53,6 +51,7 @@ website:
         - examples/mbs-linear-absorption.ipynb
         - examples/mbs-sit-area-theorem.ipynb
         - examples/mbs-two-photon-echo.ipynb
+        - examples/mbs-two-stimulated-echo.ipynb
         - examples/mbs-lambda-eit-slow-light.ipynb
         - examples/mbs-lambda-cpt.ipynb
         - examples/mbs-lambda-adiabatons.ipynb
