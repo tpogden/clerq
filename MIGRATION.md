@@ -114,7 +114,7 @@ Pre-flight 👤
 
 - [ ] This branch's PR (to `next`) is green on CI
 - [x] DNS for `clerq.org` verified (2026-10-09)
-- [ ] Tag the last pre-rename state: `git tag v-final-maxwellbloch v0.12.0 && git push origin v-final-maxwellbloch`
+- [x] Tagged the last pre-rename release as `final-maxwellbloch` (on the `v0.12.0` commit `baa79e2`), 2026-10-09. Not named `v-final-…`: `publish.yml` runs on any `v*` tag and would have tried to republish to PyPI
 
 Steps
 
