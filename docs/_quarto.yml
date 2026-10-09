@@ -51,6 +51,7 @@ website:
         - examples/mbs-linear-absorption.ipynb
         - examples/mbs-sit-area-theorem.ipynb
         - examples/mbs-two-photon-echo.ipynb
+        - examples/mbs-two-stimulated-echo.ipynb
         - examples/mbs-lambda-eit-slow-light.ipynb
         - examples/mbs-lambda-cpt.ipynb
         - examples/mbs-lambda-adiabatons.ipynb

@@ -7,6 +7,7 @@ title: "Examples"
 | [mbs-linear-absorption](mbs-linear-absorption.ipynb) | 2-level | Beer-Lambert law: optical depth, decay, CW and pulsed fields |
 | [mbs-sit-area-theorem](mbs-sit-area-theorem.ipynb) | 2-level | Self-Induced Transparency: area theorem, solitons, pulse breakup, collision |
 | [mbs-two-photon-echo](mbs-two-photon-echo.ipynb) | 2-level | Photon echo: inhomogeneous dephasing, rephasing, T₂ measurement |
+| [mbs-two-stimulated-echo](mbs-two-stimulated-echo.ipynb) | 2-level | Stimulated three-pulse photon echo: population grating, T₁ measurement |
 | [mbs-lambda-eit-slow-light](mbs-lambda-eit-slow-light.ipynb) | Λ | EIT, slow light, pulse compression and light storage |
 | [mbs-lambda-cpt](mbs-lambda-cpt.ipynb) | Λ | Coherent Population Trapping (CPT) dark resonance |
 | [mbs-lambda-adiabatons](mbs-lambda-adiabatons.ipynb) | Λ | Adiabatons: adiabatic ground-state population transfer |
