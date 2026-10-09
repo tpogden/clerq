@@ -1,0 +1,21 @@
+# utility.full_width_at_half_max { #clerq.utility.full_width_at_half_max }
+
+```python
+utility.full_width_at_half_max(x, y)
+```
+
+Return the full width at half maximum (FWHM) of a peak.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type       | Description                                                                                                            | Default    |
+|--------|------------|------------------------------------------------------------------------------------------------------------------------|------------|
+| x      | np.ndarray | 1-D array of independent variable values (must be monotonically increasing and have enough points for spline fitting). | _required_ |
+| y      | np.ndarray | 1-D array of dependent variable values, same length as ``x``.                                                          | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                     |
+|--------|--------|-----------------------------------------------------------------|
+|        | float  | The FWHM as a scalar: the distance between the two points where |
+|        | float  | ``y`` equals half its maximum value.                            |

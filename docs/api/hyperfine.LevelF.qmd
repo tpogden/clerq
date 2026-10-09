@@ -1,0 +1,56 @@
+# hyperfine.LevelF { #clerq.hyperfine.LevelF }
+
+```python
+hyperfine.LevelF(I, J, F, energy=0.0, mF_energies=None)
+```
+
+Represents an F hyperfine structure level and holds its magnetic
+    sublevels mF.
+
+## Attributes {.doc-section .doc-section-attributes}
+
+| Name      | Type              | Description                             |
+|-----------|-------------------|-----------------------------------------|
+| F         | float             | Total atomic angular momentum number F. |
+| energy    | float             | Energy of the level.                    |
+| mf_levels | list, length 2F+1 | Energies of 2F+1 hyperfine sublevels.   |
+
+## Notes {.doc-section .doc-section-notes}
+
+- The magnitude of F can take values in the range
+    `|J - I| <= F <= J + I`. A ``ValueError`` is raised if this is
+    not satisfied.
+- The mF_energies are set _relative_ to the F level energy.
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [build_mF_levels](#clerq.hyperfine.LevelF.build_mF_levels) | Builds the mF sublevels of the F level. |
+| [get_mF_range](#clerq.hyperfine.LevelF.get_mF_range) | Returns a range representing the m_F angular momentum sublevels |
+
+### build_mF_levels { #clerq.hyperfine.LevelF.build_mF_levels }
+
+```python
+hyperfine.LevelF.build_mF_levels(mF_energies=None)
+```
+
+Builds the mF sublevels of the F level.
+
+#### Parameters {.doc-section .doc-section-parameters}
+
+| Name        | Type              | Description                               | Default   |
+|-------------|-------------------|-------------------------------------------|-----------|
+| mF_energies | list, length 2F+1 | Energies of the 2F+1 hyperfine sublevels. | `None`    |
+
+Returns:
+    self.mF_levels
+
+### get_mF_range { #clerq.hyperfine.LevelF.get_mF_range }
+
+```python
+hyperfine.LevelF.get_mF_range()
+```
+
+Returns a range representing the m_F angular momentum sublevels
+[-F, -F+1, ..., F-1, F].

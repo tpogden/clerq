@@ -16,7 +16,7 @@ import seaborn as sns
 from matplotlib import animation
 from scipy.ndimage import zoom
 
-from maxwellbloch import fixed, mb_solve
+from clerq import fixed, mb_solve
 
 # Parse filename
 parser = argparse.ArgumentParser(

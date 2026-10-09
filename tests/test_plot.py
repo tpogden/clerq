@@ -1,4 +1,4 @@
-"""Smoke tests for maxwellbloch.plot primitives.
+"""Smoke tests for clerq.plot primitives.
 
 Tests verify that every public primitive:
   - returns a plotly Figure
@@ -12,12 +12,12 @@ import unittest
 
 import pytest
 
-pytest.importorskip("plotly", reason="plotly not installed; install maxwellbloch[plot]")
+pytest.importorskip("plotly", reason="plotly not installed; install clerq[plot]")
 
 import numpy as np
 import plotly.graph_objects as go
 
-from maxwellbloch import mb_solve, plot, spectral
+from clerq import mb_solve, plot, spectral
 
 # Minimal two-level two-field config used by all field/state tests.
 _TWO_LEVEL_JSON = """

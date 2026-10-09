@@ -12,7 +12,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import ob_solve, t_funcs
+from clerq import ob_solve, t_funcs
 
 # Absolute path of tests/json directory, so that tests can be called from
 # different directories.

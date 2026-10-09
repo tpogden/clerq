@@ -1,0 +1,7 @@
+/.quarto/
+**/*.quarto_ipynb
+/_site/
+/.ipython/profile_default/db/
+/.ipython/profile_default/log/
+/.ipython/profile_default/pid/
+/.ipython/profile_default/security/

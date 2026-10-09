@@ -57,15 +57,13 @@ cover/
 .DS_Store
 .benchmarks/
 
-# Saved Files — ignore everywhere except docs cache (needed for fast builds)
+# Saved solver results (regenerated on demand; docs outputs live in docs/_freeze)
 *.qu
-!docs/examples/*.qu
-!docs/usage/*.qu
 
 # Version files (generated at build time)
-maxwellbloch/version.py
-maxwellbloch/_version.py
+clerq/version.py
+clerq/_version.py
 
 # Docs
-docs/_build
+docs/_site
 *checkpoint.ipynb

@@ -1,0 +1,30 @@
+# t_funcs.sech { #clerq.t_funcs.sech }
+
+```python
+t_funcs.sech(index)
+```
+
+Return a sech pulse time function.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                        |
+|--------|--------|--------------------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``centre_{index}``, either         |
+|        | TFunc  | ``ampl_{index}`` or ``n_pi_{index}``, and either ``width_{index}`` |
+|        | TFunc  | or ``fwhm_{index}`` from args. Raises ``KeyError`` if conflicting  |
+|        | TFunc  | or missing parameters are found.                                   |
+
+## Notes {.doc-section .doc-section-notes}
+
+- The amplitude can be set directly via ``ampl_{index}`` or
+  indirectly via ``n_pi_{index}`` (desired pulse area in multiples
+  of π).
+- The width can be set directly via ``width_{index}`` or indirectly
+  via ``fwhm_{index}`` (full-width at half maximum).

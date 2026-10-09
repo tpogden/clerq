@@ -1,0 +1,20 @@
+# t_funcs.sinc { #clerq.t_funcs.sinc }
+
+```python
+t_funcs.sinc(index)
+```
+
+Return a sinc pulse time function.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                          |
+|--------|--------|------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``ampl_{index}`` and |
+|        | TFunc  | ``width_{index}`` from args.                         |
