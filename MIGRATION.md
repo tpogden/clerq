@@ -164,7 +164,25 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 - [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
 - [ ] New Zenodo DOI; add to README citation block alongside the old one 👤. `CITATION.cff` added (no ORCID yet). On Zenodo: enable `tpogden/clerq` under GitHub settings (Sync now after the rename); only releases published *after* the switch are archived, so the first archived release will be `v0.13.1`. Check whether the repo was already enabled under the old name: if so, releases join the existing MaxwellBloch record (same concept DOI)
 - [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
-- [ ] External references sweep (personal site, CV, papers, Scholar) 👤
+- [ ] External references sweep 👤 (done 2026-10-09 except the items marked open):
+  - [x] `tpogden/clerq` repo description and homepage (`https://clerq.org`)
+  - [x] Site `index.qmd` Projects entry in `tpogden.github.com` (master, `fb70693`) and `tpogden-quarto` (main, `ce6796e`).
+        `ogden.eu` is served from the `gh-pages` branch of `tpogden.github.com`, published by hand, so the live site
+        changes when you next run `quarto publish gh-pages`
+  - [x] `tpogden.github.com/environment.yml`: pip `clerq`, python 3.11, dropped the `qutip=4` / python 3.7 pins (no
+        `maxwellbloch` >= 0.8 could install with them). The file is unreferenced; the site is built with uv
+  - [ ] Read the Docs, `maxwellbloch.readthedocs.io`: still live and stale, no banner. Admin -> Redirects -> add an
+        exact redirect from `/$rest` (or `/en/latest/$rest` and `/en/stable/$rest`) to `https://clerq.org/` with
+        *Force redirect* on, otherwise existing pages are served instead. Removing `.readthedocs.yml` means new RTD
+        builds will fail, which is fine once redirected
+  - [ ] CV (`tpogden/cv`, `tpo-cv.tex`): project entry still says MaxwellBloch
+  - [ ] `paper-maxwellbloch`: title and "Program Title" say MaxwellBloch and the abstract frames the package as solving
+        the Maxwell-Bloch equations; a rewrite decision, not a find and replace
+  - [ ] Blog posts that `import maxwellbloch` and use parameters tuned before the factor-of-2 fix (figures are baked, but a
+        re-execution gives different optical depths); add a note or leave
+  - [ ] Google Scholar and ORCID entries (not reachable from the repo)
+  - Left alone on purpose: `phd-thesis`, `research-notes` (historical), the CoOMBE paper's link to
+    `github.com/tpogden/maxwellbloch` (redirects), `notebooks-maxwellbloch` (archived)
 
 ---
 
