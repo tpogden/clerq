@@ -15,7 +15,7 @@ Legend: `[x]` done · `[ ]` to do · 👤 you must do it (external or credential
 
 - [x] 0.1 Reserve `clerq` on PyPI 👤: `clerq 0.0.0` live, verified 2026-10-09
 - [x] 0.2 Decisions locked (see plan): continue `0.x.y`, rename in place, `freeze: auto`, shim, new Zenodo DOI
-- [ ] 0.3 Confirm `clerq.org` DNS points at GitHub Pages 👤 (A records `185.199.108–111.153`)
+- [x] 0.3 `clerq.org` DNS points at GitHub Pages 👤: apex A records `185.199.108–111.153` and `www` CNAME to `tpogden.github.io`, verified 2026-10-09 (MX left as Hover mail forwarding)
 - [ ] 0.4 Revoke the account-wide PyPI token used for the stub; create a `clerq`-scoped token for Phase 4 👤
 - [ ] 0.5 Decide whether to batch a small API cleanup into the rename release (open question in plan)
 
@@ -113,7 +113,7 @@ results), so I recommend **`clerq 0.13.0`** via `uv run bump-my-version bump min
 Pre-flight 👤
 
 - [ ] This branch's PR (to `next`) is green on CI
-- [ ] DNS for `clerq.org` verified (A records `185.199.108–111.153`, optional `www` CNAME)
+- [x] DNS for `clerq.org` verified (2026-10-09)
 - [ ] Tag the last pre-rename state: `git tag v-final-maxwellbloch v0.12.0 && git push origin v-final-maxwellbloch`
 
 Steps
