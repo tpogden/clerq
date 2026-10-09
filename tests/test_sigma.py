@@ -8,7 +8,7 @@ import unittest
 import numpy as np
 import qutip as qu
 
-from maxwellbloch import sigma
+from clerq import sigma
 
 
 class TestSigma(unittest.TestCase):

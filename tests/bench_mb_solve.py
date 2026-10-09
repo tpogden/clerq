@@ -3,14 +3,14 @@
 """Performance benchmarks for the Maxwell-Bloch solver.
 
 Run with:
-    uv run pytest maxwellbloch/tests/bench_mb_solve.py --benchmark-only
+    uv run pytest clerq/tests/bench_mb_solve.py --benchmark-only
 
 Or together with regular tests:
     uv run pytest --benchmark-disable        # skip benchmarks
     uv run pytest --benchmark-enable         # include benchmarks
 """
 
-from maxwellbloch import mb_solve
+from clerq import mb_solve
 
 # ---------------------------------------------------------------------------
 # Benchmark configs — inline dicts mirror the corresponding doc examples

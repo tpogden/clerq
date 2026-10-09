@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-""" Solves a MaxwellBloch Optical Bloch problem given an input JSON file.
+""" Solves a clerq Optical Bloch problem given an input JSON file.
 """
 
 import sys
 import argparse
 
-from maxwellbloch import ob_solve
+from clerq import ob_solve
 
 def main():
     parser = argparse.ArgumentParser()

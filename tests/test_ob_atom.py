@@ -12,7 +12,7 @@ from textwrap import dedent
 import numpy as np
 import qutip as qu
 
-from maxwellbloch import field, ob_atom
+from clerq import field, ob_atom
 
 # Absolute path of tests/json directory, so that tests can be called from
 # different directories.

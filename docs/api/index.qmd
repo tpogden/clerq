@@ -1,0 +1,60 @@
+# API reference {.doc .doc-index}
+
+## Solvers
+
+Time-domain and spatial-propagation solvers.
+
+| | |
+| --- | --- |
+| [mb_solve.MBSolve](mb_solve.MBSolve.qmd#clerq.mb_solve.MBSolve) |  |
+| [ob_solve.OBSolve](ob_solve.OBSolve.qmd#clerq.ob_solve.OBSolve) | Time-domain master equation solver for a single spatial point. |
+
+## Atoms and fields
+
+| | |
+| --- | --- |
+| [ob_atom.OBAtom](ob_atom.OBAtom.qmd#clerq.ob_atom.OBAtom) |  |
+| [field.Field](field.Field.qmd#clerq.field.Field) | Field object to address the OBAtom object, describing the atomic levels |
+
+## Time functions
+
+| | |
+| --- | --- |
+| [t_funcs.square](t_funcs.square.qmd#clerq.t_funcs.square) | Return a square (top-hat) pulse time function. |
+| [t_funcs.gaussian](t_funcs.gaussian.qmd#clerq.t_funcs.gaussian) | Return a Gaussian pulse time function. |
+| [t_funcs.sech](t_funcs.sech.qmd#clerq.t_funcs.sech) | Return a sech pulse time function. |
+| [t_funcs.ramp_on](t_funcs.ramp_on.qmd#clerq.t_funcs.ramp_on) | Return a ramp-on time function. |
+| [t_funcs.ramp_off](t_funcs.ramp_off.qmd#clerq.t_funcs.ramp_off) | Return a ramp-off time function. |
+| [t_funcs.ramp_onoff](t_funcs.ramp_onoff.qmd#clerq.t_funcs.ramp_onoff) | Return a ramp-on / ramp-off time function. |
+| [t_funcs.ramp_offon](t_funcs.ramp_offon.qmd#clerq.t_funcs.ramp_offon) | Return a ramp-off / ramp-on time function. |
+| [t_funcs.sinc](t_funcs.sinc.qmd#clerq.t_funcs.sinc) | Return a sinc pulse time function. |
+| [t_funcs.intp](t_funcs.intp.qmd#clerq.t_funcs.intp) | Return an interpolated time function. |
+
+## Spectral analysis
+
+| | |
+| --- | --- |
+| [spectral.freq_list](spectral.freq_list.qmd#clerq.spectral.freq_list) | Fourier transform of the tlist into the frequency domain for |
+| [spectral.rabi_freq](spectral.rabi_freq.qmd#clerq.spectral.rabi_freq) | Fourier transform of the field result of field index. |
+| [spectral.absorption](spectral.absorption.qmd#clerq.spectral.absorption) | Field absorption in the frequency domain. |
+| [spectral.dispersion](spectral.dispersion.qmd#clerq.spectral.dispersion) | Field dispersion in the frequency domain. |
+| [spectral.susceptibility_two_linear_known](spectral.susceptibility_two_linear_known.qmd#clerq.spectral.susceptibility_two_linear_known) | In the linear regime for a two-level system, the susceptibility is |
+| [spectral.absorption_two_linear_known](spectral.absorption_two_linear_known.qmd#clerq.spectral.absorption_two_linear_known) | The field absorption, equal to the imaginary part of the susceptibility. |
+| [spectral.dispersion_two_linear_known](spectral.dispersion_two_linear_known.qmd#clerq.spectral.dispersion_two_linear_known) | The field dispersion, equal to the real part of the susceptibility. |
+| [spectral.voigt_two_linear_known](spectral.voigt_two_linear_known.qmd#clerq.spectral.voigt_two_linear_known) | Returns the Voigt profile for a two-level system in the linear regime. |
+
+## Hyperfine structure
+
+| | |
+| --- | --- |
+| [hyperfine.Atom1e](hyperfine.Atom1e.qmd#clerq.hyperfine.Atom1e) | Represents an atom object and contains a list of J levels. |
+| [hyperfine.LevelF](hyperfine.LevelF.qmd#clerq.hyperfine.LevelF) | Represents an F hyperfine structure level and holds its magnetic |
+| [hyperfine.LevelMF](hyperfine.LevelMF.qmd#clerq.hyperfine.LevelMF) | Represents an m_F hyperfine sublevel. |
+
+## Utilities
+
+| | |
+| --- | --- |
+| [utility.maxwell_boltzmann](utility.maxwell_boltzmann.qmd#clerq.utility.maxwell_boltzmann) | Maxwell-Boltzmann probability distribution. |
+| [utility.half_max_roots](utility.half_max_roots.qmd#clerq.utility.half_max_roots) | Return the half-maximum value and the two roots where ``y`` crosses it. |
+| [utility.full_width_at_half_max](utility.full_width_at_half_max.qmd#clerq.utility.full_width_at_half_max) | Return the full width at half maximum (FWHM) of a peak. |

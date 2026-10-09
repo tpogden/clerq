@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-MaxwellBloch is a Python package for numerically solving the coupled Maxwell-Bloch equations, which describe nonlinear propagation of near-resonant light through thermal atomic vapors. It models two, three, and many-level quantum systems using density matrix formalism via the QuTiP library.
+clerq is a Python package for numerically solving the propagation of classical electromagnetic fields through media of open quantum systems: Maxwell's equations coupled to the Lindblad master equation. It is used for near-resonant light in thermal atomic vapors, and models two, three, and many-level systems using density matrix formalism via the QuTiP library. (The package was formerly called MaxwellBloch.)
 
 ## Commands
 
@@ -34,7 +34,8 @@ uv run ruff check .
 uv run ruff format .
 
 # Build docs
-uv run sphinx-build docs docs/_build -b html
+make docs_html        # API pages + quarto render from docs/_freeze
+make docs_execute     # re-run every notebook and refresh docs/_freeze (~7 min)
 
 # Build distribution
 uv build
@@ -46,7 +47,7 @@ uv run bump-my-version bump major   # breaking changes
 git push && git push --tags
 ```
 
-Make targets: `test`, `test_cov`, `bench`, `lint`, `format`, `format_check`, `docs_html`, `dist`, `bump_patch`, `bump_minor`, `bump_major`, `clean_qu` (removes cached `.qu` files).
+Make targets: `test`, `test_cov`, `bench`, `lint`, `format`, `format_check`, `docs_html`, `docs_execute`, `docs_serve`, `dist`, `bump_patch`, `bump_minor`, `bump_major`, `clean_qu` (removes cached `.qu` files).
 
 ## Architecture
 

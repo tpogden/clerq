@@ -31,7 +31,7 @@ Run with:
     uv run pytest tests/bench_max.py --benchmark-only -v
 """
 
-from maxwellbloch import hyperfine, mb_solve
+from clerq import hyperfine, mb_solve
 
 # ---------------------------------------------------------------------------
 # Build the hyperfine structure for the two arms of the V system.

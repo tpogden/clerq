@@ -1,0 +1,45 @@
+---
+title: "clerq"
+---
+
+::: {.callout-note}
+MaxwellBloch is now **clerq**. See [what changed and how to update](news/rename.qmd).
+:::
+
+clerq solves the propagation of classical electromagnetic fields through media
+of open quantum systems, using Maxwell's equations coupled to the Lindblad
+master equation. It is used for near-resonant light in thermal atomic vapours,
+with two-, three- and many-level atoms, spontaneous decay, dephasing and
+Doppler broadening.
+
+![Propagation of a 4π pulse through a dense atomic vapour. The pulse
+immediately breaks up on entering the medium and the resultant pulses form two
+optical solitons each with a pulse area of 2π.](example.gif)
+
+clerq is used for theoretical research, for modelling experiments and for
+undergraduate and graduate teaching. It can model two, three or many-level
+systems with physical effects including:
+
+* Inhomogeneous broadening due to spontaneous decay,
+* Doppler broadening in thermal systems,
+* Collision dephasing,
+* Sub-level structure.
+
+Modules are also available for:
+
+* Generating hyperfine structure for alkali atoms with the correct channels and
+  angular momentum factors for coupling and decay,
+* Spectral analysis,
+* Plotting and animating solutions.
+
+Some phenomena that can be demonstrated:
+
+* Linear absorption and dispersion,
+* Fast light and slow light,
+* Electromagnetically Induced Transparency (EIT),
+* Storage and retrieval of light pulses,
+* Self-Induced Transparency (SIT) and optical solitons,
+* Matched pulses and simultons,
+* Hyperfine pumping.
+
+See the [Examples](examples/index.qmd) for details.

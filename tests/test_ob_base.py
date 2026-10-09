@@ -12,7 +12,7 @@ import unittest
 import numpy as np
 import qutip as qu
 
-from maxwellbloch import ob_atom
+from clerq import ob_atom
 
 
 def make_two_state():

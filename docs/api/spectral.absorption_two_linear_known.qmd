@@ -1,0 +1,11 @@
+# spectral.absorption_two_linear_known { #clerq.spectral.absorption_two_linear_known }
+
+```python
+spectral.absorption_two_linear_known(
+    freq_list,
+    interaction_strength,
+    decay_rate,
+)
+```
+
+The field absorption, equal to the imaginary part of the susceptibility.

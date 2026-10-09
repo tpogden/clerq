@@ -1,0 +1,28 @@
+# spectral.absorption { #clerq.spectral.absorption }
+
+```python
+spectral.absorption(mb_solve, field_idx, z_idx=-1, *, window=None)
+```
+
+Field absorption in the frequency domain.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name      | Type        | Description                                             | Default    |
+|-----------|-------------|---------------------------------------------------------|------------|
+| mb_solve  | MBSolve     | An MBSolve object.                                      | _required_ |
+| field_idx | int         | Field to return spectrum of.                            | _required_ |
+| z_idx     | int         | z step at which to return absorption.                   | `-1`       |
+| window    | str \| None | Optional SciPy window name passed to :func:`rabi_freq`. | `None`     |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type       | Description                                  |
+|--------|------------|----------------------------------------------|
+|        | np.ndarray | Array[num_freq_points] of absorption values. |
+
+## Note {.doc-section .doc-section-note}
+
+In the linear regime this is the imaginary part of the linear
+susceptibility (with a factor k/2).
+See TP Ogden thesis Eqn (2.58)

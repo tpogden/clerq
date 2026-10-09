@@ -8,7 +8,7 @@ import unittest
 
 import numpy as np
 
-from maxwellbloch import angmom
+from clerq import angmom
 
 
 class TestCalcClebschHF(unittest.TestCase):

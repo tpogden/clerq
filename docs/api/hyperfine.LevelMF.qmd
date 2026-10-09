@@ -1,0 +1,14 @@
+# hyperfine.LevelMF { #clerq.hyperfine.LevelMF }
+
+```python
+hyperfine.LevelMF(mF, energy=0.0)
+```
+
+Represents an m_F hyperfine sublevel.
+
+## Attributes {.doc-section .doc-section-attributes}
+
+| Name   | Type   | Description                 |
+|--------|--------|-----------------------------|
+| mF     | float  | Angular momentum number m_F |
+| energy | float  | The energy of the level     |

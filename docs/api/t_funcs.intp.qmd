@@ -1,0 +1,25 @@
+# t_funcs.intp { #clerq.t_funcs.intp }
+
+```python
+t_funcs.intp(index)
+```
+
+Return an interpolated time function.
+
+Linearly interpolates a user-supplied ``(tlist, ylist)`` pair, returning
+zero outside the supplied range.
+
+## Parameters {.doc-section .doc-section-parameters}
+
+| Name   | Type   | Description                                        | Default    |
+|--------|--------|----------------------------------------------------|------------|
+| index  | int    | Integer suffix used to look up parameters in args. | _required_ |
+
+## Returns {.doc-section .doc-section-returns}
+
+| Name   | Type   | Description                                                         |
+|--------|--------|---------------------------------------------------------------------|
+|        | TFunc  | Callable ``f(t, args)`` reading ``tlist_{index}`` and               |
+|        | TFunc  | ``ylist_{index}`` from args. Returns a Python complex scalar when   |
+|        | TFunc  | called with scalar ``t`` (as required by QuTiP 5), or an array when |
+|        | TFunc  | called with array ``t``.                                            |
