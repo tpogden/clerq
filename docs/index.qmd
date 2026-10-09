@@ -2,6 +2,10 @@
 title: "clerq"
 ---
 
+::: {.callout-note}
+MaxwellBloch is now **clerq**. See [what changed and how to update](news/rename.qmd).
+:::
+
 clerq is a Python package for solving the coupled Maxwell–Bloch equations
 describing the nonlinear propagation of near-resonant light through thermal
 quantised systems such as atomic vapours.

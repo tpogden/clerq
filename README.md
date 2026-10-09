@@ -10,9 +10,11 @@ thermal quantised systems such as atomic vapours.
 
 > **Renamed from `maxwellbloch`.** This package was previously published as
 > `maxwellbloch`. Install `clerq` and change `import maxwellbloch` to
-> `import clerq`. The old name will keep working through a transitional release
-> that re-exports `clerq` with a `DeprecationWarning`. The API is otherwise
-> unchanged.
+> `import clerq`. The old name keeps working through a transitional release
+> that re-exports `clerq` with a `DeprecationWarning`. Version 0.13.0 also
+> fixes a factor-of-2 error in the propagation equation, so results from
+> earlier versions change. See the
+> [announcement](https://clerq.org/news/rename.html).
 
 ![](example.gif)
 

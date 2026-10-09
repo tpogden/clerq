@@ -1,0 +1,68 @@
+---
+title: "MaxwellBloch is now clerq"
+description: "The package has been renamed. What changed, how to update, and one change to your results."
+date: 2026-10-09
+categories: [news, release]
+---
+
+MaxwellBloch has been renamed to **clerq**, starting with version 0.13.0. The
+code, the solver and the JSON problem format are the same. The package name,
+the import name, the repository and the documentation address have changed.
+
+::: {.callout-important}
+## Results change in 0.13.0
+
+Version 0.13.0 also contains a physics fix that is independent of the rename.
+The Maxwell propagation equation was missing a factor of 2, so the optical
+depth in earlier versions was **half** its physical value (the propagation
+step used the convention for a coupling of $\Omega$, while the Bloch solver
+uses the standard $\Omega/2$). Absorption and propagation results change.
+Recompute any cached `.qu` results and any figures you made with earlier
+versions. See the [changelog](https://github.com/tpogden/clerq/blob/master/CHANGELOG.md).
+:::
+
+## What changed
+
+| | Before | Now |
+|---|---|---|
+| Install | `pip install maxwellbloch` | `pip install clerq` |
+| Import | `import maxwellbloch` | `import clerq` |
+| Source | `github.com/tpogden/maxwellbloch` | [`github.com/tpogden/clerq`](https://github.com/tpogden/clerq) |
+| Documentation | readthedocs | [clerq.org](https://clerq.org) |
+| Plotly theme name | `"maxwellbloch"` | `"clerq"` |
+
+Old GitHub links redirect to the new repository, so existing issue and pull
+request links keep working.
+
+## How to update
+
+1. Install the new package: `pip install clerq`.
+2. Replace `maxwellbloch` with `clerq` in your imports, for example
+   `from maxwellbloch import mb_solve` becomes `from clerq import mb_solve`.
+3. Re-run anything that depends on cached results, because of the physics fix
+   above.
+
+The command-line tools `mbsolve` and `obsolve` keep their names.
+
+## What happens to `pip install maxwellbloch`
+
+The old name stays on PyPI as a transitional release (`maxwellbloch 0.12.1`).
+It installs `clerq` and re-exports it, so existing code keeps working: 
+`from maxwellbloch import mb_solve` gives the same objects as
+`from clerq import mb_solve`. Importing it prints a `DeprecationWarning`. It
+will receive no further updates, and new features will only appear in `clerq`.
+
+If you pinned `maxwellbloch==0.12.0` or earlier, nothing changes for you until
+you upgrade.
+
+## Citing
+
+If you use clerq in research, please cite the original package, which was
+published as MaxwellBloch. The citation is in the
+[README](https://github.com/tpogden/clerq#attribution). A citation with a DOI
+for clerq itself will be added once it is available.
+
+## Questions and problems
+
+Please [open an issue](https://github.com/tpogden/clerq/issues). The
+[troubleshooting page](../support/troubleshooting.md) lists common problems.

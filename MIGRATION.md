@@ -152,9 +152,9 @@ the site over HTTPS; GitHub URLs redirect; release `v0.13.0` published; CI green
 
 ## Phase 5: Post-cutover
 
-- [ ] Rename announcement (`docs/news/rename.qmd` + README banner)
+- [x] Rename announcement: `docs/news/rename.qmd`, banner on the site home page and README (includes the factor-of-2 results change)
 - [ ] New Zenodo DOI; add to README citation block alongside the old one 👤
-- [ ] Archive `notebooks-maxwellbloch` with a pointer to `clerq.org` 👤
+- [x] Archived `notebooks-maxwellbloch` 2026-10-09 with a README pointer to `clerq.org`, repo description and homepage updated, issue #32 closed 👤
 - [ ] External references sweep (personal site, CV, papers, Scholar) 👤
 
 ---
