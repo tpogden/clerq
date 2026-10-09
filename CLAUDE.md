@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-clerq is a Python package for numerically solving the coupled Maxwell-Bloch equations, which describe nonlinear propagation of near-resonant light through thermal atomic vapors. It models two, three, and many-level quantum systems using density matrix formalism via the QuTiP library.
+clerq is a Python package for numerically solving the propagation of classical electromagnetic fields through media of open quantum systems: Maxwell's equations coupled to the Lindblad master equation. It is used for near-resonant light in thermal atomic vapors, and models two, three, and many-level systems using density matrix formalism via the QuTiP library. (The package was formerly called MaxwellBloch.)
 
 ## Commands
 
