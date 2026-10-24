@@ -178,11 +178,30 @@ def main():
     )
     ap.add_argument("--starts", type=int, default=4)
     ap.add_argument(
+        "--seed",
+        type=int,
+        default=1,
+        help="seed of the noise realisation (and the starts)",
+    )
+    ap.add_argument(
+        "--tag", default="", help="suffix of the results files, e.g. _seed2"
+    )
+    ap.add_argument(
+        "--methods",
+        default="adam,lbfgs,nelder_mead,lm",
+        help="comma-separated subset of the fit methods",
+    )
+    ap.add_argument(
+        "--no-checks",
+        action="store_true",
+        help="stop after the Hessian analysis (skip the finite-difference and solve() checks)",
+    )
+    ap.add_argument(
         "--disp", type=float, default=0.5, help="std of the start displacement in theta"
     )
     args = ap.parse_args()
     n_starts = 2 if args.quick else args.starts
-    rng = np.random.default_rng(1)
+    rng = np.random.default_rng(args.seed)
     out: dict = {"names": NAMES, "truth": TRUTH.tolist(), "sigma": SIGMA}
 
     dps = jnp.linspace(-3.0, 3.0, 5 if args.quick else 11)
@@ -317,9 +336,10 @@ def main():
     # a warm-up so compile time is not charged to the first start
     run_lbfgs(TRUTH, steps=2)
     starts = TRUTH + args.disp * rng.standard_normal((n_starts, TRUTH.size))
+    methods = {m: methods[m] for m in args.methods.split(",")}
     fits = {m: [] for m in methods}
     if args.reuse:
-        old = json.loads((RESULTS / "spectrum_fit.json").read_text())
+        old = json.loads((RESULTS / f"spectrum_fit{args.tag}.json").read_text())
         starts = np.asarray(old["starts"])
         fits.update({m: old["fits"][m] for m in old["fits"]})
         fits.update({m: [] for m in methods if m not in old["fits"]})
@@ -361,7 +381,7 @@ def main():
     out["x_opt"] = x_opt.tolist()
     print(json.dumps(summary, indent=1))
     RESULTS.mkdir(exist_ok=True)
-    (RESULTS / "spectrum_fit.json").write_text(
+    (RESULTS / f"spectrum_fit{args.tag}.json").write_text(
         json.dumps(out, indent=1)
     )  # checkpoint after the fit stage
 
@@ -477,6 +497,11 @@ def main():
             {n: round(float(v), 3) for n, v in zip(NAMES, V[:, k], strict=True)},
         )
 
+    if args.no_checks:
+        out["spectrum"] = {"dps": np.asarray(dps).tolist(), "data": data.tolist()}
+        (RESULTS / f"spectrum_fit{args.tag}.json").write_text(json.dumps(out, indent=1))
+        return
+
     # ---- gradient check against fixed-step finite differences ------------------------
     # Fixed-step runs need n_steps well above the adaptive solver's typical count: 53 and 211
     # steps per slice give NaN here (observed, cause not investigated); 997 (prime, so not
@@ -570,7 +595,7 @@ def main():
         "fit": np.asarray(spec_j(x_j, dps)).tolist(),
     }
     RESULTS.mkdir(exist_ok=True)
-    (RESULTS / "spectrum_fit.json").write_text(json.dumps(out, indent=1))
+    (RESULTS / f"spectrum_fit{args.tag}.json").write_text(json.dumps(out, indent=1))
 
     if not args.no_figure:
         figure(out, fits, x_opt, cov, H)
