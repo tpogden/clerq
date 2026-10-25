@@ -246,12 +246,11 @@ def main():
     def run_adam(x0, steps=15 if args.quick else 60, lr=0.12):
         opt = optax.adam(lr)
         x, st = jnp.asarray(x0), opt.init(jnp.asarray(x0))
-        n = 0  # noqa: B007
-        for n in range(steps):
-            v, g = vg(x)
+        for _ in range(steps):
+            _, g = vg(x)
             u, st = opt.update(g, st)
             x = optax.apply_updates(x, u)
-        return np.asarray(x), n + 1, int(n + 1)
+        return np.asarray(x), steps, steps
 
     def run_lbfgs(x0, steps=5 if args.quick else 15):
         opt = optax.lbfgs()

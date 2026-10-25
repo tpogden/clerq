@@ -30,7 +30,6 @@ jax.config.update("jax_enable_x64", True)
 
 import jax.numpy as jnp  # noqa: E402
 import optax  # noqa: E402
-
 import spectrum_fit as sf  # noqa: E402
 
 NAMES = sf.NAMES
