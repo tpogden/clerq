@@ -9,7 +9,7 @@ description = "Classical Maxwell fields propagating through open quantum systems
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Thomas P Ogden", email = "t@ogden.eu" }]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = ["qutip>=5", "tqdm>=4"]
 
 [project.urls]
@@ -26,7 +26,7 @@ docs = [
     "kaleido>=0.2",
 ]
 plot = ["plotly>=5.18", "kaleido>=0.2"]
-# Automatic differentiation backend (clerq.autodiff). CI tests the lowest (Python 3.10:
+# Automatic differentiation backend (clerq.autodiff). CI tests the lowest (Python 3.11:
 # jax 0.6.2, diffrax 0.7.0) and highest supported versions.
 jax = ["jax>=0.6.2,<0.12", "diffrax>=0.7.0,<0.8", "optax>=0.2.4"]
 dev = ["clerq[test,docs,plot,jax]", "ruff", "twine", "bump-my-version"]
@@ -67,7 +67,7 @@ markers = ["jax: needs the optional clerq[jax] extra (selected in CI with -m jax
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
+target-version = "py311"
 exclude = ["docs/"]
 
 [tool.ruff.lint]
