@@ -759,7 +759,7 @@
     "href": "release-notes.html#unreleased",
     "title": "Release Notes",
     "section": "Unreleased",
-    "text": "Unreleased\nNew time functions. clerq.t_funcs has four new pulse shapes: sin2 (a sin-squared pulse of finite duration between on and off), super_gaussian (a flat-top pulse with smooth edges; order 1 is a Gaussian and fwhm is the FWHM at every order), and exp_decay and exp_rise (single-sided exponentials, the envelopes of an emitted and an absorbed photon). square takes n_pi, the pulse area in multiples of \\(\\pi\\), as an alternative to ampl, and sinc takes an optional centre. All work with clerq.autodiff; as with square, the edge time where exp_decay and exp_rise jump (on, off) cannot be differentiated. See Built-in time functions."
+    "text": "Unreleased\nPython 3.11 or later is now required (it was 3.10), because Pillow 13, which fixes a number of security advisories, no longer supports 3.10.\nNew time functions. clerq.t_funcs has four new pulse shapes: sin2 (a sin-squared pulse of finite duration between on and off), super_gaussian (a flat-top pulse with smooth edges; order 1 is a Gaussian and fwhm is the FWHM at every order), and exp_decay and exp_rise (single-sided exponentials, the envelopes of an emitted and an absorbed photon). square takes n_pi, the pulse area in multiples of \\(\\pi\\), as an alternative to ampl, and sinc takes an optional centre. All work with clerq.autodiff; as with square, the edge time where exp_decay and exp_rise jump (on, off) cannot be differentiated. See Built-in time functions."
   },
   {
     "objectID": "release-notes.html#october-2026",
