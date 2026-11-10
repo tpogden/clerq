@@ -8,6 +8,9 @@ Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- **Python 3.11 or later is now required** (was 3.10), as Pillow 13, which fixes a number of security advisories, no longer supports 3.10. The lock file now resolves Pillow 13.0.0.
+
 ### Added
 - New time functions in `clerq.t_funcs`: `sin2` (sin-squared pulse of finite duration between `on` and `off`), `super_gaussian`
   (flat-top pulse with smooth edges, `order` 1 being a Gaussian, with `fwhm` the FWHM at any order), and `exp_decay` and
